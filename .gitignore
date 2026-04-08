@@ -24,3 +24,15 @@ dist-ssr
 *.sw?
 
 # 
+# Cursor (AI editor) metadata and rules
+.cursor/
+.cursor/**         # everything inside
+.cursor/rules/
+.cursor/rules/**   # .mdc rule files
+.cursor.json
+.cursorignore
+
+# Editors/IDE
+.vscode/
+.idea/
+.history/
