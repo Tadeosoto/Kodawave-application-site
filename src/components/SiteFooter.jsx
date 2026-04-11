@@ -1,52 +1,107 @@
 import { Link } from 'react-router-dom'
+import { CaennaFooterWordmark } from './CaennaBrand'
 
-const pageLinks = [
-  { to: '/', label: 'Home' },
-  { to: '/services', label: 'Services' },
+const social = [
+  { label: 'Instagram', href: 'https://www.instagram.com/' },
+  { label: 'Behance', href: 'https://www.behance.net/' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/' },
+  { label: 'Twitter', href: 'https://twitter.com/' },
+]
+
+const midNav = [
   { to: '/about', label: 'About' },
-  { to: '/blog', label: 'Blog' },
+  { to: { pathname: '/', hash: 'work' }, label: 'Work' },
+  { to: '/my-work', label: 'My work' },
   { to: '/contact', label: 'Contact' },
 ]
 
+const TalkTriangle = () => (
+  <svg
+    viewBox="0 0 12 12"
+    className="mb-0.5 ml-1 inline-block h-2.5 w-2.5 shrink-0 align-baseline text-secundario"
+    fill="currentColor"
+    aria-hidden
+  >
+    <path d="M0 12h12V0L0 12z" />
+  </svg>
+)
+
 const SiteFooter = () => {
+  const year = new Date().getFullYear()
+
   return (
-    <footer className="mx-auto mt-12 w-full max-w-6xl px-6 pb-14 mb-6">
-      <div className="overflow-hidden rounded-3xl border border-slate-200/70 bg-white shadow-sm">
-        <div className="flex flex-row items-start justify-between gap-8 bg-gradient-to-br from-amber-50/60 via-white to-violet-50/60 px-8 py-10">
-          <div className="max-w-xl flex-1 pr-6">
-            <p className="text-2xl font-black text-slate-900">Kodawave</p>
-            <p className="mt-4 max-w-md text-slate-600">
-              Building simple, beautiful and functional digital experiences focused on
-              growth and clarity.
-            </p>
+    <footer className="mt-20 border-t border-secundario/20 bg-terciario text-ink">
+      <div className="mx-auto w-full max-w-[1600px] px-6 pb-12 pt-10 md:px-10 md:pb-14 md:pt-12">
+        {/* Top: mark + CTA | social */}
+        <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+          <div>
+            <CaennaFooterWordmark />
+            <Link
+              to="/contact"
+              className="mt-5 flex flex-wrap items-baseline gap-0 font-display text-[clamp(2.5rem,6vw,3.75rem)] font-semibold leading-none tracking-tight text-ink transition hover:text-secundario"
+            >
+              <span>Let&apos;s talk</span>
+              <TalkTriangle />
+            </Link>
           </div>
-
-          <div className="w-44 shrink-0">
-            <p className="text-sm font-semibold text-slate-500">Pages</p>
-            <nav className="mt-4 flex flex-col gap-3">
-              {pageLinks.map((item) => (
-                <Link key={item.to} to={item.to} className="text-slate-700 transition hover:text-slate-900">
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
-
-          <div className="w-56 shrink-0">
-            <p className="text-sm font-semibold text-slate-500">Contact</p>
-            <div className="mt-4 flex flex-col gap-3 text-slate-700">
-              <a href="mailto:tadeosoto1993@gmail.com" className="transition hover:text-slate-900">
-                tadeosoto1993@gmail.com
+          <nav
+            className="flex flex-col items-start gap-2.5 text-sm font-medium md:items-end md:text-right"
+            aria-label="Social"
+          >
+            {social.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="text-ink transition hover:text-principal"
+              >
+                {item.label}
               </a>
-              <p>+0 (000) 000-0000</p>
-              <p>Mountain View, CA</p>
-            </div>
-          </div>
+            ))}
+          </nav>
         </div>
 
-        <div className="flex flex-col items-start justify-between gap-3 border-t border-slate-200/70 bg-slate-50/70 px-8 py-7 text-sm text-slate-600 md:flex-row md:items-center">
-          <p>© {new Date().getFullYear()} Kodawave. All rights reserved.</p>
-          <p>Built with React + Vite + Tailwind</p>
+        <div className="my-10 h-px w-full bg-secundario/25 md:my-12" />
+
+        {/* Middle nav */}
+        <nav
+          className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 text-sm font-semibold uppercase tracking-[0.12em] text-ink sm:gap-x-6"
+          aria-label="Footer"
+        >
+          {midNav.map((item) => (
+            <Link key={item.label} to={item.to} className="transition hover:opacity-60">
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="my-10 h-px w-full bg-secundario/25 md:my-12" />
+
+        {/* Bottom: legal | contact | privacy */}
+        <div className="flex flex-col gap-8 text-xs leading-relaxed text-ink/85 md:flex-row md:items-start md:justify-between md:gap-6">
+          <p className="shrink-0 md:max-w-[28%]">
+            ©{year} Caenna. All rights reserved.
+          </p>
+          <div className="flex flex-1 flex-col items-start gap-1 md:items-center md:text-center">
+            <p>
+              <a href="tel:+10000000000" className="transition hover:opacity-60">
+                +0 (000) 000-0000
+              </a>
+              <span className="mx-2 text-secundario/40" aria-hidden>
+                |
+              </span>
+              <a href="mailto:tadeosoto1993@gmail.com" className="transition hover:opacity-60">
+                tadeosoto1993@gmail.com
+              </a>
+            </p>
+            <p className="text-ink/70">Mountain View, CA</p>
+          </div>
+          <div className="shrink-0 md:max-w-[28%] md:text-right">
+            <Link to="/contact" className="transition hover:opacity-60">
+              Privacy Policy
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

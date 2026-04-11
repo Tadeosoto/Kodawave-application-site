@@ -1,13 +1,7 @@
 const SectionTitle = ({ eyebrow, title, description, onDark = false }) => {
-  const eyebrowClass = onDark
-    ? 'text-indigo-300'
-    : 'text-indigo-500'
-  const titleClass = onDark
-    ? 'text-white'
-    : 'text-slate-900'
-  const descClass = onDark
-    ? 'text-slate-300'
-    : 'text-slate-600'
+  const eyebrowClass = onDark ? 'text-principal' : 'text-secundario'
+  const titleClass = onDark ? 'text-terciario' : 'text-ink'
+  const descClass = onDark ? 'text-terciario/80' : 'text-neutral-600'
   return (
     <div className="mx-auto mb-10 max-w-3xl text-center">
       {eyebrow && (

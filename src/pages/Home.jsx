@@ -1,212 +1,414 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { motion } from 'motion/react'
-import SectionTitle from '../components/SectionTitle'
-import { partners, services, testimonials } from '../data/content'
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { AnimatePresence, motion } from "motion/react";
+import { portfolioProjects, testimonials } from "../data/content";
+import Reveal from "../components/Reveal";
+import heroHandsUrl from "../assets/michPageAssets/pageDecoration/mano-de-dios-chingona.png";
+import engineerSectionBgUrl from "../assets/michPageAssets/pageDecoration/background-image1.png";
+import portraitMichelleUrl from "../assets/michPageAssets/michPhotos/hf_20260329_022232_608e361f-7fac-4089-bcf8-923d3e56c916.png";
 
-const immersiveImages = [
-  'https://images.unsplash.com/photo-1518773553398-650c184e0bb3?auto=format&fit=crop&w=1100&q=80',
-  'https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1100&q=80',
-  'https://images.unsplash.com/photo-1516117172878-fd2c41f4a759?auto=format&fit=crop&w=1100&q=80',
-  'https://images.unsplash.com/photo-1511300636408-a63a89df3482?auto=format&fit=crop&w=1100&q=80',
-  'https://images.unsplash.com/photo-1516972810927-80185027ca84?auto=format&fit=crop&w=1100&q=80',
-]
+const MotionP = motion.p;
+const MotionSpan = motion.span;
+const MotionArticle = motion.article;
+const MotionBlockquote = motion.blockquote;
+
+const ease = [0.22, 0.61, 0.36, 1];
+
+const HERO_ROTATE_WORDS = ["perform", "endure", "carry", "matter"];
+
+const capabilities = [
+  {
+    title: "Mechanical design",
+    body: "I turn requirements into geometry—➤ layouts, ➤ mechanisms, ➤ material calls, and ➤ drawings with tolerances that survive manufacturing.",
+  },
+  {
+    title: "Systems thinking",
+    body: "Interfaces, loads, and failure modes get named early. I connect ➤ CAD, ➤ BOM intent, and ➤ test criteria so the story of the part stays coherent.",
+  },
+  {
+    title: "Analysis & proof",
+    body: "When the question is stiffness, life, or margin, I pair ➤ hand checks with ➤ CAE where it earns its keep—and I leave assumptions visible.",
+  },
+  {
+    title: "Build & learn",
+    body: "Prototypes are not theatre. I aim for ➤ prints you can build, ➤ tests you can repeat, and ➤ feedback that feeds the next revision fast.",
+  },
+];
+
+const Bleed = ({ children, className = "" }) => (
+  <div className={`relative left-1/2 w-screen -translate-x-1/2 ${className}`}>
+    {children}
+  </div>
+);
 
 const Home = () => {
-  const marqueePartners = [...partners, ...partners]
-  const [activeSlide, setActiveSlide] = useState(0)
-  const [slideDirection, setSlideDirection] = useState(1)
-  const MotionP = motion.p
-  const MotionH1 = motion.h1
-  const MotionArticle = motion.article
-  const MotionDiv = motion.div
+  const [heroWordIndex, setHeroWordIndex] = useState(0);
 
   useEffect(() => {
     const id = setInterval(() => {
-      setSlideDirection(1)
-      setActiveSlide((prev) => (prev + 1) % immersiveImages.length)
-    }, 2800)
-    return () => clearInterval(id)
-  }, [])
-
-  const goTo = (direction) => {
-    setSlideDirection(direction === 'next' ? 1 : -1)
-    setActiveSlide((prev) => {
-      if (direction === 'next') return (prev + 1) % immersiveImages.length
-      return (prev - 1 + immersiveImages.length) % immersiveImages.length
-    })
-  }
+      setHeroWordIndex((i) => (i + 1) % HERO_ROTATE_WORDS.length);
+    }, 2600);
+    return () => clearInterval(id);
+  }, []);
 
   return (
-    <div className="space-y-20 pb-16">
-      <section className="pt-8 text-center md:pt-14">
-        <MotionP
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mx-auto w-fit rounded-full border border-indigo-200 bg-indigo-50 px-4 py-2 text-sm font-semibold text-indigo-600"
-        >
-          Growth partner for ambitious teams
-        </MotionP>
-        <MotionH1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="mx-auto mt-6 max-w-3xl text-4xl font-black tracking-tight text-slate-900 md:text-6xl"
-        >
-          Design better, faster, smarter websites
-        </MotionH1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-600">
-          We build high-performance digital experiences to increase traffic, leads and
-          revenue.
-        </p>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-          <Link
-            to="/contact"
-            className="rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-700"
-          >
-            Get a Free Consultation
-          </Link>
-          <Link
-            to="/services"
-            className="rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
-          >
-            Explore Services
-          </Link>
-        </div>
+    <div className="pb-8">
+      <Bleed>
+        <section className="relative isolate min-h-[min(92vh,960px)] overflow-hidden bg-terciario">
+          <img
+            src={heroHandsUrl}
+            alt=""
+            className="pointer-events-none absolute inset-0 z-0 h-full min-h-full w-full min-w-full select-none object-cover object-[center_38%] opacity-[0.98] sm:object-[center_40%]"
+            decoding="async"
+          />
+          <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-terciario/88 via-terciario/20 to-terciario/92" />
+
+          <div className="relative z-10 mx-auto flex min-h-[min(92vh,960px)] max-w-[1600px] flex-col px-6 pb-16 pt-10 md:px-10 md:pb-20 md:pt-14">
+            <MotionP
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, ease }}
+              className="text-center text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-neutral-500"
+            >
+              Mechanical engineering
+            </MotionP>
+            <h1 className="mt-10 text-center font-display text-[clamp(1.85rem,5.2vw,3.15rem)] font-medium leading-[1.15] tracking-tight text-ink md:mt-14">
+              <span className="block">I engineer only what deserves to</span>
+              <span className="mt-2 flex min-h-[1.4em] items-center justify-center md:mt-3">
+                <span className="relative inline-flex min-w-[12ch] justify-center">
+                  <AnimatePresence mode="wait" initial={false}>
+                    <MotionSpan
+                      key={HERO_ROTATE_WORDS[heroWordIndex]}
+                      initial={{ opacity: 0, y: 14 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.35, ease }}
+                      className="font-bold italic text-ink"
+                    >
+                      {HERO_ROTATE_WORDS[heroWordIndex]}
+                    </MotionSpan>
+                  </AnimatePresence>
+                </span>
+              </span>
+            </h1>
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease, delay: 0.15 }}
+              className="mx-auto mt-8 max-w-lg text-left text-[0.95rem] leading-relaxed text-neutral-600 md:ml-auto md:mr-[4%] md:mt-10 md:max-w-md md:text-base"
+            >
+              <p>Does this load path deserve to exist?</p>
+              <p className="mt-2">Every tolerance is a promise.</p>
+              <p className="mt-2">
+                Less guesswork, more{" "}
+                <span className="font-semibold text-ink">evidence</span>.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, ease, delay: 0.28 }}
+              className="mt-auto flex flex-wrap items-center justify-center gap-4 pt-14 md:pt-20"
+            >
+              <Link
+                to="/contact"
+                className="border border-principal bg-principal px-8 py-3.5 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-ink transition hover:border-secundario hover:bg-secundario hover:text-terciario"
+              >
+                Get in touch
+              </Link>
+              <Link
+                to={{ pathname: "/", hash: "work" }}
+                className="border border-principal/70 bg-white/85 px-8 py-3.5 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-ink backdrop-blur-sm transition hover:border-principal hover:bg-principal/25"
+              >
+                View work
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+      </Bleed>
+
+      <Bleed>
+        <section className="bg-terciario py-14 md:py-20 lg:py-24">
+          <div className="mx-auto flex max-w-[1600px] flex-col gap-12 px-6 md:gap-14 md:px-10 lg:flex-row lg:items-start lg:gap-10 xl:gap-14">
+            <div className="w-full min-w-0 lg:w-[70%] lg:flex-[1_1_70%]">
+              <Reveal>
+                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-neutral-500">
+                  What I do
+                </p>
+              </Reveal>
+              <Reveal delay={0.06}>
+                <p className="mt-6 text-left font-display text-2xl font-normal leading-snug text-ink md:text-3xl">
+                  I am a mechanical engineer first: sketches become models, models
+                  become drawings, and drawings become hardware people can trust.
+                  I work shoulder-to-shoulder with teams who need clarity under
+                  load, cost, and schedule—not a prettier slide deck.
+                </p>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <p className="mt-10 text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-neutral-500">
+                  Focus areas
+                </p>
+              </Reveal>
+              <div className="mt-8 grid gap-10 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-10 md:gap-x-12 md:gap-y-12">
+                {capabilities.map((cap, i) => (
+                  <Reveal key={cap.title} delay={0.05 + i * 0.06}>
+                    <div>
+                      <h3 className="font-display text-xl font-medium text-ink md:text-2xl">
+                        {cap.title}
+                      </h3>
+                      <p className="mt-4 text-sm leading-relaxed text-neutral-600 md:text-[0.95rem]">
+                        {cap.body}
+                      </p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+            <div className="w-full shrink-0 lg:w-[30%] lg:flex-[0_0_30%]">
+              <Reveal delay={0.08} y={18}>
+                <div className="mx-auto aspect-[3/4] max-w-xs overflow-hidden bg-ink/5 sm:max-w-sm lg:mx-0 lg:ml-auto lg:max-w-none">
+                  <img
+                    src={portraitMichelleUrl}
+                    alt="Michelle Castellanos"
+                    className="h-full w-full object-cover object-[center_22%]"
+                    decoding="async"
+                  />
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+      </Bleed>
+
+      <Bleed>
+        <section className="relative isolate bg-white py-16 md:py-24 lg:py-28">
+          <div className="mx-auto max-w-[1600px] px-6 md:px-10">
+            <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(260px,46%)] lg:gap-12 xl:gap-16">
+              <div>
+                <Reveal>
+                  <h2 className="font-display text-3xl font-semibold tracking-tight text-ink md:text-4xl">
+                    Mechanical engineer.
+                  </h2>
+                </Reveal>
+                <div className="mt-8 max-w-xl space-y-4 text-[0.95rem] leading-relaxed text-neutral-700 md:text-base">
+                  {[
+                    <>
+                      I need to see{" "}
+                      <strong className="font-semibold text-ink">
+                        the load path
+                      </strong>
+                      —not just the outer shape.
+                    </>,
+                    <>
+                      A part has to{" "}
+                      <strong className="font-semibold text-ink">
+                        survive reality
+                      </strong>
+                      : vibration, misuse, and the shop floor.
+                    </>,
+                    <>
+                      Some drawings merely describe; others{" "}
+                      <strong className="font-semibold text-ink">
+                        release
+                      </strong>{" "}
+                      with confidence.
+                    </>,
+                    <>
+                      Good engineering is{" "}
+                      <strong className="font-semibold text-ink">
+                        constraints made visible
+                      </strong>
+                      —material, process, and margin named out loud.
+                    </>,
+                    <>
+                      The gap is rarely inspiration; it is{" "}
+                      <strong className="font-semibold text-ink">
+                        follow-through
+                      </strong>
+                      in every revision.
+                    </>,
+                  ].map((line, i) => (
+                    <Reveal key={i} delay={0.05 * i}>
+                      <p>{line}</p>
+                    </Reveal>
+                  ))}
+                  <Reveal delay={0.35}>
+                    <p className="pt-2 font-medium text-ink">
+                      From sketch to stack-up—then to the people who build it.
+                    </p>
+                  </Reveal>
+                </div>
+              </div>
+              <div className="flex min-w-0 flex-col items-center lg:items-end">
+                <Reveal>
+                  <img
+                    src={engineerSectionBgUrl}
+                    alt=""
+                    className="h-auto w-full max-w-md object-contain object-center lg:max-w-none lg:object-right"
+                    decoding="async"
+                  />
+                </Reveal>
+                <Reveal delay={0.1}>
+                  <p className="mt-8 w-full text-center font-display text-sm italic text-neutral-500 lg:text-right">
+                    — Michelle Castellanos
+                  </p>
+                </Reveal>
+              </div>
+            </div>
+          </div>
+        </section>
+      </Bleed>
+
+      <section className="mx-auto mt-20 max-w-5xl md:mt-28">
+        <Reveal className="text-center">
+          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-neutral-500">
+            Reel
+          </p>
+        </Reveal>
+        <Reveal delay={0.08}>
+          <div className="relative mt-6 aspect-video overflow-hidden bg-ink md:mt-8">
+            <img
+              src="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80"
+              alt=""
+              className="h-full w-full object-cover opacity-85"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            <button
+              type="button"
+              className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 bg-white/10 text-white backdrop-blur-md transition hover:bg-white/20"
+              aria-label="Play reel"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                className="ml-0.5 h-7 w-7"
+                fill="currentColor"
+                aria-hidden
+              >
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </button>
+          </div>
+        </Reveal>
       </section>
 
-      <section>
-        <SectionTitle
-          eyebrow="Services"
-          title="Everything you need to grow online"
-          description="A complete stack of strategy, design, development and marketing."
-        />
-        <div className="grid gap-5 md:grid-cols-2">
-          {services.slice(0, 3).map((service, index) => (
+      <section
+        id="work"
+        className="mx-auto mt-24 max-w-6xl scroll-mt-28 md:mt-32"
+      >
+        <Reveal className="text-center">
+          <h2 className="font-display text-4xl font-medium tracking-tight text-ink md:text-5xl">
+            Selected projects
+          </h2>
+        </Reveal>
+        <div className="mt-14 grid gap-12 md:grid-cols-2 md:gap-x-10 md:gap-y-16">
+          {portfolioProjects.map((item, index) => (
             <MotionArticle
-              key={service.title}
-              initial={{ opacity: 0, y: 12 }}
+              key={item.title}
+              initial={{ opacity: 0, y: 26 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.08 }}
-              className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+              viewport={{ once: true, margin: "-32px 0px" }}
+              transition={{ duration: 0.58, delay: index * 0.05, ease }}
+              className="group"
             >
-              <h3 className="text-xl font-bold text-slate-900">{service.title}</h3>
-              <p className="mt-3 text-slate-600">{service.description}</p>
+              <div className="overflow-hidden bg-principal/25">
+                <img
+                  src={item.img}
+                  alt=""
+                  className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+                />
+              </div>
+              <p className="mt-4 text-[0.7rem] font-medium uppercase tracking-[0.14em] text-neutral-500">
+                {item.tags.join(" · ")}
+              </p>
+              <h3 className="font-display mt-3 text-2xl font-medium text-ink md:text-[1.75rem]">
+                {item.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-neutral-600 md:text-base">
+                {item.blurb}
+              </p>
             </MotionArticle>
           ))}
         </div>
-      </section>
-
-      <section className="rounded-3xl bg-slate-900 px-8 py-12 text-white">
-        <SectionTitle
-          eyebrow="Why choose us"
-          title="Small team, senior execution, measurable outcomes"
-          description="We combine speed, clear communication and KPI-driven delivery."
-          onDark
-        />
-        <div className="grid gap-5 text-slate-200 md:grid-cols-3">
-          <p>Clear roadmaps and weekly progress so you always know what is next.</p>
-          <p>Conversion-first design decisions backed by analytics and user behavior.</p>
-          <p>Scalable systems you can maintain without agency dependency.</p>
-        </div>
-      </section>
-
-      <section>
-        <SectionTitle eyebrow="Partners" title="Trusted by modern brands" />
-        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white/70 py-4">
-          <MotionDiv
-            className="flex w-max gap-4 px-4"
-            animate={{ x: ['0%', '-50%'] }}
-            transition={{ duration: 22, repeat: Infinity, ease: 'linear' }}
+        <Reveal className="mt-16 text-center">
+          <Link
+            to="/my-work"
+            className="inline-flex items-center gap-2 border-b border-secundario pb-1 text-sm font-semibold uppercase tracking-[0.18em] text-ink transition hover:text-secundario/80"
           >
-            {marqueePartners.map((partner, index) => (
-              <div
-                key={`${partner.name}-${index}`}
-                className={`min-w-44 rounded-xl border border-slate-200 px-5 py-4 text-center text-sm font-bold ${partner.bgClass} ${partner.textClass}`}
-              >
-                {partner.name}
-              </div>
+            How I can help
+            <span aria-hidden>→</span>
+          </Link>
+        </Reveal>
+      </section>
+
+      <Bleed className="mt-28 bg-principal-suave md:mt-36">
+        <div className="mx-auto max-w-6xl px-6 py-20 text-ink md:px-10 md:py-24">
+          <Reveal>
+            <p className="mx-auto max-w-2xl text-center font-display text-xl font-normal leading-relaxed text-ink/85 md:text-2xl">
+              A few numbers from recent programs—milestones that reflect rigor,
+              iteration, and hardware that actually shipped.
+            </p>
+          </Reveal>
+          <div className="mt-14 grid gap-10 border-t border-secundario/30 pt-14 md:grid-cols-3 md:gap-6">
+            {[
+              { n: "35+", l: "Released revisions" },
+              { n: "12+", l: "Years in hardware" },
+              { n: "70+", l: "Tests & prototypes" },
+            ].map((s, i) => (
+              <Reveal key={s.l} delay={0.08 * i} className="text-center">
+                <p className="font-display text-5xl font-medium text-secundario md:text-6xl">
+                  {s.n}
+                </p>
+                <p className="mt-3 text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-secundario">
+                  {s.l}
+                </p>
+              </Reveal>
             ))}
-          </MotionDiv>
+          </div>
         </div>
-      </section>
+      </Bleed>
 
-      <section className="pt-4">
-        <SectionTitle
-          eyebrow="Visual Reel"
-          title="Immersive visuals"
-          description="A curated reel of visual studies, product shots, and atmospheric scenes in progress."
-        />
-        <div className="relative mx-auto mt-6 flex h-[440px] max-w-4xl items-center justify-center overflow-hidden rounded-[28px]">
-          <img
-            src={immersiveImages[(activeSlide + immersiveImages.length - 1) % immersiveImages.length]}
-            alt=""
-            className="absolute left-2 top-1/2 hidden h-[260px] w-[190px] -translate-y-1/2 rounded-2xl object-cover opacity-30 blur-[2px] md:block"
-          />
-          <img
-            src={immersiveImages[(activeSlide + 1) % immersiveImages.length]}
-            alt=""
-            className="absolute right-2 top-1/2 hidden h-[260px] w-[190px] -translate-y-1/2 rounded-2xl object-cover opacity-30 blur-[2px] md:block"
-          />
-
-          <MotionDiv
-            key={`${activeSlide}-${slideDirection}`}
-            initial={{
-              opacity: 0.5,
-              scale: 0.88,
-              filter: 'blur(5px)',
-              x: slideDirection > 0 ? 130 : -130,
-            }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-              filter: 'blur(0px)',
-              x: 0,
-            }}
-            transition={{ duration: 0.42, ease: [0.22, 0.61, 0.36, 1] }}
-            className="relative z-10 h-[430px] w-[320px] overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-xl md:w-[460px]"
-          >
-            <img
-              src={immersiveImages[activeSlide]}
-              alt="Immersive visual showcase"
-              className="h-full w-full object-cover"
-            />
-          </MotionDiv>
-
-          <button
-            type="button"
-            onClick={() => goTo('prev')}
-            className="absolute left-6 z-20 inline-flex h-12 w-12 items-center justify-center rounded-full bg-slate-800/65 text-white backdrop-blur hover:bg-slate-800"
-            aria-label="Previous visual"
-          >
-            ‹
-          </button>
-          <button
-            type="button"
-            onClick={() => goTo('next')}
-            className="absolute right-6 z-20 inline-flex h-12 w-12 items-center justify-center rounded-full bg-slate-800/65 text-white backdrop-blur hover:bg-slate-800"
-            aria-label="Next visual"
-          >
-            ›
-          </button>
-        </div>
-      </section>
-
-      <section>
-        <SectionTitle eyebrow="Testimonials" title="Success stories from our clients" />
-        <div className="grid gap-5 md:grid-cols-3">
-          {testimonials.map((testimonial) => (
-            <article key={testimonial.name} className="rounded-2xl bg-white p-6 shadow-sm">
-              <p className="text-slate-700">“{testimonial.quote}”</p>
-              <p className="mt-4 font-bold text-slate-900">{testimonial.name}</p>
-              <p className="text-sm text-slate-500">{testimonial.role}</p>
-            </article>
+      <section className="mx-auto mt-24 max-w-6xl md:mt-32">
+        <Reveal className="text-center">
+          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-neutral-500">
+            Reviews
+          </p>
+        </Reveal>
+        <Reveal delay={0.06} className="text-center">
+          <p className="mt-4 font-display text-3xl text-ink md:text-4xl">
+            5.0 ★
+          </p>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p className="mx-auto mt-6 max-w-2xl text-center text-sm leading-relaxed text-neutral-600">
+            Words from teams who have shipped hardware with me—reviews, vendors,
+            and program pressure included.
+          </p>
+        </Reveal>
+        <div className="mt-14 grid gap-8 md:grid-cols-3">
+          {testimonials.map((t, i) => (
+            <MotionBlockquote
+              key={t.name}
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-28px 0px" }}
+              transition={{ duration: 0.55, delay: i * 0.07, ease }}
+              className="border border-secundario/20 bg-white/50 p-8 backdrop-blur-sm"
+            >
+              <p className="text-sm leading-relaxed text-neutral-700">
+                &ldquo;{t.quote}&rdquo;
+              </p>
+              <footer className="mt-6 text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-neutral-500">
+                <span className="text-ink">— {t.name}</span>
+                <span className="mt-1 block font-normal normal-case tracking-normal text-neutral-500">
+                  {t.role}
+                </span>
+              </footer>
+            </MotionBlockquote>
           ))}
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

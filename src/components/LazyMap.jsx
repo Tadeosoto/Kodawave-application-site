@@ -40,14 +40,14 @@ const LazyMap = () => {
       {src ? (
         <iframe
           title="Google HQ - 1600 Amphitheatre Parkway, Mountain View, CA 94043"
-          className="h-56 w-full rounded-2xl border border-slate-300"
+          className="h-56 w-full rounded-2xl border border-secundario/30"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
           src={src}
           allowFullScreen
         />
       ) : (
-        <div className="flex h-56 w-full items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-500">
+        <div className="flex h-56 w-full items-center justify-center rounded-2xl border border-dashed border-secundario/30 bg-terciario/50 text-sm text-neutral-500">
           Loading map…
         </div>
       )}

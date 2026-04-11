@@ -1,9 +1,10 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { startTransition, useEffect, useLayoutEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
+import { CaennaHeaderLogo } from './CaennaBrand'
 
 const links = [
   { to: '/', label: 'Home' },
-  { to: '/services', label: 'Services' },
+  { to: '/my-work', label: 'My work' },
   { to: '/about', label: 'About' },
   { to: '/blog', label: 'Blog' },
   { to: '/contact', label: 'Contact' },
@@ -16,7 +17,7 @@ const linkIcons = {
       <path d="M5 9.5V21h14V9.5" />
     </svg>
   ),
-  '/services': (
+  '/my-work': (
     <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
       <path d="M4 7h16M4 12h16M4 17h16" />
     </svg>
@@ -45,35 +46,8 @@ const NavBar = () => {
   const location = useLocation()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-  const navRef = useRef(null)
-  const linkElsRef = useRef({})
-  const [indicator, setIndicator] = useState({ left: 0, width: 0 })
-
-  const updateIndicator = () => {
-    const navEl = navRef.current
-    if (!navEl) return
-
-    const activeEl = linkElsRef.current[location.pathname]
-    if (!activeEl) {
-      setIndicator({ left: 0, width: 0 })
-      return
-    }
-
-    setIndicator({
-      left: activeEl.offsetLeft,
-      width: activeEl.offsetWidth,
-    })
-  }
-
-  useLayoutEffect(() => {
-    updateIndicator()
-    window.addEventListener('resize', updateIndicator)
-    return () => window.removeEventListener('resize', updateIndicator)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.pathname])
-
-  useLayoutEffect(() => {
-    setIsMobileMenuOpen(false)
+  useEffect(() => {
+    startTransition(() => setIsMobileMenuOpen(false))
   }, [location.pathname])
 
   useLayoutEffect(() => {
@@ -92,51 +66,39 @@ const NavBar = () => {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [isMobileMenuOpen])
 
+  const navLinkClass = ({ isActive }) =>
+    `border-b-2 pb-1 text-[0.7rem] font-semibold uppercase tracking-[0.2em] transition-colors ${
+      isActive
+        ? 'border-secundario text-ink'
+        : 'border-transparent text-neutral-500 hover:text-ink/80'
+    }`
+
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/80 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <NavLink to="/" className="text-xl font-black tracking-tight text-slate-900">
-            Kodawave
-          </NavLink>
-          <nav ref={navRef} className="relative hidden items-center gap-2 md:flex">
-            {/* Active pill background: moves between items using pure CSS transitions (lighter than motion). */}
-            <div
-              aria-hidden="true"
-              className="absolute top-0 bottom-0 z-0 rounded-full bg-slate-900 transition-[width,left] duration-200 ease-out"
-              style={{ left: indicator.left, width: indicator.width }}
-            />
+      <header className="sticky top-0 z-50 border-b border-secundario/20 bg-terciario/90 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-5 md:px-10">
+          <CaennaHeaderLogo />
+          <nav className="hidden items-center gap-8 md:flex">
             {links.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                ref={(el) => {
-                  if (el) linkElsRef.current[link.to] = el
-                }}
-                className={`relative z-10 rounded-full px-4 py-2 text-sm font-medium transition ${
-                  location.pathname === link.to
-                    ? 'text-white'
-                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
-                }`}
-              >
+              <NavLink key={link.to} to={link.to} className={navLinkClass}>
                 {link.label}
               </NavLink>
             ))}
           </nav>
           <NavLink
             to="/contact"
-            className="hidden rounded-full bg-indigo-500 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-600 md:inline-flex"
+            className="hidden border border-principal bg-principal px-5 py-2.5 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-ink transition hover:border-secundario hover:bg-secundario hover:text-terciario md:inline-flex"
           >
-            Free Consultation
+            Start a project
           </NavLink>
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-            className="inline-flex items-center justify-center rounded-lg border border-slate-300 p-2 text-slate-700 md:hidden"
+            className="inline-flex items-center justify-center border border-secundario/30 p-2.5 text-ink md:hidden"
             aria-expanded={isMobileMenuOpen}
             aria-label="Toggle navigation menu"
           >
-            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.5">
               {isMobileMenuOpen ? (
                 <path d="M6 6l12 12M18 6L6 18" />
               ) : (
@@ -147,7 +109,7 @@ const NavBar = () => {
         </div>
       </header>
       <div
-        className={`fixed inset-0 z-[60] bg-slate-900/45 transition-opacity duration-200 md:hidden ${
+        className={`fixed inset-0 z-[60] bg-ink/35 transition-opacity duration-200 md:hidden ${
           isMobileMenuOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
         }`}
         onClick={() => setIsMobileMenuOpen(false)}
@@ -155,36 +117,36 @@ const NavBar = () => {
       />
       <div className="fixed inset-0 z-[70] pointer-events-none md:hidden" aria-hidden={!isMobileMenuOpen}>
         <aside
-          className={`pointer-events-auto ml-auto h-full w-[min(85vw,20rem)] border-l border-slate-200 bg-white p-6 shadow-2xl transition-transform duration-200 ${
+          className={`pointer-events-auto ml-auto h-full w-[min(85vw,20rem)] border-l border-secundario/20 bg-terciario p-6 shadow-2xl transition-transform duration-200 ${
             isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
           aria-label="Mobile navigation"
         >
-          <div className="mb-6 flex items-center justify-between">
-            <span className="mx-auto text-lg font-black text-slate-900">Menu</span>
+          <div className="mb-8 flex items-center justify-between gap-3">
+            <CaennaHeaderLogo />
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="rounded-lg p-2 text-slate-600 hover:bg-slate-100"
+              className="border border-secundario/25 p-2 text-ink"
               aria-label="Close menu"
             >
-              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M6 6l12 12M18 6L6 18" />
               </svg>
             </button>
           </div>
-          <nav className="mx-auto flex w-full max-w-[17rem] flex-col gap-2">
+          <nav className="flex w-full flex-col gap-1">
             {links.map((link) => (
               <NavLink
                 key={`mobile-${link.to}`}
                 to={link.to}
-                className={`rounded-xl px-4 py-3 text-left text-base font-semibold ${
+                className={`rounded-lg px-4 py-3 text-left text-sm font-semibold ${
                   location.pathname === link.to
-                    ? 'bg-slate-900 text-white'
-                    : 'text-slate-700 hover:bg-slate-100'
+                    ? 'bg-principal/40 text-ink'
+                    : 'text-neutral-700 hover:bg-principal/25'
                 }`}
               >
-                <span className="flex items-center justify-start gap-2">
+                <span className="flex items-center gap-3">
                   {linkIcons[link.to]}
                   <span>{link.label}</span>
                 </span>
@@ -192,9 +154,9 @@ const NavBar = () => {
             ))}
             <NavLink
               to="/contact"
-              className="mt-3 rounded-xl bg-indigo-500 px-4 py-3 text-center text-sm font-semibold text-white"
+              className="mt-4 border border-principal bg-principal px-4 py-3 text-center text-xs font-semibold uppercase tracking-[0.2em] text-ink transition hover:border-secundario hover:bg-secundario hover:text-terciario"
             >
-              Free Consultation
+              Start a project
             </NavLink>
           </nav>
         </aside>

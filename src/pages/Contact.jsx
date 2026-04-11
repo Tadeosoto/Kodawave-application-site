@@ -1,52 +1,57 @@
 import SectionTitle from '../components/SectionTitle'
+import Reveal from '../components/Reveal'
 import LazyMap from '../components/LazyMap'
 
 const Contact = () => {
   return (
     <div className="space-y-12 pb-16">
-      <SectionTitle
-        eyebrow="Contact"
-        title="Let us talk about your next growth phase"
-        description="Share your goals and we will answer with a practical action plan."
-      />
+      <Reveal>
+        <SectionTitle
+          eyebrow="Contact"
+          title="Tell me what you are building next"
+          description="Share loads, timeline, and manufacturing context—I will reply with a practical scope: what to model, what to test, and what “done” should mean."
+        />
+      </Reveal>
 
-      <section className="grid gap-8 rounded-3xl border border-slate-200 bg-white p-8 lg:grid-cols-2">
-        <form className="space-y-4">
-          <input
-            className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-indigo-500"
-            type="text"
-            placeholder="Your name"
-          />
-          <input
-            className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-indigo-500"
-            type="email"
-            placeholder="Email address"
-          />
-          <textarea
-            className="h-36 w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-indigo-500"
-            placeholder="Tell us about your project"
-          />
-          <button
-            type="button"
-            className="rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-700"
-          >
-            Send inquiry
-          </button>
-        </form>
+      <Reveal delay={0.08}>
+        <section className="grid gap-8 rounded-3xl border border-secundario/20 bg-white/80 p-8 lg:grid-cols-2">
+          <form className="space-y-4">
+            <input
+              className="w-full rounded-xl border border-secundario/30 bg-white px-4 py-3 outline-none focus:border-principal"
+              type="text"
+              placeholder="Your name"
+            />
+            <input
+              className="w-full rounded-xl border border-secundario/30 bg-white px-4 py-3 outline-none focus:border-principal"
+              type="email"
+              placeholder="Email address"
+            />
+            <textarea
+              className="h-36 w-full rounded-xl border border-secundario/30 bg-white px-4 py-3 outline-none focus:border-principal"
+              placeholder="Tell me about your project"
+            />
+            <button
+              type="button"
+              className="rounded-full bg-principal px-6 py-3 text-sm font-semibold text-ink transition hover:bg-secundario hover:text-terciario"
+            >
+              Send message
+            </button>
+          </form>
 
-        <div className="space-y-4">
-          <p className="text-slate-700">
-            <span className="font-semibold">Email:</span> tadeosoto1993@gmail.com
-          </p>
-          <p className="text-slate-700">
-            <span className="font-semibold">Phone:</span> +0 (000) 000-0000
-          </p>
-          <p className="text-slate-700">
-            <span className="font-semibold">Office:</span> 1600 Amphitheatre Parkway, Mountain View, CA 94043
-          </p>
-          <LazyMap />
-        </div>
-      </section>
+          <div className="space-y-4">
+            <p className="text-neutral-700">
+              <span className="font-semibold">Email:</span> tadeosoto1993@gmail.com
+            </p>
+            <p className="text-neutral-700">
+              <span className="font-semibold">Phone:</span> +0 (000) 000-0000
+            </p>
+            <p className="text-neutral-700">
+              <span className="font-semibold">Studio:</span> 1600 Amphitheatre Parkway, Mountain View, CA 94043
+            </p>
+            <LazyMap />
+          </div>
+        </section>
+      </Reveal>
     </div>
   )
 }

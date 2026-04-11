@@ -5,15 +5,16 @@ const About = lazy(() => import('./pages/About'))
 const Blog = lazy(() => import('./pages/Blog'))
 const Contact = lazy(() => import('./pages/Contact'))
 const Home = lazy(() => import('./pages/Home'))
-const Services = lazy(() => import('./pages/Services'))
+const MyWork = lazy(() => import('./pages/MyWork'))
 
 function App() {
   return (
-    <Suspense fallback={<div className="mx-auto max-w-6xl px-6 py-10 text-slate-500">Loading…</div>}>
+    <Suspense fallback={<div className="mx-auto max-w-6xl px-6 py-10 text-secundario">Loading…</div>}>
       <Routes>
         <Route element={<SiteLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/services" element={<Services />} />
+          <Route path="/my-work" element={<MyWork />} />
+          <Route path="/services" element={<Navigate to="/my-work" replace />} />
           <Route path="/about" element={<About />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
