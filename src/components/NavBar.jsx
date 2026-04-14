@@ -75,7 +75,7 @@ const NavBar = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-secundario/20 bg-terciario/90 backdrop-blur-xl">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-secundario/20 bg-terciario/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-5 md:px-10">
           <CaennaHeaderLogo />
           <nav className="hidden items-center gap-8 md:flex">
@@ -166,3 +166,4 @@ const NavBar = () => {
 }
 
 export default NavBar
+
