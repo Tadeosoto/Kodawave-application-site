@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import { portfolioProjects, testimonials } from "../data/content";
 import Reveal from "../components/Reveal";
 import ParallaxReservationSection from "../components/ParallaxReservationSection";
@@ -14,6 +14,7 @@ const MotionP = motion.p;
 const MotionSpan = motion.span;
 const MotionArticle = motion.article;
 const MotionBlockquote = motion.blockquote;
+const MotionImg = motion.img;
 
 const ease = [0.22, 0.61, 0.36, 1];
 
@@ -46,6 +47,15 @@ const Bleed = ({ children, className = "" }) => (
 
 const Home = () => {
   const [heroWordIndex, setHeroWordIndex] = useState(0);
+  const heroSectionRef = useRef(null);
+
+  const { scrollYProgress: heroScroll } = useScroll({
+    target: heroSectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  const heroImageScale = useTransform(heroScroll, [0, 1], [1, 1.14]);
+  const heroImageBlur = useTransform(heroScroll, [0, 1], ["blur(0px)", "blur(6px)"]);
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -57,11 +67,15 @@ const Home = () => {
   return (
     <div className="pb-8">
       <Bleed>
-        <section className="relative isolate min-h-[min(92vh,960px)] overflow-hidden bg-terciario">
-          <img
+        <section
+          ref={heroSectionRef}
+          className="relative isolate min-h-[min(92vh,960px)] overflow-hidden bg-terciario"
+        >
+          <MotionImg
             src={heroHandsUrl}
             alt=""
-            className="pointer-events-none absolute inset-0 z-0 h-full min-h-full w-full min-w-full select-none object-cover object-[center_38%] opacity-[0.98] sm:object-[center_40%]"
+            style={{ scale: heroImageScale, filter: heroImageBlur }}
+            className="pointer-events-none absolute inset-0 z-0 h-full min-h-full w-full min-w-full origin-center select-none object-cover object-[center_38%] opacity-[0.98] sm:object-[center_40%]"
             decoding="async"
           />
           <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-terciario/88 via-terciario/20 to-terciario/92" />
