@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 
@@ -24,93 +24,124 @@ function useSplitSlidePx() {
   return px;
 }
 
+/** Keyframes más espaciados en 0–1 para que en móvil no se “salten” fases con scroll rápido. */
+function useNarrowMobile() {
+  const [narrow, setNarrow] = useState(
+    () => typeof window !== "undefined" && window.innerWidth < 768,
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const fn = () => setNarrow(mq.matches);
+    fn();
+    mq.addEventListener("change", fn);
+    return () => mq.removeEventListener("change", fn);
+  }, []);
+
+  return narrow;
+}
+
 const ParallaxReservationSection = () => {
   const parallaxSectionRef = useRef(null);
   const splitSlidePx = useSplitSlidePx();
+  const narrowMobile = useNarrowMobile();
 
   const { scrollYProgress: parallaxProgress } = useScroll({
     target: parallaxSectionRef,
     offset: ["start start", "end end"],
   });
 
-  const lineOneOpacity = useTransform(
-    parallaxProgress,
-    [0, 0.08, 0.25, 0.36],
-    [0, 1, 1, 0],
-  );
-  const lineOneY = useTransform(
-    parallaxProgress,
-    [0, 0.25, 0.36],
-    [24, 0, -24],
-  );
-  const lineOneScale = useTransform(parallaxProgress, [0.25, 0.36], [1, 0.92]);
-  const lineOneBlur = useTransform(
-    parallaxProgress,
-    [0, 0.08, 0.25, 0.36],
-    ["blur(6px)", "blur(0px)", "blur(0px)", "blur(8px)"],
-  );
+  const k = useMemo(() => {
+    if (!narrowMobile) {
+      return {
+        l1o: [0, 0.08, 0.25, 0.36],
+        l1y: [0, 0.25, 0.36],
+        l1s: [0.25, 0.36],
+        l1b: [0, 0.08, 0.25, 0.36],
+        l2o: [0.26, 0.36, 0.52, 0.64],
+        l2y: [0.26, 0.52, 0.64],
+        l2s: [0.52, 0.64],
+        l2b: [0.26, 0.36, 0.52, 0.64],
+        spo: [0.52, 0.64, 0.8, 0.9],
+        spl: [0.52, 0.66],
+        spy: [0.52, 0.8, 0.9],
+        sps: [0.8, 0.9],
+        spb: [0.52, 0.64, 0.8, 0.9],
+        rvo: [0.8, 0.9, 1],
+        rvy: [0.8, 0.9],
+        rvs: [0.8, 0.9],
+        rvb: [0.8, 0.9],
+      };
+    }
+    return {
+      l1o: [0, 0.1, 0.28, 0.4],
+      l1y: [0, 0.28, 0.4],
+      l1s: [0.28, 0.4],
+      l1b: [0, 0.1, 0.28, 0.4],
+      l2o: [0.26, 0.4, 0.54, 0.66],
+      l2y: [0.26, 0.54, 0.66],
+      l2s: [0.54, 0.66],
+      l2b: [0.26, 0.4, 0.54, 0.66],
+      spo: [0.5, 0.64, 0.76, 0.86],
+      spl: [0.5, 0.66],
+      spy: [0.5, 0.76, 0.86],
+      sps: [0.76, 0.86],
+      spb: [0.5, 0.64, 0.76, 0.86],
+      rvo: [0.68, 0.82, 1],
+      rvy: [0.68, 0.82],
+      rvs: [0.68, 0.82],
+      rvb: [0.68, 0.82],
+    };
+  }, [narrowMobile]);
 
-  const lineTwoOpacity = useTransform(
-    parallaxProgress,
-    [0.26, 0.36, 0.52, 0.64],
-    [0, 1, 1, 0],
-  );
-  const lineTwoY = useTransform(
-    parallaxProgress,
-    [0.26, 0.52, 0.64],
-    [24, 0, -24],
-  );
-  const lineTwoScale = useTransform(parallaxProgress, [0.52, 0.64], [1, 0.92]);
-  const lineTwoBlur = useTransform(
-    parallaxProgress,
-    [0.26, 0.36, 0.52, 0.64],
-    ["blur(6px)", "blur(0px)", "blur(0px)", "blur(8px)"],
-  );
+  const lineOneOpacity = useTransform(parallaxProgress, k.l1o, [0, 1, 1, 0]);
+  const lineOneY = useTransform(parallaxProgress, k.l1y, [24, 0, -24]);
+  const lineOneScale = useTransform(parallaxProgress, k.l1s, [1, 0.92]);
+  const lineOneBlur = useTransform(parallaxProgress, k.l1b, [
+    "blur(6px)",
+    "blur(0px)",
+    "blur(0px)",
+    "blur(8px)",
+  ]);
 
-  const splitOpacity = useTransform(
-    parallaxProgress,
-    [0.52, 0.64, 0.8, 0.9],
-    [0, 1, 1, 0],
-  );
-  const splitLeftX = useTransform(
-    parallaxProgress,
-    [0.52, 0.66],
-    [-splitSlidePx, 0],
-  );
-  const splitRightX = useTransform(
-    parallaxProgress,
-    [0.52, 0.66],
-    [splitSlidePx, 0],
-  );
-  const splitY = useTransform(parallaxProgress, [0.52, 0.8, 0.9], [24, 0, -24]);
-  const splitScale = useTransform(parallaxProgress, [0.8, 0.9], [1, 0.93]);
-  const splitBlur = useTransform(
-    parallaxProgress,
-    [0.52, 0.64, 0.8, 0.9],
-    ["blur(6px)", "blur(0px)", "blur(0px)", "blur(8px)"],
-  );
+  const lineTwoOpacity = useTransform(parallaxProgress, k.l2o, [0, 1, 1, 0]);
+  const lineTwoY = useTransform(parallaxProgress, k.l2y, [24, 0, -24]);
+  const lineTwoScale = useTransform(parallaxProgress, k.l2s, [1, 0.92]);
+  const lineTwoBlur = useTransform(parallaxProgress, k.l2b, [
+    "blur(6px)",
+    "blur(0px)",
+    "blur(0px)",
+    "blur(8px)",
+  ]);
 
-  const reserveOpacity = useTransform(
-    parallaxProgress,
-    [0.8, 0.9, 1],
-    [0, 1, 1],
-  );
-  const reserveY = useTransform(parallaxProgress, [0.8, 0.9], [24, 0]);
-  const reserveScale = useTransform(parallaxProgress, [0.8, 0.9], [0.95, 1]);
-  const reserveBlur = useTransform(
-    parallaxProgress,
-    [0.8, 0.9],
-    ["blur(6px)", "blur(0px)"],
-  );
+  const splitOpacity = useTransform(parallaxProgress, k.spo, [0, 1, 1, 0]);
+  const splitLeftX = useTransform(parallaxProgress, k.spl, [-splitSlidePx, 0]);
+  const splitRightX = useTransform(parallaxProgress, k.spl, [splitSlidePx, 0]);
+  const splitY = useTransform(parallaxProgress, k.spy, [24, 0, -24]);
+  const splitScale = useTransform(parallaxProgress, k.sps, [1, 0.93]);
+  const splitBlur = useTransform(parallaxProgress, k.spb, [
+    "blur(6px)",
+    "blur(0px)",
+    "blur(0px)",
+    "blur(8px)",
+  ]);
+
+  const reserveOpacity = useTransform(parallaxProgress, k.rvo, [0, 1, 1]);
+  const reserveY = useTransform(parallaxProgress, k.rvy, [24, 0]);
+  const reserveScale = useTransform(parallaxProgress, k.rvs, [0.95, 1]);
+  const reserveBlur = useTransform(parallaxProgress, k.rvb, [
+    "blur(6px)",
+    "blur(0px)",
+  ]);
 
   return (
     <section
       ref={parallaxSectionRef}
-      className="relative h-[380vh] md:h-[360vh]"
+      className="relative max-md:h-[min(640vh,9000px)] md:h-[360vh]"
     >
-      <div className="sticky top-0 flex h-dvh min-h-0 items-center justify-center overflow-hidden max-md:overflow-y-auto max-md:overscroll-y-contain">
-        <div className="pointer-events-none absolute inset-0 bg-radial-[80%_80%_at_50%_50%] " />
-        <div className="absolute inset-0 flex items-center justify-center px-4 max-md:py-10 sm:px-6">
+      <div className="sticky top-0 flex h-dvh min-h-0 items-center justify-center overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 bg-radial-[80%_80%_at_50%_50%]" />
+        <div className="absolute inset-0 flex items-center justify-center px-4 max-md:py-8 sm:px-6">
           <MotionP
             style={{
               opacity: lineOneOpacity,
@@ -123,7 +154,7 @@ const ParallaxReservationSection = () => {
             No es para todos.
           </MotionP>
         </div>
-        <div className="absolute inset-0 flex items-center justify-center px-4 max-md:py-10 sm:px-6">
+        <div className="absolute inset-0 flex items-center justify-center px-4 max-md:py-8 sm:px-6">
           <MotionP
             style={{
               opacity: lineTwoOpacity,
@@ -137,7 +168,7 @@ const ParallaxReservationSection = () => {
             <span className="text-principal">siéntelo.</span>
           </MotionP>
         </div>
-        <div className="absolute inset-0 flex items-center justify-center px-4 max-md:py-10 sm:px-6">
+        <div className="absolute inset-0 flex items-center justify-center px-4 max-md:py-8 sm:px-6">
           <MotionDiv
             style={{
               opacity: splitOpacity,
@@ -161,7 +192,7 @@ const ParallaxReservationSection = () => {
             </MotionSpan>
           </MotionDiv>
         </div>
-        <div className="absolute inset-0 z-20 flex items-center justify-center px-4 max-md:py-10 sm:px-6">
+        <div className="absolute inset-0 z-20 flex items-center justify-center px-4 max-md:py-8 sm:px-6">
           <MotionDiv
             style={{
               opacity: reserveOpacity,
