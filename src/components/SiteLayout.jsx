@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Outlet, useLocation } from 'react-router-dom'
 import NavBar from './NavBar'
 import SiteFooter from './SiteFooter'
@@ -14,9 +14,9 @@ const SiteLayout = () => {
         <AnimatePresence mode="wait">
           <MotionDiv
             key={location.pathname}
-            initial={{ opacity: 0, filter: 'blur(6px)' }}
-            animate={{ opacity: 1, filter: 'blur(0px)' }}
-            exit={{ opacity: 0, filter: 'blur(4px)' }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.25, ease: 'easeOut' }}
           >
             <Outlet />

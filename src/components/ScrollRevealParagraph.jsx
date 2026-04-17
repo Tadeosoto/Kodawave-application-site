@@ -1,5 +1,8 @@
 import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'motion/react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+
+const MotionSpan = motion.span
+const MotionDiv = motion.div
 
 /**
  * Maps raw viewport scroll (often caps below 1 before the user “feels done”) to a 0–1 reveal curve.
@@ -17,9 +20,9 @@ function RevealWord({ word, index, total, progress }) {
     return dim + (1 - dim) * s
   })
   return (
-    <motion.span className="inline text-ink [overflow-wrap:anywhere]" style={{ opacity }}>
+    <MotionSpan className="inline text-ink [overflow-wrap:anywhere]" style={{ opacity }}>
       {word}
-    </motion.span>
+    </MotionSpan>
   )
 }
 
@@ -68,7 +71,7 @@ export default function ScrollRevealParagraph({
             </p>
           </div>
 
-          <motion.div
+          <MotionDiv
             className="relative z-0 w-full shrink-0 lg:w-[30%] lg:flex-[0_0_30%] lg:pl-2"
             style={{ opacity: imageOpacity, y: imageY }}
           >
@@ -81,7 +84,7 @@ export default function ScrollRevealParagraph({
                 decoding="async"
               />
             </div>
-          </motion.div>
+          </MotionDiv>
         </div>
       </div>
     </div>

@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion } from "framer-motion";
 import { portfolioProjects, testimonials } from "../data/content";
 import Reveal from "../components/Reveal";
+import ParallaxReservationSection from "../components/ParallaxReservationSection";
+import ParallaxCards from "../components/ParallaxCards";
 import heroHandsUrl from "../assets/michPageAssets/pageDecoration/mano-de-dios-chingona.png";
 import engineerSectionBgUrl from "../assets/michPageAssets/pageDecoration/background-image1.png";
 import portraitMichelleUrl from "../assets/michPageAssets/michPhotos/hf_20260329_022232_608e361f-7fac-4089-bcf8-923d3e56c916.png";
+import alignnaBlancoRotoUrl from "../assets/michPageAssets/logos-icons/Alignna-BlancoRoto.svg";
 
 const MotionP = motion.p;
 const MotionSpan = motion.span;
@@ -14,24 +17,24 @@ const MotionBlockquote = motion.blockquote;
 
 const ease = [0.22, 0.61, 0.36, 1];
 
-const HERO_ROTATE_WORDS = ["perform", "endure", "carry", "matter"];
+const HERO_ROTATE_WORDS = ["conciencia", "ideas", "futuro", "impacto"];
 
 const capabilities = [
   {
-    title: "Mechanical design",
-    body: "I turn requirements into geometry—➤ layouts, ➤ mechanisms, ➤ material calls, and ➤ drawings with tolerances that survive manufacturing.",
+    title: "Diseño mecánico",
+    body: "Convierto requerimientos en geometría: disposiciones, mecanismos, decisiones de material y planos con tolerancias que sobreviven a manufactura.",
   },
   {
-    title: "Systems thinking",
-    body: "Interfaces, loads, and failure modes get named early. I connect ➤ CAD, ➤ BOM intent, and ➤ test criteria so the story of the part stays coherent.",
+    title: "Pensamiento de sistemas",
+    body: "Las interfaces, cargas y modos de falla se nombran desde temprano. Conecto CAD, intención de BOM y criterios de prueba para mantener coherencia técnica.",
   },
   {
-    title: "Analysis & proof",
-    body: "When the question is stiffness, life, or margin, I pair ➤ hand checks with ➤ CAE where it earns its keep—and I leave assumptions visible.",
+    title: "Análisis y validación",
+    body: "Cuando la pregunta es rigidez, vida útil o margen, combino cálculos manuales con CAE donde realmente aporta, dejando visibles las suposiciones.",
   },
   {
-    title: "Build & learn",
-    body: "Prototypes are not theatre. I aim for ➤ prints you can build, ➤ tests you can repeat, and ➤ feedback that feeds the next revision fast.",
+    title: "Construir y aprender",
+    body: "Los prototipos no son teatro. Busco planos construibles, pruebas repetibles y retroalimentación que acelere la siguiente iteración.",
   },
 ];
 
@@ -70,26 +73,10 @@ const Home = () => {
               transition={{ duration: 0.55, ease }}
               className="text-center text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-neutral-500"
             >
-              Mechanical engineering
+              Ingeniería mecánica
             </MotionP>
             <h1 className="mt-10 text-center font-display text-[clamp(1.85rem,5.2vw,3.15rem)] font-medium leading-[1.15] tracking-tight text-ink md:mt-14">
-              <span className="block">I engineer only what deserves to</span>
-              <span className="mt-2 flex min-h-[1.4em] items-center justify-center md:mt-3">
-                <span className="relative inline-flex min-w-[12ch] justify-center">
-                  <AnimatePresence mode="wait" initial={false}>
-                    <MotionSpan
-                      key={HERO_ROTATE_WORDS[heroWordIndex]}
-                      initial={{ opacity: 0, y: 14 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.35, ease }}
-                      className="font-bold italic text-ink"
-                    >
-                      {HERO_ROTATE_WORDS[heroWordIndex]}
-                    </MotionSpan>
-                  </AnimatePresence>
-                </span>
-              </span>
+              <span className="block">Tecnología con alma.</span>
             </h1>
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -97,31 +84,58 @@ const Home = () => {
               transition={{ duration: 0.6, ease, delay: 0.15 }}
               className="mx-auto mt-8 max-w-lg text-left text-[0.95rem] leading-relaxed text-neutral-600 md:ml-auto md:mr-[4%] md:mt-10 md:max-w-md md:text-base"
             >
-              <p>Does this load path deserve to exist?</p>
-              <p className="mt-2">Every tolerance is a promise.</p>
+              <p>¿Este camino de carga merece existir?</p>
+              <p className="mt-2">Cada tolerancia es una promesa.</p>
               <p className="mt-2">
-                Less guesswork, more{" "}
-                <span className="font-semibold text-ink">evidence</span>.
+                Menos suposiciones, más{" "}
+                <span className="font-semibold text-ink">evidencia</span>.
               </p>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, ease, delay: 0.28 }}
-              className="mt-auto flex flex-wrap items-center justify-center gap-4 pt-14 md:pt-20"
+              className="mt-auto grid items-end gap-10 pt-14 md:grid-cols-[1fr_auto_1fr] md:pt-20"
             >
-              <Link
-                to="/contact"
-                className="border border-principal bg-principal px-8 py-3.5 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-ink transition hover:border-secundario hover:bg-secundario hover:text-terciario"
-              >
-                Get in touch
-              </Link>
-              <Link
-                to={{ pathname: "/", hash: "work" }}
-                className="border border-principal/70 bg-white/85 px-8 py-3.5 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-ink backdrop-blur-sm transition hover:border-principal hover:bg-principal/25"
-              >
-                View work
-              </Link>
+              <div className="text-left md:pb-2">
+                <p className="font-display text-[clamp(2rem,5vw,3.6rem)] font-medium leading-[1.02] tracking-tight text-ink">
+                  Materializando <br />
+                  <span className="relative inline-flex min-w-[9ch]">
+                    <AnimatePresence mode="wait" initial={false}>
+                      <MotionSpan
+                        key={HERO_ROTATE_WORDS[heroWordIndex]}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.35, ease }}
+                        className="font-semibold italic text-ink"
+                      >
+                        {HERO_ROTATE_WORDS[heroWordIndex]}.
+                      </MotionSpan>
+                    </AnimatePresence>
+                  </span>
+                </p>
+                <p className="mt-3 text-sm font-semibold italic text-neutral-600 md:text-lg">
+                  Nada es casualidad.
+                </p>
+              </div>
+              <div className="flex flex-col items-center justify-center gap-3">
+                <Link
+                  to="/contact"
+                  className="rounded-full bg-principal px-16 py-4 shadow-[0_12px_30px_-16px_rgba(42,38,32,0.8)] transition-all duration-300 ease-out hover:scale-105 hover:bg-secundario active:scale-95"
+                  aria-label="Ir a contacto"
+                >
+                  <img
+                    src={alignnaBlancoRotoUrl}
+                    alt="Alignna"
+                    className="h-7 w-auto sm:h-8 md:h-10 lg:h-14"
+                    decoding="async"
+                  />
+                </Link>
+                <p className="text-center text-base text-ink">
+                  Es solo el comienzo
+                </p>
+              </div>
             </motion.div>
           </div>
         </section>
@@ -133,20 +147,21 @@ const Home = () => {
             <div className="w-full min-w-0 lg:w-[70%] lg:flex-[1_1_70%]">
               <Reveal>
                 <p className="text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-neutral-500">
-                  What I do
+                  Lo que hago
                 </p>
               </Reveal>
               <Reveal delay={0.06}>
                 <p className="mt-6 text-left font-display text-2xl font-normal leading-snug text-ink md:text-3xl">
-                  I am a mechanical engineer first: sketches become models, models
-                  become drawings, and drawings become hardware people can trust.
-                  I work shoulder-to-shoulder with teams who need clarity under
-                  load, cost, and schedule—not a prettier slide deck.
+                  Primero soy ingeniera mecánica: los bocetos se convierten en
+                  modelos, los modelos en planos, y los planos en hardware en el
+                  que las personas pueden confiar. Trabajo hombro a hombro con
+                  equipos que necesitan claridad bajo carga, costo y cronograma,
+                  no una presentación más bonita.
                 </p>
               </Reveal>
               <Reveal delay={0.1}>
                 <p className="mt-10 text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-neutral-500">
-                  Focus areas
+                  Áreas de enfoque
                 </p>
               </Reveal>
               <div className="mt-8 grid gap-10 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-10 md:gap-x-12 md:gap-y-12">
@@ -169,7 +184,7 @@ const Home = () => {
                 <div className="mx-auto aspect-[3/4] max-w-xs overflow-hidden bg-ink/5 sm:max-w-sm lg:mx-0 lg:ml-auto lg:max-w-none">
                   <img
                     src={portraitMichelleUrl}
-                    alt="Michelle Castellanos"
+                    alt="Retrato de Michelle Castellanos"
                     className="h-full w-full object-cover object-[center_22%]"
                     decoding="async"
                   />
@@ -181,88 +196,77 @@ const Home = () => {
       </Bleed>
 
       <Bleed>
-        <section className="relative isolate bg-white py-16 md:py-24 lg:py-28">
-          <div className="mx-auto max-w-[1600px] px-6 md:px-10">
-            <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(260px,46%)] lg:gap-12 xl:gap-16">
-              <div>
-                <Reveal>
-                  <h2 className="font-display text-3xl font-semibold tracking-tight text-ink md:text-4xl">
-                    Mechanical engineer.
-                  </h2>
-                </Reveal>
-                <div className="mt-8 max-w-xl space-y-4 text-[0.95rem] leading-relaxed text-neutral-700 md:text-base">
-                  {[
-                    <>
-                      I need to see{" "}
-                      <strong className="font-semibold text-ink">
-                        the load path
-                      </strong>
-                      —not just the outer shape.
-                    </>,
-                    <>
-                      A part has to{" "}
-                      <strong className="font-semibold text-ink">
-                        survive reality
-                      </strong>
-                      : vibration, misuse, and the shop floor.
-                    </>,
-                    <>
-                      Some drawings merely describe; others{" "}
-                      <strong className="font-semibold text-ink">
-                        release
-                      </strong>{" "}
-                      with confidence.
-                    </>,
-                    <>
-                      Good engineering is{" "}
-                      <strong className="font-semibold text-ink">
-                        constraints made visible
-                      </strong>
-                      —material, process, and margin named out loud.
-                    </>,
-                    <>
-                      The gap is rarely inspiration; it is{" "}
-                      <strong className="font-semibold text-ink">
-                        follow-through
-                      </strong>
-                      in every revision.
-                    </>,
-                  ].map((line, i) => (
-                    <Reveal key={i} delay={0.05 * i}>
-                      <p>{line}</p>
-                    </Reveal>
-                  ))}
-                  <Reveal delay={0.35}>
-                    <p className="pt-2 font-medium text-ink">
-                      From sketch to stack-up—then to the people who build it.
-                    </p>
-                  </Reveal>
-                </div>
-              </div>
-              <div className="flex min-w-0 flex-col items-center lg:items-end">
-                <Reveal>
-                  <img
-                    src={engineerSectionBgUrl}
-                    alt=""
-                    className="h-auto w-full max-w-md object-contain object-center lg:max-w-none lg:object-right"
-                    decoding="async"
-                  />
-                </Reveal>
-                <Reveal delay={0.1}>
-                  <p className="mt-8 w-full text-center font-display text-sm italic text-neutral-500 lg:text-right">
-                    — Michelle Castellanos
-                  </p>
-                </Reveal>
-              </div>
+        <section className="relative isolate flex min-h-[70vh] items-center overflow-hidden bg-linear-to-b from-terciario/55 via-white to-terciario/55 py-20 md:min-h-[78vh] md:py-28 lg:min-h-[84vh] lg:py-36">
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-1 h-24 bg-linear-to-b from-terciario/85 to-transparent md:h-28" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-1 h-24 bg-linear-to-t from-terciario/85 to-transparent md:h-28" />
+          <motion.img
+            src={engineerSectionBgUrl}
+            alt=""
+            className="pointer-events-none absolute inset-0 z-0 h-full w-full select-none object-cover object-[78%_center] md:object-[82%_center] lg:object-right"
+            initial={{ opacity: 0, x: 48, scale: 0.96 }}
+            whileInView={{ opacity: 0.56, x: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.45 }}
+            transition={{ duration: 1.05, ease }}
+            decoding="async"
+          />
+          <div className="relative z-10 mx-auto w-full max-w-[1500px] px-6 text-center md:px-12">
+            <motion.h2
+              initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true, amount: 0.55 }}
+              transition={{ duration: 0.82, ease }}
+              className="mx-auto max-w-[13ch] text-balance font-display text-[clamp(2.2rem,5.4vw,4.35rem)] font-medium leading-[1.06] tracking-tight text-ink"
+            >
+              Diseñamos solo lo que merece existir
+            </motion.h2>
+            <div className="mx-auto mt-10 max-w-md space-y-5 text-pretty text-[clamp(1.05rem,1.35vw,1.75rem)] leading-[1.28] text-ink/90 md:mt-12">
+              <MotionP
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.75 }}
+                transition={{ duration: 0.58, ease, delay: 0.08 }}
+              >
+                ¿Esto realmente mejora la experiencia humana?
+              </MotionP>
+              <MotionP
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.75 }}
+                transition={{ duration: 0.58, ease, delay: 0.18 }}
+              >
+                Cada detalle importa.
+              </MotionP>
+              <MotionP
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.75 }}
+                transition={{ duration: 0.58, ease, delay: 0.28 }}
+                className="pt-2"
+              >
+                Menos ruido,
+              </MotionP>
+              <MotionP
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.75 }}
+                transition={{ duration: 0.58, ease, delay: 0.38 }}
+                className="font-medium"
+              >
+                Más <span className="font-semibold">intención.</span>
+              </MotionP>
             </div>
           </div>
         </section>
       </Bleed>
 
+      <ParallaxReservationSection />
+
+      <ParallaxCards />
+
       <section className="mx-auto mt-20 max-w-5xl md:mt-28">
         <Reveal className="text-center">
           <p className="text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-neutral-500">
-            Reel
+            Video
           </p>
         </Reveal>
         <Reveal delay={0.08}>
@@ -276,7 +280,7 @@ const Home = () => {
             <button
               type="button"
               className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 bg-white/10 text-white backdrop-blur-md transition hover:bg-white/20"
-              aria-label="Play reel"
+              aria-label="Reproducir reel"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -297,7 +301,7 @@ const Home = () => {
       >
         <Reveal className="text-center">
           <h2 className="font-display text-4xl font-medium tracking-tight text-ink md:text-5xl">
-            Selected projects
+            Proyectos seleccionados
           </h2>
         </Reveal>
         <div className="mt-14 grid gap-12 md:grid-cols-2 md:gap-x-10 md:gap-y-16">
@@ -334,7 +338,7 @@ const Home = () => {
             to="/my-work"
             className="inline-flex items-center gap-2 border-b border-secundario pb-1 text-sm font-semibold uppercase tracking-[0.18em] text-ink transition hover:text-secundario/80"
           >
-            How I can help
+            Cómo puedo ayudarte
             <span aria-hidden>→</span>
           </Link>
         </Reveal>
@@ -344,15 +348,15 @@ const Home = () => {
         <div className="mx-auto max-w-6xl px-6 py-20 text-ink md:px-10 md:py-24">
           <Reveal>
             <p className="mx-auto max-w-2xl text-center font-display text-xl font-normal leading-relaxed text-ink/85 md:text-2xl">
-              A few numbers from recent programs—milestones that reflect rigor,
-              iteration, and hardware that actually shipped.
+              Algunos números de programas recientes: hitos que reflejan rigor,
+              iteración y hardware que realmente llegó a producción.
             </p>
           </Reveal>
           <div className="mt-14 grid gap-10 border-t border-secundario/30 pt-14 md:grid-cols-3 md:gap-6">
             {[
-              { n: "35+", l: "Released revisions" },
-              { n: "12+", l: "Years in hardware" },
-              { n: "70+", l: "Tests & prototypes" },
+              { n: "35+", l: "Revisiones liberadas" },
+              { n: "12+", l: "Años en hardware" },
+              { n: "70+", l: "Pruebas y prototipos" },
             ].map((s, i) => (
               <Reveal key={s.l} delay={0.08 * i} className="text-center">
                 <p className="font-display text-5xl font-medium text-secundario md:text-6xl">
@@ -370,7 +374,7 @@ const Home = () => {
       <section className="mx-auto mt-24 max-w-6xl md:mt-32">
         <Reveal className="text-center">
           <p className="text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-neutral-500">
-            Reviews
+            Reseñas
           </p>
         </Reveal>
         <Reveal delay={0.06} className="text-center">
@@ -380,8 +384,8 @@ const Home = () => {
         </Reveal>
         <Reveal delay={0.1}>
           <p className="mx-auto mt-6 max-w-2xl text-center text-sm leading-relaxed text-neutral-600">
-            Words from teams who have shipped hardware with me—reviews, vendors,
-            and program pressure included.
+            Palabras de equipos con los que he lanzado hardware, incluyendo
+            proveedores, revisiones y presión real de programa.
           </p>
         </Reveal>
         <div className="mt-14 grid gap-8 md:grid-cols-3">

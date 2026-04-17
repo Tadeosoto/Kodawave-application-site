@@ -2,62 +2,62 @@
 export const portfolioProjects = [
   {
     title: 'Symphony',
-    tags: ['CAD', 'Structural', 'Design review'],
-    blurb: 'Load paths made legible. A housing that survived vibration without hiding how it works.',
+    tags: ['CAD', 'Estructural', 'Revisión de diseño'],
+    blurb: 'Caminos de carga legibles. Una carcasa que resistió vibración sin ocultar cómo funciona.',
     img: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
   },
   {
     title: 'Beyond',
-    tags: ['DFM', 'Sheet metal', 'Prototype'],
-    blurb: 'From flat pattern to assembled stack—tolerances that kept assembly honest on the first build.',
+    tags: ['DFM', 'Lámina', 'Prototipo'],
+    blurb: 'Del desplegado al ensamble: tolerancias que mantuvieron el montaje correcto desde la primera construcción.',
     img: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
   },
   {
     title: 'Northline',
-    tags: ['Mechanism', 'Tolerance stack', 'Testing'],
-    blurb: 'Motion where friction and wear were budgeted in—not discovered late.',
+    tags: ['Mecanismo', 'Cadena de tolerancias', 'Pruebas'],
+    blurb: 'Movimiento donde la fricción y el desgaste se contemplaron desde el diseño, no al final.',
     img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
   },
   {
     title: 'Café Meridian',
-    tags: ['Thermal', 'CFD', 'Validation'],
-    blurb: 'Thermal paths and guardrails before metal met the real environment.',
+    tags: ['Térmico', 'CFD', 'Validación'],
+    blurb: 'Rutas térmicas y límites definidos antes de que el metal tocara el entorno real.',
     img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
   },
   {
     title: 'Bunero',
-    tags: ['Materials', 'Finish', 'Supplier liaison'],
-    blurb: 'Surface and material choices that survived contact, cleaning, and real users.',
+    tags: ['Materiales', 'Acabado', 'Gestión con proveedores'],
+    blurb: 'Elecciones de superficie y material que soportaron contacto, limpieza y uso real.',
     img: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
   },
   {
     title: 'Castro Capital',
-    tags: ['Systems', 'BOM', 'Release'],
-    blurb: 'Documentation that held together when the program shifted—revision history people could trust.',
+    tags: ['Sistemas', 'BOM', 'Liberación'],
+    blurb: 'Documentación que se mantuvo sólida cuando cambió el programa, con historial de revisiones confiable.',
     img: 'https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
   },
 ]
 
 export const services = [
   {
-    title: '3D modeling & drawings',
+    title: 'Modelado 3D y planos',
     description:
-      'Solid models, assemblies, and drawings with tolerances and revision discipline you can take to a shop or a review.',
+      'Modelos sólidos, ensambles y planos con tolerancias y disciplina de revisión que puedes llevar a taller o a revisión técnica.',
   },
   {
-    title: 'Design for manufacturing',
+    title: 'Diseño para manufactura',
     description:
-      'Material choices, tooling awareness, and process fit so the part is not just correct on paper—it can be made.',
+      'Selección de materiales, criterio de herramentales y ajuste al proceso para que la pieza no solo sea correcta en papel: se pueda fabricar.',
   },
   {
-    title: 'Analysis & validation',
+    title: 'Análisis y validación',
     description:
-      'Hand calculations and CAE where it matters: stiffness, safety factors, and clear assumptions you can defend.',
+      'Cálculos manuales y CAE donde importa: rigidez, factores de seguridad y suposiciones claras que se pueden defender.',
   },
   {
-    title: 'Prototypes & iteration',
+    title: 'Prototipos e iteración',
     description:
-      'Prints, bench tests, and learn-fast loops that connect geometry to what you feel when the hardware is in hand.',
+      'Planos, pruebas de banco y ciclos de aprendizaje rápido que conectan la geometría con lo que se siente al tener el hardware en mano.',
   },
 ]
 
@@ -75,21 +75,21 @@ export const partners = [
 export const testimonials = [
   {
     name: 'Maria M.',
-    role: 'Operations lead, hardware startup',
+    role: 'Líder de operaciones, startup de hardware',
     quote:
-      'Michelle turned a fuzzy concept into released drawings our vendor could quote—every tolerance and note was there when we needed it.',
+      'Michelle convirtió un concepto difuso en planos liberados que nuestro proveedor pudo cotizar; cada tolerancia y nota estuvo cuando la necesitamos.',
   },
   {
     name: 'Daniel R.',
-    role: 'Program manager, industrial OEM',
+    role: 'Gerente de programa, OEM industrial',
     quote:
-      'She stayed calm through reviews, tied every change to risk and load cases, and never let “looks fine” replace a checked assumption.',
+      'Se mantuvo serena en las revisiones, conectó cada cambio con riesgos y casos de carga, y nunca dejó que un “se ve bien” reemplazara una suposición verificada.',
   },
   {
     name: 'Olivia T.',
-    role: 'Founder, medical device team',
+    role: 'Fundadora, equipo de dispositivos médicos',
     quote:
-      'Our second prototype finally matched intent: fewer surprises at assembly, and a test plan we could repeat without guessing.',
+      'Nuestro segundo prototipo por fin reflejó la intención: menos sorpresas en ensamble y un plan de pruebas repetible sin adivinar.',
   },
 ]
 

@@ -1,0 +1,91 @@
+.seccion {
+  position: relative;
+  margin-top: 50vh;
+}
+
+.cardContainer {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardSticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.cardContainer .cardSticky .card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: -25%;
+  height: 500px;
+  width: 100vw;
+  max-width: calc(100vw - 3rem);
+  border-radius: 25px;
+  padding: 50px;
+  transform-origin: top;
+}
+
+.cardContainer .cardSticky .card h2 {
+  text-align: center;
+  margin: 0px;
+  font-size: 28px;
+}
+
+.cardContainer .cardSticky .card .body {
+  display: flex;
+  height: 100%;
+  margin-top: 50px;
+  gap: 50px;
+}
+
+.cardContainer .cardSticky .card .body .description {
+  width: 40%;
+  position: relative;
+  top: 10%;
+}
+
+.cardContainer .cardSticky .card .body .description p {
+  font-size: 16px;
+}
+
+.cardContainer .cardSticky .card .body .description p::first-letter {
+  font-size: 28px;
+  font-family: "Title";
+}
+
+.cardContainer .cardSticky .card .body .description span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.cardContainer .cardSticky .card .body .description span a {
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.cardContainer .cardSticky .card .body .imageContainer {
+  position: relative;
+  width: 60%;
+  height: 100%;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.cardContainer .cardSticky .card .body .imageContainer .inner {
+  width: 100%;
+  height: 100%;
+}
+
+.cardContainer .cardSticky .card .body .imageContainer img {
+  object-fit: cover;
+}

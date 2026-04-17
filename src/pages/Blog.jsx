@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'motion/react'
+import { motion } from 'framer-motion'
 import { blogPosts } from '../data/content'
 import Reveal from '../components/Reveal'
 import michelleDeskUrl from '../assets/michPageAssets/michPhotos/michelle-desk.png'

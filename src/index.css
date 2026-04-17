@@ -18,10 +18,17 @@
   --color-ink: #2a2620;
 }
 
-html,
+/*
+  overflow-x: hidden en html/body suele romper position: sticky en Chromium/WebKit.
+  clip recorta el eje X sin el mismo efecto lateral sobre sticky (y evita scroll horizontal).
+*/
+html {
+  overflow-x: clip;
+}
+
 body,
 #root {
-  overflow-x: hidden;
+  overflow-x: visible;
 }
 
 body {
