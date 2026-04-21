@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
-import Reveal from "../components/Reveal";
 import ParallaxReservationSection from "../components/ParallaxReservationSection";
 import ParallaxCards from "../components/ParallaxCards";
 import heroHandsUrl from "../assets/michPageAssets/pageDecoration/mano-de-dios-chingona.png";
@@ -12,10 +11,60 @@ import alignnaBlancoRotoUrl from "../assets/michPageAssets/logos-icons/Alignna-B
 const MotionP = motion.p;
 const MotionSpan = motion.span;
 const MotionImg = motion.img;
+const MotionH1 = motion.h1;
 
 const ease = [0.22, 0.61, 0.36, 1];
 
 const HERO_ROTATE_WORDS = ["conciencia", "ideas", "futuro", "impacto"];
+
+const clamp01 = (value) => Math.max(0, Math.min(1, value));
+
+const RevealToken = ({ word, strong, index, total, progress }) => {
+  const opacity = useTransform(progress, (p) => {
+    const dim = 0.2;
+    const t = p * total - index;
+    if (t <= 0) return dim;
+    if (t >= 1) return 1;
+    const s = t * t * (3 - 2 * t);
+    return dim + (1 - dim) * s;
+  });
+
+  return (
+    <MotionSpan
+      className={`inline wrap-anywhere ${strong ? "font-semibold text-ink" : ""}`}
+      style={{ opacity }}
+    >
+      {word}
+    </MotionSpan>
+  );
+};
+
+const ScrollRevealLine = ({ progress, parts }) => {
+  const tokens = parts
+    .flatMap((part) =>
+      part.text
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean)
+        .map((word) => ({ word, strong: Boolean(part.strong) })),
+    );
+  const total = tokens.length || 1;
+
+  return tokens.map((token, i) => {
+    return (
+      <span key={`${token.word}-${i}`}>
+        {i > 0 ? <span aria-hidden> </span> : null}
+        <RevealToken
+          word={token.word}
+          strong={token.strong}
+          index={i}
+          total={total}
+          progress={progress}
+        />
+      </span>
+    );
+  });
+};
 
 const Bleed = ({ children, className = "" }) => (
   <div className={`relative left-1/2 w-screen -translate-x-1/2 ${className}`}>
@@ -26,6 +75,7 @@ const Bleed = ({ children, className = "" }) => (
 const Home = () => {
   const [heroWordIndex, setHeroWordIndex] = useState(0);
   const heroSectionRef = useRef(null);
+  const engineerSectionRef = useRef(null);
 
   const { scrollYProgress: heroScroll } = useScroll({
     target: heroSectionRef,
@@ -34,6 +84,16 @@ const Home = () => {
 
   const heroImageScale = useTransform(heroScroll, [0, 1], [1, 1.14]);
   const heroImageBlur = useTransform(heroScroll, [0, 1], ["blur(0px)", "blur(6px)"]);
+  const { scrollYProgress: engineerScroll } = useScroll({
+    target: engineerSectionRef,
+    offset: ["start 82%", "start 18%"],
+  });
+  const engineerLine1Progress = useTransform(engineerScroll, (v) => clamp01((v - 0.08) / 0.2));
+  const engineerLine2Progress = useTransform(engineerScroll, (v) => clamp01((v - 0.2) / 0.2));
+  const engineerLine3Progress = useTransform(engineerScroll, (v) => clamp01((v - 0.32) / 0.2));
+  const engineerLine4Progress = useTransform(engineerScroll, (v) => clamp01((v - 0.44) / 0.2));
+  const engineerLine5Progress = useTransform(engineerScroll, (v) => clamp01((v - 0.56) / 0.18));
+  const engineerLine6Progress = useTransform(engineerScroll, (v) => clamp01((v - 0.68) / 0.18));
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -60,20 +120,25 @@ const Home = () => {
 
           <div className="relative z-10 mx-auto flex min-h-[min(92vh,960px)] max-w-[1600px] flex-col px-6 pb-16 pt-10 md:px-10 md:pb-20 md:pt-14">
             <MotionP
-              initial={{ opacity: 0, y: 8 }}
+              initial={{ opacity: 0, y: -18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, ease }}
+              transition={{ duration: 0.65, ease }}
               className="text-center text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-neutral-500"
             >
               Ingeniería mecánica
             </MotionP>
-            <h1 className="mt-10 text-center font-display text-[clamp(1.85rem,5.2vw,3.15rem)] font-medium leading-[1.15] tracking-tight text-ink md:mt-14">
-              <span className="block">Tecnología con alma.</span>
-            </h1>
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
+            <MotionH1
+              initial={{ opacity: 0, y: -26 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease, delay: 0.15 }}
+              transition={{ duration: 0.72, ease, delay: 0.08 }}
+              className="mt-10 text-center font-display text-[clamp(1.85rem,5.2vw,3.15rem)] font-medium leading-[1.15] tracking-tight text-ink md:mt-14"
+            >
+              <span className="block">Tecnología con alma.</span>
+            </MotionH1>
+            <motion.div
+              initial={{ opacity: 0, y: -18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, ease, delay: 0.18 }}
               className="mx-auto mt-8 max-w-lg text-left text-[0.95rem] leading-relaxed text-neutral-600 md:ml-auto md:mr-[4%] md:mt-10 md:max-w-md md:text-base"
             >
               <p>¿Este camino de carga merece existir?</p>
@@ -84,9 +149,9 @@ const Home = () => {
               </p>
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 26 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, ease, delay: 0.28 }}
+              transition={{ duration: 0.65, ease, delay: 0.32 }}
               className="mt-auto grid items-end gap-10 pt-14 md:grid-cols-[1fr_auto_1fr] md:pt-20"
             >
               <div className="text-left md:pb-2">
@@ -134,7 +199,10 @@ const Home = () => {
       </Bleed>
 
       <Bleed>
-        <section className="relative isolate overflow-hidden bg-[#f2f2f3] pt-24 pb-24 md:pt-30 md:pb-30 lg:pt-34 lg:pb-34">
+        <section
+          ref={engineerSectionRef}
+          className="relative isolate overflow-hidden bg-[#f2f2f3] pt-24 pb-24 md:pt-30 md:pb-30 lg:pt-34 lg:pb-34"
+        >
           <img
             src={fondoEsferasUrl}
             alt=""
@@ -146,40 +214,59 @@ const Home = () => {
           <div className="pointer-events-none absolute inset-x-0 bottom-0 z-2 h-24 bg-linear-to-t from-terciario/28 via-terciario/10 to-transparent md:h-28 lg:h-32" />
           <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-10">
             <div className="mx-auto max-w-5xl text-ink">
-              <Reveal>
-                <p className="font-display text-[clamp(2rem,4.6vw,3.3rem)] font-medium leading-[1.2] tracking-tight">
-                  Ingeniera.
-                </p>
-              </Reveal>
-              <Reveal delay={0.06}>
-                <p className="mt-8 text-[clamp(1.2rem,2.3vw,2.05rem)] leading-tight tracking-tight text-ink/85">
-                  Obsesionada con entender <span className="font-semibold text-ink">cómo funcionan</span> las cosas.
-                  <br />
-                  Pero más aún, con <span className="font-semibold text-ink">cómo se sienten.</span>
-                </p>
-              </Reveal>
-              <Reveal delay={0.12}>
-                <p className="mt-8 text-[clamp(1.2rem,2.3vw,2.05rem)] leading-tight tracking-tight text-ink/85">
-                  Algunos objetos solo existen, otros <span className="font-semibold text-ink">trascienden.</span>
-                  <br />
-                  De ser materia se convierten en <span className="font-semibold text-ink">experiencia.</span>
-                </p>
-              </Reveal>
-              <Reveal delay={0.18}>
-                <p className="mt-10 text-[clamp(1.2rem,2.3vw,2.05rem)] leading-tight tracking-tight text-ink/85">
-                  La diferencia está en la <span className="font-semibold text-ink">intención.</span>
-                </p>
-              </Reveal>
-              <Reveal delay={0.22}>
-                <p className="mt-4 text-[clamp(1.25rem,2.45vw,2.2rem)] font-semibold leading-[1.2] tracking-tight text-ink">
-                  De mi mente a tus manos.
-                </p>
-              </Reveal>
-              <Reveal delay={0.28}>
-                <p className="mt-14 text-right font-display text-[clamp(1.3rem,2.2vw,2rem)] italic text-ink/80 md:mt-18">
-                  -Michelle Castellanos
-                </p>
-              </Reveal>
+              <p className="font-display text-[clamp(2rem,4.6vw,3.3rem)] font-medium leading-[1.2] tracking-tight">
+                <ScrollRevealLine progress={engineerLine1Progress} parts={[{ text: "Ingeniera." }]} />
+              </p>
+              <p className="mt-8 text-[clamp(1.2rem,2.3vw,2.05rem)] leading-tight tracking-tight text-ink/85">
+                <ScrollRevealLine
+                  progress={engineerLine2Progress}
+                  parts={[
+                    { text: "Obsesionada con entender" },
+                    { text: "cómo funcionan", strong: true },
+                    { text: "las cosas." },
+                  ]}
+                />
+                <br />
+                <ScrollRevealLine
+                  progress={engineerLine3Progress}
+                  parts={[
+                    { text: "Pero más aún, con" },
+                    { text: "cómo se sienten.", strong: true },
+                  ]}
+                />
+              </p>
+              <p className="mt-8 text-[clamp(1.2rem,2.3vw,2.05rem)] leading-tight tracking-tight text-ink/85">
+                <ScrollRevealLine
+                  progress={engineerLine4Progress}
+                  parts={[
+                    { text: "Algunos objetos solo existen, otros" },
+                    { text: "trascienden.", strong: true },
+                  ]}
+                />
+                <br />
+                <ScrollRevealLine
+                  progress={engineerLine5Progress}
+                  parts={[
+                    { text: "De ser materia se convierten en" },
+                    { text: "experiencia.", strong: true },
+                  ]}
+                />
+              </p>
+              <p className="mt-10 text-[clamp(1.2rem,2.3vw,2.05rem)] leading-tight tracking-tight text-ink/85">
+                <ScrollRevealLine
+                  progress={engineerLine6Progress}
+                  parts={[
+                    { text: "La diferencia está en la" },
+                    { text: "intención.", strong: true },
+                  ]}
+                />
+              </p>
+              <p className="mt-4 text-[clamp(1.25rem,2.45vw,2.2rem)] font-semibold leading-[1.2] tracking-tight text-ink">
+                <ScrollRevealLine progress={engineerLine6Progress} parts={[{ text: "De mi mente a tus manos.", strong: true }]} />
+              </p>
+              <p className="mt-14 text-right font-display text-[clamp(1.3rem,2.2vw,2rem)] italic text-ink/80 md:mt-18">
+                <ScrollRevealLine progress={engineerLine6Progress} parts={[{ text: "-Michelle Castellanos" }]} />
+              </p>
             </div>
           </div>
         </section>

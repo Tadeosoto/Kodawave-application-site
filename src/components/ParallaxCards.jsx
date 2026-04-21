@@ -70,20 +70,6 @@ const projects = [
     color: principalShades[1],
     variant: "caennaBrand",
   },
-  {
-    title: "Control de plagas",
-    description:
-      " Aplicamos tratamientos dirigidos utilizando drones, asegurando una distribución uniforme de pesticidas y reduciendo el impacto ambiental al evitar el uso excesivo de químicos.",
-    imageUrl: michelleDeskUrl,
-    color: principalShades[2],
-  },
-  {
-    title: "Monitoreo y Diagnóstico de Cultivos",
-    description:
-      " Evaluamos de manera integral la salud y el estado de tus cultivos a través del análisis de niveles de nutrientes, detección de estrés hídrico, identificación de erosión del suelo y monitoreo del estado general de las plantas. Utilizamos tecnología avanzada para ofrecer soluciones precisas que optimicen el rendimiento y la sostenibilidad de tus tierras.",
-    imageUrl: michelleDeskUrl,
-    color: principalShades[3],
-  },
 ];
 
 const Card = ({

@@ -7,8 +7,9 @@ const links = [
   { to: '/my-work', label: 'My work' },
   { to: '/about', label: 'About' },
   { to: '/blog', label: 'Blog' },
-  { to: '/contact', label: 'Contact' },
 ]
+
+const mobileLinks = [...links, { to: '/contact', label: 'Contact' }]
 
 const linkIcons = {
   '/': (
@@ -85,11 +86,8 @@ const NavBar = () => {
               </NavLink>
             ))}
           </nav>
-          <NavLink
-            to="/contact"
-            className="hidden border border-principal bg-principal px-5 py-2.5 text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-ink transition hover:border-secundario hover:bg-secundario hover:text-terciario md:inline-flex"
-          >
-            Start a project
+          <NavLink to="/contact" className="hidden border-b-2 border-transparent pb-1 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-neutral-500 transition-colors hover:text-ink/80 md:inline-flex">
+            Contact
           </NavLink>
           <button
             type="button"
@@ -109,13 +107,13 @@ const NavBar = () => {
         </div>
       </header>
       <div
-        className={`fixed inset-0 z-[60] bg-ink/35 transition-opacity duration-200 md:hidden ${
+        className={`fixed inset-0 z-60 bg-ink/35 transition-opacity duration-200 md:hidden ${
           isMobileMenuOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
         }`}
         onClick={() => setIsMobileMenuOpen(false)}
         aria-hidden="true"
       />
-      <div className="fixed inset-0 z-[70] pointer-events-none md:hidden" aria-hidden={!isMobileMenuOpen}>
+      <div className="fixed inset-0 z-70 pointer-events-none md:hidden" aria-hidden={!isMobileMenuOpen}>
         <aside
           className={`pointer-events-auto ml-auto h-full w-[min(85vw,20rem)] border-l border-secundario/20 bg-terciario p-6 shadow-2xl transition-transform duration-200 ${
             isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
@@ -136,7 +134,7 @@ const NavBar = () => {
             </button>
           </div>
           <nav className="flex w-full flex-col gap-1">
-            {links.map((link) => (
+            {mobileLinks.map((link) => (
               <NavLink
                 key={`mobile-${link.to}`}
                 to={link.to}
@@ -152,12 +150,6 @@ const NavBar = () => {
                 </span>
               </NavLink>
             ))}
-            <NavLink
-              to="/contact"
-              className="mt-4 border border-principal bg-principal px-4 py-3 text-center text-xs font-semibold uppercase tracking-[0.2em] text-ink transition hover:border-secundario hover:bg-secundario hover:text-terciario"
-            >
-              Start a project
-            </NavLink>
           </nav>
         </aside>
       </div>

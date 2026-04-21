@@ -19,8 +19,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/alignna" element={<Alignna />} />
         </Route>
-        <Route path="/alignna" element={<Alignna />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>

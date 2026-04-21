@@ -1,7 +1,7 @@
 .alignnaPage {
   position: relative;
   width: 100%;
-  background: #f2f2f1;
+  background: #ffffff;
   color: #444540;
 }
 
@@ -9,6 +9,7 @@
   position: relative;
   min-height: 100vh;
   overflow: hidden;
+  background: #ffffff;
 }
 
 .alignnaPage__bg {
@@ -92,7 +93,7 @@
   position: relative;
   z-index: 3;
   min-height: min(90vh, 860px);
-  background: #f4f4f2;
+  background: #ffffff;
   overflow: hidden;
 }
 
