@@ -1,91 +1,336 @@
+/* Alineado con el tutorial Cards Parallax: el contenedor es sticky + 100vh (sin wrapper extra). */
+/* Rompe el max-width del main sin usar transform (no rompe position:sticky). */
 .seccion {
   position: relative;
   margin-top: 50vh;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  box-sizing: border-box;
 }
 
 .cardContainer {
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cardSticky {
+  width: 100%;
   position: sticky;
   top: 0;
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
 }
 
-.cardContainer .cardSticky .card {
+.cardContainer .card {
   display: flex;
   flex-direction: column;
   position: relative;
-  top: -25%;
-  height: 500px;
-  width: 100vw;
-  max-width: calc(100vw - 3rem);
+  height: 70%;
+  width: 100%;
+  max-width: none;
   border-radius: 25px;
-  padding: 50px;
+  padding: clamp(1.25rem, 4vw, 3rem);
+  padding-left: max(1.25rem, env(safe-area-inset-left));
+  padding-right: max(1.25rem, env(safe-area-inset-right));
   transform-origin: top;
+  box-sizing: border-box;
 }
 
-.cardContainer .cardSticky .card h2 {
+.cardContainer .card .cardBrandMark {
+  position: absolute;
+  top: clamp(0.75rem, 2.4vw, 1.35rem);
+  left: max(clamp(0.75rem, 2.4vw, 1.35rem), env(safe-area-inset-left));
+  width: clamp(2.75rem, 9vw, 4.25rem);
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
+  filter: drop-shadow(0 1px 2px rgba(42, 38, 32, 0.08));
+}
+
+.cardContainer .card:not(.card--intro) h2 {
   text-align: center;
   margin: 0px;
   font-size: 28px;
 }
 
-.cardContainer .cardSticky .card .body {
+.cardContainer .card .body {
   display: flex;
   height: 100%;
   margin-top: 50px;
   gap: 50px;
 }
 
-.cardContainer .cardSticky .card .body .description {
+.cardContainer .card .body .description {
   width: 40%;
   position: relative;
   top: 10%;
 }
 
-.cardContainer .cardSticky .card .body .description p {
+.cardContainer .card .body .description p {
   font-size: 16px;
 }
 
-.cardContainer .cardSticky .card .body .description p::first-letter {
+.cardContainer .card .body .description p::first-letter {
   font-size: 28px;
   font-family: "Title";
 }
 
-.cardContainer .cardSticky .card .body .description span {
+.cardContainer .card .body .description span {
   display: flex;
   align-items: center;
   gap: 5px;
 }
 
-.cardContainer .cardSticky .card .body .description span a {
+.cardContainer .card .body .description span a {
   font-size: 12px;
   text-decoration: underline;
   cursor: pointer;
 }
 
-.cardContainer .cardSticky .card .body .imageContainer {
+.cardContainer .card .body .imageContainer {
   position: relative;
-  width: 60%;
-  height: 100%;
+  width: 55%;
+  height: 80%;
   border-radius: 25px;
   overflow: hidden;
 }
 
-.cardContainer .cardSticky .card .body .imageContainer .inner {
+.cardContainer .card .body .imageContainer .inner {
   width: 100%;
   height: 100%;
 }
 
-.cardContainer .cardSticky .card .body .imageContainer img {
+.cardContainer .card .body .imageContainer img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+}
+
+/* Primera tarjeta: intro + tríptico enlazado
+   Altura fija + overflow: el hover del tríptico no debe cambiar el tamaño de la tarjeta. */
+.cardContainer .card--intro {
+  display: flex;
+  flex-direction: column;
+  height: min(88vh, 920px);
+  max-height: min(88vh, 920px);
+  min-height: min(88vh, 920px);
+  padding: clamp(3.25rem, 8vw, 4.5rem) 0 0;
+  gap: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+  .cardContainer .card--intro {
+    height: auto;
+    min-height: min(88vh, 920px);
+    max-height: none;
+  }
+}
+
+.cardIntroHeaderWrap {
+  padding-left: max(1.25rem, env(safe-area-inset-left));
+  padding-right: max(1.25rem, env(safe-area-inset-right));
+  padding-bottom: clamp(1rem, 3vw, 1.75rem);
+  flex-shrink: 0;
+}
+
+.cardIntroHeader {
+  text-align: center;
+}
+
+.cardIntroTitle {
+  margin: 0;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: clamp(1.35rem, 4.2vw, 2.15rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-ink, #2a2620);
+}
+
+.cardIntroTitle strong {
+  font-weight: 700;
+}
+
+.cardIntroSub {
+  margin: clamp(0.65rem, 2vw, 1rem) 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem 0.5rem;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: clamp(0.95rem, 2.8vw, 1.15rem);
+  color: var(--color-ink, #2a2620);
+}
+
+.cardIntroAlignna {
+  height: clamp(1.35rem, 4vw, 1.85rem);
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) opacity(0.88);
+}
+
+.cardIntroSubText {
+  font-weight: 500;
+}
+
+.cardTriptych {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+  align-self: stretch;
+  border-radius: 0 0 25px 25px;
+  overflow: hidden;
+  contain: layout;
+}
+
+@media (min-width: 768px) {
+  .cardTriptych {
+    flex-direction: row;
+    align-items: stretch;
+  }
+}
+
+.cardTriptych__link {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  text-decoration: none;
+  color: inherit;
+  min-height: 0;
+  min-width: 0;
+  outline: none;
+}
+
+@media (min-width: 768px) {
+  .cardTriptych__link {
+    flex: 1 1 0;
+    transition: flex 0.55s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .cardTriptych:hover .cardTriptych__link:not(:hover) {
+      flex: 0.38 1 0;
+    }
+
+    .cardTriptych__link:hover {
+      flex: 2.24 1 0;
+    }
+  }
+
+  .cardTriptych__link:focus-visible {
+    flex: 2.24 1 0;
+    z-index: 1;
+    outline: 2px solid var(--color-principal, #97cdb5);
+    outline-offset: -2px;
+  }
+
+  .cardTriptych:focus-within .cardTriptych__link:not(:focus-visible) {
+    flex: 0.38 1 0;
+  }
+}
+
+.cardTriptych__media {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 200px;
+  overflow: hidden;
+  background: rgba(42, 38, 32, 0.06);
+}
+
+@media (min-width: 768px) {
+  .cardTriptych__media {
+    min-height: 0;
+    height: 100%;
+  }
+}
+
+.cardTriptych__motion {
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+}
+
+.cardTriptych__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cardTriptych__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(42, 38, 32, 0.18) 0%,
+    rgba(42, 38, 32, 0.28) 50%,
+    rgba(42, 38, 32, 0.45) 100%
+  );
+  pointer-events: none;
+}
+
+.cardTriptych__labelWrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.75rem, 3vw, 1.5rem);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.cardTriptych__label {
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: clamp(0.88rem, 2.4vw, 1.05rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #f8f6f3;
+  text-align: center;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
+  max-width: 95%;
+  line-height: 1.15;
+  transition:
+    font-size 0.5s cubic-bezier(0.33, 1, 0.68, 1),
+    font-weight 0.35s ease,
+    letter-spacing 0.4s ease;
+}
+
+@media (min-width: 768px) {
+  @media (hover: hover) and (pointer: fine) {
+    .cardTriptych__link:hover .cardTriptych__label {
+      font-size: clamp(1.35rem, 3.8vw, 2.65rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+  }
+
+  .cardTriptych__link:focus-visible .cardTriptych__label {
+    font-size: clamp(1.35rem, 3.8vw, 2.65rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+}
+
+@media (max-width: 767px) {
+  .cardTriptych__link:focus-visible {
+    outline: 2px solid var(--color-principal, #97cdb5);
+    outline-offset: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cardTriptych__link {
+    transition: none !important;
+  }
+
+  .cardTriptych__label {
+    transition: none !important;
+  }
 }
