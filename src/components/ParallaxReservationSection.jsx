@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
+import cBlancoRotoUrl from "../assets/michPageAssets/logos-icons/C-BlancoRoto.svg";
 
 const MotionP = motion.p;
 const MotionDiv = motion.div;
@@ -204,8 +205,22 @@ const ParallaxReservationSection = () => {
           >
             <Link
               to="/contact"
-              className="flex h-auto min-h-14 w-full max-w-[min(100%,18rem)] items-center justify-center rounded-full bg-principal px-8 py-3.5 text-lg font-semibold text-ink shadow-[0_12px_30px_-16px_rgba(0,0,0,0.9)] transition-all duration-300 ease-out hover:scale-105 hover:bg-secundario hover:text-white max-md:mx-auto max-md:max-w-[min(100%,20rem)] sm:min-h-18 sm:max-w-xs md:h-30 md:w-80 md:max-w-none md:px-18 md:py-4 lg:text-6xl"
+              className="group flex h-auto min-h-14 w-full max-w-[min(100%,18rem)] items-center justify-center gap-2.5 rounded-full bg-principal px-8 py-3.5 text-lg font-semibold text-ink shadow-[0_12px_30px_-16px_rgba(0,0,0,0.9)] transition-all duration-300 ease-out hover:scale-105 hover:bg-secundario hover:text-white max-md:mx-auto max-md:max-w-[min(100%,20rem)] sm:min-h-18 sm:max-w-xs md:h-30 md:w-80 md:max-w-none md:gap-3 md:px-18 md:py-4 lg:text-6xl"
             >
+              <span
+                className="inline-block size-[1.1em] shrink-0 bg-current opacity-95 transition-[transform,opacity] duration-300 ease-out group-hover:scale-110 group-hover:opacity-100"
+                style={{
+                  maskImage: `url("${cBlancoRotoUrl}")`,
+                  WebkitMaskImage: `url("${cBlancoRotoUrl}")`,
+                  maskRepeat: "no-repeat",
+                  maskPosition: "center",
+                  maskSize: "contain",
+                  WebkitMaskRepeat: "no-repeat",
+                  WebkitMaskPosition: "center",
+                  WebkitMaskSize: "contain",
+                }}
+                aria-hidden
+              />
               Reservar
             </Link>
           </MotionDiv>

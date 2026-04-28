@@ -24,19 +24,26 @@ const Alignna = () => {
       </section>
 
       <section className="alignnaBreakSection" aria-label="Momento de romper paradigmas">
-        <img
-          src={bolaRosaUrl}
-          alt=""
-          className="alignnaBreakSection__bgImage"
-          decoding="async"
-        />
-        <p className="alignnaBreakSection__headline">Algo no estaba bien.</p>
-        <p className="alignnaBreakSection__copy">
-          Por años usamos lo mismo.
-          <br />
-          Con queja, pero sin <strong>cuestionarlo.</strong>
-        </p>
-        <p className="alignnaBreakSection__quote">“Es momento de romper paradigmas.”</p>
+        <div className="alignnaBreakSection__inner">
+          <div className="alignnaBreakSection__visual">
+            <img
+              src={bolaRosaUrl}
+              alt=""
+              className="alignnaBreakSection__bgImage"
+              decoding="async"
+            />
+            <div className="alignnaBreakSection__visualOverlay" aria-hidden />
+            <p className="alignnaBreakSection__quote">“Es momento de romper paradigmas.”</p>
+          </div>
+          <div className="alignnaBreakSection__text">
+            <p className="alignnaBreakSection__headline">Algo no estaba bien.</p>
+            <p className="alignnaBreakSection__copy">
+              Por años usamos lo mismo.
+              <br />
+              Con queja, pero sin <strong>cuestionarlo.</strong>
+            </p>
+          </div>
+        </div>
       </section>
     </div>
   );

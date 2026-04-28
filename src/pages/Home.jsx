@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import ParallaxReservationSection from "../components/ParallaxReservationSection";
 import ParallaxCards from "../components/ParallaxCards";
-import heroHandsUrl from "../assets/michPageAssets/pageDecoration/mano-de-dios-chingona.png";
+import heroHandsUrl from "../assets/michPageAssets/pageDecoration/Mano de dios PNG.png";
 import engineerSectionBgUrl from "../assets/michPageAssets/pageDecoration/background-image1.png";
 import fondoEsferasUrl from "../assets/michPageAssets/pageDecoration/fondo-esferas.jpg";
 import alignnaBlancoRotoUrl from "../assets/michPageAssets/logos-icons/Alignna-BlancoRoto.svg";
@@ -109,13 +109,20 @@ const Home = () => {
           ref={heroSectionRef}
           className="relative isolate min-h-[min(92vh,960px)] overflow-hidden bg-terciario"
         >
-          <MotionImg
-            src={heroHandsUrl}
-            alt=""
-            style={{ scale: heroImageScale, filter: heroImageBlur }}
-            className="pointer-events-none absolute inset-0 z-0 h-full min-h-full w-full min-w-full origin-center select-none object-cover object-[center_38%] opacity-[0.98] sm:object-[center_40%]"
-            decoding="async"
-          />
+          <motion.div
+            className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+            initial={{ opacity: 0, y: 36 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.72, ease, delay: 0.1 }}
+          >
+            <MotionImg
+              src={heroHandsUrl}
+              alt=""
+              style={{ scale: heroImageScale, filter: heroImageBlur }}
+              className="pointer-events-none absolute inset-0 h-full min-h-full w-full min-w-full origin-center select-none object-cover object-[center_38%] sm:object-[center_40%]"
+              decoding="async"
+            />
+          </motion.div>
           <div className="pointer-events-none absolute inset-0 z-1 bg-linear-to-b from-terciario/88 via-terciario/20 to-terciario/92" />
 
           <div className="relative z-10 mx-auto flex min-h-[min(92vh,960px)] max-w-[1600px] flex-col px-6 pb-16 pt-10 md:px-10 md:pb-20 md:pt-14">
@@ -199,82 +206,8 @@ const Home = () => {
       </Bleed>
 
       <Bleed>
-        <section
-          ref={engineerSectionRef}
-          className="relative isolate overflow-hidden bg-[#f2f2f3] pt-24 pb-24 md:pt-30 md:pb-30 lg:pt-34 lg:pb-34"
-        >
-          <img
-            src={fondoEsferasUrl}
-            alt=""
-            className="pointer-events-none absolute inset-0 z-0 h-full w-full select-none object-cover object-center opacity-25"
-            decoding="async"
-          />
-          <div className="pointer-events-none absolute inset-0 z-1 bg-linear-to-b from-white/40 via-white/30 to-white/35" />
-          <div className="pointer-events-none absolute inset-x-0 top-0 z-2 h-24 bg-linear-to-b from-terciario/70 via-terciario/28 to-transparent md:h-28 lg:h-32" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-2 h-24 bg-linear-to-t from-terciario/28 via-terciario/10 to-transparent md:h-28 lg:h-32" />
-          <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-10">
-            <div className="mx-auto max-w-5xl text-ink">
-              <p className="font-display text-[clamp(2rem,4.6vw,3.3rem)] font-medium leading-[1.2] tracking-tight">
-                <ScrollRevealLine progress={engineerLine1Progress} parts={[{ text: "Ingeniera." }]} />
-              </p>
-              <p className="mt-8 text-[clamp(1.2rem,2.3vw,2.05rem)] leading-tight tracking-tight text-ink/85">
-                <ScrollRevealLine
-                  progress={engineerLine2Progress}
-                  parts={[
-                    { text: "Obsesionada con entender" },
-                    { text: "cómo funcionan", strong: true },
-                    { text: "las cosas." },
-                  ]}
-                />
-                <br />
-                <ScrollRevealLine
-                  progress={engineerLine3Progress}
-                  parts={[
-                    { text: "Pero más aún, con" },
-                    { text: "cómo se sienten.", strong: true },
-                  ]}
-                />
-              </p>
-              <p className="mt-8 text-[clamp(1.2rem,2.3vw,2.05rem)] leading-tight tracking-tight text-ink/85">
-                <ScrollRevealLine
-                  progress={engineerLine4Progress}
-                  parts={[
-                    { text: "Algunos objetos solo existen, otros" },
-                    { text: "trascienden.", strong: true },
-                  ]}
-                />
-                <br />
-                <ScrollRevealLine
-                  progress={engineerLine5Progress}
-                  parts={[
-                    { text: "De ser materia se convierten en" },
-                    { text: "experiencia.", strong: true },
-                  ]}
-                />
-              </p>
-              <p className="mt-10 text-[clamp(1.2rem,2.3vw,2.05rem)] leading-tight tracking-tight text-ink/85">
-                <ScrollRevealLine
-                  progress={engineerLine6Progress}
-                  parts={[
-                    { text: "La diferencia está en la" },
-                    { text: "intención.", strong: true },
-                  ]}
-                />
-              </p>
-              <p className="mt-4 text-[clamp(1.25rem,2.45vw,2.2rem)] font-semibold leading-[1.2] tracking-tight text-ink">
-                <ScrollRevealLine progress={engineerLine6Progress} parts={[{ text: "De mi mente a tus manos.", strong: true }]} />
-              </p>
-              <p className="mt-14 text-right font-display text-[clamp(1.3rem,2.2vw,2rem)] italic text-ink/80 md:mt-18">
-                <ScrollRevealLine progress={engineerLine6Progress} parts={[{ text: "-Michelle Castellanos" }]} />
-              </p>
-            </div>
-          </div>
-        </section>
-      </Bleed>
-
-      <Bleed>
-        <section className="relative isolate -mt-6 flex min-h-[70vh] items-center overflow-hidden bg-linear-to-b from-[#f2f2f3] via-white to-terciario/48 py-22 md:-mt-8 md:min-h-[78vh] md:py-30 lg:min-h-[84vh] lg:py-36">
-          <div className="pointer-events-none absolute inset-x-0 top-0 z-1 h-28 bg-linear-to-b from-[#f2f2f3] via-white/65 to-transparent md:h-36" />
+        <section className="relative isolate -mt-6 flex min-h-[70vh] items-center overflow-hidden bg-linear-to-b from-terciario/55 via-white to-terciario/48 py-22 md:-mt-8 md:min-h-[78vh] md:py-30 lg:min-h-[84vh] lg:py-36">
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-1 h-28 bg-linear-to-b from-terciario/85 via-white/50 to-transparent md:h-36" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 z-1 h-24 bg-linear-to-t from-terciario/72 to-transparent md:h-28" />
           <motion.img
             src={engineerSectionBgUrl}
@@ -331,6 +264,80 @@ const Home = () => {
               >
                 Más <span className="font-semibold">intención.</span>
               </MotionP>
+            </div>
+          </div>
+        </section>
+      </Bleed>
+
+      <Bleed>
+        <section
+          ref={engineerSectionRef}
+          className="relative isolate overflow-hidden bg-[#f2f2f3] pt-24 pb-24 md:pt-30 md:pb-30 lg:pt-34 lg:pb-34"
+        >
+          <img
+            src={fondoEsferasUrl}
+            alt=""
+            className="pointer-events-none absolute inset-0 z-0 h-full w-full select-none object-cover object-center opacity-25"
+            decoding="async"
+          />
+          <div className="pointer-events-none absolute inset-0 z-1 bg-linear-to-b from-white/40 via-white/30 to-white/35" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-2 h-24 bg-linear-to-b from-white/80 via-white/35 to-transparent md:h-28 lg:h-32" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-2 h-24 bg-linear-to-t from-terciario/28 via-terciario/10 to-transparent md:h-28 lg:h-32" />
+          <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-10">
+            <div className="mx-auto max-w-5xl text-ink">
+              <p className="font-display text-[clamp(2rem,4.6vw,3.3rem)] font-medium leading-[1.2] tracking-tight">
+                <ScrollRevealLine progress={engineerLine1Progress} parts={[{ text: "Ingeniera." }]} />
+              </p>
+              <p className="mt-8 text-[clamp(1.2rem,2.3vw,2.05rem)] leading-tight tracking-tight text-ink/85">
+                <ScrollRevealLine
+                  progress={engineerLine2Progress}
+                  parts={[
+                    { text: "Obsesionada con entender" },
+                    { text: "cómo funcionan", strong: true },
+                    { text: "las cosas." },
+                  ]}
+                />
+                <br />
+                <ScrollRevealLine
+                  progress={engineerLine3Progress}
+                  parts={[
+                    { text: "Pero más aún, con" },
+                    { text: "cómo se sienten.", strong: true },
+                  ]}
+                />
+              </p>
+              <p className="mt-8 text-[clamp(1.2rem,2.3vw,2.05rem)] leading-tight tracking-tight text-ink/85">
+                <ScrollRevealLine
+                  progress={engineerLine4Progress}
+                  parts={[
+                    { text: "Algunos objetos solo existen, otros" },
+                    { text: "trascienden.", strong: true },
+                  ]}
+                />
+                <br />
+                <ScrollRevealLine
+                  progress={engineerLine5Progress}
+                  parts={[
+                    { text: "De ser materia se convierten en" },
+                    { text: "experiencia.", strong: true },
+                  ]}
+                />
+              </p>
+              <p className="mt-10 text-[clamp(1.2rem,2.3vw,2.05rem)] leading-tight tracking-tight text-ink/85">
+                <ScrollRevealLine
+                  progress={engineerLine6Progress}
+                  parts={[
+                    { text: "La diferencia está en la" },
+                    { text: "intención.", strong: true },
+                  ]}
+                />
+              </p>
+              <p className="mt-4 text-[clamp(1.25rem,2.45vw,2.2rem)] font-semibold leading-[1.2] tracking-tight text-ink">
+                <ScrollRevealLine progress={engineerLine6Progress} parts={[{ text: "De mi mente a tus manos.", strong: true }]} />
+              </p>
+              <p className="mt-14 text-right font-display text-[clamp(1.3rem,2.2vw,2rem)] italic text-ink/80 md:mt-18">
+                <ScrollRevealLine progress={engineerLine6Progress} parts={[{ text: "-Michelle Castellanos" }]} />
+              </p>
             </div>
           </div>
         </section>
