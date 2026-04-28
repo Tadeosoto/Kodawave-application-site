@@ -182,12 +182,25 @@ const Home = () => {
                   aria-label="Ir a Alignna"
                 >
                   <span className="pointer-events-none absolute inset-0 bg-principal opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <img
-                    src={alignnaBlancoRotoUrl}
-                    alt="Alignna"
-                    className="relative z-10 h-8 w-auto brightness-0 transition duration-300 group-hover:brightness-100 sm:h-9 md:h-11 lg:h-15"
-                    decoding="async"
-                  />
+                  <MotionSpan
+                    className="relative z-10 inline-flex transform-gpu"
+                    style={{ willChange: "transform" }}
+                    animate={{ scale: [1, 1.03, 1.08, 1.11, 1.08, 1.03, 1] }}
+                    transition={{
+                      duration: 2.6,
+                      ease: "easeInOut",
+                      times: [0, 0.16, 0.34, 0.5, 0.66, 0.84, 1],
+                      repeat: Infinity,
+                      repeatDelay: 1.1,
+                    }}
+                  >
+                    <MotionImg
+                      src={alignnaBlancoRotoUrl}
+                      alt="Alignna"
+                      className="h-8 w-auto brightness-0 transition duration-300 group-hover:brightness-100 sm:h-9 md:h-11 lg:h-15"
+                      decoding="async"
+                    />
+                  </MotionSpan>
                   <span className="pointer-events-none absolute left-0 top-0 h-[2px] w-0 bg-secundario transition-all duration-100 group-hover:w-full" />
                   <span className="pointer-events-none absolute right-0 top-0 h-0 w-[2px] bg-secundario transition-all delay-100 duration-100 group-hover:h-full" />
                   <span className="pointer-events-none absolute bottom-0 right-0 h-[2px] w-0 bg-secundario transition-all delay-200 duration-100 group-hover:w-full" />

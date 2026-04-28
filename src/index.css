@@ -41,7 +41,7 @@ body {
 }
 
 .font-display {
-  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-family: "DM Sans", system-ui, -apple-system, sans-serif;
 }
 
 /* Horizontal carousels: hide scrollbar, keep touch / trackpad / drag scroll */
