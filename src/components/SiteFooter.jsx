@@ -1,11 +1,39 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import alignnaWordmarkUrl from "../assets/michPageAssets/logos-icons/Alignna-BlancoRoto.svg";
+
+const MotionFooter = motion.footer;
+const MotionH2 = motion.h2;
+const MotionDiv = motion.div;
+const MotionP = motion.p;
+const MotionForm = motion.form;
+
+const footerEase = [0.22, 0.61, 0.36, 1];
+
+const footerContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.06,
+    },
+  },
+};
+
+const footerItem = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.62, ease: footerEase },
+  },
+};
 
 const NOTIFY_EMAIL =
   import.meta.env.VITE_NEWSLETTER_NOTIFY_EMAIL ?? "tadeosoto1993@gmail.com";
 const ENDPOINT = import.meta.env.VITE_NEWSLETTER_ENDPOINT?.trim();
 
-const SiteFooter = () => {
+const SiteFooter = ({ compactTop = false }) => {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("idle");
   const [message, setMessage] = useState("");
@@ -51,21 +79,36 @@ const SiteFooter = () => {
   };
 
   return (
-    <footer className="mt-20 border-t border-neutral-300/40 bg-[#f7f6f2] text-ink">
+    <MotionFooter
+      className={`border-t border-neutral-300/40 text-ink ${
+        compactTop ? "mt-0 bg-[#eff0ec]" : "mt-20 bg-[#f7f6f2]"
+      }`}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.18, margin: "0px 0px -10% 0px" }}
+      variants={footerContainer}
+    >
       <div className="mx-auto flex max-w-2xl flex-col items-center px-6 py-16 text-center md:px-10 md:py-20">
-        <h2 className="font-display text-[clamp(1.65rem,4.2vw,2.35rem)] font-normal leading-[1.2] tracking-tight text-ink">
+        <MotionH2
+          variants={footerItem}
+          className="font-display text-[clamp(1.65rem,4.2vw,2.35rem)] font-normal leading-[1.2] tracking-tight text-ink"
+        >
           <span className="block">Lo vas a querer puesto</span>
           <span className="mt-1 block font-medium italic text-[#c5a880]">
             antes de que exista.
           </span>
-        </h2>
+        </MotionH2>
 
-        <div
+        <MotionDiv
+          variants={footerItem}
           className="mt-10 h-px w-full max-w-md bg-linear-to-r from-transparent via-principal/55 to-transparent shadow-[0_0_24px_rgba(151,205,181,0.45)]"
           aria-hidden
         />
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
+        <MotionDiv
+          variants={footerItem}
+          className="mt-10 flex flex-wrap items-center justify-center gap-x-3 gap-y-2"
+        >
           <img
             src={alignnaWordmarkUrl}
             alt="Alignna"
@@ -75,13 +118,17 @@ const SiteFooter = () => {
           <span className="text-sm font-medium tracking-wide text-neutral-500 md:text-base">
             está en desarrollo
           </span>
-        </div>
+        </MotionDiv>
 
-        <p className="mt-3 text-sm text-neutral-600 md:text-base">
+        <MotionP
+          variants={footerItem}
+          className="mt-3 text-sm text-neutral-600 md:text-base"
+        >
           Sé la primera en saberlo.
-        </p>
+        </MotionP>
 
-        <form
+        <MotionForm
+          variants={footerItem}
           onSubmit={handleSubmit}
           className="mt-10 flex w-full max-w-md flex-col gap-3 sm:flex-row sm:items-stretch sm:gap-0"
           noValidate
@@ -107,24 +154,30 @@ const SiteFooter = () => {
           >
             {status === "loading" ? "Enviando…" : "Avisar"}
           </button>
-        </form>
+        </MotionForm>
 
         {message ? (
-          <p
+          <MotionP
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.38, ease: footerEase }}
             className={`mt-4 max-w-md text-sm ${
               status === "error" ? "text-red-700/90" : "text-neutral-600"
             }`}
             role={status === "error" ? "alert" : "status"}
           >
             {message}
-          </p>
+          </MotionP>
         ) : null}
 
-        <p className="mt-8 max-w-md text-xs leading-relaxed text-neutral-500">
+        <MotionP
+          variants={footerItem}
+          className="mt-8 max-w-md text-xs leading-relaxed text-neutral-500"
+        >
           © {new Date().getFullYear()} Caenna · Alignna
-        </p>
+        </MotionP>
       </div>
-    </footer>
+    </MotionFooter>
   );
 };
 

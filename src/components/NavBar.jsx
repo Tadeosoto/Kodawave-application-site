@@ -1,15 +1,13 @@
 import { startTransition, useEffect, useLayoutEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { CaennaHeaderLogo } from './CaennaBrand'
+import alignnaBlancoRotoUrl from '../assets/michPageAssets/logos-icons/Alignna-BlancoRoto.svg'
 
 const links = [
   { to: '/', label: 'Home' },
-  { to: '/my-work', label: 'My work' },
-  { to: '/about', label: 'About' },
-  { to: '/blog', label: 'Blog' },
 ]
 
-const mobileLinks = [...links, { to: '/contact', label: 'Contact' }]
+const mobileLinks = [...links]
 
 const linkIcons = {
   '/': (
@@ -86,8 +84,17 @@ const NavBar = () => {
               </NavLink>
             ))}
           </nav>
-          <NavLink to="/contact" className="hidden border-b-2 border-transparent pb-1 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-neutral-500 transition-colors hover:text-ink/80 md:inline-flex">
-            Contact
+          <NavLink
+            to="/alignna"
+            aria-label="Ir a Alignna"
+            className="hidden items-center justify-center transition-all duration-300 ease-out hover:opacity-85 active:scale-95 md:inline-flex"
+          >
+            <img
+              src={alignnaBlancoRotoUrl}
+              alt="Alignna"
+              className="h-5 w-auto invert-78 sepia-21 saturate-482 hue-rotate-96 brightness-92 contrast-88 sm:h-6"
+              decoding="async"
+            />
           </NavLink>
           <button
             type="button"
@@ -151,6 +158,18 @@ const NavBar = () => {
               </NavLink>
             ))}
           </nav>
+          <NavLink
+            to="/alignna"
+            aria-label="Ir a Alignna"
+            className="mt-6 inline-flex items-center justify-center self-start transition-all duration-300 ease-out hover:opacity-85 active:scale-95"
+          >
+            <img
+              src={alignnaBlancoRotoUrl}
+              alt="Alignna"
+              className="h-6 w-auto invert-78 sepia-21 saturate-482 hue-rotate-96 brightness-92 contrast-88"
+              decoding="async"
+            />
+          </NavLink>
         </aside>
       </div>
     </>

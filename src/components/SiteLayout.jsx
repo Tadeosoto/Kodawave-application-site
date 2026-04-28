@@ -30,7 +30,7 @@ const SiteLayout = () => {
           </MotionDiv>
         </AnimatePresence>
       </main>
-      <SiteFooter />
+      <SiteFooter compactTop={isAlignnaRoute} />
     </div>
   )
 }
