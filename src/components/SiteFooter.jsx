@@ -31,7 +31,7 @@ const footerItem = {
 
 const NOTIFY_EMAIL =
   import.meta.env.VITE_NEWSLETTER_NOTIFY_EMAIL ?? "tadeosoto1993@gmail.com";
-const ENDPOINT = import.meta.env.VITE_NEWSLETTER_ENDPOINT?.trim();
+const ENDPOINT = import.meta.env.VITE_NEWSLETTER_ENDPOINT?.trim() || "/api/subscribe";
 
 const SiteFooter = ({ compactTop = false }) => {
   const [email, setEmail] = useState("");
@@ -50,34 +50,39 @@ const SiteFooter = ({ compactTop = false }) => {
     setStatus("loading");
     setMessage("");
 
-    if (ENDPOINT) {
-      try {
-        const res = await fetch(ENDPOINT, {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email: trimmed }),
-        });
-        if (!res.ok) throw new Error("bad_status");
-        setStatus("success");
-        setMessage("Listo. Te avisamos pronto.");
-        setEmail("");
-      } catch {
-        setStatus("error");
-        setMessage("No se pudo enviar. Intenta de nuevo más tarde.");
-      }
-      return;
-    }
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: trimmed,
+          source: "site-footer",
+        }),
+      });
 
-    const subject = encodeURIComponent("Newsletter — Alignna");
-    const body = encodeURIComponent(
-      `Quiero recibir novedades.\n\nCorreo: ${trimmed}`,
-    );
-    window.location.href = `mailto:${NOTIFY_EMAIL}?subject=${subject}&body=${body}`;
-    setStatus("success");
-    setMessage("Se abrirá tu correo con el mensaje listo para enviar.");
+      const payload = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(payload?.message || "bad_status");
+
+      setStatus("success");
+      setMessage(payload?.message || "Listo. Te avisamos pronto.");
+      setEmail("");
+    } catch (error) {
+      if (!import.meta.env.VITE_NEWSLETTER_ENDPOINT) {
+        const subject = encodeURIComponent("Newsletter — Alignna");
+        const body = encodeURIComponent(
+          `Quiero recibir novedades.\n\nCorreo: ${trimmed}`,
+        );
+        window.location.href = `mailto:${NOTIFY_EMAIL}?subject=${subject}&body=${body}`;
+        setStatus("success");
+        setMessage("Se abrirá tu correo con el mensaje listo para enviar.");
+        return;
+      }
+      setStatus("error");
+      setMessage(error?.message || "No se pudo enviar. Intenta de nuevo más tarde.");
+    }
   };
 
   return (
