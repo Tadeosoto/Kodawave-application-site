@@ -40,7 +40,9 @@ export default async function handler(req, res) {
   const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!supabaseUrl || !supabaseServiceRoleKey) {
-    return res.status(500).json({ message: "Newsletter service is not configured." });
+    return res
+      .status(500)
+      .json({ message: "Newsletter service is not configured." });
   }
 
   let payload = {};
@@ -76,8 +78,12 @@ export default async function handler(req, res) {
   );
 
   if (error) {
-    return res.status(500).json({ message: "No se pudo guardar tu correo. Intenta nuevamente." });
+    return res
+      .status(500)
+      .json({ message: "No se pudo guardar tu correo. Intenta nuevamente." });
   }
 
-  return res.status(200).json({ message: "Listo. Te avisamos cuando esté disponible." });
+  return res
+    .status(200)
+    .json({ message: "Listo. Te avisamos en cuanto sea el lanzamiento." });
 }
