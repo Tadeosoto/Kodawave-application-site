@@ -138,7 +138,7 @@ const SiteFooter = ({ compactTop = false, tightAfterContent = false }) => {
           variants={footerItem}
           className="mt-3 text-lg text-neutral-600 md:text-xl"
         >
-          Sé la primera en enterarte cuando este listo
+          Lista de acceso anticipado, solo para quienes lleguen primero.
         </MotionP>
 
         <MotionForm

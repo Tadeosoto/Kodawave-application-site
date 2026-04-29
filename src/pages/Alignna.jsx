@@ -17,14 +17,23 @@ const Alignna = () => {
         <div className="alignnaPage__bg" aria-hidden />
 
         <main className="alignnaPage__center">
-          <img src={alignnaBlancoRotoUrl} alt="Alignna" className="alignnaPage__alignnaLogo" decoding="async" />
+          <img
+            src={alignnaBlancoRotoUrl}
+            alt="Alignna"
+            className="alignnaPage__alignnaLogo"
+            decoding="async"
+          />
           <p className="alignnaPage__tagline">
-            Tu eres el <strong>escultor</strong> y la <strong>escultura</strong>.
+            Tu eres el <strong>escultor</strong> y la <strong>escultura</strong>
+            .
           </p>
         </main>
       </section>
 
-      <section className="alignnaBridgeSection" aria-label="Mensaje introductorio Alignna">
+      <section
+        className="alignnaBridgeSection"
+        aria-label="Mensaje introductorio Alignna"
+      >
         <MotionP
           className="alignnaBridgeSection__copy"
           initial={{ opacity: 0, y: 24, filter: "blur(5px)" }}
@@ -53,14 +62,20 @@ const Alignna = () => {
           viewport={{ once: true, amount: 0.34 }}
           variants={{
             hidden: {},
-            visible: { transition: { delayChildren: 0.1, staggerChildren: 0.12 } },
+            visible: {
+              transition: { delayChildren: 0.1, staggerChildren: 0.12 },
+            },
           }}
         >
           <MotionDiv
             className="alignnaBreakSection__visual"
             variants={{
               hidden: { opacity: 0.86, scale: 0.985 },
-              visible: { opacity: 1, scale: 1, transition: { duration: 0.86, ease: revealEase } },
+              visible: {
+                opacity: 1,
+                scale: 1,
+                transition: { duration: 0.86, ease: revealEase },
+              },
             }}
           >
             <img
@@ -74,24 +89,35 @@ const Alignna = () => {
               className="alignnaBreakSection__quote"
               variants={{
                 hidden: { opacity: 0, y: 16 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.62, ease: revealEase } },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.62, ease: revealEase },
+                },
               }}
             >
-              “Es momento de romper paradigmas.”
+              “Ya no se trata de apretar, se trata de despertar.”
             </MotionP>
           </MotionDiv>
           <MotionDiv
             className="alignnaBreakSection__text"
             variants={{
               hidden: { opacity: 0 },
-              visible: { opacity: 1, transition: { duration: 0.52, ease: revealEase } },
+              visible: {
+                opacity: 1,
+                transition: { duration: 0.52, ease: revealEase },
+              },
             }}
           >
             <MotionP
               className="alignnaBreakSection__headline"
               variants={{
                 hidden: { opacity: 0, y: 14 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.58, ease: revealEase } },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.58, ease: revealEase },
+                },
               }}
             >
               Algo no estaba bien.
@@ -100,7 +126,11 @@ const Alignna = () => {
               className="alignnaBreakSection__copy"
               variants={{
                 hidden: { opacity: 0, y: 14 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.58, ease: revealEase, delay: 0.06 } },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.58, ease: revealEase, delay: 0.06 },
+                },
               }}
             >
               Por años usamos lo mismo.

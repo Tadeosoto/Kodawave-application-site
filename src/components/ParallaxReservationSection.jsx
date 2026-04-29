@@ -183,13 +183,13 @@ const ParallaxReservationSection = () => {
               style={{ x: splitLeftX }}
               className="block max-w-[min(100%,22rem)] md:max-w-none"
             >
-              hay algo especial esperando
+              No todos podrán decir
             </MotionSpan>
             <MotionSpan
               style={{ x: splitRightX }}
               className="block max-w-[min(100%,22rem)] md:max-w-none"
             >
-              para quienes llegan primero
+              que estuvieron desde el inicio.
             </MotionSpan>
           </MotionDiv>
         </div>
