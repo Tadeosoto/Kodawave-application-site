@@ -1,0 +1,16 @@
+{
+  "testimonials": {
+    "maria": {
+      "quote": "Michelle turned a fuzzy concept into released drawings our supplier could quote; every tolerance and note was there when we needed it.",
+      "role": "Operations lead, hardware startup"
+    },
+    "daniel": {
+      "quote": "She stayed calm in reviews, tied every change to risks and load cases, and never let “looks fine” replace a verified assumption.",
+      "role": "Program manager, industrial OEM"
+    },
+    "olivia": {
+      "quote": "Our second prototype finally matched the intent: fewer assembly surprises and a repeatable test plan without guesswork.",
+      "role": "Founder, medical device team"
+    }
+  }
+}

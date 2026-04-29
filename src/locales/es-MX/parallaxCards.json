@@ -1,0 +1,21 @@
+{
+  "parallaxCards": {
+    "triptych1": "El proceso",
+    "triptych2": "La mente detrás",
+    "triptych3": "La misión",
+    "introTitleBefore": "Esto ",
+    "introTitleStrong": "apenas",
+    "introTitleAfter": " comienza",
+    "introSubText": " es el primer paso.",
+    "projectTitle": "Mapeo de áreas",
+    "projectDescription": "Realizamos mapeo con antena RTK para obtener datos precisos del terreno, acompañado de la planeación de rutas de vuelo optimizadas. Además, cuantificamos y analizamos los requerimientos específicos del cultivo, estimación de maleza por m2, proporcionando información clave para maximizar la productividad de tus tierras.",
+    "caennaLeadLine1": "No es el objeto,",
+    "caennaLeadLine2Before": "es lo que ",
+    "caennaLeadLine2Strong": "despierta en ti.",
+    "caennaTagline": "Tecnología con alma.",
+    "caennaSocialAria": "Canales de Caenna",
+    "instagram": "Instagram",
+    "tiktok": "TikTok",
+    "email": "Correo"
+  }
+}

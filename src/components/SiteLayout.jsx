@@ -1,11 +1,13 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import NavBar from './NavBar'
 import SiteFooter from './SiteFooter'
 
 const SiteLayout = () => {
   const location = useLocation()
+  const { i18n } = useTranslation()
   const MotionDiv = motion.div
   const isAlignnaRoute = location.pathname === '/alignna'
   const isHomeRoute = location.pathname === '/'
@@ -13,6 +15,11 @@ const SiteLayout = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
   }, [location.pathname])
+
+  useEffect(() => {
+    const lang = i18n.resolvedLanguage || i18n.language || 'en-AU'
+    document.documentElement.lang = lang
+  }, [i18n.language, i18n.resolvedLanguage])
 
   return (
     <div className="relative min-h-screen">

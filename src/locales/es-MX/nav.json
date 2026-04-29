@@ -1,0 +1,14 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "toggleMenu": "Abrir menú de navegación",
+    "closeMenu": "Cerrar menú",
+    "mobileNav": "Navegación móvil",
+    "goToAlignna": "Ir a Alignna"
+  },
+  "language": {
+    "enAU": "English (Australia)",
+    "esMX": "Español (México)",
+    "listLabel": "Idioma del sitio"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "blog": {
+    "title": "From requirement to hardware—notes along the way",
+    "fieldNotesEyebrow": "Field notes",
+    "fieldNotesLead": "This journal is where I write about tools, tradeoffs, and lessons from projects—CAD, manufacturing, and tests included. If it belongs in a review or a shop conversation, it probably shows up here.",
+    "bylineSuffix": "— engineering notes.",
+    "topicTags": [
+      "CAD & release",
+      "DFM",
+      "Tolerances",
+      "Materials",
+      "FEA / CAE",
+      "Prototyping",
+      "Testing"
+    ],
+    "designIntentAria": "Design intent",
+    "designIntentEyebrow": "Design intent",
+    "designIntentBody": "Intent shows up in details a supplier will notice: radii, datum choices, and how assemblies come apart for service. I write for teams who care about both the calculation and the conversation on the shop floor—because the drawing is only done when the part can be made, tested, and repeated.",
+    "deskAlt": "Michelle Castellanos at the desk",
+    "listAria": "All posts",
+    "listHeading": "Notes, essays, and field observations",
+    "listSub": "Writing",
+    "loadMore": "Load more",
+    "signature": "— Michelle Castellanos",
+    "posts": {
+      "post-1": {
+        "title": "Standout trends in generative design and manufacturing in 2026",
+        "excerpt": "What is shifting in tools, materials, and how I validate before production.",
+        "category": "Design & fabrication"
+      },
+      "post-2": {
+        "title": "Exploring AI in a product engineer’s day-to-day flow",
+        "excerpt": "From idea to geometry—where AI helps without replacing human judgment.",
+        "category": "Tools"
+      },
+      "post-3": {
+        "title": "Twelve factors I check before designing a critical part",
+        "excerpt": "A checklist across load, tolerances, and real-world use.",
+        "category": "Engineering"
+      },
+      "post-4": {
+        "title": "From simulation to the shop floor: lessons from one build",
+        "excerpt": "Iterations worth keeping—and mistakes I will not repeat.",
+        "category": "Projects"
+      },
+      "post-5": {
+        "title": "Signals that it is time to refresh your design documentation",
+        "excerpt": "What I watch for in the team and on the manufacturing line.",
+        "category": "Process"
+      },
+      "post-6": {
+        "title": "Working relationships that raise the technical bar",
+        "excerpt": "Communication between design, prototype, and production.",
+        "category": "Collaboration"
+      },
+      "post-7": {
+        "title": "Tighter launches, clearer outcomes",
+        "excerpt": "How I narrow scope without losing intent.",
+        "category": "Strategy"
+      },
+      "post-8": {
+        "title": "Why a coherent CAD–CAE pipeline matters on mid-sized projects",
+        "excerpt": "Less friction between models and analysis.",
+        "category": "Tools"
+      },
+      "post-9": {
+        "title": "Reframing an industrial brand while honoring its past",
+        "excerpt": "When brand voice walks beside the engineering.",
+        "category": "Brand"
+      },
+      "post-10": {
+        "title": "How I present a redesign to non-technical stakeholders",
+        "excerpt": "Stories, numbers, and prototypes that land.",
+        "category": "Communication"
+      }
+    }
+  }
+}

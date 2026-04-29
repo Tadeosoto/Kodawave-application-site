@@ -1,6 +1,7 @@
 import "./Cards.css";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { motion, useScroll, useTransform } from "framer-motion";
 import michelleDeskUrl from "../assets/michPageAssets/michPhotos/michelle-desk.png";
 import portraitMichelleUrl from "../assets/michPageAssets/michPhotos/hf_20260329_022232_608e361f-7fac-4089-bcf8-923d3e56c916.png";
@@ -14,6 +15,12 @@ const MotionDiv = motion.div;
 
 /** Tonos del verde principal (#97cdb5): de más claro a más cargado. */
 const principalShades = ["#e7f3ee", "#d0e8df", "#b9dccf", "#97cdb5"];
+
+const INTRO_TRIPTYCH = [
+  { src: michelleDeskUrl, to: "/my-work", labelKey: "triptych1" },
+  { src: portraitMichelleUrl, to: "/about", labelKey: "triptych2" },
+  { src: lignnaMisionUrl, to: "/alignna", labelKey: "triptych3" },
+];
 
 const InstagramIcon = () => (
   <svg viewBox="0 0 24 24" aria-hidden className="cardCaennaBrand__socialIcon">
@@ -39,39 +46,6 @@ const MailIcon = () => (
   </svg>
 );
 
-const introTriptych = [
-  {
-    src: michelleDeskUrl,
-    label: "El proceso",
-    to: "/my-work",
-  },
-  {
-    src: portraitMichelleUrl,
-    label: "La mente detrás",
-    to: "/about",
-  },
-  {
-    src: lignnaMisionUrl,
-    label: "La misión",
-    to: "/alignna",
-  },
-];
-
-const projects = [
-  {
-    variant: "intro",
-    color: principalShades[0],
-  },
-  {
-    title: "Mapeo de áreas",
-    description:
-      "Realizamos mapeo con antena RTK para obtener datos precisos del terreno, acompañado de la planeación de rutas de vuelo optimizadas. Además, cuantificamos y analizamos los requerimientos específicos del cultivo,estimación de maleza por m2, proporcionando información clave para maximizar la productividad de tus tierras.",
-    imageUrl: monoJadeUrl,
-    color: principalShades[1],
-    variant: "caennaBrand",
-  },
-];
-
 const Card = ({
   i,
   title,
@@ -83,6 +57,7 @@ const Card = ({
   targetScale,
   variant,
 }) => {
+  const { t } = useTranslation();
   const container = useRef(null);
   const { scrollYProgress } = useScroll({
     target: container,
@@ -117,7 +92,9 @@ const Card = ({
             <div className="cardIntroHeaderWrap">
               <header className="cardIntroHeader">
                 <h2 className="cardIntroTitle">
-                  Esto <strong>apenas</strong> comienza
+                  {t("parallaxCards.introTitleBefore")}
+                  <strong>{t("parallaxCards.introTitleStrong")}</strong>
+                  {t("parallaxCards.introTitleAfter")}
                 </h2>
                 <p className="cardIntroSub">
                   <img
@@ -126,35 +103,38 @@ const Card = ({
                     className="cardIntroAlignna"
                     decoding="async"
                   />
-                  <span className="cardIntroSubText"> es el primer paso.</span>
+                  <span className="cardIntroSubText">{t("parallaxCards.introSubText")}</span>
                 </p>
               </header>
             </div>
             <div className="cardTriptych" role="list">
-              {introTriptych.map((col) => (
-                <Link
-                  key={col.label}
-                  to={col.to}
-                  className="cardTriptych__link"
-                  role="listitem"
-                  aria-label={col.label}
-                >
-                  <div className="cardTriptych__media">
-                    <MotionDiv
-                      style={{ scale: imageScale }}
-                      className="cardTriptych__motion"
-                    >
-                      <img src={col.src} alt="" className="cardTriptych__img" />
-                    </MotionDiv>
-                    <div className="cardTriptych__tint" aria-hidden />
-                    <div className="cardTriptych__overlay" aria-hidden />
-                    <span className="cardTriptych__brandIcon" aria-hidden />
-                    <div className="cardTriptych__labelWrap">
-                      <span className="cardTriptych__label">{col.label}</span>
+              {INTRO_TRIPTYCH.map((col) => {
+                const label = t(`parallaxCards.${col.labelKey}`);
+                return (
+                  <Link
+                    key={col.to}
+                    to={col.to}
+                    className="cardTriptych__link"
+                    role="listitem"
+                    aria-label={label}
+                  >
+                    <div className="cardTriptych__media">
+                      <MotionDiv
+                        style={{ scale: imageScale }}
+                        className="cardTriptych__motion"
+                      >
+                        <img src={col.src} alt="" className="cardTriptych__img" />
+                      </MotionDiv>
+                      <div className="cardTriptych__tint" aria-hidden />
+                      <div className="cardTriptych__overlay" aria-hidden />
+                      <span className="cardTriptych__brandIcon" aria-hidden />
+                      <div className="cardTriptych__labelWrap">
+                        <span className="cardTriptych__label">{label}</span>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                );
+              })}
             </div>
           </>
         ) : isCaennaBrand ? (
@@ -170,9 +150,10 @@ const Card = ({
             <div className="cardCaennaBrand__overlay" aria-hidden />
             <div className="cardCaennaBrand__content">
               <p className="cardCaennaBrand__lead">
-                No es el objeto,
+                {t("parallaxCards.caennaLeadLine1")}
                 <br />
-                es lo que <strong>despierta en ti.</strong>
+                {t("parallaxCards.caennaLeadLine2Before")}
+                <strong>{t("parallaxCards.caennaLeadLine2Strong")}</strong>
               </p>
               <img
                 src={caennaWordmarkJadeUrl}
@@ -180,17 +161,17 @@ const Card = ({
                 className="cardCaennaBrand__logo"
                 decoding="async"
               />
-              <p className="cardCaennaBrand__tagline">Tecnología con alma.</p>
-              <div className="cardCaennaBrand__social" aria-label="Canales de Caenna">
-                <a href="https://www.instagram.com/" target="_blank" rel="noreferrer noopener" aria-label="Instagram">
+              <p className="cardCaennaBrand__tagline">{t("parallaxCards.caennaTagline")}</p>
+              <div className="cardCaennaBrand__social" aria-label={t("parallaxCards.caennaSocialAria")}>
+                <a href="https://www.instagram.com/" target="_blank" rel="noreferrer noopener" aria-label={t("parallaxCards.instagram")}>
                   <InstagramIcon />
                 </a>
                 <span aria-hidden>|</span>
-                <a href="https://www.tiktok.com/" target="_blank" rel="noreferrer noopener" aria-label="TikTok">
+                <a href="https://www.tiktok.com/" target="_blank" rel="noreferrer noopener" aria-label={t("parallaxCards.tiktok")}>
                   <TikTokIcon />
                 </a>
                 <span aria-hidden>|</span>
-                <a href="mailto:tadeosoto1993@gmail.com" aria-label="Correo">
+                <a href="mailto:tadeosoto1993@gmail.com" aria-label={t("parallaxCards.email")}>
                   <MailIcon />
                 </a>
               </div>
@@ -217,18 +198,37 @@ const Card = ({
 };
 
 const ParallaxCards = () => {
+  const { t, i18n } = useTranslation();
   const container = useRef(null);
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ["start start", "end end"],
   });
+
+  const projects = useMemo(
+    () => [
+      {
+        variant: "intro",
+        color: principalShades[0],
+      },
+      {
+        title: t("parallaxCards.projectTitle"),
+        description: t("parallaxCards.projectDescription"),
+        imageUrl: monoJadeUrl,
+        color: principalShades[1],
+        variant: "caennaBrand",
+      },
+    ],
+    [t, i18n.language],
+  );
+
   return (
     <section ref={container} className="seccion">
       {projects.map((project, i) => {
         const targetScale = 1 - (projects.length - i) * 0.05;
         return (
           <Card
-            key={i}
+            key={`${i}-${i18n.language}`}
             i={i}
             {...project}
             progress={scrollYProgress}

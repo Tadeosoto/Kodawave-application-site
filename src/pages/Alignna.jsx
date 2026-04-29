@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import "./Alignna.css";
 import alignnaBlancoRotoUrl from "../assets/michPageAssets/logos-icons/Alignna-BlancoRoto.svg";
 import bolaRosaUrl from "../assets/michPageAssets/pageDecoration/bola rosa(1).png";
@@ -11,6 +11,8 @@ const MotionDiv = motion.div;
 const revealEase = [0.22, 0.61, 0.36, 1];
 
 const Alignna = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="alignnaPage">
       <section className="alignnaHero">
@@ -24,15 +26,18 @@ const Alignna = () => {
             decoding="async"
           />
           <p className="alignnaPage__tagline">
-            Tu eres el <strong>escultor</strong> y la <strong>escultura</strong>
-            .
+            {t("alignna.taglineBefore")}
+            <strong>{t("alignna.taglineSculptor")}</strong>
+            {t("alignna.taglineMid")}
+            <strong>{t("alignna.taglineSculpture")}</strong>
+            {t("alignna.taglineAfter")}
           </p>
         </main>
       </section>
 
       <section
         className="alignnaBridgeSection"
-        aria-label="Mensaje introductorio Alignna"
+        aria-label={t("alignna.bridgeAria")}
       >
         <MotionP
           className="alignnaBridgeSection__copy"
@@ -41,15 +46,15 @@ const Alignna = () => {
           viewport={{ once: true, amount: 0.6 }}
           transition={{ duration: 0.78, ease: revealEase }}
         >
-          Conciencia corporal,
+          {t("alignna.bridgeLine1")}
           <br />
-          sin interrumpir tu día a día.
+          {t("alignna.bridgeLine2")}
         </MotionP>
       </section>
 
       <MotionSection
         className="alignnaBreakSection"
-        aria-label="Momento de romper paradigmas"
+        aria-label={t("alignna.breakAria")}
         initial={{ opacity: 0, y: 34, filter: "blur(8px)" }}
         whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         viewport={{ once: true, amount: 0.24 }}
@@ -96,7 +101,7 @@ const Alignna = () => {
                 },
               }}
             >
-              “Ya no se trata de apretar, se trata de despertar.”
+              {t("alignna.quote")}
             </MotionP>
           </MotionDiv>
           <MotionDiv
@@ -120,7 +125,7 @@ const Alignna = () => {
                 },
               }}
             >
-              Algo no estaba bien.
+              {t("alignna.headlineWrong")}
             </MotionP>
             <MotionP
               className="alignnaBreakSection__copy"
@@ -133,9 +138,10 @@ const Alignna = () => {
                 },
               }}
             >
-              Por años usamos lo mismo.
+              {t("alignna.copyYearsLine1")}
               <br />
-              Con queja, pero sin <strong>cuestionarlo.</strong>
+              {t("alignna.copyYearsLine2Before")}
+              <strong>{t("alignna.copyYearsLine2Strong")}</strong>
             </MotionP>
           </MotionDiv>
         </MotionDiv>
@@ -143,7 +149,7 @@ const Alignna = () => {
 
       <MotionSection
         className="alignnaPulseSection"
-        aria-label="Manifiesto Alignna"
+        aria-label={t("alignna.pulseAria")}
         initial={{ opacity: 0, y: 42, filter: "blur(9px)" }}
         whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         viewport={{ once: true, amount: 0.2 }}
@@ -156,7 +162,7 @@ const Alignna = () => {
           viewport={{ once: true, amount: 0.6 }}
           transition={{ duration: 0.7, ease: revealEase, delay: 0.05 }}
         >
-          Nada es casualidad.
+          {t("alignna.pulseIntro")}
         </MotionP>
 
         <MotionDiv
@@ -176,18 +182,19 @@ const Alignna = () => {
           </div>
           <div className="alignnaPulseCard__overlay" aria-hidden />
 
-          <p className="alignnaPulseCard__question">¿Y si el molde eres tu?</p>
+          <p className="alignnaPulseCard__question">{t("alignna.pulseQuestion")}</p>
           <p className="alignnaPulseCard__centerCopy">
-            Cada línea.
+            {t("alignna.pulseCenterLine1")}
             <br />
-            Cada forma.
+            {t("alignna.pulseCenterLine2")}
             <br />
-            Cada decisión.
+            {t("alignna.pulseCenterLine3")}
             <br />
-            Tiene una razón.
+            {t("alignna.pulseCenterLine4")}
           </p>
           <p className="alignnaPulseCard__bottomCopy">
-            Cuando lo uses, lo vas a <strong>entender.</strong>
+            {t("alignna.pulseBottomBefore")}
+            <strong>{t("alignna.pulseBottomStrong")}</strong>
           </p>
         </MotionDiv>
 
@@ -198,9 +205,11 @@ const Alignna = () => {
           viewport={{ once: true, amount: 0.7 }}
           transition={{ duration: 0.72, ease: revealEase, delay: 0.12 }}
         >
-          Te sientes <strong>diferente,</strong>
+          {t("alignna.pulseOutroLine1Before")}
+          <strong>{t("alignna.pulseOutroLine1Strong")}</strong>
           <br />
-          te sientes <strong>tu.</strong>
+          {t("alignna.pulseOutroLine2Before")}
+          <strong>{t("alignna.pulseOutroLine2Strong")}</strong>
         </MotionP>
       </MotionSection>
     </div>

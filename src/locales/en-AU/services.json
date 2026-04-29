@@ -1,0 +1,20 @@
+{
+  "services": {
+    "modeling": {
+      "title": "3D modelling and drawings",
+      "description": "Solid models, assemblies, and drawings with tolerances and a review discipline you can take to the shop floor or a technical gate."
+    },
+    "dfm": {
+      "title": "Design for manufacture",
+      "description": "Material selection, tooling logic, and process fit so the part is not only right on paper—it can actually be built."
+    },
+    "analysis": {
+      "title": "Analysis and validation",
+      "description": "Hand calculations and CAE where it matters: stiffness, factors of safety, and assumptions you can defend."
+    },
+    "prototypes": {
+      "title": "Prototypes and iteration",
+      "description": "Drawings, bench tests, and fast learning loops that connect geometry with how the hardware feels in your hands."
+    }
+  }
+}

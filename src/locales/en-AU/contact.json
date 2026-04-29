@@ -1,0 +1,14 @@
+{
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Tell me what you are building next",
+    "description": "Share loads, timeline, and manufacturing context—I will reply with a practical scope: what to model, what to test, and what “done” should mean.",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "Email address",
+    "messagePlaceholder": "Tell me about your project",
+    "send": "Send message",
+    "emailLabel": "Email:",
+    "phoneLabel": "Phone:",
+    "studioLabel": "Studio:"
+  }
+}

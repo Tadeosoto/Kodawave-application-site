@@ -1,0 +1,16 @@
+{
+  "testimonials": {
+    "maria": {
+      "quote": "Michelle convirtió un concepto difuso en planos liberados que nuestro proveedor pudo cotizar; cada tolerancia y nota estuvo cuando la necesitamos.",
+      "role": "Líder de operaciones, startup de hardware"
+    },
+    "daniel": {
+      "quote": "Se mantuvo serena en las revisiones, conectó cada cambio con riesgos y casos de carga, y nunca dejó que un “se ve bien” reemplazara una suposición verificada.",
+      "role": "Gerente de programa, OEM industrial"
+    },
+    "olivia": {
+      "quote": "Nuestro segundo prototipo por fin reflejó la intención: menos sorpresas en ensamble y un plan de pruebas repetible sin adivinar.",
+      "role": "Fundadora, equipo de dispositivos médicos"
+    }
+  }
+}

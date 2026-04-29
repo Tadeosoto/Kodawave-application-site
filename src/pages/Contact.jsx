@@ -1,15 +1,18 @@
+import { useTranslation } from 'react-i18next'
 import SectionTitle from '../components/SectionTitle'
 import Reveal from '../components/Reveal'
 import LazyMap from '../components/LazyMap'
 
 const Contact = () => {
+  const { t } = useTranslation()
+
   return (
     <div className="space-y-12 pb-16">
       <Reveal>
         <SectionTitle
-          eyebrow="Contact"
-          title="Tell me what you are building next"
-          description="Share loads, timeline, and manufacturing context—I will reply with a practical scope: what to model, what to test, and what “done” should mean."
+          eyebrow={t('contact.eyebrow')}
+          title={t('contact.title')}
+          description={t('contact.description')}
         />
       </Reveal>
 
@@ -19,34 +22,34 @@ const Contact = () => {
             <input
               className="w-full rounded-xl border border-secundario/30 bg-white px-4 py-3 outline-none focus:border-principal"
               type="text"
-              placeholder="Your name"
+              placeholder={t('contact.namePlaceholder')}
             />
             <input
               className="w-full rounded-xl border border-secundario/30 bg-white px-4 py-3 outline-none focus:border-principal"
               type="email"
-              placeholder="Email address"
+              placeholder={t('contact.emailPlaceholder')}
             />
             <textarea
               className="h-36 w-full rounded-xl border border-secundario/30 bg-white px-4 py-3 outline-none focus:border-principal"
-              placeholder="Tell me about your project"
+              placeholder={t('contact.messagePlaceholder')}
             />
             <button
               type="button"
               className="rounded-full bg-principal px-6 py-3 text-sm font-semibold text-ink transition hover:bg-secundario hover:text-terciario"
             >
-              Send message
+              {t('contact.send')}
             </button>
           </form>
 
           <div className="space-y-4">
             <p className="text-neutral-700">
-              <span className="font-semibold">Email:</span> tadeosoto1993@gmail.com
+              <span className="font-semibold">{t('contact.emailLabel')}</span> tadeosoto1993@gmail.com
             </p>
             <p className="text-neutral-700">
-              <span className="font-semibold">Phone:</span> +0 (000) 000-0000
+              <span className="font-semibold">{t('contact.phoneLabel')}</span> +0 (000) 000-0000
             </p>
             <p className="text-neutral-700">
-              <span className="font-semibold">Studio:</span> 1600 Amphitheatre Parkway, Mountain View, CA 94043
+              <span className="font-semibold">{t('contact.studioLabel')}</span> 1600 Amphitheatre Parkway, Mountain View, CA 94043
             </p>
             <LazyMap />
           </div>

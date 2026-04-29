@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   AnimatePresence,
   motion,
@@ -20,8 +21,6 @@ const MotionH1 = motion.h1;
 const MotionLink = motion(Link);
 
 const ease = [0.22, 0.61, 0.36, 1];
-
-const HERO_ROTATE_WORDS = ["conciencia", "ideas", "futuro", "impacto"];
 
 const clamp01 = (value) => Math.max(0, Math.min(1, value));
 
@@ -78,9 +77,16 @@ const Bleed = ({ children, className = "" }) => (
 );
 
 const Home = () => {
+  const { t } = useTranslation();
   const [heroWordIndex, setHeroWordIndex] = useState(0);
   const heroSectionRef = useRef(null);
   const engineerSectionRef = useRef(null);
+
+  const heroRotateWords = useMemo(
+    () => t("home.heroRotateWords", { returnObjects: true }),
+    [t],
+  );
+  const words = Array.isArray(heroRotateWords) ? heroRotateWords : [];
 
   const { scrollYProgress: heroScroll } = useScroll({
     target: heroSectionRef,
@@ -88,10 +94,14 @@ const Home = () => {
   });
 
   const heroImageScale = useTransform(heroScroll, [0, 1], [1, 1.14]);
-  const heroImageBlur = useTransform(
+  /** Palidez fija + blur al scroll (un solo `filter` para que no pise clases CSS). */
+  const heroImageFilter = useTransform(
     heroScroll,
     [0, 1],
-    ["blur(0px)", "blur(6px)"],
+    [
+      "brightness(1.05) saturate(0.78) contrast(0.9) blur(0px)",
+      "brightness(1.05) saturate(0.78) contrast(0.9) blur(6px)",
+    ],
   );
   const { scrollYProgress: engineerScroll } = useScroll({
     target: engineerSectionRef,
@@ -117,11 +127,15 @@ const Home = () => {
   );
 
   useEffect(() => {
+    if (!words.length) return;
     const id = setInterval(() => {
-      setHeroWordIndex((i) => (i + 1) % HERO_ROTATE_WORDS.length);
+      setHeroWordIndex((i) => (i + 1) % words.length);
     }, 2600);
     return () => clearInterval(id);
-  }, []);
+  }, [words.length]);
+
+  const wordIndex = words.length ? heroWordIndex % words.length : 0;
+  const activeHeroWord = words[wordIndex] ?? "";
 
   return (
     <div className="pb-0">
@@ -139,7 +153,7 @@ const Home = () => {
             <MotionImg
               src={heroHandsUrl}
               alt=""
-              style={{ scale: heroImageScale, filter: heroImageBlur }}
+              style={{ scale: heroImageScale, filter: heroImageFilter }}
               className="pointer-events-none absolute inset-0 h-full min-h-full w-full min-w-full origin-center select-none object-cover object-[center_38%] sm:object-[center_40%]"
               decoding="async"
             />
@@ -153,21 +167,14 @@ const Home = () => {
               transition={{ duration: 0.72, ease, delay: 0.08 }}
               className="mt-10 text-center font-display text-[clamp(1.85rem,5.2vw,3.15rem)] font-medium leading-[1.15] tracking-tight text-ink md:mt-14"
             >
-              <span className="block">Tecnología con alma.</span>
+              <span className="block">{t("home.heroTitle")}</span>
             </MotionH1>
             <motion.div
               initial={{ opacity: 0, y: -18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, ease, delay: 0.18 }}
               className="mx-auto mt-8 max-w-lg text-left text-[0.95rem] leading-relaxed text-neutral-600 md:ml-auto md:mr-[4%] md:mt-10 md:max-w-md md:text-base"
-            >
-              {/* <p>¿Este camino de carga merece existir?</p>
-              <p className="mt-2">Cada tolerancia es una promesa.</p>
-              <p className="mt-2">
-                Menos suposiciones, más{" "}
-                <span className="font-semibold text-ink">evidencia</span>.
-              </p> */}
-            </motion.div>
+            />
             <motion.div
               initial={{ opacity: 0, y: 26 }}
               animate={{ opacity: 1, y: 0 }}
@@ -176,31 +183,31 @@ const Home = () => {
             >
               <div className="text-left md:pb-2">
                 <p className="font-display text-[clamp(2rem,5vw,3.6rem)] font-medium leading-[1.02] tracking-tight text-ink">
-                  Materializando <br />
+                  {t("home.heroMaterialising")} <br />
                   <span className="relative inline-flex min-w-[9ch]">
                     <AnimatePresence mode="wait" initial={false}>
                       <MotionSpan
-                        key={HERO_ROTATE_WORDS[heroWordIndex]}
+                        key={activeHeroWord}
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
                         transition={{ duration: 0.35, ease }}
                         className="font-semibold italic text-ink"
                       >
-                        {HERO_ROTATE_WORDS[heroWordIndex]}.
+                        {activeHeroWord}.
                       </MotionSpan>
                     </AnimatePresence>
                   </span>
                 </p>
                 <p className="mt-3 text-sm font-semibold italic text-neutral-600 md:text-lg">
-                  Nada es casualidad.
+                  {t("home.heroTagline")}
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center gap-3">
                 <MotionLink
                   to="/alignna"
                   className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-transparent px-14 py-3.5 transition-all duration-300 ease-out hover:scale-[1.045] active:scale-[0.98]"
-                  aria-label="Ir a Alignna"
+                  aria-label={t("nav.goToAlignna")}
                   style={{ willChange: "transform" }}
                   animate={{ scale: [1, 1.014, 1.03, 1.042, 1.03, 1.014, 1] }}
                   transition={{
@@ -265,7 +272,7 @@ const Home = () => {
                   </MotionSpan>
                 </MotionLink>
                 <p className="text-center text-base text-ink">
-                  Es solo el comienzo
+                  {t("home.alignnaCtaCaption")}
                 </p>
               </div>
             </motion.div>
@@ -296,7 +303,7 @@ const Home = () => {
               transition={{ duration: 0.82, ease }}
               className="mx-auto max-w-[13ch] text-balance font-display text-[clamp(2.2rem,5.4vw,4.35rem)] font-medium leading-[1.06] tracking-tight text-ink max-md:text-[clamp(2.5rem,11vw,3.2rem)]"
             >
-              Diseñamos solo lo que merece existir
+              {t("home.manifestoTitle")}
             </motion.h2>
             <div className="mx-auto mt-10 max-w-md space-y-5 text-pretty text-[clamp(1.05rem,1.35vw,1.75rem)] leading-[1.28] text-ink/90 max-md:text-[clamp(1.28rem,5.8vw,1.65rem)] max-md:leading-[1.34] md:mt-12">
               <MotionP
@@ -305,7 +312,7 @@ const Home = () => {
                 viewport={{ once: true, amount: 0.75 }}
                 transition={{ duration: 0.58, ease, delay: 0.08 }}
               >
-                ¿Esto realmente mejora la experiencia humana?
+                {t("home.manifestoQ")}
               </MotionP>
               <MotionP
                 initial={{ opacity: 0, y: 16 }}
@@ -313,7 +320,7 @@ const Home = () => {
                 viewport={{ once: true, amount: 0.75 }}
                 transition={{ duration: 0.58, ease, delay: 0.18 }}
               >
-                Cada detalle importa.
+                {t("home.manifestoDetail")}
               </MotionP>
               <MotionP
                 initial={{ opacity: 0, y: 16 }}
@@ -322,7 +329,7 @@ const Home = () => {
                 transition={{ duration: 0.58, ease, delay: 0.28 }}
                 className="pt-2"
               >
-                Menos ruido,
+                {t("home.manifestoLessNoise")}
               </MotionP>
               <MotionP
                 initial={{ opacity: 0, y: 16 }}
@@ -331,7 +338,8 @@ const Home = () => {
                 transition={{ duration: 0.58, ease, delay: 0.38 }}
                 className="font-medium"
               >
-                Más <span className="font-semibold">intención.</span>
+                {t("home.manifestoMorePrefix")}
+                <span className="font-semibold">{t("home.manifestoIntentWord")}</span>
               </MotionP>
             </div>
           </div>
@@ -357,24 +365,24 @@ const Home = () => {
               <p className="font-display text-[clamp(2rem,4.6vw,3.3rem)] font-medium leading-[1.2] tracking-tight">
                 <ScrollRevealLine
                   progress={engineerLine1Progress}
-                  parts={[{ text: "Ingeniera." }]}
+                  parts={[{ text: t("home.engineerLine1") }]}
                 />
               </p>
               <p className="mt-8 text-[clamp(1.2rem,2.3vw,2.05rem)] leading-tight tracking-tight text-ink/85">
                 <ScrollRevealLine
                   progress={engineerLine2Progress}
                   parts={[
-                    { text: "Obsesionada con entender" },
-                    { text: "cómo funcionan", strong: true },
-                    { text: "las cosas." },
+                    { text: t("home.engineerParts2a") },
+                    { text: t("home.engineerParts2b"), strong: true },
+                    { text: t("home.engineerParts2c") },
                   ]}
                 />
                 <br />
                 <ScrollRevealLine
                   progress={engineerLine3Progress}
                   parts={[
-                    { text: "Pero más aún, con" },
-                    { text: "cómo se sienten.", strong: true },
+                    { text: t("home.engineerParts3a") },
+                    { text: t("home.engineerParts3b"), strong: true },
                   ]}
                 />
               </p>
@@ -382,16 +390,16 @@ const Home = () => {
                 <ScrollRevealLine
                   progress={engineerLine4Progress}
                   parts={[
-                    { text: "Algunos objetos solo existen, otros" },
-                    { text: "trascienden.", strong: true },
+                    { text: t("home.engineerParts4a") },
+                    { text: t("home.engineerParts4b"), strong: true },
                   ]}
                 />
                 <br />
                 <ScrollRevealLine
                   progress={engineerLine5Progress}
                   parts={[
-                    { text: "De ser materia se convierten en" },
-                    { text: "experiencia.", strong: true },
+                    { text: t("home.engineerParts5a") },
+                    { text: t("home.engineerParts5b"), strong: true },
                   ]}
                 />
               </p>
@@ -399,21 +407,21 @@ const Home = () => {
                 <ScrollRevealLine
                   progress={engineerLine6Progress}
                   parts={[
-                    { text: "La diferencia está en la" },
-                    { text: "intención.", strong: true },
+                    { text: t("home.engineerParts6a") },
+                    { text: t("home.engineerParts6b"), strong: true },
                   ]}
                 />
               </p>
               <p className="mt-4 text-[clamp(1.25rem,2.45vw,2.2rem)] font-semibold leading-[1.2] tracking-tight text-ink">
                 <ScrollRevealLine
                   progress={engineerLine6Progress}
-                  parts={[{ text: "De mi mente a tus manos.", strong: true }]}
+                  parts={[{ text: t("home.engineerClosing"), strong: true }]}
                 />
               </p>
               <p className="mt-14 text-right font-display text-[clamp(1.3rem,2.2vw,2rem)] italic text-ink/80 md:mt-18">
                 <ScrollRevealLine
                   progress={engineerLine6Progress}
-                  parts={[{ text: "-Michelle Castellanos" }]}
+                  parts={[{ text: t("home.engineerSignature") }]}
                 />
               </p>
             </div>

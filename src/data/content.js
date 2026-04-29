@@ -1,36 +1,42 @@
 /** Featured projects — home grid & My work carousel (Unsplash IDs verified 200 from CDN) */
 export const portfolioProjects = [
   {
+    tKey: 'symphony',
     title: 'Symphony',
     tags: ['CAD', 'Estructural', 'Revisión de diseño'],
     blurb: 'Caminos de carga legibles. Una carcasa que resistió vibración sin ocultar cómo funciona.',
     img: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
   },
   {
+    tKey: 'beyond',
     title: 'Beyond',
     tags: ['DFM', 'Lámina', 'Prototipo'],
     blurb: 'Del desplegado al ensamble: tolerancias que mantuvieron el montaje correcto desde la primera construcción.',
     img: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
   },
   {
+    tKey: 'northline',
     title: 'Northline',
     tags: ['Mecanismo', 'Cadena de tolerancias', 'Pruebas'],
     blurb: 'Movimiento donde la fricción y el desgaste se contemplaron desde el diseño, no al final.',
     img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
   },
   {
+    tKey: 'cafeMeridian',
     title: 'Café Meridian',
     tags: ['Térmico', 'CFD', 'Validación'],
     blurb: 'Rutas térmicas y límites definidos antes de que el metal tocara el entorno real.',
     img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
   },
   {
+    tKey: 'bunero',
     title: 'Bunero',
     tags: ['Materiales', 'Acabado', 'Gestión con proveedores'],
     blurb: 'Elecciones de superficie y material que soportaron contacto, limpieza y uso real.',
     img: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
   },
   {
+    tKey: 'castroCapital',
     title: 'Castro Capital',
     tags: ['Sistemas', 'BOM', 'Liberación'],
     blurb: 'Documentación que se mantuvo sólida cuando cambió el programa, con historial de revisiones confiable.',
@@ -40,21 +46,25 @@ export const portfolioProjects = [
 
 export const services = [
   {
+    tKey: 'modeling',
     title: 'Modelado 3D y planos',
     description:
       'Modelos sólidos, ensambles y planos con tolerancias y disciplina de revisión que puedes llevar a taller o a revisión técnica.',
   },
   {
+    tKey: 'dfm',
     title: 'Diseño para manufactura',
     description:
       'Selección de materiales, criterio de herramentales y ajuste al proceso para que la pieza no solo sea correcta en papel: se pueda fabricar.',
   },
   {
+    tKey: 'analysis',
     title: 'Análisis y validación',
     description:
       'Cálculos manuales y CAE donde importa: rigidez, factores de seguridad y suposiciones claras que se pueden defender.',
   },
   {
+    tKey: 'prototypes',
     title: 'Prototipos e iteración',
     description:
       'Planos, pruebas de banco y ciclos de aprendizaje rápido que conectan la geometría con lo que se siente al tener el hardware en mano.',
@@ -74,18 +84,21 @@ export const partners = [
 
 export const testimonials = [
   {
+    tKey: 'maria',
     name: 'Maria M.',
     role: 'Líder de operaciones, startup de hardware',
     quote:
       'Michelle convirtió un concepto difuso en planos liberados que nuestro proveedor pudo cotizar; cada tolerancia y nota estuvo cuando la necesitamos.',
   },
   {
+    tKey: 'daniel',
     name: 'Daniel R.',
     role: 'Gerente de programa, OEM industrial',
     quote:
       'Se mantuvo serena en las revisiones, conectó cada cambio con riesgos y casos de carga, y nunca dejó que un “se ve bien” reemplazara una suposición verificada.',
   },
   {
+    tKey: 'olivia',
     name: 'Olivia T.',
     role: 'Fundadora, equipo de dispositivos médicos',
     quote:

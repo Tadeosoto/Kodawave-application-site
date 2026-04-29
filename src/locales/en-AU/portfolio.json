@@ -1,0 +1,34 @@
+{
+  "portfolio": {
+    "symphony": {
+      "title": "Symphony",
+      "tags": ["CAD", "Structural", "Design review"],
+      "blurb": "Load paths you can read. A housing that survived vibration without hiding how it works."
+    },
+    "beyond": {
+      "title": "Beyond",
+      "tags": ["DFM", "Sheet metal", "Prototype"],
+      "blurb": "From flat pattern to assembly: tolerances that kept the build right from the first construction."
+    },
+    "northline": {
+      "title": "Northline",
+      "tags": ["Mechanism", "Tolerance stack", "Testing"],
+      "blurb": "Motion where friction and wear were designed in—not patched at the end."
+    },
+    "cafeMeridian": {
+      "title": "Café Meridian",
+      "tags": ["Thermal", "CFD", "Validation"],
+      "blurb": "Thermal paths and limits defined before metal met the real environment."
+    },
+    "bunero": {
+      "title": "Bunero",
+      "tags": ["Materials", "Finishing", "Supplier management"],
+      "blurb": "Surface and material choices that stood up to contact, cleaning, and real use."
+    },
+    "castroCapital": {
+      "title": "Castro Capital",
+      "tags": ["Systems", "BOM", "Release"],
+      "blurb": "Documentation that stayed solid when the program changed—with a revision history you could trust."
+    }
+  }
+}

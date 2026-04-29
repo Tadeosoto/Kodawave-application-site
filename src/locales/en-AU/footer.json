@@ -1,0 +1,19 @@
+{
+  "footer": {
+    "headline1": "You will want to wear it",
+    "headline2": "before it exists.",
+    "inDevelopment": "is in development",
+    "earlyAccess": "Early access list—only for those who get here first.",
+    "emailLabel": "Email address",
+    "placeholder": "you@email.com",
+    "submit": "Notify me",
+    "submitting": "Sending…",
+    "errorEmpty": "Please enter a valid email.",
+    "successDefault": "Done. We will be in touch soon.",
+    "successMailto": "Your email app will open with the message ready to send.",
+    "errorSend": "Could not send. Please try again later.",
+    "copyright": "© {{year}} Caenna",
+    "newsletterSubject": "Newsletter — Alignna",
+    "newsletterBody": "I would like to receive updates.\n\nEmail: {{email}}"
+  }
+}

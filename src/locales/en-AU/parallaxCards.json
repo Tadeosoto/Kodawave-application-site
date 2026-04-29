@@ -1,0 +1,21 @@
+{
+  "parallaxCards": {
+    "triptych1": "The process",
+    "triptych2": "The mind behind",
+    "triptych3": "The mission",
+    "introTitleBefore": "This is only ",
+    "introTitleStrong": "the beginning",
+    "introTitleAfter": "",
+    "introSubText": " is the first step.",
+    "projectTitle": "Area mapping",
+    "projectDescription": "We carry out RTK antenna mapping to capture precise terrain data, paired with optimised flight planning. We quantify and analyse crop-specific requirements—including weed estimates per m²—giving you the insight to maximise productivity across your land.",
+    "caennaLeadLine1": "It is not the object,",
+    "caennaLeadLine2Before": "it is what ",
+    "caennaLeadLine2Strong": "it awakens in you.",
+    "caennaTagline": "Technology with soul.",
+    "caennaSocialAria": "Caenna channels",
+    "instagram": "Instagram",
+    "tiktok": "TikTok",
+    "email": "Email"
+  }
+}

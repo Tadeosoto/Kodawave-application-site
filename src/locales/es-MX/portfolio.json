@@ -1,0 +1,34 @@
+{
+  "portfolio": {
+    "symphony": {
+      "title": "Symphony",
+      "tags": ["CAD", "Estructural", "Revisión de diseño"],
+      "blurb": "Caminos de carga legibles. Una carcasa que resistió vibración sin ocultar cómo funciona."
+    },
+    "beyond": {
+      "title": "Beyond",
+      "tags": ["DFM", "Lámina", "Prototipo"],
+      "blurb": "Del desplegado al ensamble: tolerancias que mantuvieron el montaje correcto desde la primera construcción."
+    },
+    "northline": {
+      "title": "Northline",
+      "tags": ["Mecanismo", "Cadena de tolerancias", "Pruebas"],
+      "blurb": "Movimiento donde la fricción y el desgaste se contemplaron desde el diseño, no al final."
+    },
+    "cafeMeridian": {
+      "title": "Café Meridian",
+      "tags": ["Térmico", "CFD", "Validación"],
+      "blurb": "Rutas térmicas y límites definidos antes de que el metal tocara el entorno real."
+    },
+    "bunero": {
+      "title": "Bunero",
+      "tags": ["Materiales", "Acabado", "Gestión con proveedores"],
+      "blurb": "Elecciones de superficie y material que soportaron contacto, limpieza y uso real."
+    },
+    "castroCapital": {
+      "title": "Castro Capital",
+      "tags": ["Sistemas", "BOM", "Liberación"],
+      "blurb": "Documentación que se mantuvo sólida cuando cambió el programa, con historial de revisiones confiable."
+    }
+  }
+}

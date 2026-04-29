@@ -1,0 +1,13 @@
+{
+  "selectedWork": {
+    "sectionAria": "Trabajo seleccionado",
+    "heading": "Trabajo seleccionado",
+    "prev": "Proyecto anterior",
+    "next": "Proyecto siguiente",
+    "carouselAria": "Diapositivas de proyectos",
+    "goToSlide": "Ir a la diapositiva {{n}}",
+    "slideOf": "{{i}} de {{total}}",
+    "tagline": "— Nuestro portafolio de éxitos",
+    "cta": "Hablemos"
+  }
+}

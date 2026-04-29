@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { motion, useScroll, useTransform } from "framer-motion";
 import cBlancoRotoUrl from "../assets/michPageAssets/logos-icons/C-BlancoRoto.svg";
 
@@ -43,6 +44,7 @@ function useNarrowMobile() {
 }
 
 const ParallaxReservationSection = () => {
+  const { t } = useTranslation();
   const parallaxSectionRef = useRef(null);
   const splitSlidePx = useSplitSlidePx();
   const narrowMobile = useNarrowMobile();
@@ -138,7 +140,7 @@ const ParallaxReservationSection = () => {
   return (
     <section
       ref={parallaxSectionRef}
-      className="relative max-md:h-[min(640vh,9000px)] md:h-[360vh]"
+      className="relative max-md:h-[min(340vh,4800px)] md:h-[265vh]"
     >
       <div className="sticky top-0 flex h-dvh min-h-0 items-center justify-center overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-radial-[80%_80%_at_50%_50%]" />
@@ -150,9 +152,9 @@ const ParallaxReservationSection = () => {
               scale: lineOneScale,
               filter: lineOneBlur,
             }}
-            className="w-full max-w-6xl text-center font-display text-[clamp(1.85rem,9vw,11rem)] leading-[0.92] tracking-tight text-black font-bold md:text-[clamp(2.8rem,11vw,11rem)]"
+            className="w-full max-w-6xl text-center font-display text-[clamp(2.15rem,11vw,11rem)] leading-[0.92] tracking-tight text-black font-bold md:text-[clamp(2.8rem,11vw,11rem)]"
           >
-            No es para todos.
+            {t("parallaxReserve.line1")}
           </MotionP>
         </div>
         <div className="absolute inset-0 flex items-center justify-center px-4 max-md:py-8 sm:px-6">
@@ -163,10 +165,10 @@ const ParallaxReservationSection = () => {
               scale: lineTwoScale,
               filter: lineTwoBlur,
             }}
-            className="w-full max-w-6xl text-center font-display text-[clamp(1.45rem,5.5vw,6rem)] leading-[0.98] tracking-tight text-black font-bold md:text-[clamp(2rem,7.4vw,6rem)]"
+            className="w-full max-w-6xl text-center font-display text-[clamp(1.72rem,6.8vw,6rem)] leading-[0.98] tracking-tight text-black font-bold md:text-[clamp(2rem,7.4vw,6rem)]"
           >
-            Pero si estás aquí,{" "}
-            <span className="text-principal">siéntelo.</span>
+            {t("parallaxReserve.line2Before")}
+            <span className="text-principal">{t("parallaxReserve.line2Accent")}</span>
           </MotionP>
         </div>
         <div className="absolute inset-0 flex items-center justify-center px-4 max-md:py-8 sm:px-6">
@@ -177,19 +179,19 @@ const ParallaxReservationSection = () => {
               scale: splitScale,
               filter: splitBlur,
             }}
-            className="flex w-full max-w-6xl flex-col items-center gap-2 text-center font-display text-[clamp(1.15rem,4.8vw,5.6rem)] leading-[0.96] tracking-tight text-black font-bold max-md:px-1 md:gap-2 md:text-[clamp(1.8rem,6vw,5.6rem)]"
+            className="flex w-full max-w-6xl flex-col items-center gap-2 text-center font-display text-[clamp(1.38rem,6.2vw,5.6rem)] leading-[0.96] tracking-tight text-black font-bold max-md:px-1 md:gap-2 md:text-[clamp(1.8rem,6vw,5.6rem)]"
           >
             <MotionSpan
               style={{ x: splitLeftX }}
               className="block max-w-[min(100%,22rem)] md:max-w-none"
             >
-              No todos podrán decir
+              {t("parallaxReserve.split1")}
             </MotionSpan>
             <MotionSpan
               style={{ x: splitRightX }}
               className="block max-w-[min(100%,22rem)] md:max-w-none"
             >
-              que estuvieron desde el inicio.
+              {t("parallaxReserve.split2")}
             </MotionSpan>
           </MotionDiv>
         </div>
@@ -205,7 +207,7 @@ const ParallaxReservationSection = () => {
           >
             <Link
               to="/contact"
-              className="group flex h-auto min-h-14 w-full max-w-[min(100%,18rem)] items-center justify-center gap-2.5 rounded-full bg-principal px-8 py-3.5 text-lg font-semibold text-ink shadow-[0_12px_30px_-16px_rgba(0,0,0,0.9)] transition-all duration-300 ease-out hover:scale-105 hover:bg-secundario hover:text-white max-md:mx-auto max-md:max-w-[min(100%,20rem)] sm:min-h-18 sm:max-w-xs md:h-30 md:w-80 md:max-w-none md:gap-3 md:px-18 md:py-4 lg:text-6xl"
+              className="group flex h-auto min-h-14 w-full max-w-[min(100%,18rem)] items-center justify-center gap-2.5 rounded-full bg-principal px-8 py-3.5 text-xl font-semibold text-ink shadow-[0_12px_30px_-16px_rgba(0,0,0,0.9)] transition-all duration-300 ease-out hover:scale-105 hover:bg-secundario hover:text-white max-md:mx-auto max-md:max-w-[min(100%,20rem)] sm:min-h-18 sm:max-w-xs md:h-30 md:w-80 md:max-w-none md:gap-3 md:px-18 md:py-4 md:text-lg lg:text-6xl"
             >
               <span
                 className="inline-block size-[1.1em] shrink-0 bg-current opacity-95 transition-[transform,opacity] duration-300 ease-out group-hover:scale-110 group-hover:opacity-100"
@@ -221,7 +223,7 @@ const ParallaxReservationSection = () => {
                 }}
                 aria-hidden
               />
-              Reservar
+              {t("parallaxReserve.reserveCta")}
             </Link>
           </MotionDiv>
         </div>

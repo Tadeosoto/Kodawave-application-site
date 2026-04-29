@@ -1,0 +1,14 @@
+{
+  "contact": {
+    "eyebrow": "Contacto",
+    "title": "Cuéntame qué estás construyendo ahora",
+    "description": "Comparte cargas, plazos y contexto de manufactura—responderé con un alcance práctico: qué modelar, qué probar y qué debería significar “terminado”.",
+    "namePlaceholder": "Tu nombre",
+    "emailPlaceholder": "Correo electrónico",
+    "messagePlaceholder": "Cuéntame sobre tu proyecto",
+    "send": "Enviar mensaje",
+    "emailLabel": "Correo:",
+    "phoneLabel": "Teléfono:",
+    "studioLabel": "Estudio:"
+  }
+}

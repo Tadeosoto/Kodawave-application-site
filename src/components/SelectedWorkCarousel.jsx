@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 const CornerAccent = () => (
   <svg
@@ -15,10 +16,23 @@ const CornerAccent = () => (
 
 const GAP_PX = 24
 
+function translateProject(item, t) {
+  const tagsRaw = t(`portfolio.${item.tKey}.tags`, { returnObjects: true })
+  const tags = Array.isArray(tagsRaw) ? tagsRaw : item.tags
+  return {
+    title: t(`portfolio.${item.tKey}.title`),
+    blurb: t(`portfolio.${item.tKey}.blurb`),
+    tagLine: tags.join(' · '),
+    img: item.img,
+    tKey: item.tKey,
+  }
+}
+
 /**
  * Horizontal carousel: native overflow scroll + snap (touch-friendly) and mouse drag.
  */
 export default function SelectedWorkCarousel({ items, bleed = true }) {
+  const { t, i18n } = useTranslation()
   const [index, setIndex] = useState(0)
   const [slideStep, setSlideStep] = useState(0)
   const [dragging, setDragging] = useState(false)
@@ -30,13 +44,15 @@ export default function SelectedWorkCarousel({ items, bleed = true }) {
   const dragRef = useRef({ active: false, originX: 0, originScroll: 0, pointerId: null })
   const maxIndex = Math.max(0, items.length - 1)
 
+  const slides = items.map((item) => translateProject(item, t))
+
   useEffect(() => {
     indexRef.current = index
   }, [index])
 
   useEffect(() => {
     setIndex((i) => Math.min(i, maxIndex))
-  }, [maxIndex])
+  }, [maxIndex, i18n.language])
 
   const measure = useCallback(() => {
     const el = firstSlideRef.current
@@ -53,7 +69,7 @@ export default function SelectedWorkCarousel({ items, bleed = true }) {
       ro.disconnect()
       window.removeEventListener('resize', measure)
     }
-  }, [measure, items.length])
+  }, [measure, items.length, i18n.language])
 
   const scrollToIndex = useCallback(
     (targetIndex, behavior = 'smooth') => {
@@ -75,7 +91,7 @@ export default function SelectedWorkCarousel({ items, bleed = true }) {
     const el = scrollRef.current
     if (!el || slideStep <= 0) return
     el.scrollLeft = indexRef.current * slideStep
-  }, [slideStep])
+  }, [slideStep, i18n.language])
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -143,16 +159,16 @@ export default function SelectedWorkCarousel({ items, bleed = true }) {
   }
 
   const inner = (
-    <section className="bg-[#0d0c0b] py-14 text-white md:py-20" aria-label="Selected work">
+    <section className="bg-[#0d0c0b] py-14 text-white md:py-20" aria-label={t('selectedWork.sectionAria')}>
       <div className="mx-auto max-w-[1600px] px-6 md:px-10">
-        <h2 className="font-display text-3xl font-medium tracking-tight md:text-[2.35rem]">Selected work</h2>
+        <h2 className="font-display text-3xl font-medium tracking-tight md:text-[2.35rem]">{t('selectedWork.heading')}</h2>
 
         <div className="relative mt-10 md:mt-12">
           <button
             type="button"
             onClick={() => go(-1)}
             className="absolute left-0 top-1/2 z-10 hidden -translate-x-2 -translate-y-1/2 rounded-full border border-white/15 bg-black/30 p-2.5 text-white/90 backdrop-blur-sm transition hover:bg-black/50 md:flex"
-            aria-label="Previous project"
+            aria-label={t('selectedWork.prev')}
           >
             <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
               <path d="M15 6l-6 6 6 6" />
@@ -162,7 +178,7 @@ export default function SelectedWorkCarousel({ items, bleed = true }) {
             type="button"
             onClick={() => go(1)}
             className="absolute right-0 top-1/2 z-10 hidden translate-x-2 -translate-y-1/2 rounded-full border border-white/15 bg-black/30 p-2.5 text-white/90 backdrop-blur-sm transition hover:bg-black/50 md:flex"
-            aria-label="Next project"
+            aria-label={t('selectedWork.next')}
           >
             <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
               <path d="M9 6l6 6-6 6" />
@@ -174,7 +190,7 @@ export default function SelectedWorkCarousel({ items, bleed = true }) {
               ref={scrollRef}
               role="region"
               aria-roledescription="carousel"
-              aria-label="Project slides"
+              aria-label={t('selectedWork.carouselAria')}
               className={`carousel-x-scroll flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 [-webkit-overflow-scrolling:touch] ${
                 dragging ? 'cursor-grabbing' : 'cursor-grab'
               }`}
@@ -185,13 +201,13 @@ export default function SelectedWorkCarousel({ items, bleed = true }) {
               onPointerUp={endDrag}
               onPointerCancel={endDrag}
             >
-              {items.map((item, i) => (
+              {slides.map((item, i) => (
                 <article
-                  key={item.title}
+                  key={`${item.tKey}-${i18n.language}`}
                   ref={i === 0 ? firstSlideRef : undefined}
                   className="group relative aspect-[4/3] w-[min(88vw,520px)] shrink-0 snap-start overflow-hidden rounded-[2px] bg-neutral-900 select-none md:w-[min(42vw,520px)]"
                   aria-roledescription="slide"
-                  aria-label={`${i + 1} of ${items.length}`}
+                  aria-label={t('selectedWork.slideOf', { i: i + 1, total: slides.length })}
                 >
                   <img
                     src={item.img}
@@ -204,7 +220,7 @@ export default function SelectedWorkCarousel({ items, bleed = true }) {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/45" />
                   <CornerAccent />
                   <p className="absolute left-5 right-16 top-5 text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-white/88">
-                    {item.tags.join(' · ')}
+                    {item.tagLine}
                   </p>
                   <div className="absolute bottom-0 left-0 right-0 p-5 md:p-7">
                     <h3 className="font-display text-2xl font-semibold tracking-tight text-white md:text-[1.85rem]">
@@ -219,7 +235,7 @@ export default function SelectedWorkCarousel({ items, bleed = true }) {
         </div>
 
         <div className="mt-10 flex justify-center gap-2 md:mt-12">
-          {items.map((_, i) => (
+          {slides.map((_, i) => (
             <button
               key={i}
               type="button"
@@ -227,19 +243,19 @@ export default function SelectedWorkCarousel({ items, bleed = true }) {
               className={`h-2 rounded-full transition-all duration-500 ease-out ${
                 i === index ? 'w-9 bg-white' : 'w-2 bg-white/35 hover:bg-white/55'
               }`}
-              aria-label={`Go to slide ${i + 1}`}
+              aria-label={t('selectedWork.goToSlide', { n: i + 1 })}
               aria-current={i === index}
             />
           ))}
         </div>
 
         <div className="mt-10 flex flex-col items-start gap-4 border-t border-white/10 pt-8 md:flex-row md:items-center md:justify-between">
-          <p className="font-display text-sm italic text-white/55">— Our portfolio of success</p>
+          <p className="font-display text-sm italic text-white/55">{t('selectedWork.tagline')}</p>
           <Link
             to="/contact"
             className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-principal transition hover:text-principal/85"
           >
-            Let&apos;s talk
+            {t('selectedWork.cta')}
           </Link>
         </div>
       </div>

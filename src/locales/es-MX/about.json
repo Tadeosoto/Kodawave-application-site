@@ -1,0 +1,23 @@
+{
+  "about": {
+    "eyebrow": "Acerca de",
+    "title": "Mecánica clara, restricciones honestas, hardware que puedes liberar",
+    "introBefore": "Soy ",
+    "introName": "Michelle Castellanos",
+    "introAfter": ", ingeniera mecánica. Ayudo a equipos a convertir intención en modelos, planos y prototipos—con trazabilidad del requisito a la prueba.",
+    "scrollEyebrow": "Acerca de",
+    "scrollText": "Soy ingeniera mecánica: bosquejo trayectorias de carga antes de confiar en las superficies, y prototipo para responder preguntas que el CAD no puede resolver solo. Me importa cómo se fabrica una pieza, cómo acopla y qué pasa cuando se acumulan tolerancias o un perno se aprieta mal. Mi trabajo vive donde los requisitos encuentran la realidad material—geometría, análisis e iteración hasta que el hardware se comporte como el programa lo necesita.",
+    "imageAlt": "Michelle Castellanos trabajando en planos en su escritorio",
+    "beliefsEyebrow": "Lo que creemos",
+    "beliefsBody": "Creo en supuestos por escrito, márgenes que puedes explicar y revisiones que dan la bienvenida a las preguntas difíciles. Un modelo bonito no es la meta—uno verificable sí. Busco piezas y ensambles que sigan teniendo sentido años después, porque el razonamiento nunca quedó escondido en la cabeza de una sola persona.",
+    "whyEyebrow": "Por qué trabajar conmigo",
+    "whyCol1Title": "La colaboración es el hilo",
+    "whyCol1Body": "Me mantengo transparente desde el concepto, la liberación de planos y la construcción—para que los compromisos se vean antes de cortar metal. Los equipos rápidos me enseñaron urgencia; los programas complejos, cómo mantener configuración y riesgo legibles cuando todos piden un cambio a la vez.",
+    "whyCol2Title": "Trabajo que envejece bien",
+    "whyCol2Body": "Diseño para mantenibilidad y cambio—interfaces, sujetadores y documentación alineados con un producto que evolucionará. Encontrarás en mi portafolio trabajo que se quedó en campo porque los fundamentos eran correctos—no porque tuviéramos suerte en el prototipo uno.",
+    "photoCaption1": "— Sesión retrato / 2026",
+    "photoCaption2": "— Escritorio y proceso / 2026",
+    "testimonialsTitle": "Lo que dicen los clientes",
+    "testimonialsLead": "Palabras de quienes han construido y liberado hardware conmigo."
+  }
+}

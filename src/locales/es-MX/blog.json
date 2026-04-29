@@ -1,0 +1,78 @@
+{
+  "blog": {
+    "title": "Del requisito al hardware—notas en el camino",
+    "fieldNotesEyebrow": "Notas de campo",
+    "fieldNotesLead": "En este diario escribo sobre herramientas, compromisos y lecciones de proyectos—CAD, manufactura y pruebas incluidas. Si pertenece a una revisión o a una charla en taller, probablemente aparece aquí.",
+    "bylineSuffix": "— notas de ingeniería.",
+    "topicTags": [
+      "CAD y liberación",
+      "DFM",
+      "Tolerancias",
+      "Materiales",
+      "FEA / CAE",
+      "Prototipado",
+      "Pruebas"
+    ],
+    "designIntentAria": "Intención de diseño",
+    "designIntentEyebrow": "Intención de diseño",
+    "designIntentBody": "La intención se nota en detalles que un proveedor ve: radios, elección de datum y cómo se desmontan los ensambles para servicio. Escribo para equipos que se preocupan tanto por el cálculo como por la conversación en taller—porque el plano solo está listo cuando la pieza se puede fabricar, probar y repetir.",
+    "deskAlt": "Michelle Castellanos en el escritorio",
+    "listAria": "Todas las entradas",
+    "listHeading": "Notas, ensayos y observaciones de campo",
+    "listSub": "Escritos",
+    "loadMore": "Cargar más",
+    "signature": "— Michelle Castellanos",
+    "posts": {
+      "post-1": {
+        "title": "Tendencias destacadas en diseño generativo y manufactura en 2026",
+        "excerpt": "Qué está cambiando en herramientas, materiales y cómo valido antes de producción.",
+        "category": "Diseño y fabricación"
+      },
+      "post-2": {
+        "title": "Explorando la IA en el flujo diario del ingeniero de producto",
+        "excerpt": "De la idea a la geometría—dónde ayuda la IA sin reemplazar el criterio humano.",
+        "category": "Herramientas"
+      },
+      "post-3": {
+        "title": "Doce factores que reviso antes de diseñar una pieza crítica",
+        "excerpt": "Una lista entre carga, tolerancias y uso real.",
+        "category": "Ingeniería"
+      },
+      "post-4": {
+        "title": "De la simulación al taller: lecciones de una construcción",
+        "excerpt": "Iteraciones que valió la pena conservar—y errores que no repetiré.",
+        "category": "Proyectos"
+      },
+      "post-5": {
+        "title": "Señales de que es hora de actualizar la documentación de diseño",
+        "excerpt": "Qué observo en el equipo y en la línea de manufactura.",
+        "category": "Proceso"
+      },
+      "post-6": {
+        "title": "Relaciones de trabajo que elevan la vara técnica",
+        "excerpt": "Comunicación entre diseño, prototipo y producción.",
+        "category": "Colaboración"
+      },
+      "post-7": {
+        "title": "Lanzamientos más ajustados, resultados más claros",
+        "excerpt": "Cómo acoto el alcance sin perder la intención.",
+        "category": "Estrategia"
+      },
+      "post-8": {
+        "title": "Por qué importa un pipeline CAD–CAE coherente en proyectos medianos",
+        "excerpt": "Menos fricción entre modelos y análisis.",
+        "category": "Herramientas"
+      },
+      "post-9": {
+        "title": "Reenmarcar una marca industrial honrando su pasado",
+        "excerpt": "Cuando la voz de marca camina junto a la ingeniería.",
+        "category": "Marca"
+      },
+      "post-10": {
+        "title": "Cómo presento un rediseño a partes interesadas no técnicas",
+        "excerpt": "Historias, números y prototipos que conectan.",
+        "category": "Comunicación"
+      }
+    }
+  }
+}

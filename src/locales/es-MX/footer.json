@@ -1,0 +1,19 @@
+{
+  "footer": {
+    "headline1": "Lo vas a querer puesto",
+    "headline2": "antes de que exista.",
+    "inDevelopment": "está en desarrollo",
+    "earlyAccess": "Lista de acceso anticipado, solo para quienes lleguen primero.",
+    "emailLabel": "Correo electrónico",
+    "placeholder": "tu@email.com",
+    "submit": "Avisar",
+    "submitting": "Enviando…",
+    "errorEmpty": "Escribe un correo válido.",
+    "successDefault": "Listo. Te avisamos pronto.",
+    "successMailto": "Se abrirá tu correo con el mensaje listo para enviar.",
+    "errorSend": "No se pudo enviar. Intenta de nuevo más tarde.",
+    "copyright": "© {{year}} Caenna",
+    "newsletterSubject": "Newsletter — Alignna",
+    "newsletterBody": "Quiero recibir novedades.\n\nCorreo: {{email}}"
+  }
+}

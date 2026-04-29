@@ -1,7 +1,8 @@
 .alignnaPage {
   position: relative;
   width: 100%;
-  background: #ffffff;
+  /* Mismo tono que secciones (p. ej. pulse) para que no se vea franja blanca al animar scroll */
+  background: #eff0ec;
   color: #444540;
 }
 
@@ -9,7 +10,7 @@
   position: relative;
   min-height: 100vh;
   overflow: hidden;
-  background: #ffffff;
+  background: #eff0ec;
   isolation: isolate;
 }
 
@@ -154,7 +155,7 @@
   position: relative;
   z-index: 3;
   min-height: min(90vh, 860px);
-  background: #ffffff;
+  background: #eff0ec;
   overflow: hidden;
 }
 

@@ -1,0 +1,20 @@
+{
+  "services": {
+    "modeling": {
+      "title": "Modelado 3D y planos",
+      "description": "Modelos sólidos, ensambles y planos con tolerancias y disciplina de revisión que puedes llevar a taller o a revisión técnica."
+    },
+    "dfm": {
+      "title": "Diseño para manufactura",
+      "description": "Selección de materiales, criterio de herramentales y ajuste al proceso para que la pieza no solo sea correcta en papel: se pueda fabricar."
+    },
+    "analysis": {
+      "title": "Análisis y validación",
+      "description": "Cálculos manuales y CAE donde importa: rigidez, factores de seguridad y suposiciones claras que se pueden defender."
+    },
+    "prototypes": {
+      "title": "Prototipos e iteración",
+      "description": "Planos, pruebas de banco y ciclos de aprendizaje rápido que conectan la geometría con lo que se siente al tener el hardware en mano."
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "about": {
+    "eyebrow": "About",
+    "title": "Clear mechanics, honest constraints, hardware you can release",
+    "introBefore": "I'm ",
+    "introName": "Michelle Castellanos",
+    "introAfter": ", a mechanical engineer. I help teams turn intent into models, drawings, and prototypes—with traceability from requirement to test.",
+    "scrollEyebrow": "About",
+    "scrollText": "I am a mechanical engineer: I sketch load paths before I trust surfaces, and I prototype to answer questions CAD cannot settle alone. I care how a part is made, how it mates, and what happens when tolerances stack or a bolt is torqued wrong. My work sits where requirements meet material reality—geometry, analysis, and iteration until the hardware behaves the way the program needs it to.",
+    "imageAlt": "Michelle Castellanos working on layouts at her desk",
+    "beliefsEyebrow": "Our beliefs",
+    "beliefsBody": "I believe in assumptions written down, margins you can explain, and reviews that welcome hard questions. A clean-looking model is not the goal—a verifiable one is. I aim for parts and assemblies that still make sense years later, because the reasoning was never hidden in a single person's head.",
+    "whyEyebrow": "Why work with me",
+    "whyCol1Title": "Collaboration is the thread",
+    "whyCol1Body": "I stay transparent through concept, drawing release, and build—so tradeoffs are visible before metal is cut. Fast teams taught me urgency; complex programs taught me how to keep configuration and risk legible when everyone is asking for a change at once.",
+    "whyCol2Title": "Work that ages well",
+    "whyCol2Body": "I design for serviceability and change—interfaces, fasteners, and documentation aligned with a product that will evolve. You will find work in my portfolio that stayed in the field because the fundamentals were right—not because we got lucky on prototype one.",
+    "photoCaption1": "— Portrait session / 2026",
+    "photoCaption2": "— Desk & process / 2026",
+    "testimonialsTitle": "What clients say",
+    "testimonialsLead": "Words from people who have built and released hardware with me."
+  }
+}

@@ -1,11 +1,9 @@
-import { startTransition, useEffect, useLayoutEffect, useState } from "react";
+import { startTransition, useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { CaennaHeaderLogo } from "./CaennaBrand";
+import LanguageSelect from "./LanguageSelect";
 import alignnaBlancoRotoUrl from "../assets/michPageAssets/logos-icons/Alignna-BlancoRoto.svg";
-
-const links = [{ to: "/", label: "Home" }];
-
-const mobileLinks = [...links];
 
 const linkIcons = {
   "/": (
@@ -71,7 +69,11 @@ const linkIcons = {
 
 const NavBar = () => {
   const location = useLocation();
+  const { t } = useTranslation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const links = useMemo(() => [{ to: "/", label: t("nav.home") }], [t]);
+  const mobileLinks = useMemo(() => [...links], [links]);
 
   useEffect(() => {
     startTransition(() => setIsMobileMenuOpen(false));
@@ -112,39 +114,42 @@ const NavBar = () => {
               </NavLink>
             ))}
           </nav>
-          <NavLink
-            to="/alignna"
-            aria-label="Ir a Alignna"
-            className="hidden items-center justify-center transition-all duration-300 ease-out hover:opacity-85 active:scale-95 md:inline-flex"
-          >
-            <img
-              src={alignnaBlancoRotoUrl}
-              alt="Alignna"
-              className="h-5 w-auto invert-78 sepia-21 saturate-482 hue-rotate-96 brightness-92 contrast-88 sm:h-6"
-              decoding="async"
-            />
-          </NavLink>
-          <button
-            type="button"
-            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-            className="inline-flex items-center justify-center border border-secundario/30 p-2.5 text-ink md:hidden"
-            aria-expanded={isMobileMenuOpen}
-            aria-label="Toggle navigation menu"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
+          <div className="flex items-center gap-2">
+            <LanguageSelect />
+            <NavLink
+              to="/alignna"
+              aria-label={t("nav.goToAlignna")}
+              className="hidden items-center justify-center transition-all duration-300 ease-out hover:opacity-85 active:scale-95 md:inline-flex"
             >
-              {isMobileMenuOpen ? (
-                <path d="M6 6l12 12M18 6L6 18" />
-              ) : (
-                <path d="M4 7h16M4 12h16M4 17h16" />
-              )}
-            </svg>
-          </button>
+              <img
+                src={alignnaBlancoRotoUrl}
+                alt="Alignna"
+                className="h-5 w-auto invert-78 sepia-21 saturate-482 hue-rotate-96 brightness-92 contrast-88 sm:h-6"
+                decoding="async"
+              />
+            </NavLink>
+            <button
+              type="button"
+              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+              className="inline-flex items-center justify-center border border-secundario/30 p-2.5 text-ink md:hidden"
+              aria-expanded={isMobileMenuOpen}
+              aria-label={t("nav.toggleMenu")}
+            >
+              <svg
+                viewBox="0 0 24 24"
+                className="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              >
+                {isMobileMenuOpen ? (
+                  <path d="M6 6l12 12M18 6L6 18" />
+                ) : (
+                  <path d="M4 7h16M4 12h16M4 17h16" />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
       </header>
       <div
@@ -162,7 +167,7 @@ const NavBar = () => {
           className={`pointer-events-auto ml-auto h-full w-[min(85vw,20rem)] border-l border-secundario/20 bg-terciario p-6 shadow-2xl transition-transform duration-200 ${
             isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
-          aria-label="Mobile navigation"
+          aria-label={t("nav.mobileNav")}
         >
           <div className="mb-8 flex items-center justify-between gap-3">
             <CaennaHeaderLogo />
@@ -170,7 +175,7 @@ const NavBar = () => {
               type="button"
               onClick={() => setIsMobileMenuOpen(false)}
               className="border border-secundario/25 p-2 text-ink"
-              aria-label="Close menu"
+              aria-label={t("nav.closeMenu")}
             >
               <svg
                 viewBox="0 0 24 24"
@@ -203,7 +208,7 @@ const NavBar = () => {
           </nav>
           <NavLink
             to="/alignna"
-            aria-label="Ir a Alignna"
+            aria-label={t("nav.goToAlignna")}
             className="mt-6 inline-flex items-center justify-center self-start transition-all duration-300 ease-out hover:opacity-85 active:scale-95"
           >
             <img
