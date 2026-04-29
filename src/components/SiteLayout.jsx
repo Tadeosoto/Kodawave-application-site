@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
+import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import NavBar from './NavBar'
 import SiteFooter from './SiteFooter'
@@ -7,6 +8,10 @@ const SiteLayout = () => {
   const location = useLocation()
   const MotionDiv = motion.div
   const isAlignnaRoute = location.pathname === '/alignna'
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  }, [location.pathname])
 
   return (
     <div className="relative min-h-screen">
