@@ -105,16 +105,18 @@ const NavBar = () => {
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-50 border-b border-secundario/20 bg-terciario/90 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-5 md:px-10">
-          <CaennaHeaderLogo />
-          <nav className="hidden items-center gap-8 md:flex">
+        <div className="mx-auto grid max-w-[1600px] grid-cols-[1fr_auto] items-center gap-x-2 px-6 py-5 md:grid-cols-[1fr_auto_1fr] md:gap-x-4 md:px-10">
+          <div className="min-w-0 justify-self-start">
+            <CaennaHeaderLogo />
+          </div>
+          <nav className="hidden items-center justify-center gap-8 justify-self-center md:flex">
             {links.map((link) => (
               <NavLink key={link.to} to={link.to} className={navLinkClass}>
                 {link.label}
               </NavLink>
             ))}
           </nav>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-end gap-2 justify-self-end">
             <LanguageSelect />
             <NavLink
               to="/alignna"
