@@ -340,12 +340,12 @@
 }
 
 .alignnaPulseCard__centerCopy {
-  top: 60%;
-  left: 53%;
+  top: 46%;
+  left: 50%;
   transform: translate(-50%, -50%);
   width: min(18ch, 78%);
   text-align: center;
-  font-size: clamp(1.1rem, 2.15vw, 1.9rem);
+  font-size: clamp(2rem, 2.15vw, 1.9rem);
   line-height: 1.22;
 }
 
@@ -540,8 +540,8 @@
   }
 
   .alignnaPulseCard__centerCopy {
-    top: 61%;
-    left: 56%;
+    top: 45%;
+    left: 50%;
     transform: translate(-50%, -50%);
     width: min(15ch, 80%);
     font-size: clamp(1.12rem, 5.2vw, 1.42rem);
@@ -569,8 +569,8 @@
   }
 
   .alignnaPulseCard__centerCopy {
-    top: 60%;
-    left: 59%;
+    top: 47%;
+    left: 50%;
     transform: translate(-50%, -50%);
     width: min(14ch, 78%);
     font-size: clamp(1.05rem, 4.9vw, 1.3rem);

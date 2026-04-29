@@ -41,7 +41,7 @@
   position: absolute;
   top: clamp(0.75rem, 2.4vw, 1.35rem);
   left: max(clamp(0.75rem, 2.4vw, 1.35rem), env(safe-area-inset-left));
-  width: clamp(2.75rem, 9vw, 4.25rem);
+  width: clamp(1.5rem, 9vw, 4.25rem);
   height: auto;
   object-fit: contain;
   pointer-events: none;
@@ -522,7 +522,17 @@
   }
 }
 
+@media (max-width: 1023px) {
+  .cardTriptych__labelWrap {
+    margin-top: 20%;
+  }
+}
+
 @media (max-width: 767px) {
+  .cardTriptych__labelWrap {
+    margin-top: 0%;
+  }
+
   .cardTriptych__link:focus-visible {
     outline: 2px solid var(--color-principal, #97cdb5);
     outline-offset: 3px;
