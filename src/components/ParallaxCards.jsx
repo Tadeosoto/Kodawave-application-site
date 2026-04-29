@@ -7,7 +7,7 @@ import portraitMichelleUrl from "../assets/michPageAssets/michPhotos/hf_20260329
 import lignnaMisionUrl from "../assets/michPageAssets/pageDecoration/lignna-mision.png";
 import monoJadeUrl from "../assets/michPageAssets/pageDecoration/mono jade.png";
 import alignnaWordmarkUrl from "../assets/michPageAssets/logos-icons/Alignna-BlancoRoto.svg";
-import brandMarkUrl from "../assets/michPageAssets/logos-icons/C-BlancoRoto.svg";
+import brandMarkUrl from "../assets/michPageAssets/logos-icons/C-MaderaClara.svg";
 import caennaWordmarkJadeUrl from "../assets/michPageAssets/logos-icons/Caenna-JadeSuave.png";
 
 const MotionDiv = motion.div;

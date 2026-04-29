@@ -17,6 +17,7 @@ const MotionP = motion.p;
 const MotionSpan = motion.span;
 const MotionImg = motion.img;
 const MotionH1 = motion.h1;
+const MotionLink = motion(Link);
 
 const ease = [0.22, 0.61, 0.36, 1];
 
@@ -123,7 +124,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="pb-8">
+    <div className="pb-0">
       <Bleed>
         <section
           ref={heroSectionRef}
@@ -196,33 +197,73 @@ const Home = () => {
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center gap-3">
-                <Link
+                <MotionLink
                   to="/alignna"
-                  className="group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-[#71a58e]/55 bg-[#84bca5]/88 px-14 py-3.5 backdrop-blur-[1.5px] shadow-[0_10px_30px_-12px_rgba(74,130,107,0.78),inset_0_0_20px_rgba(255,255,255,0.2)] transition-all duration-400 ease-out hover:scale-[1.04] hover:bg-[#8ac3ac] hover:shadow-[0_14px_36px_-12px_rgba(74,130,107,0.9),inset_0_0_24px_rgba(255,255,255,0.24)] active:scale-[0.98]"
+                  className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-transparent px-14 py-3.5 transition-all duration-300 ease-out hover:scale-[1.045] active:scale-[0.98]"
                   aria-label="Ir a Alignna"
+                  style={{ willChange: "transform" }}
+                  animate={{ scale: [1, 1.014, 1.03, 1.042, 1.03, 1.014, 1] }}
+                  transition={{
+                    duration: 2.8,
+                    ease: "easeInOut",
+                    times: [0, 0.16, 0.34, 0.5, 0.66, 0.84, 1],
+                    repeat: Infinity,
+                    repeatDelay: 1.15,
+                  }}
                 >
-                  <span className="pointer-events-none absolute -inset-x-6 -inset-y-2 rounded-full bg-[#84bca5]/45 blur-xl transition duration-400 group-hover:bg-[#8ac3ac]/55 group-hover:blur-2xl" />
-                  <span className="pointer-events-none absolute inset-0 rounded-full bg-linear-to-b from-white/25 via-transparent to-[#6f9c86]/15" />
+                  <svg
+                    className="pointer-events-none absolute inset-0 h-full w-full"
+                    viewBox="0 0 100 100"
+                    preserveAspectRatio="none"
+                    aria-hidden
+                  >
+                    <rect
+                      x="1.5"
+                      y="1.5"
+                      width="97"
+                      height="97"
+                      rx="49"
+                      ry="49"
+                      className="fill-none stroke-black/85 stroke-[1.6] transition-opacity duration-250 ease-out group-hover:opacity-0"
+                    />
+                  </svg>
+                  <svg
+                    className="pointer-events-none absolute inset-0 h-full w-full"
+                    viewBox="0 0 100 100"
+                    preserveAspectRatio="none"
+                    aria-hidden
+                  >
+                    <rect
+                      x="1.5"
+                      y="1.5"
+                      width="97"
+                      height="97"
+                      rx="49"
+                      ry="49"
+                      className="fill-[#84bca5] opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
+                    />
+                    <rect
+                      x="1.5"
+                      y="1.5"
+                      width="97"
+                      height="97"
+                      rx="49"
+                      ry="49"
+                      pathLength="1"
+                      className="fill-none stroke-[#ffffff] stroke-2 [stroke-dasharray:1] [stroke-dashoffset:1] opacity-0 transition-[stroke-dashoffset,opacity] duration-500 ease-out group-hover:[stroke-dashoffset:0] group-hover:opacity-100"
+                    />
+                  </svg>
                   <MotionSpan
                     className="relative z-10 inline-flex transform-gpu"
-                    style={{ willChange: "transform" }}
-                    animate={{ scale: [1, 1.03, 1.08, 1.11, 1.08, 1.03, 1] }}
-                    transition={{
-                      duration: 2.6,
-                      ease: "easeInOut",
-                      times: [0, 0.16, 0.34, 0.5, 0.66, 0.84, 1],
-                      repeat: Infinity,
-                      repeatDelay: 1.1,
-                    }}
                   >
                     <MotionImg
                       src={alignnaBlancoRotoUrl}
                       alt="Alignna"
-                      className="h-8 w-auto drop-shadow-[0_1px_1px_rgba(20,45,35,0.2)] transition duration-300 group-hover:brightness-110 sm:h-9 md:h-11 lg:h-15"
+                      className="h-8 w-auto brightness-0 transition-[filter] duration-500 ease-out group-hover:brightness-100 sm:h-9 md:h-11 lg:h-15"
                       decoding="async"
                     />
                   </MotionSpan>
-                </Link>
+                </MotionLink>
                 <p className="text-center text-base text-ink">
                   Es solo el comienzo
                 </p>

@@ -31,9 +31,10 @@ const footerItem = {
 
 const NOTIFY_EMAIL =
   import.meta.env.VITE_NEWSLETTER_NOTIFY_EMAIL ?? "tadeosoto1993@gmail.com";
-const ENDPOINT = import.meta.env.VITE_NEWSLETTER_ENDPOINT?.trim() || "/api/subscribe";
+const ENDPOINT =
+  import.meta.env.VITE_NEWSLETTER_ENDPOINT?.trim() || "/api/subscribe";
 
-const SiteFooter = ({ compactTop = false }) => {
+const SiteFooter = ({ compactTop = false, tightAfterContent = false }) => {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("idle");
   const [message, setMessage] = useState("");
@@ -81,14 +82,20 @@ const SiteFooter = ({ compactTop = false }) => {
         return;
       }
       setStatus("error");
-      setMessage(error?.message || "No se pudo enviar. Intenta de nuevo más tarde.");
+      setMessage(
+        error?.message || "No se pudo enviar. Intenta de nuevo más tarde.",
+      );
     }
   };
 
   return (
     <MotionFooter
       className={`border-t border-neutral-300/40 text-ink ${
-        compactTop ? "mt-0 bg-[#eff0ec]" : "mt-20 bg-[#f7f6f2]"
+        compactTop
+          ? "mt-0 bg-[#eff0ec]"
+          : tightAfterContent
+            ? "mt-4 bg-[#f7f6f2]"
+            : "mt-20 bg-[#f7f6f2]"
       }`}
       initial="hidden"
       whileInView="visible"
@@ -122,14 +129,14 @@ const SiteFooter = ({ compactTop = false }) => {
             className="h-7 w-auto brightness-0 sm:h-8"
             decoding="async"
           />
-          <span className="text-sm font-medium tracking-wide text-neutral-500 md:text-base">
+          <span className="text-lg font-medium tracking-wide text-neutral-500 md:text-2xl">
             está en desarrollo
           </span>
         </MotionDiv>
 
         <MotionP
           variants={footerItem}
-          className="mt-3 text-sm text-neutral-600 md:text-base"
+          className="mt-3 text-lg text-neutral-600 md:text-xl"
         >
           Sé la primera en enterarte cuando este listo
         </MotionP>
@@ -152,12 +159,12 @@ const SiteFooter = ({ compactTop = false }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={status === "loading"}
-            className="min-h-12 w-full flex-1 rounded-lg border border-neutral-400/60 bg-white px-4 py-3 text-left text-sm text-ink placeholder:text-neutral-400 outline-none transition focus:border-principal focus:ring-2 focus:ring-principal/30 sm:rounded-r-none sm:border-r-0"
+            className="min-h-12 w-full flex-1 rounded-lg border border-neutral-400/60 bg-white px-4 py-3 text-left text-base text-ink placeholder:text-neutral-400 outline-none transition focus:border-principal focus:ring-2 focus:ring-principal/30 sm:rounded-r-none sm:border-r-0 md:text-xl"
           />
           <button
             type="submit"
             disabled={status === "loading"}
-            className="min-h-12 shrink-0 rounded-lg bg-[#769382] px-6 py-3 text-sm font-semibold tracking-wide text-white shadow-sm transition hover:bg-[#6a8774] hover:shadow-md disabled:opacity-60 sm:rounded-l-none sm:px-8"
+            className="min-h-12 shrink-0 rounded-lg bg-[#769382] px-6 py-3 text-lg font-semibold tracking-wide text-white shadow-sm transition hover:bg-[#6a8774] hover:shadow-md disabled:opacity-60 sm:rounded-l-none sm:px-8 md:text-2xl"
           >
             {status === "loading" ? "Enviando…" : "Avisar"}
           </button>
@@ -179,9 +186,9 @@ const SiteFooter = ({ compactTop = false }) => {
 
         <MotionP
           variants={footerItem}
-          className="mt-8 max-w-md text-xs leading-relaxed text-neutral-500"
+          className="mt-8 max-w-md text-xl leading-relaxed text-neutral-500"
         >
-          © {new Date().getFullYear()} Caenna · Alignna
+          © {new Date().getFullYear()} Caenna
         </MotionP>
       </div>
     </MotionFooter>

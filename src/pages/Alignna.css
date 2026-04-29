@@ -111,7 +111,7 @@
 .alignnaPage__tagline {
   margin: 0;
   font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-  font-size: clamp(1rem, 2.1vw, 1.85rem);
+  font-size: clamp(1.5rem, 2.1vw, 1.85rem);
   line-height: 1.2;
   color: rgba(63, 63, 59, 0.92);
 }

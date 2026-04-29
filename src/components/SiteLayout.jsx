@@ -8,6 +8,7 @@ const SiteLayout = () => {
   const location = useLocation()
   const MotionDiv = motion.div
   const isAlignnaRoute = location.pathname === '/alignna'
+  const isHomeRoute = location.pathname === '/'
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
@@ -35,7 +36,10 @@ const SiteLayout = () => {
           </MotionDiv>
         </AnimatePresence>
       </main>
-      <SiteFooter compactTop={isAlignnaRoute} />
+      <SiteFooter
+        compactTop={isAlignnaRoute}
+        tightAfterContent={isHomeRoute && !isAlignnaRoute}
+      />
     </div>
   )
 }
