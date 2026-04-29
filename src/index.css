@@ -52,3 +52,14 @@ body {
 .carousel-x-scroll::-webkit-scrollbar {
   display: none;
 }
+
+@keyframes back-to-top-ring-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.back-to-top-ring-spin {
+  animation: back-to-top-ring-spin 22s linear infinite;
+  transform-origin: center center;
+}

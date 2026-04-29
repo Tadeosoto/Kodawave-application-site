@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import BackToTop from './BackToTop'
 import NavBar from './NavBar'
 import SiteFooter from './SiteFooter'
 
@@ -47,6 +48,7 @@ const SiteLayout = () => {
         compactTop={isAlignnaRoute}
         tightAfterContent={isHomeRoute && !isAlignnaRoute}
       />
+      <BackToTop />
     </div>
   )
 }
