@@ -72,7 +72,9 @@ const SiteFooter = ({ compactTop = false }) => {
     }
 
     const subject = encodeURIComponent("Newsletter — Alignna");
-    const body = encodeURIComponent(`Quiero recibir novedades.\n\nCorreo: ${trimmed}`);
+    const body = encodeURIComponent(
+      `Quiero recibir novedades.\n\nCorreo: ${trimmed}`,
+    );
     window.location.href = `mailto:${NOTIFY_EMAIL}?subject=${subject}&body=${body}`;
     setStatus("success");
     setMessage("Se abrirá tu correo con el mensaje listo para enviar.");
@@ -124,7 +126,7 @@ const SiteFooter = ({ compactTop = false }) => {
           variants={footerItem}
           className="mt-3 text-sm text-neutral-600 md:text-base"
         >
-          Sé la primera en saberlo.
+          Sé la primera en enterarte cuando este listo
         </MotionP>
 
         <MotionForm

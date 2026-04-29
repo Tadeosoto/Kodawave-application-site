@@ -34,14 +34,14 @@ body,
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   color: var(--color-ink);
   background: var(--color-terciario);
   font-optical-sizing: auto;
 }
 
 .font-display {
-  font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
 }
 
 /* Horizontal carousels: hide scrollbar, keep touch / trackpad / drag scroll */

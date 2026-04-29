@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import ParallaxReservationSection from "../components/ParallaxReservationSection";
 import ParallaxCards from "../components/ParallaxCards";
 import heroHandsUrl from "../assets/michPageAssets/pageDecoration/Mano de dios PNG.png";
@@ -40,14 +45,13 @@ const RevealToken = ({ word, strong, index, total, progress }) => {
 };
 
 const ScrollRevealLine = ({ progress, parts }) => {
-  const tokens = parts
-    .flatMap((part) =>
-      part.text
-        .trim()
-        .split(/\s+/)
-        .filter(Boolean)
-        .map((word) => ({ word, strong: Boolean(part.strong) })),
-    );
+  const tokens = parts.flatMap((part) =>
+    part.text
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean)
+      .map((word) => ({ word, strong: Boolean(part.strong) })),
+  );
   const total = tokens.length || 1;
 
   return tokens.map((token, i) => {
@@ -83,17 +87,33 @@ const Home = () => {
   });
 
   const heroImageScale = useTransform(heroScroll, [0, 1], [1, 1.14]);
-  const heroImageBlur = useTransform(heroScroll, [0, 1], ["blur(0px)", "blur(6px)"]);
+  const heroImageBlur = useTransform(
+    heroScroll,
+    [0, 1],
+    ["blur(0px)", "blur(6px)"],
+  );
   const { scrollYProgress: engineerScroll } = useScroll({
     target: engineerSectionRef,
     offset: ["start 82%", "start 18%"],
   });
-  const engineerLine1Progress = useTransform(engineerScroll, (v) => clamp01((v - 0.08) / 0.2));
-  const engineerLine2Progress = useTransform(engineerScroll, (v) => clamp01((v - 0.2) / 0.2));
-  const engineerLine3Progress = useTransform(engineerScroll, (v) => clamp01((v - 0.32) / 0.2));
-  const engineerLine4Progress = useTransform(engineerScroll, (v) => clamp01((v - 0.44) / 0.2));
-  const engineerLine5Progress = useTransform(engineerScroll, (v) => clamp01((v - 0.56) / 0.18));
-  const engineerLine6Progress = useTransform(engineerScroll, (v) => clamp01((v - 0.68) / 0.18));
+  const engineerLine1Progress = useTransform(engineerScroll, (v) =>
+    clamp01((v - 0.08) / 0.2),
+  );
+  const engineerLine2Progress = useTransform(engineerScroll, (v) =>
+    clamp01((v - 0.2) / 0.2),
+  );
+  const engineerLine3Progress = useTransform(engineerScroll, (v) =>
+    clamp01((v - 0.32) / 0.2),
+  );
+  const engineerLine4Progress = useTransform(engineerScroll, (v) =>
+    clamp01((v - 0.44) / 0.2),
+  );
+  const engineerLine5Progress = useTransform(engineerScroll, (v) =>
+    clamp01((v - 0.56) / 0.18),
+  );
+  const engineerLine6Progress = useTransform(engineerScroll, (v) =>
+    clamp01((v - 0.68) / 0.18),
+  );
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -140,12 +160,12 @@ const Home = () => {
               transition={{ duration: 0.65, ease, delay: 0.18 }}
               className="mx-auto mt-8 max-w-lg text-left text-[0.95rem] leading-relaxed text-neutral-600 md:ml-auto md:mr-[4%] md:mt-10 md:max-w-md md:text-base"
             >
-              <p>¿Este camino de carga merece existir?</p>
+              {/* <p>¿Este camino de carga merece existir?</p>
               <p className="mt-2">Cada tolerancia es una promesa.</p>
               <p className="mt-2">
                 Menos suposiciones, más{" "}
                 <span className="font-semibold text-ink">evidencia</span>.
-              </p>
+              </p> */}
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 26 }}
@@ -178,10 +198,11 @@ const Home = () => {
               <div className="flex flex-col items-center justify-center gap-3">
                 <Link
                   to="/alignna"
-                  className="group relative inline-flex items-center justify-center overflow-hidden px-16 py-4 transition-all duration-300 ease-out hover:scale-105 active:scale-95"
+                  className="group relative inline-flex items-center justify-center overflow-hidden rounded-full border border-[#71a58e]/55 bg-[#84bca5]/88 px-14 py-3.5 backdrop-blur-[1.5px] shadow-[0_10px_30px_-12px_rgba(74,130,107,0.78),inset_0_0_20px_rgba(255,255,255,0.2)] transition-all duration-400 ease-out hover:scale-[1.04] hover:bg-[#8ac3ac] hover:shadow-[0_14px_36px_-12px_rgba(74,130,107,0.9),inset_0_0_24px_rgba(255,255,255,0.24)] active:scale-[0.98]"
                   aria-label="Ir a Alignna"
                 >
-                  <span className="pointer-events-none absolute inset-0 bg-principal opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <span className="pointer-events-none absolute -inset-x-6 -inset-y-2 rounded-full bg-[#84bca5]/45 blur-xl transition duration-400 group-hover:bg-[#8ac3ac]/55 group-hover:blur-2xl" />
+                  <span className="pointer-events-none absolute inset-0 rounded-full bg-linear-to-b from-white/25 via-transparent to-[#6f9c86]/15" />
                   <MotionSpan
                     className="relative z-10 inline-flex transform-gpu"
                     style={{ willChange: "transform" }}
@@ -197,14 +218,10 @@ const Home = () => {
                     <MotionImg
                       src={alignnaBlancoRotoUrl}
                       alt="Alignna"
-                      className="h-8 w-auto brightness-0 transition duration-300 group-hover:brightness-100 sm:h-9 md:h-11 lg:h-15"
+                      className="h-8 w-auto drop-shadow-[0_1px_1px_rgba(20,45,35,0.2)] transition duration-300 group-hover:brightness-110 sm:h-9 md:h-11 lg:h-15"
                       decoding="async"
                     />
                   </MotionSpan>
-                  <span className="pointer-events-none absolute left-0 top-0 h-[2px] w-0 bg-secundario transition-all duration-100 group-hover:w-full" />
-                  <span className="pointer-events-none absolute right-0 top-0 h-0 w-[2px] bg-secundario transition-all delay-100 duration-100 group-hover:h-full" />
-                  <span className="pointer-events-none absolute bottom-0 right-0 h-[2px] w-0 bg-secundario transition-all delay-200 duration-100 group-hover:w-full" />
-                  <span className="pointer-events-none absolute bottom-0 left-0 h-0 w-[2px] bg-secundario transition-all delay-300 duration-100 group-hover:h-full" />
                 </Link>
                 <p className="text-center text-base text-ink">
                   Es solo el comienzo
@@ -219,10 +236,11 @@ const Home = () => {
         <section className="relative isolate -mt-6 flex min-h-[70vh] items-center overflow-hidden bg-linear-to-b from-terciario/55 via-white to-terciario/48 py-22 md:-mt-8 md:min-h-[78vh] md:py-30 lg:min-h-[84vh] lg:py-36">
           <div className="pointer-events-none absolute inset-x-0 top-0 z-1 h-28 bg-linear-to-b from-terciario/85 via-white/50 to-transparent md:h-36" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 z-1 h-24 bg-linear-to-t from-terciario/72 to-transparent md:h-28" />
+          <div className="pointer-events-none absolute inset-0 z-1 bg-white/48 md:bg-transparent" />
           <motion.img
             src={engineerSectionBgUrl}
             alt=""
-            className="pointer-events-none absolute inset-0 z-0 h-full w-full select-none object-cover object-[78%_center] md:object-[82%_center] lg:object-right"
+            className="pointer-events-none absolute inset-0 z-0 h-full w-full select-none object-cover object-[78%_center] max-md:brightness-[1.28] max-md:saturate-[0.58] max-md:contrast-[0.72] max-md:grayscale-[0.12] md:object-[82%_center] lg:object-right"
             initial={{ opacity: 0, x: 48, scale: 0.96 }}
             whileInView={{ opacity: 0.56, x: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.45 }}
@@ -235,11 +253,11 @@ const Home = () => {
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: true, amount: 0.55 }}
               transition={{ duration: 0.82, ease }}
-              className="mx-auto max-w-[13ch] text-balance font-display text-[clamp(2.2rem,5.4vw,4.35rem)] font-medium leading-[1.06] tracking-tight text-ink"
+              className="mx-auto max-w-[13ch] text-balance font-display text-[clamp(2.2rem,5.4vw,4.35rem)] font-medium leading-[1.06] tracking-tight text-ink max-md:text-[clamp(2.5rem,11vw,3.2rem)]"
             >
               Diseñamos solo lo que merece existir
             </motion.h2>
-            <div className="mx-auto mt-10 max-w-md space-y-5 text-pretty text-[clamp(1.05rem,1.35vw,1.75rem)] leading-[1.28] text-ink/90 md:mt-12">
+            <div className="mx-auto mt-10 max-w-md space-y-5 text-pretty text-[clamp(1.05rem,1.35vw,1.75rem)] leading-[1.28] text-ink/90 max-md:text-[clamp(1.28rem,5.8vw,1.65rem)] max-md:leading-[1.34] md:mt-12">
               <MotionP
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -296,7 +314,10 @@ const Home = () => {
           <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-10">
             <div className="mx-auto max-w-5xl text-ink">
               <p className="font-display text-[clamp(2rem,4.6vw,3.3rem)] font-medium leading-[1.2] tracking-tight">
-                <ScrollRevealLine progress={engineerLine1Progress} parts={[{ text: "Ingeniera." }]} />
+                <ScrollRevealLine
+                  progress={engineerLine1Progress}
+                  parts={[{ text: "Ingeniera." }]}
+                />
               </p>
               <p className="mt-8 text-[clamp(1.2rem,2.3vw,2.05rem)] leading-tight tracking-tight text-ink/85">
                 <ScrollRevealLine
@@ -343,10 +364,16 @@ const Home = () => {
                 />
               </p>
               <p className="mt-4 text-[clamp(1.25rem,2.45vw,2.2rem)] font-semibold leading-[1.2] tracking-tight text-ink">
-                <ScrollRevealLine progress={engineerLine6Progress} parts={[{ text: "De mi mente a tus manos.", strong: true }]} />
+                <ScrollRevealLine
+                  progress={engineerLine6Progress}
+                  parts={[{ text: "De mi mente a tus manos.", strong: true }]}
+                />
               </p>
               <p className="mt-14 text-right font-display text-[clamp(1.3rem,2.2vw,2rem)] italic text-ink/80 md:mt-18">
-                <ScrollRevealLine progress={engineerLine6Progress} parts={[{ text: "-Michelle Castellanos" }]} />
+                <ScrollRevealLine
+                  progress={engineerLine6Progress}
+                  parts={[{ text: "-Michelle Castellanos" }]}
+                />
               </p>
             </div>
           </div>
