@@ -10,6 +10,17 @@
   box-sizing: border-box;
 }
 
+/* Compacta el cierre del parallax de cards para evitar hueco antes del bloque siguiente. */
+.seccion--parallaxCards {
+  margin-bottom: -18vh;
+}
+
+@media (max-width: 767px) {
+  .seccion--parallaxCards {
+    margin-bottom: -22vh;
+  }
+}
+
 .cardContainer {
   height: 100vh;
   width: 100%;
@@ -145,6 +156,13 @@
   height: auto;
   /* Altura generosa: el bloque llena el pie sin franjas vacías arriba/abajo. */
   min-height: max(420px, min(56vh, 680px));
+}
+
+@media (max-width: 640px) {
+  .cardCaennaBrand--siteFooter {
+    /* En móvil reducimos altura base para evitar hueco largo al final. */
+    min-height: max(360px, min(48vh, 560px));
+  }
 }
 
 @media (min-width: 768px) {
@@ -349,7 +367,9 @@
   flex-shrink: 0;
   background-color: currentcolor;
   opacity: 0.95;
-  transition: transform 0.22s ease, opacity 0.22s ease;
+  transition:
+    transform 0.22s ease,
+    opacity 0.22s ease;
 }
 
 .cardCaennaBrand__reserve:hover .cardCaennaBrand__reserveIcon,
@@ -365,7 +385,7 @@
 }
 
 .cardCaennaBrand--siteFooter .cardCaennaBrand__social {
-  margin-top: clamp(1rem, 2.8vw, 1.5rem);
+  margin-top: clamp(3rem, 2.8vw, 1.5rem);
 }
 
 .cardCaennaBrand__social {
@@ -449,10 +469,14 @@
   }
 
   .cardCaennaBrand__siteFooterInner {
+    min-height: 100%;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
     padding-left: 1rem;
     padding-right: 1rem;
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
   }
 
   /* En móvil reencuadramos la silueta para que no se vaya al borde derecho. */
@@ -470,7 +494,12 @@
   }
 
   .cardCaennaBrand__social {
+    margin-top: clamp(1.9rem, 6.4vw, 2.45rem);
     gap: 0.5rem;
+  }
+
+  .cardCaennaBrand--siteFooter .cardCaennaBrand__copyright {
+    margin-top: clamp(1.05rem, 4.6vw, 1.7rem);
   }
 }
 

@@ -405,7 +405,9 @@ const Home = () => {
         <ParallaxCards />
       </Suspense>
 
-      <ParallaxReservationSection />
+      <div className="relative z-20 -mt-[38vh] md:-mt-[30vh]">
+        <ParallaxReservationSection />
+      </div>
     </div>
   );
 };

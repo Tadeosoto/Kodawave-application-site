@@ -1,8 +1,9 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import monoJadeUrl from "../assets/michPageAssets/pageDecoration/mono jade.png";
 import caennaWordmarkJadeUrl from "../assets/michPageAssets/logos-icons/Caenna-JadeSuave.png";
 import cBlancoRotoUrl from "../assets/michPageAssets/logos-icons/C-BlancoRoto.svg";
+import { GlowPillLink } from "./HeroAlignnaButtons";
 import "./Cards.css";
 
 const InstagramIcon = () => (
@@ -60,9 +61,13 @@ export default function CaennaBrandPanel({ className = "" }) {
               decoding="async"
             />
             <p className="cardCaennaBrand__tagline">{t("parallaxCards.caennaTagline")}</p>
-            <Link to={reserveTo} className="cardCaennaBrand__reserve group">
+            <GlowPillLink
+              to={reserveTo}
+              ariaLabel={t("parallaxReserve.reserveCta")}
+              className="mt-[clamp(1rem,2.6vw,1.65rem)] min-h-11 gap-[0.55rem] px-[clamp(1.25rem,3.8vw,1.75rem)] py-[0.6rem] font-['Cormorant_Garamond',Georgia,'Times_New_Roman',serif] text-[clamp(1.05rem,2.1vw,1.35rem)] font-semibold tracking-[0.04em] text-[#2f2e2b] transition-colors duration-500 ease-in-out"
+            >
               <span
-                className="cardCaennaBrand__reserveIcon"
+                className="cardCaennaBrand__reserveIcon relative z-10"
                 style={{
                   maskImage: `url("${cBlancoRotoUrl}")`,
                   WebkitMaskImage: `url("${cBlancoRotoUrl}")`,
@@ -75,8 +80,8 @@ export default function CaennaBrandPanel({ className = "" }) {
                 }}
                 aria-hidden
               />
-              {t("parallaxReserve.reserveCta")}
-            </Link>
+              <span className="relative z-10">{t("parallaxReserve.reserveCta")}</span>
+            </GlowPillLink>
             <div className="cardCaennaBrand__social" aria-label={t("parallaxCards.caennaSocialAria")}>
               <a href="https://www.instagram.com/" target="_blank" rel="noreferrer noopener" aria-label={t("parallaxCards.instagram")}>
                 <InstagramIcon />

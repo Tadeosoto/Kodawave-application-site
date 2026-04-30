@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 import alignnaWordmarkUrl from "../assets/michPageAssets/logos-icons/Alignna-BlancoRoto.svg";
 
 const MotionH2 = motion.h2;
@@ -37,9 +38,11 @@ const ENDPOINT =
  */
 export default function FooterNewsletterPanel({ embedded = false }) {
   const { t } = useTranslation();
+  const { pathname } = useLocation();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("idle");
   const [message, setMessage] = useState("");
+  const isAlignnaRoute = pathname === "/alignna";
 
   const inputId = embedded ? "newsletter-email-embedded" : "newsletter-email";
 
@@ -91,11 +94,11 @@ export default function FooterNewsletterPanel({ embedded = false }) {
   };
 
   const h2Class = embedded
-    ? "font-display text-[clamp(1.45rem,3.8vw,2.2rem)] font-normal leading-[1.2] tracking-tight text-ink md:text-[clamp(1.65rem,4.2vw,2.35rem)]"
-    : "font-display text-[clamp(1.65rem,4.2vw,2.35rem)] font-normal leading-[1.2] tracking-tight text-ink";
+    ? "font-display text-[clamp(1.62rem,4.3vw,2.35rem)] font-normal leading-[1.2] tracking-tight text-ink md:text-[clamp(1.82rem,4.8vw,2.55rem)]"
+    : "font-display text-[clamp(1.82rem,4.9vw,2.55rem)] font-normal leading-[1.2] tracking-tight text-ink";
 
-  const dividerClass = embedded ? "mt-8 md:mt-10" : "mt-10";
-  const blockClass = embedded ? "mt-8 md:mt-10" : "mt-10";
+  const dividerClass = embedded ? "mt-14 md:mt-10" : "mt-10";
+  const blockClass = embedded ? "mt-14 md:mt-10" : "mt-10";
   const innerWidth = embedded ? "w-full" : "max-w-md";
 
   const inputClassName =
@@ -117,7 +120,7 @@ export default function FooterNewsletterPanel({ embedded = false }) {
       variants={footerContainer}
       className={
         embedded
-          ? "mx-auto flex h-full min-h-0 w-full max-w-md flex-col items-stretch justify-center overflow-y-auto bg-transparent px-4 py-8 text-center sm:max-w-lg sm:px-6 sm:py-10 md:max-w-xl md:px-8 md:py-12"
+          ? "mx-auto flex h-full min-h-0 w-full max-w-md flex-col items-stretch justify-center overflow-y-auto bg-transparent px-4 pt-5 pb-10 text-center sm:max-w-lg sm:px-6 sm:pt-6 sm:pb-12 md:max-w-xl md:px-8 md:pt-8 md:pb-14"
           : "mx-auto flex max-w-2xl flex-col items-center px-6 py-16 text-center md:px-10 md:py-20"
       }
     >
@@ -145,7 +148,7 @@ export default function FooterNewsletterPanel({ embedded = false }) {
           decoding="async"
         />
         <span
-          className={`font-medium tracking-wide text-neutral-500 ${embedded ? "text-base md:text-lg" : "text-lg md:text-2xl"}`}
+          className={`font-medium tracking-wide text-neutral-500 ${embedded ? "text-[1.08rem] md:text-xl" : "text-xl md:text-[1.7rem]"}`}
         >
           {t("footer.inDevelopment")}
         </span>
@@ -153,9 +156,17 @@ export default function FooterNewsletterPanel({ embedded = false }) {
 
       <MotionP
         variants={footerItem}
-        className={`mt-3 text-neutral-600 ${embedded ? "text-base md:text-lg" : "text-lg md:text-xl"}`}
+        className={`mt-3 text-neutral-600 ${embedded ? "text-[1.08rem] md:text-xl" : "text-xl md:text-[1.55rem]"}`}
       >
-        {t("footer.earlyAccess")}
+        {isAlignnaRoute ? (
+          <>
+            {t("footer.earlyAccessAlignnaLine1")}
+            <br />
+            {t("footer.earlyAccessAlignnaLine2")}
+          </>
+        ) : (
+          t("footer.earlyAccessHome")
+        )}
       </MotionP>
 
       <MotionForm

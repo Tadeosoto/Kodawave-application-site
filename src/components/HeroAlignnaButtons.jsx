@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useId } from "react";
 import { motion } from "framer-motion";
 
 const MotionLink = motion(Link);
@@ -13,6 +14,68 @@ const pulseAnimation = {
     repeat: Infinity,
     repeatDelay: 1.15,
   },
+};
+
+export const GlowPillLink = ({
+  to,
+  ariaLabel,
+  children,
+  className = "",
+  pulse = false,
+  invertOnHover = true,
+}) => {
+  const filterId = useId().replace(/:/g, "");
+  const motionProps = pulse ? pulseAnimation : {};
+
+  const blurFillClass = invertOnHover
+    ? "fill-[#84bca5]/74 transition-all duration-500 ease-in-out group-hover:fill-white/88"
+    : "fill-[#84bca5]/74 transition-all duration-500 ease-in-out group-hover:fill-[#84bca5]/78";
+  const topFillClass = invertOnHover
+    ? "fill-[#84bca5]/20 transition-all duration-500 ease-in-out group-hover:fill-white/35"
+    : "fill-[#84bca5]/20 transition-all duration-500 ease-in-out group-hover:fill-[#84bca5]/24";
+
+  return (
+    <MotionLink
+      to={to}
+      className={`group relative inline-flex items-center justify-center overflow-hidden rounded-full px-14 py-3.5 transition-all duration-300 ease-out hover:scale-[1.045] active:scale-[0.98] ${className}`}
+      aria-label={ariaLabel}
+      style={{ willChange: "transform" }}
+      {...motionProps}
+    >
+      <svg
+        className="pointer-events-none absolute inset-0 h-full w-full"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        aria-hidden
+      >
+        <defs>
+          <filter id={filterId} x="-10%" y="-20%" width="120%" height="140%">
+            <feGaussianBlur stdDeviation="3.6" />
+          </filter>
+        </defs>
+        <rect
+          x="1.5"
+          y="1.5"
+          width="97"
+          height="97"
+          rx="49"
+          ry="49"
+          filter={`url(#${filterId})`}
+          className={blurFillClass}
+        />
+        <rect
+          x="1.5"
+          y="1.5"
+          width="97"
+          height="97"
+          rx="49"
+          ry="49"
+          className={topFillClass}
+        />
+      </svg>
+      {children}
+    </MotionLink>
+  );
 };
 
 export const HeroAlignnaButtonLegacy = ({ to, ariaLabel, logoSrc }) => (
@@ -75,49 +138,16 @@ export const HeroAlignnaButtonLegacy = ({ to, ariaLabel, logoSrc }) => (
 );
 
 export const HeroAlignnaButtonGlow = ({ to, ariaLabel, logoSrc }) => (
-  <MotionLink
+  <GlowPillLink
     to={to}
-    className="group relative inline-flex items-center justify-center overflow-hidden rounded-full px-14 py-3.5 transition-all duration-300 ease-out hover:scale-[1.045] active:scale-[0.98]"
     aria-label={ariaLabel}
-    style={{ willChange: "transform" }}
-    {...pulseAnimation}
+    pulse
   >
-    <svg
-      className="pointer-events-none absolute inset-0 h-full w-full"
-      viewBox="0 0 100 100"
-      preserveAspectRatio="none"
-      aria-hidden
-    >
-      <defs>
-        <filter id="heroAlignnaInnerBlur" x="-10%" y="-20%" width="120%" height="140%">
-          <feGaussianBlur stdDeviation="3.6" />
-        </filter>
-      </defs>
-      <rect
-        x="1.5"
-        y="1.5"
-        width="97"
-        height="97"
-        rx="49"
-        ry="49"
-        filter="url(#heroAlignnaInnerBlur)"
-        className="fill-[#84bca5]/74 transition-all duration-500 ease-in-out group-hover:fill-white/88"
-      />
-      <rect
-        x="1.5"
-        y="1.5"
-        width="97"
-        height="97"
-        rx="49"
-        ry="49"
-        className="fill-[#84bca5]/20 transition-all duration-500 ease-in-out group-hover:fill-white/35"
-      />
-    </svg>
     <MotionImg
       src={logoSrc}
       alt="Alignna"
       className="relative z-10 h-8 w-auto opacity-100 drop-shadow-[0_1px_1px_rgba(0,0,0,0.14)] transition-[filter,opacity] duration-500 ease-in-out group-hover:filter-[brightness(0)_saturate(100%)_invert(69%)_sepia(16%)_saturate(590%)_hue-rotate(98deg)_brightness(92%)_contrast(90%)] sm:h-9 md:h-11 lg:h-15"
       decoding="async"
     />
-  </MotionLink>
+  </GlowPillLink>
 );

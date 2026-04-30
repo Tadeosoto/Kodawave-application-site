@@ -173,7 +173,7 @@ const ParallaxCards = () => {
   );
 
   return (
-    <section ref={container} className="seccion">
+    <section ref={container} className="seccion seccion--parallaxCards">
       {projects.map((project, i) => {
         const targetScale = 1 - (projects.length - i) * 0.05;
         return (

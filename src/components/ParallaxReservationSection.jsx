@@ -67,40 +67,40 @@ const ParallaxReservationSection = () => {
     if (!narrowMobile) {
       return {
         /* Línea 1 visible casi al entrar (antes ~0.08 del progreso = mucho scroll en beige). */
-        l1o: [0, 0.035, 0.2, 0.33],
-        l1y: [0, 0.19, 0.33],
-        l1s: [0.19, 0.33],
-        l1b: [0, 0.035, 0.2, 0.33],
-        l2o: [0.23, 0.33, 0.47, 0.59],
-        l2y: [0.23, 0.47, 0.59],
-        l2s: [0.47, 0.59],
-        l2b: [0.23, 0.33, 0.47, 0.59],
-        spo: [0.45, 0.56, 0.68, 0.94],
-        spl: [0.45, 0.62],
-        spy: [0.45, 0.68, 0.94],
-        sps: [0.68, 0.94],
-        spb: [0.45, 0.56, 0.68, 0.94],
+        l1o: [0, 0.001, 0.16, 0.28],
+        l1y: [0, 0.16, 0.28],
+        l1s: [0.16, 0.28],
+        l1b: [0, 0.001, 0.16, 0.28],
+        l2o: [0.18, 0.28, 0.4, 0.5],
+        l2y: [0.18, 0.4, 0.5],
+        l2s: [0.4, 0.5],
+        l2b: [0.18, 0.28, 0.4, 0.5],
+        spo: [0.58, 0.74, 0.9, 0.995],
+        spl: [0.38, 0.56],
+        spy: [0.58, 0.9, 0.995],
+        sps: [0.9, 0.995],
+        spb: [0.58, 0.74, 0.9, 0.995],
       };
     }
     return {
-      l1o: [0, 0.05, 0.22, 0.36],
-      l1y: [0, 0.21, 0.36],
-      l1s: [0.21, 0.36],
-      l1b: [0, 0.05, 0.22, 0.36],
-      l2o: [0.24, 0.36, 0.5, 0.62],
-      l2y: [0.24, 0.5, 0.62],
-      l2s: [0.5, 0.62],
-      l2b: [0.24, 0.36, 0.5, 0.62],
-      spo: [0.44, 0.58, 0.7, 0.93],
-      spl: [0.44, 0.64],
-      spy: [0.44, 0.7, 0.93],
-      sps: [0.7, 0.93],
-      spb: [0.44, 0.58, 0.7, 0.93],
+      l1o: [0, 0.002, 0.18, 0.31],
+      l1y: [0, 0.17, 0.31],
+      l1s: [0.17, 0.31],
+      l1b: [0, 0.002, 0.18, 0.31],
+      l2o: [0.2, 0.31, 0.44, 0.54],
+      l2y: [0.2, 0.44, 0.54],
+      l2s: [0.44, 0.54],
+      l2b: [0.2, 0.31, 0.44, 0.54],
+      spo: [0.56, 0.74, 0.9, 0.995],
+      spl: [0.4, 0.6],
+      spy: [0.56, 0.9, 0.995],
+      sps: [0.9, 0.995],
+      spb: [0.56, 0.74, 0.9, 0.995],
     };
   }, [narrowMobile]);
 
   /** Al ceder paso al siguiente bloque: sube más y se encoge un poco (ilusión de “bajar” la mirada). */
-  const textEnterY = narrowMobile ? 20 : 28;
+  const textEnterY = narrowMobile ? 8 : 12;
   const textExitY = narrowMobile ? -78 : -132;
   const textExitScale = narrowMobile ? 0.9 : 0.86;
   const splitExitScale = narrowMobile ? 0.91 : 0.87;
@@ -111,7 +111,10 @@ const ParallaxReservationSection = () => {
     0,
     textExitY,
   ]);
-  const lineOneScale = useTransform(parallaxProgress, k.l1s, [1, textExitScale]);
+  const lineOneScale = useTransform(parallaxProgress, k.l1s, [
+    1,
+    textExitScale,
+  ]);
   const lineOneBlur = useTransform(parallaxProgress, k.l1b, [
     "blur(6px)",
     "blur(0px)",
@@ -125,7 +128,10 @@ const ParallaxReservationSection = () => {
     0,
     textExitY,
   ]);
-  const lineTwoScale = useTransform(parallaxProgress, k.l2s, [1, textExitScale]);
+  const lineTwoScale = useTransform(parallaxProgress, k.l2s, [
+    1,
+    textExitScale,
+  ]);
   const lineTwoBlur = useTransform(parallaxProgress, k.l2b, [
     "blur(6px)",
     "blur(0px)",
@@ -152,9 +158,9 @@ const ParallaxReservationSection = () => {
   return (
     <section
       ref={parallaxSectionRef}
-      className="relative -mt-6 max-md:h-[min(255vh,3600px)] md:-mt-10 md:h-[200vh]"
+      className="relative -mt-28 -mb-[14vh] max-md:h-[min(255vh,3600px)] md:-mt-36 md:-mb-[10vh] md:h-[205vh]"
     >
-      <div className="sticky top-0 flex h-dvh min-h-0 items-center justify-center overflow-hidden">
+      <div className="sticky top-0 flex h-[78dvh] min-h-0 items-center justify-center overflow-hidden md:h-[84dvh]">
         <div className="pointer-events-none absolute inset-0 bg-radial-[80%_80%_at_50%_50%]" />
         <div className="absolute inset-0 flex items-center justify-center px-4 max-md:py-8 sm:px-6">
           <MotionP
@@ -180,7 +186,9 @@ const ParallaxReservationSection = () => {
             className="w-full max-w-6xl text-center font-display text-[clamp(1.72rem,6.8vw,6rem)] leading-[0.98] tracking-tight text-black font-bold md:text-[clamp(2rem,7.4vw,6rem)]"
           >
             {t("parallaxReserve.line2Before")}
-            <span className="text-principal">{t("parallaxReserve.line2Accent")}</span>
+            <span className="text-principal">
+              {t("parallaxReserve.line2Accent")}
+            </span>
           </MotionP>
         </div>
         <div className="absolute inset-0 flex items-center justify-center px-4 max-md:py-8 sm:px-6">
