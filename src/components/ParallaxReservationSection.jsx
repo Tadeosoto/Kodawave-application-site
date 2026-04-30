@@ -1,8 +1,6 @@
 import { useRef, useState, useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { motion, useScroll, useTransform } from "framer-motion";
-import cBlancoRotoUrl from "../assets/michPageAssets/logos-icons/C-BlancoRoto.svg";
 
 const MotionP = motion.p;
 const MotionDiv = motion.div;
@@ -81,10 +79,6 @@ const ParallaxReservationSection = () => {
         spy: [0.52, 0.8, 0.9],
         sps: [0.8, 0.9],
         spb: [0.52, 0.64, 0.8, 0.9],
-        rvo: [0.9, 0.965, 1],
-        rvy: [0.9, 0.965],
-        rvs: [0.9, 0.965],
-        rvb: [0.9, 0.965],
       };
     }
     return {
@@ -101,10 +95,6 @@ const ParallaxReservationSection = () => {
       spy: [0.5, 0.76, 0.86],
       sps: [0.76, 0.86],
       spb: [0.5, 0.64, 0.76, 0.86],
-      rvo: [0.87, 0.95, 1],
-      rvy: [0.87, 0.95],
-      rvs: [0.87, 0.95],
-      rvb: [0.87, 0.95],
     };
   }, [narrowMobile]);
 
@@ -156,14 +146,6 @@ const ParallaxReservationSection = () => {
     "blur(0px)",
     "blur(0px)",
     "blur(10px)",
-  ]);
-
-  const reserveOpacity = useTransform(parallaxProgress, k.rvo, [0, 1, 1]);
-  const reserveY = useTransform(parallaxProgress, k.rvy, [24, 0]);
-  const reserveScale = useTransform(parallaxProgress, k.rvs, [0.95, 1]);
-  const reserveBlur = useTransform(parallaxProgress, k.rvb, [
-    "blur(6px)",
-    "blur(0px)",
   ]);
 
   return (
@@ -222,38 +204,6 @@ const ParallaxReservationSection = () => {
             >
               {t("parallaxReserve.split2")}
             </MotionSpan>
-          </MotionDiv>
-        </div>
-        <div className="absolute inset-0 z-20 flex items-center justify-center px-4 max-md:py-8 sm:px-6">
-          <MotionDiv
-            style={{
-              opacity: reserveOpacity,
-              y: reserveY,
-              scale: reserveScale,
-              filter: reserveBlur,
-            }}
-            className="flex w-full max-w-3xl flex-col items-center text-center"
-          >
-            <Link
-              to="/contact"
-              className="group flex h-auto min-h-14 w-full max-w-[min(100%,18rem)] items-center justify-center gap-2.5 rounded-full bg-principal px-8 py-3.5 text-xl font-semibold text-ink shadow-[0_12px_30px_-16px_rgba(0,0,0,0.9)] transition-all duration-300 ease-out hover:scale-105 hover:bg-secundario hover:text-white max-md:mx-auto max-md:max-w-[min(100%,20rem)] sm:min-h-18 sm:max-w-xs md:h-30 md:w-80 md:max-w-none md:gap-3 md:px-18 md:py-4 md:text-lg lg:text-6xl"
-            >
-              <span
-                className="inline-block size-[1.1em] shrink-0 bg-current opacity-95 transition-[transform,opacity] duration-300 ease-out group-hover:scale-110 group-hover:opacity-100"
-                style={{
-                  maskImage: `url("${cBlancoRotoUrl}")`,
-                  WebkitMaskImage: `url("${cBlancoRotoUrl}")`,
-                  maskRepeat: "no-repeat",
-                  maskPosition: "center",
-                  maskSize: "contain",
-                  WebkitMaskRepeat: "no-repeat",
-                  WebkitMaskPosition: "center",
-                  WebkitMaskSize: "contain",
-                }}
-                aria-hidden
-              />
-              {t("parallaxReserve.reserveCta")}
-            </Link>
           </MotionDiv>
         </div>
       </div>

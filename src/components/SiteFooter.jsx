@@ -1,200 +1,42 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { useTranslation } from "react-i18next";
-import alignnaWordmarkUrl from "../assets/michPageAssets/logos-icons/Alignna-BlancoRoto.svg";
-
-const MotionFooter = motion.footer;
-const MotionH2 = motion.h2;
-const MotionDiv = motion.div;
-const MotionP = motion.p;
-const MotionForm = motion.form;
-
-const footerEase = [0.22, 0.61, 0.36, 1];
-
-const footerContainer = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.06,
-    },
-  },
-};
-
-const footerItem = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.62, ease: footerEase },
-  },
-};
-
-const NOTIFY_EMAIL =
-  import.meta.env.VITE_NEWSLETTER_NOTIFY_EMAIL ?? "tadeosoto1993@gmail.com";
-const ENDPOINT =
-  import.meta.env.VITE_NEWSLETTER_ENDPOINT?.trim() || "/api/subscribe";
-
-const SiteFooter = ({ compactTop = false, tightAfterContent = false }) => {
-  const { t } = useTranslation();
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState("idle");
-  const [message, setMessage] = useState("");
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const trimmed = email.trim();
-    if (!trimmed) {
-      setStatus("error");
-      setMessage(t("footer.errorEmpty"));
-      return;
-    }
-
-    setStatus("loading");
-    setMessage("");
-
-    try {
-      const res = await fetch(ENDPOINT, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: trimmed,
-          source: "site-footer",
-        }),
-      });
-
-      const payload = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(payload?.message || "bad_status");
-
-      setStatus("success");
-      setMessage(payload?.message || t("footer.successDefault"));
-      setEmail("");
-    } catch (error) {
-      if (!import.meta.env.VITE_NEWSLETTER_ENDPOINT) {
-        const subject = encodeURIComponent(t("footer.newsletterSubject"));
-        const body = encodeURIComponent(
-          t("footer.newsletterBody", { email: trimmed }),
-        );
-        window.location.href = `mailto:${NOTIFY_EMAIL}?subject=${subject}&body=${body}`;
-        setStatus("success");
-        setMessage(t("footer.successMailto"));
-        return;
-      }
-      setStatus("error");
-      setMessage(
-        error?.message || t("footer.errorSend"),
-      );
-    }
-  };
-
-  return (
-    <MotionFooter
-      className={`border-t border-neutral-300/40 text-ink ${
-        compactTop
-          ? "mt-0 bg-[#eff0ec]"
-          : tightAfterContent
-            ? "mt-4 bg-[#f7f6f2]"
-            : "mt-20 bg-[#f7f6f2]"
-      }`}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.18, margin: "0px 0px -10% 0px" }}
-      variants={footerContainer}
-    >
-      <div className="mx-auto flex max-w-2xl flex-col items-center px-6 py-16 text-center md:px-10 md:py-20">
-        <MotionH2
-          variants={footerItem}
-          className="font-display text-[clamp(1.65rem,4.2vw,2.35rem)] font-normal leading-[1.2] tracking-tight text-ink"
-        >
-          <span className="block">{t("footer.headline1")}</span>
-          <span className="mt-1 block font-medium italic text-[#c5a880]">
-            {t("footer.headline2")}
-          </span>
-        </MotionH2>
-
-        <MotionDiv
-          variants={footerItem}
-          className="mt-10 h-px w-full max-w-md bg-linear-to-r from-transparent via-principal/55 to-transparent shadow-[0_0_24px_rgba(151,205,181,0.45)]"
-          aria-hidden
-        />
-
-        <MotionDiv
-          variants={footerItem}
-          className="mt-10 flex flex-wrap items-center justify-center gap-x-3 gap-y-2"
-        >
-          <img
-            src={alignnaWordmarkUrl}
-            alt="Alignna"
-            className="h-7 w-auto brightness-0 sm:h-8"
-            decoding="async"
-          />
-          <span className="text-lg font-medium tracking-wide text-neutral-500 md:text-2xl">
-            {t("footer.inDevelopment")}
-          </span>
-        </MotionDiv>
-
-        <MotionP
-          variants={footerItem}
-          className="mt-3 text-lg text-neutral-600 md:text-xl"
-        >
-          {t("footer.earlyAccess")}
-        </MotionP>
-
-        <MotionForm
-          variants={footerItem}
-          onSubmit={handleSubmit}
-          className="mt-10 flex w-full max-w-md flex-col gap-3 sm:flex-row sm:items-stretch sm:gap-0"
-          noValidate
-        >
-          <label htmlFor="newsletter-email" className="sr-only">
-            {t("footer.emailLabel")}
-          </label>
-          <input
-            id="newsletter-email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            placeholder={t("footer.placeholder")}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled={status === "loading"}
-            className="min-h-12 w-full flex-1 rounded-lg border border-neutral-400/60 bg-white px-4 py-3 text-left text-base text-ink placeholder:text-neutral-400 outline-none transition focus:border-principal focus:ring-2 focus:ring-principal/30 sm:rounded-r-none sm:border-r-0 md:text-xl"
-          />
-          <button
-            type="submit"
-            disabled={status === "loading"}
-            className="min-h-12 shrink-0 rounded-lg bg-[#769382] px-6 py-3 text-lg font-semibold tracking-wide text-white shadow-sm transition hover:bg-[#6a8774] hover:shadow-md disabled:opacity-60 sm:rounded-l-none sm:px-8 md:text-2xl"
-          >
-            {status === "loading" ? t("footer.submitting") : t("footer.submit")}
-          </button>
-        </MotionForm>
-
-        {message ? (
-          <MotionP
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.38, ease: footerEase }}
-            className={`mt-4 max-w-md text-sm ${
-              status === "error" ? "text-red-700/90" : "text-neutral-600"
-            }`}
-            role={status === "error" ? "alert" : "status"}
-          >
-            {message}
-          </MotionP>
-        ) : null}
-
-        <MotionP
-          variants={footerItem}
-          className="mt-8 max-w-md text-xl leading-relaxed text-neutral-500"
-        >
-          {t("footer.copyright", { year: new Date().getFullYear() })}
-        </MotionP>
-      </div>
-    </MotionFooter>
-  );
-};
-
-export default SiteFooter;
+import { motion } from "framer-motion";
+import CaennaBrandPanel from "./CaennaBrandPanel";
+
+const MotionFooter = motion.footer;
+
+const footerEase = [0.22, 0.61, 0.36, 1];
+
+const footerContainer = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.1, delayChildren: 0.06 },
+  },
+};
+
+const footerItem = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: footerEase },
+  },
+};
+
+const SiteFooter = ({ compactTop = false, tightAfterContent = false }) => {
+  return (
+    <MotionFooter
+      className={`border-t border-neutral-300/40 text-ink ${
+        compactTop ? "mt-0 bg-[#eff0ec]" : tightAfterContent ? "mt-4 bg-[#f7f6f2]" : "mt-20 bg-[#f7f6f2]"
+      }`}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.12, margin: "0px 0px -8% 0px" }}
+      variants={footerContainer}
+    >
+      <motion.div variants={footerItem} className="w-full">
+        <CaennaBrandPanel />
+      </motion.div>
+    </MotionFooter>
+  );
+};
+
+export default SiteFooter;

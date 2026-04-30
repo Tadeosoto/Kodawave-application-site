@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import "./Alignna.css";
+import FooterNewsletterPanel from "../components/FooterNewsletterPanel";
 import alignnaBlancoRotoUrl from "../assets/michPageAssets/logos-icons/Alignna-BlancoRoto.svg";
 import bolaRosaUrl from "../assets/michPageAssets/pageDecoration/bola rosa(1).png";
 import manosLatidoSombraUrl from "../assets/michPageAssets/pageDecoration/manos-latido-sombra.png";
@@ -211,6 +212,18 @@ const Alignna = () => {
           {t("alignna.pulseOutroLine2Before")}
           <strong>{t("alignna.pulseOutroLine2Strong")}</strong>
         </MotionP>
+      </MotionSection>
+
+      <MotionSection
+        id="alignna-waitlist"
+        className="alignnaNewsletter"
+        aria-label={t("alignna.newsletterAria")}
+        initial={{ opacity: 0, y: 28 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.72, ease: revealEase }}
+      >
+        <FooterNewsletterPanel embedded />
       </MotionSection>
     </div>
   );

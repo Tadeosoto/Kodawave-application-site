@@ -1,4 +1,10 @@
-import { startTransition, useEffect, useLayoutEffect, useMemo, useState } from "react";
+import {
+  startTransition,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { CaennaHeaderLogo } from "./CaennaBrand";
@@ -70,71 +76,45 @@ const linkIcons = {
 const NavBar = () => {
   const location = useLocation();
   const { t } = useTranslation();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const links = useMemo(() => [{ to: "/", label: t("nav.home") }], [t]);
-  const mobileLinks = useMemo(() => [...links], [links]);
+  const drawerLinks = useMemo(() => [...links], [links]);
 
   useEffect(() => {
-    startTransition(() => setIsMobileMenuOpen(false));
+    startTransition(() => setIsMenuOpen(false));
   }, [location.pathname]);
 
   useLayoutEffect(() => {
-    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isMobileMenuOpen]);
+  }, [isMenuOpen]);
 
   useEffect(() => {
-    if (!isMobileMenuOpen) return;
+    if (!isMenuOpen) return;
     const onKeyDown = (event) => {
-      if (event.key === "Escape") setIsMobileMenuOpen(false);
+      if (event.key === "Escape") setIsMenuOpen(false);
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [isMobileMenuOpen]);
-
-  const navLinkClass = ({ isActive }) =>
-    `border-b-2 pb-1 text-[1.05rem] font-semibold uppercase tracking-[0.2em] transition-colors ${
-      isActive
-        ? "border-secundario text-ink"
-        : "border-transparent text-neutral-500 hover:text-ink/80"
-    }`;
+  }, [isMenuOpen]);
 
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-50 border-b border-secundario/20 bg-terciario/90 backdrop-blur-xl">
-        <div className="mx-auto grid max-w-[1600px] grid-cols-[1fr_auto] items-center gap-x-2 px-6 py-5 md:grid-cols-[1fr_auto_1fr] md:gap-x-4 md:px-10">
+        <div className="mx-auto grid max-w-[1600px] grid-cols-[1fr_auto] items-center gap-x-3 px-6 py-5 md:gap-x-4 md:px-10">
           <div className="min-w-0 justify-self-start">
             <CaennaHeaderLogo />
           </div>
-          <nav className="hidden items-center justify-center gap-8 justify-self-center md:flex">
-            {links.map((link) => (
-              <NavLink key={link.to} to={link.to} className={navLinkClass}>
-                {link.label}
-              </NavLink>
-            ))}
-          </nav>
           <div className="flex items-center justify-end gap-2 justify-self-end">
             <LanguageSelect />
-            <NavLink
-              to="/alignna"
-              aria-label={t("nav.goToAlignna")}
-              className="hidden items-center justify-center transition-all duration-300 ease-out hover:opacity-85 active:scale-95 md:inline-flex"
-            >
-              <img
-                src={alignnaBlancoRotoUrl}
-                alt="Alignna"
-                className="h-5 w-auto invert-78 sepia-21 saturate-482 hue-rotate-96 brightness-92 contrast-88 sm:h-6"
-                decoding="async"
-              />
-            </NavLink>
             <button
               type="button"
-              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-              className="inline-flex items-center justify-center border border-secundario/30 p-2.5 text-ink md:hidden"
-              aria-expanded={isMobileMenuOpen}
+              onClick={() => setIsMenuOpen((prev) => !prev)}
+              className="inline-flex items-center justify-center border border-secundario/30 p-2.5 text-ink"
+              aria-expanded={isMenuOpen}
               aria-label={t("nav.toggleMenu")}
             >
               <svg
@@ -144,7 +124,7 @@ const NavBar = () => {
                 stroke="currentColor"
                 strokeWidth="1.5"
               >
-                {isMobileMenuOpen ? (
+                {isMenuOpen ? (
                   <path d="M6 6l12 12M18 6L6 18" />
                 ) : (
                   <path d="M4 7h16M4 12h16M4 17h16" />
@@ -155,19 +135,19 @@ const NavBar = () => {
         </div>
       </header>
       <div
-        className={`fixed inset-0 z-60 bg-ink/35 transition-opacity duration-200 md:hidden ${
-          isMobileMenuOpen ? "opacity-100" : "pointer-events-none opacity-0"
+        className={`fixed inset-0 z-60 bg-ink/35 transition-opacity duration-200 ${
+          isMenuOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
-        onClick={() => setIsMobileMenuOpen(false)}
+        onClick={() => setIsMenuOpen(false)}
         aria-hidden="true"
       />
       <div
-        className="fixed inset-0 z-70 pointer-events-none md:hidden"
-        aria-hidden={!isMobileMenuOpen}
+        className="fixed inset-0 z-70 pointer-events-none"
+        aria-hidden={!isMenuOpen}
       >
         <aside
           className={`pointer-events-auto ml-auto h-full w-[min(85vw,20rem)] border-l border-secundario/20 bg-terciario p-6 shadow-2xl transition-transform duration-200 ${
-            isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+            isMenuOpen ? "translate-x-0" : "translate-x-full"
           }`}
           aria-label={t("nav.mobileNav")}
         >
@@ -175,7 +155,7 @@ const NavBar = () => {
             <CaennaHeaderLogo />
             <button
               type="button"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={() => setIsMenuOpen(false)}
               className="border border-secundario/25 p-2 text-ink"
               aria-label={t("nav.closeMenu")}
             >
@@ -191,9 +171,9 @@ const NavBar = () => {
             </button>
           </div>
           <nav className="flex w-full flex-col gap-1">
-            {mobileLinks.map((link) => (
+            {drawerLinks.map((link) => (
               <NavLink
-                key={`mobile-${link.to}`}
+                key={`drawer-${link.to}`}
                 to={link.to}
                 className={`rounded-lg px-4 py-3 text-left text-sm font-semibold ${
                   location.pathname === link.to

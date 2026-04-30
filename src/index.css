@@ -28,6 +28,12 @@
   --color-ink: #2a2620;
 }
 
+/* Anclas del CTA “Reservar” → formulario (navbar fija). */
+#waitlist,
+#alignna-waitlist {
+  scroll-margin-top: 5.75rem;
+}
+
 /*
   overflow-x: hidden en html/body suele romper position: sticky en Chromium/WebKit.
   clip recorta el eje X sin el mismo efecto lateral sobre sticky (y evita scroll horizontal).

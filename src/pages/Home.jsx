@@ -459,18 +459,18 @@ const Home = () => {
         </section>
       </Bleed>
 
-      <ParallaxReservationSection />
-
       <Suspense
         fallback={
           <div
-            className="relative mt-[30vh] min-h-[200vh] w-screen max-w-[100vw] ml-[calc(50%-50vw)] box-border bg-terciario"
+            className="relative min-h-[200vh] w-screen max-w-[100vw] ml-[calc(50%-50vw)] box-border bg-terciario"
             aria-hidden
           />
         }
       >
         <ParallaxCards />
       </Suspense>
+
+      <ParallaxReservationSection />
     </div>
   );
 };

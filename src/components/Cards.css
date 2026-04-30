@@ -2,7 +2,7 @@
 /* Rompe el max-width del main sin usar transform (no rompe position:sticky). */
 .seccion {
   position: relative;
-  margin-top: 30vh;
+  margin-top: 0;
   margin-bottom: 0;
   width: 100vw;
   max-width: 100vw;
@@ -113,6 +113,22 @@
   padding: 0;
 }
 
+.cardContainer .card--waitlist {
+  overflow: hidden;
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.cardContainer .card--waitlist > * {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
 .cardCaennaBrand {
   position: relative;
   width: 100%;
@@ -120,6 +136,101 @@
   border-radius: 25px;
   overflow: hidden;
   isolation: isolate;
+}
+
+/* Footer global: sin “tarjeta” flotante; misma banda que el <footer>. */
+.cardCaennaBrand--siteFooter {
+  border-radius: 0;
+  box-shadow: none;
+  height: auto;
+  /* Altura generosa: el bloque llena el pie sin franjas vacías arriba/abajo. */
+  min-height: max(420px, min(56vh, 680px));
+}
+
+@media (min-width: 768px) {
+  .cardCaennaBrand--siteFooter {
+    min-height: max(460px, min(50vh, 720px));
+  }
+}
+
+/* Zoom suave del arte para cubrir bordes y rellenar altura (object-fit + scale). */
+.cardCaennaBrand--siteFooter .cardCaennaBrand__bgMotion {
+  transform: scale(1.12);
+  transform-origin: 82% 45%;
+}
+
+.cardCaennaBrand--siteFooter .cardCaennaBrand__bg {
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  object-position: 86% center;
+}
+
+/* Banda a ancho viewport; el copy respeta el mismo ancho que <main>. */
+.cardCaennaBrand--siteFooter .cardCaennaBrand__content {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: clamp(2rem, 6vw, 3.8rem);
+  padding-bottom: clamp(2.85rem, 8vw, 4.25rem);
+}
+
+.cardCaennaBrand__siteFooterInner {
+  position: relative;
+  width: 100%;
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .cardCaennaBrand__siteFooterInner {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+.cardCaennaBrand--siteFooter .cardCaennaBrand__overlay {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(247, 246, 242, 0.98) 0%,
+      rgba(247, 246, 242, 0.9) 38%,
+      rgba(247, 246, 242, 0.55) 58%,
+      rgba(247, 246, 242, 0.14) 78%,
+      rgba(247, 246, 242, 0) 100%
+    ),
+    radial-gradient(
+      circle at 14% 22%,
+      rgba(247, 246, 242, 0.75) 0%,
+      rgba(247, 246, 242, 0) 56%
+    );
+}
+
+@media (max-width: 900px) {
+  .cardCaennaBrand--siteFooter .cardCaennaBrand__overlay {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(247, 246, 242, 0.98) 0%,
+        rgba(247, 246, 242, 0.92) 48%,
+        rgba(247, 246, 242, 0.62) 72%,
+        rgba(247, 246, 242, 0.1) 100%
+      ),
+      radial-gradient(
+        circle at 12% 20%,
+        rgba(247, 246, 242, 0.78) 0%,
+        rgba(247, 246, 242, 0) 58%
+      );
+  }
 }
 
 .cardCaennaBrand__bgMotion {
@@ -167,6 +278,7 @@
   justify-content: center;
   text-align: center;
   padding: clamp(2rem, 6vw, 3.8rem) clamp(1.1rem, 4vw, 2rem);
+  padding-bottom: clamp(2.85rem, 8vw, 4.25rem);
   color: #2f2e2b;
 }
 
@@ -195,6 +307,65 @@
   font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   font-size: clamp(1rem, 2vw, 1.35rem);
   letter-spacing: 0.01em;
+}
+
+.cardCaennaBrand__reserve {
+  margin-top: clamp(1rem, 2.6vw, 1.65rem);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 2.75rem;
+  padding: 0.6rem clamp(1.25rem, 3.8vw, 1.75rem);
+  border-radius: 9999px;
+  background-color: var(--color-principal, #97cdb5);
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-size: clamp(1.05rem, 2.1vw, 1.35rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #2f2e2b;
+  text-decoration: none;
+  box-shadow: 0 10px 28px -14px rgba(0, 0, 0, 0.55);
+  transition:
+    transform 0.22s ease,
+    background-color 0.22s ease,
+    color 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.cardCaennaBrand__reserve:hover,
+.cardCaennaBrand__reserve:focus-visible {
+  transform: scale(1.03);
+  background-color: var(--color-secundario, #a08b71);
+  color: #fff;
+  box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.45);
+  outline: none;
+}
+
+.cardCaennaBrand__reserveIcon {
+  display: inline-block;
+  width: 1.12em;
+  height: 1.12em;
+  flex-shrink: 0;
+  background-color: currentcolor;
+  opacity: 0.95;
+  transition: transform 0.22s ease, opacity 0.22s ease;
+}
+
+.cardCaennaBrand__reserve:hover .cardCaennaBrand__reserveIcon,
+.cardCaennaBrand__reserve:focus-visible .cardCaennaBrand__reserveIcon {
+  transform: scale(1.08);
+  opacity: 1;
+}
+
+.cardCaennaBrand--siteFooter .cardCaennaBrand__copyright {
+  position: static;
+  margin-top: clamp(1rem, 2.8vw, 1.5rem);
+  padding: 0;
+}
+
+.cardCaennaBrand--siteFooter .cardCaennaBrand__social {
+  margin-top: clamp(0.65rem, 2vw, 1rem);
 }
 
 .cardCaennaBrand__social {
@@ -226,6 +397,20 @@
   height: clamp(1.05rem, 1.8vw, 1.38rem);
 }
 
+.cardCaennaBrand__copyright {
+  position: absolute;
+  bottom: clamp(1rem, 3vw, 1.75rem);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+  text-align: center;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-size: clamp(0.75rem, 1.45vw, 0.95rem);
+  letter-spacing: 0.02em;
+  color: rgba(47, 46, 43, 0.52);
+}
+
 @media (max-width: 900px) {
   .cardCaennaBrand__bg {
     object-position: 76% center;
@@ -254,6 +439,24 @@
     text-align: left;
     justify-content: center;
     padding: clamp(1.5rem, 6vw, 2.2rem) clamp(1rem, 5vw, 1.25rem);
+  }
+
+  .cardCaennaBrand--siteFooter .cardCaennaBrand__content {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: clamp(1.5rem, 6vw, 2.2rem);
+    padding-bottom: clamp(2.5rem, 8vw, 3.5rem);
+  }
+
+  .cardCaennaBrand__siteFooterInner {
+    align-items: flex-start;
+    text-align: left;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .cardCaennaBrand--siteFooter .cardCaennaBrand__copyright {
+    text-align: left;
   }
 
   .cardCaennaBrand__social {

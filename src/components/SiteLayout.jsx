@@ -14,8 +14,27 @@ const SiteLayout = () => {
   const isHomeRoute = location.pathname === '/'
 
   useEffect(() => {
+    const hash = (location.hash || '').replace(/^#/, '')
+    if (hash) {
+      let cancelled = false
+      const tryScroll = (attempt = 0) => {
+        if (cancelled) return
+        const el = document.getElementById(hash)
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          return
+        }
+        if (attempt < 36) {
+          setTimeout(() => tryScroll(attempt + 1), 80)
+        }
+      }
+      requestAnimationFrame(() => tryScroll())
+      return () => {
+        cancelled = true
+      }
+    }
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
-  }, [location.pathname])
+  }, [location.pathname, location.hash])
 
   useEffect(() => {
     const lang = i18n.resolvedLanguage || i18n.language || 'en-AU'
