@@ -101,7 +101,7 @@ export const HeroAlignnaButtonGlow = ({ to, ariaLabel, logoSrc }) => (
         rx="49"
         ry="49"
         filter="url(#heroAlignnaInnerBlur)"
-        className="fill-[#84bca5]/74 transition-all duration-300 ease-out group-hover:fill-white/88"
+        className="fill-[#84bca5]/74 transition-all duration-500 ease-in-out group-hover:fill-white/88"
       />
       <rect
         x="1.5"
@@ -110,13 +110,13 @@ export const HeroAlignnaButtonGlow = ({ to, ariaLabel, logoSrc }) => (
         height="97"
         rx="49"
         ry="49"
-        className="fill-[#84bca5]/20 transition-all duration-300 ease-out group-hover:fill-white/35"
+        className="fill-[#84bca5]/20 transition-all duration-500 ease-in-out group-hover:fill-white/35"
       />
     </svg>
     <MotionImg
       src={logoSrc}
       alt="Alignna"
-      className="relative z-10 h-8 w-auto opacity-100 drop-shadow-[0_1px_1px_rgba(0,0,0,0.14)] transition-[filter,opacity] duration-300 ease-out group-hover:filter-[brightness(0)_saturate(100%)_invert(69%)_sepia(16%)_saturate(590%)_hue-rotate(98deg)_brightness(92%)_contrast(90%)] sm:h-9 md:h-11 lg:h-15"
+      className="relative z-10 h-8 w-auto opacity-100 drop-shadow-[0_1px_1px_rgba(0,0,0,0.14)] transition-[filter,opacity] duration-500 ease-in-out group-hover:filter-[brightness(0)_saturate(100%)_invert(69%)_sepia(16%)_saturate(590%)_hue-rotate(98deg)_brightness(92%)_contrast(90%)] sm:h-9 md:h-11 lg:h-15"
       decoding="async"
     />
   </MotionLink>
