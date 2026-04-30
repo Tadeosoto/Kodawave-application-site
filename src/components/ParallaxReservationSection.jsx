@@ -8,6 +8,17 @@ const MotionP = motion.p;
 const MotionDiv = motion.div;
 const MotionSpan = motion.span;
 
+/**
+ * Equivalente visual a `["start start", "end end"]`, pero sin coincidir con el
+ * preset interno "All" de Framer. Si coincide, Chrome usa View Timeline
+ * acelerado y el `scrollYProgress` puede desincronizarse respecto al cálculo
+ * por JS (Firefox suele ir por ahí) → textos superpuestos al entrar a la sección.
+ */
+const PARALLAX_SCROLL_OFFSET = [
+  [0, 0],
+  [1, 0.9995],
+];
+
 function useSplitSlidePx() {
   const [px, setPx] = useState(160);
 
@@ -51,7 +62,7 @@ const ParallaxReservationSection = () => {
 
   const { scrollYProgress: parallaxProgress } = useScroll({
     target: parallaxSectionRef,
-    offset: ["start start", "end end"],
+    offset: PARALLAX_SCROLL_OFFSET,
   });
 
   const k = useMemo(() => {
@@ -97,36 +108,54 @@ const ParallaxReservationSection = () => {
     };
   }, [narrowMobile]);
 
+  /** Al ceder paso al siguiente bloque: sube más y se encoge un poco (ilusión de “bajar” la mirada). */
+  const textEnterY = narrowMobile ? 20 : 28;
+  const textExitY = narrowMobile ? -78 : -132;
+  const textExitScale = narrowMobile ? 0.9 : 0.86;
+  const splitExitScale = narrowMobile ? 0.91 : 0.87;
+
   const lineOneOpacity = useTransform(parallaxProgress, k.l1o, [0, 1, 1, 0]);
-  const lineOneY = useTransform(parallaxProgress, k.l1y, [24, 0, -24]);
-  const lineOneScale = useTransform(parallaxProgress, k.l1s, [1, 0.92]);
+  const lineOneY = useTransform(parallaxProgress, k.l1y, [
+    textEnterY,
+    0,
+    textExitY,
+  ]);
+  const lineOneScale = useTransform(parallaxProgress, k.l1s, [1, textExitScale]);
   const lineOneBlur = useTransform(parallaxProgress, k.l1b, [
     "blur(6px)",
     "blur(0px)",
     "blur(0px)",
-    "blur(8px)",
+    "blur(10px)",
   ]);
 
   const lineTwoOpacity = useTransform(parallaxProgress, k.l2o, [0, 1, 1, 0]);
-  const lineTwoY = useTransform(parallaxProgress, k.l2y, [24, 0, -24]);
-  const lineTwoScale = useTransform(parallaxProgress, k.l2s, [1, 0.92]);
+  const lineTwoY = useTransform(parallaxProgress, k.l2y, [
+    textEnterY,
+    0,
+    textExitY,
+  ]);
+  const lineTwoScale = useTransform(parallaxProgress, k.l2s, [1, textExitScale]);
   const lineTwoBlur = useTransform(parallaxProgress, k.l2b, [
     "blur(6px)",
     "blur(0px)",
     "blur(0px)",
-    "blur(8px)",
+    "blur(10px)",
   ]);
 
   const splitOpacity = useTransform(parallaxProgress, k.spo, [0, 1, 1, 0]);
   const splitLeftX = useTransform(parallaxProgress, k.spl, [-splitSlidePx, 0]);
   const splitRightX = useTransform(parallaxProgress, k.spl, [splitSlidePx, 0]);
-  const splitY = useTransform(parallaxProgress, k.spy, [24, 0, -24]);
-  const splitScale = useTransform(parallaxProgress, k.sps, [1, 0.93]);
+  const splitY = useTransform(parallaxProgress, k.spy, [
+    textEnterY,
+    0,
+    textExitY,
+  ]);
+  const splitScale = useTransform(parallaxProgress, k.sps, [1, splitExitScale]);
   const splitBlur = useTransform(parallaxProgress, k.spb, [
     "blur(6px)",
     "blur(0px)",
     "blur(0px)",
-    "blur(8px)",
+    "blur(10px)",
   ]);
 
   const reserveOpacity = useTransform(parallaxProgress, k.rvo, [0, 1, 1]);

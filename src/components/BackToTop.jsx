@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useId, useMemo, useState } from 'react'
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 const SCROLL_REVEAL_AT = 200
@@ -9,15 +9,33 @@ export default function BackToTop() {
   const rawId = useId()
   const pathId = `back-to-top-path-${rawId.replace(/:/g, '')}`
   const [visible, setVisible] = useState(false)
+  const visibleRef = useRef(false)
+  const rafRef = useRef(0)
 
   const onScroll = useCallback(() => {
-    setVisible(window.scrollY > SCROLL_REVEAL_AT)
+    if (rafRef.current) return
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = 0
+      const next = window.scrollY > SCROLL_REVEAL_AT
+      if (next !== visibleRef.current) {
+        visibleRef.current = next
+        setVisible(next)
+      }
+    })
   }, [])
 
   useEffect(() => {
-    onScroll()
+    const sync = () => {
+      const next = window.scrollY > SCROLL_REVEAL_AT
+      visibleRef.current = next
+      setVisible(next)
+    }
+    sync()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
   }, [onScroll])
 
   const phrase = t('nav.backToTop')

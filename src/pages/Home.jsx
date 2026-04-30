@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
@@ -7,12 +7,17 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import ParallaxReservationSection from "../components/ParallaxReservationSection";
-import ParallaxCards from "../components/ParallaxCards";
-import heroHandsUrl from "../assets/michPageAssets/pageDecoration/Mano de dios PNG.png";
-import engineerSectionBgUrl from "../assets/michPageAssets/pageDecoration/background-image1.png";
+import heroHandsPng from "../assets/michPageAssets/pageDecoration/Mano de dios PNG.png";
+import heroHandsWebp from "../assets/michPageAssets/pageDecoration/Mano de dios PNG.webp";
+import heroHandsAvif from "../assets/michPageAssets/pageDecoration/Mano de dios PNG.avif";
+import engineerSectionPng from "../assets/michPageAssets/pageDecoration/background-image1.png";
+import engineerSectionWebp from "../assets/michPageAssets/pageDecoration/background-image1.webp";
+import engineerSectionAvif from "../assets/michPageAssets/pageDecoration/background-image1.avif";
 import fondoEsferasUrl from "../assets/michPageAssets/pageDecoration/fondo-esferas.jpg";
 import alignnaBlancoRotoUrl from "../assets/michPageAssets/logos-icons/Alignna-BlancoRoto.svg";
+import ParallaxReservationSection from "../components/ParallaxReservationSection";
+
+const ParallaxCards = lazy(() => import("../components/ParallaxCards"));
 
 const MotionP = motion.p;
 const MotionSpan = motion.span;
@@ -150,13 +155,24 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.72, ease, delay: 0.1 }}
           >
-            <MotionImg
-              src={heroHandsUrl}
-              alt=""
+            <motion.div
+              className="pointer-events-none absolute inset-0 h-full min-h-full w-full min-w-full origin-center"
               style={{ scale: heroImageScale, filter: heroImageFilter }}
-              className="pointer-events-none absolute inset-0 h-full min-h-full w-full min-w-full origin-center select-none object-cover object-[center_38%] sm:object-[center_40%]"
-              decoding="async"
-            />
+            >
+              <picture className="block h-full w-full">
+                <source srcSet={heroHandsAvif} type="image/avif" />
+                <source srcSet={heroHandsWebp} type="image/webp" />
+                <img
+                  src={heroHandsPng}
+                  alt=""
+                  width={1536}
+                  height={1024}
+                  fetchPriority="high"
+                  decoding="async"
+                  className="pointer-events-none h-full w-full select-none object-cover object-[center_38%] sm:object-[center_40%]"
+                />
+              </picture>
+            </motion.div>
           </motion.div>
           <div className="pointer-events-none absolute inset-0 z-1 bg-linear-to-b from-terciario/88 via-terciario/20 to-terciario/92" />
 
@@ -285,16 +301,27 @@ const Home = () => {
           <div className="pointer-events-none absolute inset-x-0 top-0 z-1 h-28 bg-linear-to-b from-terciario/85 via-white/50 to-transparent md:h-36" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 z-1 h-24 bg-linear-to-t from-terciario/72 to-transparent md:h-28" />
           <div className="pointer-events-none absolute inset-0 z-1 bg-white/48 md:bg-transparent" />
-          <motion.img
-            src={engineerSectionBgUrl}
-            alt=""
-            className="pointer-events-none absolute inset-0 z-0 h-full w-full select-none object-cover object-[78%_center] max-md:brightness-[1.28] max-md:saturate-[0.58] max-md:contrast-[0.72] max-md:grayscale-[0.12] md:object-[82%_center] lg:object-right"
+          <motion.div
+            className="pointer-events-none absolute inset-0 z-0 h-full w-full"
             initial={{ opacity: 0, x: 48, scale: 0.96 }}
             whileInView={{ opacity: 0.56, x: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.45 }}
             transition={{ duration: 1.05, ease }}
-            decoding="async"
-          />
+          >
+            <picture className="block h-full w-full">
+              <source srcSet={engineerSectionAvif} type="image/avif" />
+              <source srcSet={engineerSectionWebp} type="image/webp" />
+              <img
+                src={engineerSectionPng}
+                alt=""
+                width={1024}
+                height={540}
+                loading="lazy"
+                decoding="async"
+                className="pointer-events-none h-full w-full select-none object-cover object-[78%_center] max-md:brightness-[1.28] max-md:saturate-[0.58] max-md:contrast-[0.72] max-md:grayscale-[0.12] md:object-[82%_center] lg:object-right"
+              />
+            </picture>
+          </motion.div>
           <div className="relative z-10 mx-auto w-full max-w-[1500px] px-6 text-center md:px-12">
             <motion.h2
               initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
@@ -354,8 +381,11 @@ const Home = () => {
           <img
             src={fondoEsferasUrl}
             alt=""
-            className="pointer-events-none absolute inset-0 z-0 h-full w-full select-none object-cover object-center opacity-25"
+            width={900}
+            height={675}
+            loading="lazy"
             decoding="async"
+            className="pointer-events-none absolute inset-0 z-0 h-full w-full select-none object-cover object-center opacity-25"
           />
           <div className="pointer-events-none absolute inset-0 z-1 bg-linear-to-b from-white/40 via-white/30 to-white/35" />
           <div className="pointer-events-none absolute inset-x-0 top-0 z-2 h-24 bg-linear-to-b from-white/80 via-white/35 to-transparent md:h-28 lg:h-32" />
@@ -431,7 +461,16 @@ const Home = () => {
 
       <ParallaxReservationSection />
 
-      <ParallaxCards />
+      <Suspense
+        fallback={
+          <div
+            className="relative mt-[30vh] min-h-[200vh] w-screen max-w-[100vw] ml-[calc(50%-50vw)] box-border bg-terciario"
+            aria-hidden
+          />
+        }
+      >
+        <ParallaxCards />
+      </Suspense>
     </div>
   );
 };

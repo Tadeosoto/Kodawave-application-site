@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+@import "@fontsource/dm-sans/latin-400.css";
+@import "@fontsource/dm-sans/latin-500.css";
+@import "@fontsource/dm-sans/latin-600.css";
+@import "@fontsource/dm-sans/latin-700.css";
+@import "@fontsource/cormorant-garamond/latin-400.css";
+@import "@fontsource/cormorant-garamond/latin-500.css";
+@import "@fontsource/cormorant-garamond/latin-600.css";
+@import "@fontsource/cormorant-garamond/latin-700.css";
+@import "@fontsource/cormorant-garamond/latin-400-italic.css";
+
 /* Paleta: principal, secundario, terciario (+ ink para texto oscuro legible) */
 @theme {
   --color-principal: #97cdb5;
