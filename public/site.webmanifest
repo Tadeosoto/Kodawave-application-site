@@ -1,0 +1,16 @@
+{
+  "name": "Caenna Mechanical Engineering",
+  "short_name": "Caenna",
+  "icons": [
+    {
+      "src": "/favicon.svg?v=4",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "theme_color": "#e2dbd6",
+  "background_color": "#e2dbd6",
+  "display": "standalone",
+  "start_url": "/"
+}
