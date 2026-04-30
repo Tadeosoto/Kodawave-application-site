@@ -19,8 +19,8 @@ const principalShades = ["#e7f3ee", "#d0e8df", "#b9dccf", "#97cdb5"];
 const WAITLIST_CARD_BG = "#f7f6f2";
 
 const INTRO_TRIPTYCH = [
-  { src: michelleDeskUrl, to: "/my-work", labelKey: "triptych1" },
-  { src: portraitMichelleUrl, to: "/about", labelKey: "triptych2" },
+  { src: michelleDeskUrl, to: "/#", labelKey: "triptych1" },
+  { src: portraitMichelleUrl, to: "#", labelKey: "triptych2" },
   { src: lignnaMisionUrl, to: "/alignna", labelKey: "triptych3" },
 ];
 
@@ -85,7 +85,9 @@ const Card = ({
                     className="cardIntroAlignna"
                     decoding="async"
                   />
-                  <span className="cardIntroSubText">{t("parallaxCards.introSubText")}</span>
+                  <span className="cardIntroSubText">
+                    {t("parallaxCards.introSubText")}
+                  </span>
                 </p>
               </header>
             </div>
@@ -105,7 +107,11 @@ const Card = ({
                         style={{ scale: imageScale }}
                         className="cardTriptych__motion"
                       >
-                        <img src={col.src} alt="" className="cardTriptych__img" />
+                        <img
+                          src={col.src}
+                          alt=""
+                          className="cardTriptych__img"
+                        />
                       </MotionDiv>
                       <div className="cardTriptych__tint" aria-hidden />
                       <div className="cardTriptych__overlay" aria-hidden />

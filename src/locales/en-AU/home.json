@@ -1,10 +1,10 @@
 {
   "home": {
     "heroTitle": "Technology with soul.",
-    "heroMaterialising": "Materialising",
+    "heroMaterialising": "Creating",
     "heroRotateWords": ["awareness", "ideas", "future", "impact"],
     "heroTagline": "Nothing is coincidence.",
-    "alignnaCtaCaption": "It is only the beginning",
+    "alignnaCtaCaption": "This is just the beginning",
     "manifestoTitle": "We only design what deserves to exist",
     "manifestoQ": "Does this genuinely improve the human experience?",
     "manifestoDetail": "Every detail matters.",
@@ -13,8 +13,7 @@
     "manifestoIntentWord": "intention.",
     "engineerLine1": "Engineer.",
     "engineerParts2a": "Obsessed with understanding",
-    "engineerParts2b": "how things work",
-    "engineerParts2c": ".",
+    "engineerParts2b": "how things work.",
     "engineerParts3a": "But even more with",
     "engineerParts3b": "how they feel.",
     "engineerParts4a": "Some objects merely exist; others",

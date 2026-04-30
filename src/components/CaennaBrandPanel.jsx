@@ -77,9 +77,6 @@ export default function CaennaBrandPanel({ className = "" }) {
               />
               {t("parallaxReserve.reserveCta")}
             </Link>
-            <p className="cardCaennaBrand__copyright">
-              {t("footer.copyright", { year: new Date().getFullYear() })}
-            </p>
             <div className="cardCaennaBrand__social" aria-label={t("parallaxCards.caennaSocialAria")}>
               <a href="https://www.instagram.com/" target="_blank" rel="noreferrer noopener" aria-label={t("parallaxCards.instagram")}>
                 <InstagramIcon />
@@ -93,6 +90,9 @@ export default function CaennaBrandPanel({ className = "" }) {
                 <MailIcon />
               </a>
             </div>
+            <p className="cardCaennaBrand__copyright">
+              {t("footer.copyright", { year: new Date().getFullYear() })}
+            </p>
           </div>
         </div>
       </div>

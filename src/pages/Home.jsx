@@ -1,5 +1,4 @@
 import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   AnimatePresence,
@@ -16,14 +15,13 @@ import engineerSectionAvif from "../assets/michPageAssets/pageDecoration/backgro
 import fondoEsferasUrl from "../assets/michPageAssets/pageDecoration/fondo-esferas.jpg";
 import alignnaBlancoRotoUrl from "../assets/michPageAssets/logos-icons/Alignna-BlancoRoto.svg";
 import ParallaxReservationSection from "../components/ParallaxReservationSection";
+import { HeroAlignnaButtonGlow } from "../components/HeroAlignnaButtons";
 
 const ParallaxCards = lazy(() => import("../components/ParallaxCards"));
 
 const MotionP = motion.p;
 const MotionSpan = motion.span;
-const MotionImg = motion.img;
 const MotionH1 = motion.h1;
-const MotionLink = motion(Link);
 
 const ease = [0.22, 0.61, 0.36, 1];
 
@@ -104,8 +102,8 @@ const Home = () => {
     heroScroll,
     [0, 1],
     [
-      "brightness(1.05) saturate(0.78) contrast(0.9) blur(0px)",
-      "brightness(1.05) saturate(0.78) contrast(0.9) blur(6px)",
+      "brightness(1.03) saturate(0.66) contrast(0.82) blur(0.6px)",
+      "brightness(1.03) saturate(0.66) contrast(0.82) blur(8px)",
     ],
   );
   const { scrollYProgress: engineerScroll } = useScroll({
@@ -220,73 +218,11 @@ const Home = () => {
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center gap-3">
-                <MotionLink
+                <HeroAlignnaButtonGlow
                   to="/alignna"
-                  className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-transparent px-14 py-3.5 transition-all duration-300 ease-out hover:scale-[1.045] active:scale-[0.98]"
-                  aria-label={t("nav.goToAlignna")}
-                  style={{ willChange: "transform" }}
-                  animate={{ scale: [1, 1.014, 1.03, 1.042, 1.03, 1.014, 1] }}
-                  transition={{
-                    duration: 2.8,
-                    ease: "easeInOut",
-                    times: [0, 0.16, 0.34, 0.5, 0.66, 0.84, 1],
-                    repeat: Infinity,
-                    repeatDelay: 1.15,
-                  }}
-                >
-                  <svg
-                    className="pointer-events-none absolute inset-0 h-full w-full"
-                    viewBox="0 0 100 100"
-                    preserveAspectRatio="none"
-                    aria-hidden
-                  >
-                    <rect
-                      x="1.5"
-                      y="1.5"
-                      width="97"
-                      height="97"
-                      rx="49"
-                      ry="49"
-                      className="fill-none stroke-black/85 stroke-[1.6] transition-opacity duration-250 ease-out group-hover:opacity-0"
-                    />
-                  </svg>
-                  <svg
-                    className="pointer-events-none absolute inset-0 h-full w-full"
-                    viewBox="0 0 100 100"
-                    preserveAspectRatio="none"
-                    aria-hidden
-                  >
-                    <rect
-                      x="1.5"
-                      y="1.5"
-                      width="97"
-                      height="97"
-                      rx="49"
-                      ry="49"
-                      className="fill-[#84bca5] opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
-                    />
-                    <rect
-                      x="1.5"
-                      y="1.5"
-                      width="97"
-                      height="97"
-                      rx="49"
-                      ry="49"
-                      pathLength="1"
-                      className="fill-none stroke-[#ffffff] stroke-2 [stroke-dasharray:1] [stroke-dashoffset:1] opacity-0 transition-[stroke-dashoffset,opacity] duration-500 ease-out group-hover:[stroke-dashoffset:0] group-hover:opacity-100"
-                    />
-                  </svg>
-                  <MotionSpan
-                    className="relative z-10 inline-flex transform-gpu"
-                  >
-                    <MotionImg
-                      src={alignnaBlancoRotoUrl}
-                      alt="Alignna"
-                      className="h-8 w-auto brightness-0 transition-[filter] duration-500 ease-out group-hover:brightness-100 sm:h-9 md:h-11 lg:h-15"
-                      decoding="async"
-                    />
-                  </MotionSpan>
-                </MotionLink>
+                  ariaLabel={t("nav.goToAlignna")}
+                  logoSrc={alignnaBlancoRotoUrl}
+                />
                 <p className="text-center text-base text-ink">
                   {t("home.alignnaCtaCaption")}
                 </p>
@@ -404,7 +340,6 @@ const Home = () => {
                   parts={[
                     { text: t("home.engineerParts2a") },
                     { text: t("home.engineerParts2b"), strong: true },
-                    { text: t("home.engineerParts2c") },
                   ]}
                 />
                 <br />

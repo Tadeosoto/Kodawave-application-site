@@ -66,35 +66,36 @@ const ParallaxReservationSection = () => {
   const k = useMemo(() => {
     if (!narrowMobile) {
       return {
-        l1o: [0, 0.08, 0.25, 0.36],
-        l1y: [0, 0.25, 0.36],
-        l1s: [0.25, 0.36],
-        l1b: [0, 0.08, 0.25, 0.36],
-        l2o: [0.26, 0.36, 0.52, 0.64],
-        l2y: [0.26, 0.52, 0.64],
-        l2s: [0.52, 0.64],
-        l2b: [0.26, 0.36, 0.52, 0.64],
-        spo: [0.52, 0.64, 0.8, 0.9],
-        spl: [0.52, 0.66],
-        spy: [0.52, 0.8, 0.9],
-        sps: [0.8, 0.9],
-        spb: [0.52, 0.64, 0.8, 0.9],
+        /* Línea 1 visible casi al entrar (antes ~0.08 del progreso = mucho scroll en beige). */
+        l1o: [0, 0.035, 0.2, 0.33],
+        l1y: [0, 0.19, 0.33],
+        l1s: [0.19, 0.33],
+        l1b: [0, 0.035, 0.2, 0.33],
+        l2o: [0.23, 0.33, 0.47, 0.59],
+        l2y: [0.23, 0.47, 0.59],
+        l2s: [0.47, 0.59],
+        l2b: [0.23, 0.33, 0.47, 0.59],
+        spo: [0.45, 0.56, 0.68, 0.94],
+        spl: [0.45, 0.62],
+        spy: [0.45, 0.68, 0.94],
+        sps: [0.68, 0.94],
+        spb: [0.45, 0.56, 0.68, 0.94],
       };
     }
     return {
-      l1o: [0, 0.1, 0.28, 0.4],
-      l1y: [0, 0.28, 0.4],
-      l1s: [0.28, 0.4],
-      l1b: [0, 0.1, 0.28, 0.4],
-      l2o: [0.26, 0.4, 0.54, 0.66],
-      l2y: [0.26, 0.54, 0.66],
-      l2s: [0.54, 0.66],
-      l2b: [0.26, 0.4, 0.54, 0.66],
-      spo: [0.5, 0.64, 0.76, 0.86],
-      spl: [0.5, 0.66],
-      spy: [0.5, 0.76, 0.86],
-      sps: [0.76, 0.86],
-      spb: [0.5, 0.64, 0.76, 0.86],
+      l1o: [0, 0.05, 0.22, 0.36],
+      l1y: [0, 0.21, 0.36],
+      l1s: [0.21, 0.36],
+      l1b: [0, 0.05, 0.22, 0.36],
+      l2o: [0.24, 0.36, 0.5, 0.62],
+      l2y: [0.24, 0.5, 0.62],
+      l2s: [0.5, 0.62],
+      l2b: [0.24, 0.36, 0.5, 0.62],
+      spo: [0.44, 0.58, 0.7, 0.93],
+      spl: [0.44, 0.64],
+      spy: [0.44, 0.7, 0.93],
+      sps: [0.7, 0.93],
+      spb: [0.44, 0.58, 0.7, 0.93],
     };
   }, [narrowMobile]);
 
@@ -151,7 +152,7 @@ const ParallaxReservationSection = () => {
   return (
     <section
       ref={parallaxSectionRef}
-      className="relative max-md:h-[min(340vh,4800px)] md:h-[265vh]"
+      className="relative -mt-6 max-md:h-[min(255vh,3600px)] md:-mt-10 md:h-[200vh]"
     >
       <div className="sticky top-0 flex h-dvh min-h-0 items-center justify-center overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-radial-[80%_80%_at_50%_50%]" />

@@ -360,12 +360,12 @@
 
 .cardCaennaBrand--siteFooter .cardCaennaBrand__copyright {
   position: static;
-  margin-top: clamp(1rem, 2.8vw, 1.5rem);
+  margin-top: clamp(0.75rem, 2.2vw, 1.15rem);
   padding: 0;
 }
 
 .cardCaennaBrand--siteFooter .cardCaennaBrand__social {
-  margin-top: clamp(0.65rem, 2vw, 1rem);
+  margin-top: clamp(1rem, 2.8vw, 1.5rem);
 }
 
 .cardCaennaBrand__social {
@@ -435,8 +435,8 @@
 
 @media (max-width: 640px) {
   .cardCaennaBrand__content {
-    align-items: flex-start;
-    text-align: left;
+    align-items: center;
+    text-align: center;
     justify-content: center;
     padding: clamp(1.5rem, 6vw, 2.2rem) clamp(1rem, 5vw, 1.25rem);
   }
@@ -449,14 +449,24 @@
   }
 
   .cardCaennaBrand__siteFooterInner {
-    align-items: flex-start;
-    text-align: left;
+    align-items: center;
+    text-align: center;
     padding-left: 1rem;
     padding-right: 1rem;
   }
 
+  /* En móvil reencuadramos la silueta para que no se vaya al borde derecho. */
+  .cardCaennaBrand--siteFooter .cardCaennaBrand__bgMotion {
+    transform: scale(1.04);
+    transform-origin: center 58%;
+  }
+
+  .cardCaennaBrand--siteFooter .cardCaennaBrand__bg {
+    object-position: center 58%;
+  }
+
   .cardCaennaBrand--siteFooter .cardCaennaBrand__copyright {
-    text-align: left;
+    text-align: center;
   }
 
   .cardCaennaBrand__social {
