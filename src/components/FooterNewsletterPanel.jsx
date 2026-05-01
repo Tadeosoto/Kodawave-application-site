@@ -214,7 +214,11 @@ export default function FooterNewsletterPanel({ embedded = false }) {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.38, ease: footerEase }}
-          className={`mt-4 w-full ${innerWidth} text-[0.95rem] sm:text-base ${status === "error" ? "text-red-700/90" : embedded ? "text-neutral-700" : "text-neutral-600"}`}
+          className={
+            status === "error"
+              ? `mt-4 w-full ${innerWidth} text-base font-medium leading-snug text-red-700/90 sm:mt-5 sm:text-lg md:text-xl`
+              : `mt-5 w-full ${innerWidth} text-center font-display text-[clamp(1.15rem,3.8vw,1.55rem)] font-medium leading-snug tracking-tight sm:mt-6 sm:text-[clamp(1.22rem,3.2vw,1.65rem)] md:text-2xl md:leading-snug lg:mt-7 lg:text-[clamp(1.45rem,2.4vw,1.85rem)] ${embedded ? "text-neutral-800" : "text-neutral-700"}`
+          }
           role={status === "error" ? "alert" : "status"}
         >
           {message}

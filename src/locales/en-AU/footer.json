@@ -1,7 +1,7 @@
 {
   "footer": {
     "headline1": "You will want to wear it",
-    "headline2": "before it exists.",
+    "headline2": "before it even exists.",
     "inDevelopment": "is in development",
     "earlyAccessHome": "Be the first to know when it is ready.",
     "earlyAccessAlignnaLine1": "Early access list.",
@@ -11,7 +11,7 @@
     "submit": "Notify me",
     "submitting": "Sending…",
     "errorEmpty": "Please enter a valid email.",
-    "successDefault": "Done. We will be in touch soon.",
+    "successDefault": "Done. We'll let you know as soon as we launch.",
     "successMailto": "Your email app will open with the message ready to send.",
     "errorSend": "Could not send. Please try again later.",
     "copyright": "© {{year}} Caenna",

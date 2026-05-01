@@ -217,7 +217,10 @@ const Home = () => {
                   {t("home.heroTagline")}
                 </p>
               </div>
-              <div className="flex flex-col items-center justify-center gap-4 md:gap-5">
+              <div className="flex flex-col items-center justify-center gap-3 md:gap-4">
+                <p className="text-center text-lg text-ink md:text-xl lg:text-2xl">
+                  {t("home.alignnaCtaAction")}
+                </p>
                 <HeroAlignnaButtonGlow
                   to="/alignna"
                   ariaLabel={t("nav.goToAlignna")}

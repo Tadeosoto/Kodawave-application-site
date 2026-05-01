@@ -11,7 +11,7 @@
     "submit": "Avisar",
     "submitting": "Enviando…",
     "errorEmpty": "Escribe un correo válido.",
-    "successDefault": "Listo. Te avisamos pronto.",
+    "successDefault": "Listo. Te avisamos en cuanto sea el lanzamiento.",
     "successMailto": "Se abrirá tu correo con el mensaje listo para enviar.",
     "errorSend": "No se pudo enviar. Intenta de nuevo más tarde.",
     "copyright": "© {{year}} Caenna",

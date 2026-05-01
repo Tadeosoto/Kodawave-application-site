@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { useId } from "react";
 import { motion } from "framer-motion";
-import { useTranslation } from "react-i18next";
-
 const MotionLink = motion(Link);
 const MotionImg = motion.img;
 
@@ -139,7 +137,7 @@ export const HeroAlignnaButtonLegacy = ({ to, ariaLabel, logoSrc }) => (
 );
 
 /** Flecha fina tipo editorial (hereda `currentColor` del CTA). */
-const CtaArrowIcon = ({ className = "" }) => (
+const CtaArrowIcon = ({ className = "", strokeWidth: sw = 1.55 }) => (
   <svg
     className={className}
     viewBox="0 0 24 24"
@@ -149,33 +147,31 @@ const CtaArrowIcon = ({ className = "" }) => (
     <path
       d="M5 12h14M14 7l5 5-5 5"
       stroke="currentColor"
-      strokeWidth="1.55"
+      strokeWidth={sw}
       strokeLinecap="round"
       strokeLinejoin="round"
     />
   </svg>
 );
 
-export const HeroAlignnaButtonGlow = ({ to, ariaLabel, logoSrc }) => {
-  const { t } = useTranslation();
-
-  return (
-    <GlowPillLink
-      to={to}
-      ariaLabel={ariaLabel}
-      pulse
-      className="min-h-14 min-w-[min(100%,20rem)] px-6 py-3.5 hover:scale-[1.035] sm:min-w-88 sm:px-8 sm:py-4 md:min-w-96 md:px-11 md:py-4.5 lg:min-w-104 lg:px-14 lg:py-5"
-    >
-      <span className="relative z-10 flex items-center justify-center gap-3 font-display text-[clamp(1.05rem,2.9vw,1.32rem)] font-semibold tracking-[0.03em] text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.12)] transition-colors duration-500 ease-in-out group-hover:text-[#2a4a3d] sm:gap-3.5 sm:text-[clamp(1.1rem,2.5vw,1.38rem)] md:text-[clamp(1.15rem,2.2vw,1.45rem)] lg:gap-4 lg:text-[clamp(1.2rem,1.9vw,1.55rem)]">
-        <span className="whitespace-nowrap">{t("home.alignnaCtaAction")}</span>
-        <MotionImg
-          src={logoSrc}
-          alt=""
-          className="h-[1.52em] w-auto max-w-[min(48vw,10.5rem)] object-contain object-center opacity-95 transition-[filter,opacity] duration-500 ease-in-out group-hover:brightness-0 group-hover:opacity-100 sm:max-w-48 md:h-[1.62em] md:max-w-52 lg:h-[1.68em] lg:max-w-56"
-          decoding="async"
-        />
-        <CtaArrowIcon className="h-[1.12em] w-[1.12em] shrink-0 sm:h-[1.2em] sm:w-[1.2em] md:h-[1.22em] md:w-[1.22em]" />
-      </span>
-    </GlowPillLink>
-  );
-};
+export const HeroAlignnaButtonGlow = ({ to, ariaLabel, logoSrc }) => (
+  <GlowPillLink
+    to={to}
+    ariaLabel={ariaLabel}
+    pulse
+    className="min-h-14 min-w-[min(100%,17rem)] px-6 py-3.5 hover:scale-[1.035] sm:min-w-80 sm:px-8 sm:py-4 md:min-w-88 md:px-10 md:py-4.5 lg:min-w-96 lg:px-11 lg:py-5"
+  >
+    <span className="relative z-10 flex items-center justify-center gap-3 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.12)] transition-colors duration-500 ease-in-out group-hover:text-[#2a4a3d] sm:gap-3.5 md:gap-4">
+      <MotionImg
+        src={logoSrc}
+        alt=""
+        className="h-[clamp(2.15rem,6.2vw,2.95rem)] w-auto max-w-[min(58vw,13rem)] object-contain object-center opacity-95 transition-[filter,opacity] duration-500 ease-in-out group-hover:brightness-0 group-hover:opacity-100 sm:max-w-60 md:h-[clamp(2.4rem,5.2vw,3.25rem)] md:max-w-64 lg:h-[clamp(2.65rem,4.2vw,3.65rem)] lg:max-w-72"
+        decoding="async"
+      />
+      <CtaArrowIcon
+        className="h-[1.38em] w-[1.38em] shrink-0 sm:h-[1.48em] sm:w-[1.48em] md:h-[1.58em] md:w-[1.58em] lg:h-[1.68em] lg:w-[1.68em]"
+        strokeWidth={1.72}
+      />
+    </span>
+  </GlowPillLink>
+);
