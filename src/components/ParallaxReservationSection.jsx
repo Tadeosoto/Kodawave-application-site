@@ -66,7 +66,7 @@ const ParallaxReservationSection = () => {
   const k = useMemo(() => {
     if (!narrowMobile) {
       return {
-        /* Línea 1 visible casi al entrar (antes ~0.08 del progreso = mucho scroll en beige). */
+        /* Línea 1: opaca y nítida desde progreso 0 (antes de scroll en la sección); luego sale como hasta ahora. */
         l1o: [0, 0.001, 0.16, 0.28],
         l1y: [0, 0.16, 0.28],
         l1s: [0.16, 0.28],
@@ -75,11 +75,12 @@ const ParallaxReservationSection = () => {
         l2y: [0.18, 0.4, 0.5],
         l2s: [0.4, 0.5],
         l2b: [0.18, 0.28, 0.4, 0.5],
-        spo: [0.58, 0.74, 0.9, 0.995],
+        /* Split final: más tramo a opacidad 1 antes del fade-out → más scroll hasta el footer. */
+        spo: [0.58, 0.74, 0.97, 0.999],
         spl: [0.38, 0.56],
-        spy: [0.58, 0.9, 0.995],
-        sps: [0.9, 0.995],
-        spb: [0.58, 0.74, 0.9, 0.995],
+        spy: [0.58, 0.97, 0.999],
+        sps: [0.97, 0.999],
+        spb: [0.58, 0.74, 0.97, 0.999],
       };
     }
     return {
@@ -91,11 +92,11 @@ const ParallaxReservationSection = () => {
       l2y: [0.2, 0.44, 0.54],
       l2s: [0.44, 0.54],
       l2b: [0.2, 0.31, 0.44, 0.54],
-      spo: [0.56, 0.74, 0.9, 0.995],
+      spo: [0.56, 0.74, 0.965, 0.999],
       spl: [0.4, 0.6],
-      spy: [0.56, 0.9, 0.995],
-      sps: [0.9, 0.995],
-      spb: [0.56, 0.74, 0.9, 0.995],
+      spy: [0.56, 0.965, 0.999],
+      sps: [0.965, 0.999],
+      spb: [0.56, 0.74, 0.965, 0.999],
     };
   }, [narrowMobile]);
 
@@ -105,18 +106,14 @@ const ParallaxReservationSection = () => {
   const textExitScale = narrowMobile ? 0.9 : 0.86;
   const splitExitScale = narrowMobile ? 0.91 : 0.87;
 
-  const lineOneOpacity = useTransform(parallaxProgress, k.l1o, [0, 1, 1, 0]);
-  const lineOneY = useTransform(parallaxProgress, k.l1y, [
-    textEnterY,
-    0,
-    textExitY,
-  ]);
+  const lineOneOpacity = useTransform(parallaxProgress, k.l1o, [1, 1, 1, 0]);
+  const lineOneY = useTransform(parallaxProgress, k.l1y, [0, 0, textExitY]);
   const lineOneScale = useTransform(parallaxProgress, k.l1s, [
     1,
     textExitScale,
   ]);
   const lineOneBlur = useTransform(parallaxProgress, k.l1b, [
-    "blur(6px)",
+    "blur(0px)",
     "blur(0px)",
     "blur(0px)",
     "blur(10px)",

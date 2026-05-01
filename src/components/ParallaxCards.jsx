@@ -79,12 +79,18 @@ const Card = ({
                   {t("parallaxCards.introTitleAfter")}
                 </h2>
                 <p className="cardIntroSub">
-                  <img
-                    src={alignnaWordmarkUrl}
-                    alt=""
-                    className="cardIntroAlignna"
-                    decoding="async"
-                  />
+                  <Link
+                    to="/alignna"
+                    className="cardIntroAlignnaLink"
+                    aria-label={t("nav.goToAlignna")}
+                  >
+                    <img
+                      src={alignnaWordmarkUrl}
+                      alt=""
+                      className="cardIntroAlignna"
+                      decoding="async"
+                    />
+                  </Link>
                   <span className="cardIntroSubText">
                     {t("parallaxCards.introSubText")}
                   </span>

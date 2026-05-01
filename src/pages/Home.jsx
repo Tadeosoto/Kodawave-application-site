@@ -179,7 +179,7 @@ const Home = () => {
               initial={{ opacity: 0, y: -26 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.72, ease, delay: 0.08 }}
-              className="mt-10 text-center font-display text-[clamp(1.85rem,5.2vw,3.15rem)] font-medium leading-[1.15] tracking-tight text-ink md:mt-14"
+              className="mt-10 text-center font-display text-[clamp(2.1rem,5.8vw,3.85rem)] font-medium leading-[1.12] tracking-tight text-ink md:mt-14 lg:text-[clamp(2.35rem,4.6vw,4.1rem)]"
             >
               <span className="block">{t("home.heroTitle")}</span>
             </MotionH1>
@@ -193,10 +193,10 @@ const Home = () => {
               initial={{ opacity: 0, y: 26 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, ease, delay: 0.32 }}
-              className="mt-auto grid items-end gap-10 pt-14 md:grid-cols-[1fr_auto_1fr] md:pt-20"
+              className="mt-auto grid items-end gap-12 pt-16 md:grid-cols-[1fr_auto_1fr] md:gap-14 md:pt-22 lg:pt-24"
             >
               <div className="text-left md:pb-2">
-                <p className="font-display text-[clamp(2rem,5vw,3.6rem)] font-medium leading-[1.02] tracking-tight text-ink">
+                <p className="font-display text-[clamp(2.35rem,5.8vw,4.15rem)] font-medium leading-[1.02] tracking-tight text-ink lg:text-[clamp(2.55rem,4.8vw,4.5rem)]">
                   {t("home.heroMaterialising")} <br />
                   <span className="relative inline-flex min-w-[9ch]">
                     <AnimatePresence mode="wait" initial={false}>
@@ -213,17 +213,17 @@ const Home = () => {
                     </AnimatePresence>
                   </span>
                 </p>
-                <p className="mt-3 text-sm font-semibold italic text-neutral-600 md:text-lg">
+                <p className="mt-4 text-base font-semibold italic text-neutral-600 md:mt-5 md:text-xl lg:text-2xl">
                   {t("home.heroTagline")}
                 </p>
               </div>
-              <div className="flex flex-col items-center justify-center gap-3">
+              <div className="flex flex-col items-center justify-center gap-4 md:gap-5">
                 <HeroAlignnaButtonGlow
                   to="/alignna"
                   ariaLabel={t("nav.goToAlignna")}
                   logoSrc={alignnaBlancoRotoUrl}
                 />
-                <p className="text-center text-base text-ink">
+                <p className="text-center text-lg text-ink md:text-xl lg:text-2xl">
                   {t("home.alignnaCtaCaption")}
                 </p>
               </div>
@@ -325,7 +325,8 @@ const Home = () => {
           />
           <div className="pointer-events-none absolute inset-0 z-1 bg-linear-to-b from-white/40 via-white/30 to-white/35" />
           <div className="pointer-events-none absolute inset-x-0 top-0 z-2 h-24 bg-linear-to-b from-white/80 via-white/35 to-transparent md:h-28 lg:h-32" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-2 h-24 bg-linear-to-t from-terciario/28 via-terciario/10 to-transparent md:h-28 lg:h-32" />
+          {/* Mismo tono frío que el fondo (#f2f2f3); evita terciario en el borde (franja café con la sección siguiente). */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-2 h-28 bg-linear-to-t from-[#f2f2f3] via-[#f2f2f3]/55 to-transparent md:h-36 lg:h-44" />
           <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-10">
             <div className="mx-auto max-w-5xl text-ink">
               <p className="font-display text-[clamp(2rem,4.6vw,3.3rem)] font-medium leading-[1.2] tracking-tight">

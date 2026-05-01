@@ -11,13 +11,37 @@
 }
 
 /* Compacta el cierre del parallax de cards para evitar hueco antes del bloque siguiente. */
+/* Velo superior: mismo gris que la sección ingeniero (#f2f2f3), tapa el body (terciario) en el hueco sticky sin cambiar el color de las tarjetas. */
 .seccion--parallaxCards {
   margin-bottom: -18vh;
+  isolation: isolate;
+}
+
+.seccion--parallaxCards::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: min(62vh, 720px);
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(
+    180deg,
+    #f2f2f3 0%,
+    #f2f2f3 42%,
+    rgba(242, 242, 243, 0.9) 62%,
+    rgba(242, 242, 243, 0.52) 80%,
+    rgba(236, 243, 239, 0.18) 94%,
+    rgba(242, 242, 243, 0) 100%
+  );
 }
 
 @media (max-width: 767px) {
   .seccion--parallaxCards {
     margin-bottom: -22vh;
+  }
+
+  .seccion--parallaxCards::before {
+    height: min(68vh, 640px);
   }
 }
 
@@ -30,6 +54,7 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
+  z-index: 1;
 }
 
 .cardContainer .card {
@@ -63,7 +88,7 @@
 .cardContainer .card:not(.card--intro) h2 {
   text-align: center;
   margin: 0px;
-  font-size: 28px;
+  font-size: 46px;
 }
 
 .cardContainer .card .body {
@@ -523,6 +548,10 @@
     min-height: min(88vh, 920px);
     max-height: none;
   }
+
+  .cardContainer .card:not(.card--intro) h2 {
+    font-size: 36px;
+  }
 }
 
 .cardIntroHeaderWrap {
@@ -560,6 +589,23 @@
   font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   font-size: clamp(1.55rem, 2.8vw, 1.15rem);
   color: var(--color-ink, #2a2620);
+}
+
+.cardIntroAlignnaLink {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  border-radius: 0.2rem;
+  transition: opacity 0.2s ease;
+}
+
+.cardIntroAlignnaLink:hover {
+  opacity: 0.88;
+}
+
+.cardIntroAlignnaLink:focus-visible {
+  outline: 2px solid var(--color-principal, #97cdb5);
+  outline-offset: 3px;
 }
 
 .cardIntroAlignna {
