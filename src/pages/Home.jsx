@@ -239,7 +239,7 @@ const Home = () => {
               initial={{ opacity: 0, y: 26 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, ease, delay: 0.32 }}
-              className="mt-auto grid items-end gap-12 pt-16 md:grid-cols-[1fr_auto_1fr] md:gap-14 md:pt-22 lg:pt-24"
+              className="mt-auto grid items-end gap-12 pt-16 lg:grid-cols-[1fr_auto_1fr] lg:gap-14 lg:pt-24"
             >
               <div className="text-left max-md:translate-y-14 md:pb-2">
                 <p className="font-display text-[clamp(2.35rem,5.8vw,4.15rem)] font-medium leading-[1.02] tracking-tight text-ink max-md:text-[clamp(1.78rem,8.2vw,2.35rem)] max-md:leading-[1.1] lg:text-[clamp(2.55rem,4.8vw,4.5rem)]">
