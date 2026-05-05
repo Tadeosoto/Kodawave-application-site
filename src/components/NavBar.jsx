@@ -7,9 +7,18 @@ import {
 } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { motion as motionFn } from "framer-motion";
+import {
+  ALIGNNA_STICKY_LAYOUT_ID,
+  alignnaStickySpring,
+} from "./alignnaStickyLayout";
 import { CaennaHeaderLogo } from "./CaennaBrand";
 import LanguageSelect from "./LanguageSelect";
+import { HeroAlignnaButtonGlow } from "./HeroAlignnaButtons";
+import { useHeroAlignnaDock } from "../context/HeroAlignnaDockContext";
 import alignnaBlancoRotoUrl from "../assets/michPageAssets/logos-icons/Alignna-BlancoRoto.svg";
+
+const MotionDiv = motionFn.div;
 
 const linkIcons = {
   "/": (
@@ -76,7 +85,12 @@ const linkIcons = {
 const NavBar = () => {
   const location = useLocation();
   const { t } = useTranslation();
+  const { docked, setDocked } = useHeroAlignnaDock();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  /** Borde inferior del header en px (para anclar el CTA Alignna centrado). */
+  const [headerBottomPx, setHeaderBottomPx] = useState(80);
+  const isHome = location.pathname === "/";
+  const showDockedAlignna = isHome && docked && !isMenuOpen;
 
   const links = useMemo(() => [{ to: "/", label: t("nav.home") }], [t]);
   const drawerLinks = useMemo(() => [...links], [links]);
@@ -84,6 +98,10 @@ const NavBar = () => {
   useEffect(() => {
     startTransition(() => setIsMenuOpen(false));
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (!isHome) setDocked(false);
+  }, [isHome, setDocked]);
 
   useLayoutEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
@@ -101,14 +119,32 @@ const NavBar = () => {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [isMenuOpen]);
 
+  useLayoutEffect(() => {
+    const el = document.getElementById("site-header");
+    if (!el) return;
+    const update = () =>
+      setHeaderBottomPx(Math.ceil(el.getBoundingClientRect().height));
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    window.addEventListener("resize", update);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-secundario/20 bg-terciario/90 backdrop-blur-xl">
+      <header
+        id="site-header"
+        className="fixed inset-x-0 top-0 z-50 border-b border-secundario/20 bg-terciario/90 backdrop-blur-xl"
+      >
         <div className="mx-auto grid max-w-[1600px] grid-cols-[1fr_auto] items-center gap-x-3 px-6 py-5 md:gap-x-4 md:px-10">
           <div className="min-w-0 justify-self-start">
             <CaennaHeaderLogo />
           </div>
-          <div className="flex items-center justify-end gap-2 justify-self-end">
+          <div className="flex items-center justify-end gap-2 justify-self-end sm:gap-3">
             <LanguageSelect />
             <button
               type="button"
@@ -134,6 +170,22 @@ const NavBar = () => {
           </div>
         </div>
       </header>
+      {showDockedAlignna ? (
+        <MotionDiv
+          layoutId={ALIGNNA_STICKY_LAYOUT_ID}
+          className="pointer-events-none fixed left-1/2 z-55 -translate-x-1/2 px-3 sm:px-4"
+          style={{ top: headerBottomPx }}
+          transition={alignnaStickySpring}
+        >
+          <div className="pointer-events-auto -translate-y-1/2">
+            <HeroAlignnaButtonGlow
+              to="/alignna"
+              ariaLabel={t("nav.goToAlignna")}
+              logoSrc={alignnaBlancoRotoUrl}
+            />
+          </div>
+        </MotionDiv>
+      ) : null}
       <div
         className={`fixed inset-0 z-60 bg-ink/35 transition-opacity duration-200 ${
           isMenuOpen ? "opacity-100" : "pointer-events-none opacity-0"

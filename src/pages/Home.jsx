@@ -1,4 +1,5 @@
 import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   AnimatePresence,
@@ -15,7 +16,12 @@ import engineerSectionAvif from "../assets/michPageAssets/pageDecoration/backgro
 import fondoEsferasUrl from "../assets/michPageAssets/pageDecoration/fondo-esferas.jpg";
 import alignnaBlancoRotoUrl from "../assets/michPageAssets/logos-icons/Alignna-BlancoRoto.svg";
 import ParallaxReservationSection from "../components/ParallaxReservationSection";
+import {
+  ALIGNNA_STICKY_LAYOUT_ID,
+  alignnaStickySpring,
+} from "../components/alignnaStickyLayout";
 import { HeroAlignnaButtonGlow } from "../components/HeroAlignnaButtons";
+import { useHeroAlignnaDock } from "../context/HeroAlignnaDockContext";
 
 const ParallaxCards = lazy(() => import("../components/ParallaxCards"));
 
@@ -81,9 +87,12 @@ const Bleed = ({ children, className = "" }) => (
 
 const Home = () => {
   const { t } = useTranslation();
+  const { pathname } = useLocation();
+  const { docked, setDocked } = useHeroAlignnaDock();
   const [heroWordIndex, setHeroWordIndex] = useState(0);
   const heroSectionRef = useRef(null);
   const engineerSectionRef = useRef(null);
+  const heroAlignnaCtaRef = useRef(null);
 
   const heroRotateWords = useMemo(
     () => t("home.heroRotateWords", { returnObjects: true }),
@@ -136,6 +145,43 @@ const Home = () => {
     }, 2600);
     return () => clearInterval(id);
   }, [words.length]);
+
+  useEffect(() => {
+    if (pathname !== "/") {
+      setDocked(false);
+      return;
+    }
+    const el = heroAlignnaCtaRef.current;
+    if (!el) return;
+
+    let io = null;
+    const connect = () => {
+      io?.disconnect();
+      const header = document.getElementById("site-header");
+      const topInset = header
+        ? Math.ceil(header.getBoundingClientRect().height)
+        : 88;
+      io = new IntersectionObserver(
+        ([entry]) => {
+          setDocked(!entry.isIntersecting);
+        },
+        {
+          root: null,
+          rootMargin: `-${topInset}px 0px 0px 0px`,
+          threshold: 0,
+        },
+      );
+      io.observe(el);
+    };
+
+    connect();
+    window.addEventListener("resize", connect);
+    return () => {
+      window.removeEventListener("resize", connect);
+      io?.disconnect();
+      setDocked(false);
+    };
+  }, [pathname, setDocked]);
 
   const wordIndex = words.length ? heroWordIndex % words.length : 0;
   const activeHeroWord = words[wordIndex] ?? "";
@@ -221,11 +267,35 @@ const Home = () => {
                 <p className="text-center text-lg text-ink md:text-xl lg:text-2xl">
                   {t("home.alignnaCtaAction")}
                 </p>
-                <HeroAlignnaButtonGlow
-                  to="/alignna"
-                  ariaLabel={t("nav.goToAlignna")}
-                  logoSrc={alignnaBlancoRotoUrl}
-                />
+                <div
+                  ref={heroAlignnaCtaRef}
+                  className="inline-flex flex-col items-center"
+                >
+                  {!docked ? (
+                    <motion.div
+                      layoutId={ALIGNNA_STICKY_LAYOUT_ID}
+                      className="inline-flex"
+                      transition={alignnaStickySpring}
+                    >
+                      <HeroAlignnaButtonGlow
+                        to="/alignna"
+                        ariaLabel={t("nav.goToAlignna")}
+                        logoSrc={alignnaBlancoRotoUrl}
+                      />
+                    </motion.div>
+                  ) : (
+                    <div
+                      className="pointer-events-none inline-flex select-none invisible"
+                      aria-hidden
+                    >
+                      <HeroAlignnaButtonGlow
+                        to="/alignna"
+                        ariaLabel={t("nav.goToAlignna")}
+                        logoSrc={alignnaBlancoRotoUrl}
+                      />
+                    </div>
+                  )}
+                </div>
                 <p className="text-center text-lg text-ink md:text-xl lg:text-2xl">
                   {t("home.alignnaCtaCaption")}
                 </p>

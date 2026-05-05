@@ -154,24 +154,50 @@ const CtaArrowIcon = ({ className = "", strokeWidth: sw = 1.55 }) => (
   </svg>
 );
 
-export const HeroAlignnaButtonGlow = ({ to, ariaLabel, logoSrc }) => (
-  <GlowPillLink
-    to={to}
-    ariaLabel={ariaLabel}
-    pulse
-    className="min-h-14 min-w-[min(100%,17rem)] px-6 py-3.5 hover:scale-[1.035] sm:min-w-80 sm:px-8 sm:py-4 md:min-w-88 md:px-10 md:py-4.5 lg:min-w-96 lg:px-11 lg:py-5"
-  >
-    <span className="relative z-10 flex items-center justify-center gap-3 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.12)] transition-colors duration-500 ease-in-out group-hover:text-[#2a4a3d] sm:gap-3.5 md:gap-4">
-      <MotionImg
-        src={logoSrc}
-        alt=""
-        className="h-[clamp(2.15rem,6.2vw,2.95rem)] w-auto max-w-[min(58vw,13rem)] object-contain object-center opacity-95 transition-[filter,opacity] duration-500 ease-in-out group-hover:brightness-0 group-hover:opacity-100 sm:max-w-60 md:h-[clamp(2.4rem,5.2vw,3.25rem)] md:max-w-64 lg:h-[clamp(2.65rem,4.2vw,3.65rem)] lg:max-w-72"
-        decoding="async"
-      />
-      <CtaArrowIcon
-        className="h-[1.38em] w-[1.38em] shrink-0 sm:h-[1.48em] sm:w-[1.48em] md:h-[1.58em] md:w-[1.58em] lg:h-[1.68em] lg:w-[1.68em]"
-        strokeWidth={1.72}
-      />
-    </span>
-  </GlowPillLink>
-);
+export const HeroAlignnaButtonGlow = ({
+  to,
+  ariaLabel,
+  logoSrc,
+  variant = "hero",
+}) => {
+  const isNav = variant === "nav";
+  return (
+    <GlowPillLink
+      to={to}
+      ariaLabel={ariaLabel}
+      pulse={!isNav}
+      className={
+        isNav
+          ? "min-h-10 max-w-[min(100%,14rem)] px-3.5 py-2 hover:scale-[1.03] sm:min-h-11 sm:max-w-60 sm:px-4 sm:py-2.5"
+          : "min-h-14 min-w-[min(100%,17rem)] px-6 py-3.5 hover:scale-[1.035] sm:min-w-80 sm:px-8 sm:py-4 md:min-w-88 md:px-10 md:py-4.5 lg:min-w-96 lg:px-11 lg:py-5"
+      }
+    >
+      <span
+        className={`relative z-10 flex items-center justify-center text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.12)] transition-colors duration-500 ease-in-out group-hover:text-[#2a4a3d] ${
+          isNav
+            ? "gap-1.5 sm:gap-2"
+            : "gap-3 sm:gap-3.5 md:gap-4"
+        }`}
+      >
+        <MotionImg
+          src={logoSrc}
+          alt=""
+          className={
+            isNav
+              ? "h-6 w-auto max-w-26 object-contain object-center opacity-95 transition-[filter,opacity] duration-500 ease-in-out group-hover:brightness-0 group-hover:opacity-100 sm:h-7 sm:max-w-29"
+              : "h-[clamp(2.15rem,6.2vw,2.95rem)] w-auto max-w-[min(58vw,13rem)] object-contain object-center opacity-95 transition-[filter,opacity] duration-500 ease-in-out group-hover:brightness-0 group-hover:opacity-100 sm:max-w-60 md:h-[clamp(2.4rem,5.2vw,3.25rem)] md:max-w-64 lg:h-[clamp(2.65rem,4.2vw,3.65rem)] lg:max-w-72"
+          }
+          decoding="async"
+        />
+        <CtaArrowIcon
+          className={
+            isNav
+              ? "h-[1.1em] w-[1.1em] shrink-0 sm:h-[1.2em] sm:w-[1.2em]"
+              : "h-[1.38em] w-[1.38em] shrink-0 sm:h-[1.48em] sm:w-[1.48em] md:h-[1.58em] md:w-[1.58em] lg:h-[1.68em] lg:w-[1.68em]"
+          }
+          strokeWidth={isNav ? 1.55 : 1.72}
+        />
+      </span>
+    </GlowPillLink>
+  );
+};
