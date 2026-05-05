@@ -138,12 +138,7 @@ export const HeroAlignnaButtonLegacy = ({ to, ariaLabel, logoSrc }) => (
 
 /** Flecha fina tipo editorial (hereda `currentColor` del CTA). */
 const CtaArrowIcon = ({ className = "", strokeWidth: sw = 1.55 }) => (
-  <svg
-    className={className}
-    viewBox="0 0 24 24"
-    fill="none"
-    aria-hidden
-  >
+  <svg className={className} viewBox="0 0 24 24" fill="none" aria-hidden>
     <path
       d="M5 12h14M14 7l5 5-5 5"
       stroke="currentColor"
@@ -168,15 +163,13 @@ export const HeroAlignnaButtonGlow = ({
       pulse={!isNav}
       className={
         isNav
-          ? "min-h-10 max-w-[min(100%,14rem)] px-3.5 py-2 hover:scale-[1.03] sm:min-h-11 sm:max-w-60 sm:px-4 sm:py-2.5"
+          ? "min-h-5 max-w-[min(100%,6.8rem)] px-1 py-0.75 hover:scale-[1.03] sm:min-h-9 sm:max-w-[min(100%,12rem)] sm:px-3 sm:py-1.75"
           : "min-h-14 min-w-[min(100%,17rem)] px-6 py-3.5 hover:scale-[1.035] sm:min-w-80 sm:px-8 sm:py-4 md:min-w-88 md:px-10 md:py-4.5 lg:min-w-96 lg:px-11 lg:py-5"
       }
     >
       <span
         className={`relative z-10 flex items-center justify-center text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.12)] transition-colors duration-500 ease-in-out group-hover:text-[#2a4a3d] ${
-          isNav
-            ? "gap-1.5 sm:gap-2"
-            : "gap-3 sm:gap-3.5 md:gap-4"
+          isNav ? "gap-0.75 sm:gap-1" : "gap-3 sm:gap-3.5 md:gap-4"
         }`}
       >
         <MotionImg
@@ -184,7 +177,7 @@ export const HeroAlignnaButtonGlow = ({
           alt=""
           className={
             isNav
-              ? "h-6 w-auto max-w-26 object-contain object-center opacity-95 transition-[filter,opacity] duration-500 ease-in-out group-hover:brightness-0 group-hover:opacity-100 sm:h-7 sm:max-w-29"
+              ? "h-4.5 w-auto max-w-20 object-contain object-center opacity-95 transition-[filter,opacity] duration-500 ease-in-out group-hover:brightness-0 group-hover:opacity-100 sm:h-5 sm:max-w-22"
               : "h-[clamp(2.15rem,6.2vw,2.95rem)] w-auto max-w-[min(58vw,13rem)] object-contain object-center opacity-95 transition-[filter,opacity] duration-500 ease-in-out group-hover:brightness-0 group-hover:opacity-100 sm:max-w-60 md:h-[clamp(2.4rem,5.2vw,3.25rem)] md:max-w-64 lg:h-[clamp(2.65rem,4.2vw,3.65rem)] lg:max-w-72"
           }
           decoding="async"
@@ -192,7 +185,7 @@ export const HeroAlignnaButtonGlow = ({
         <CtaArrowIcon
           className={
             isNav
-              ? "h-[1.1em] w-[1.1em] shrink-0 sm:h-[1.2em] sm:w-[1.2em]"
+              ? "h-[0.95em] w-[0.95em] shrink-0 sm:h-[1.05em] sm:w-[1.05em]"
               : "h-[1.38em] w-[1.38em] shrink-0 sm:h-[1.48em] sm:w-[1.48em] md:h-[1.58em] md:w-[1.58em] lg:h-[1.68em] lg:w-[1.68em]"
           }
           strokeWidth={isNav ? 1.55 : 1.72}

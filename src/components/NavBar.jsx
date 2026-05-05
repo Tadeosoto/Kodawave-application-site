@@ -188,10 +188,10 @@ const NavBar = () => {
         <MotionDiv
           layoutId={ALIGNNA_STICKY_LAYOUT_ID}
           className="pointer-events-none fixed left-1/2 z-55 -translate-x-1/2 px-3 sm:px-4"
-          style={{ top: headerBottomPx }}
+          style={{ top: headerBottomPx - 32, left: "50vw" }}
           transition={alignnaStickySpring}
         >
-          <div className="pointer-events-auto -translate-y-1/2">
+          <div className="pointer-events-auto flex justify-center -translate-y-1/2">
             <HeroAlignnaButtonGlow
               to="/alignna"
               ariaLabel={t("nav.goToAlignna")}
