@@ -407,10 +407,15 @@
   position: static;
   margin-top: clamp(0.75rem, 2.2vw, 1.15rem);
   padding: 0;
+  font-size: clamp(0.92rem, 1.9vw, 1.12rem);
+  letter-spacing: 0.03em;
+  color: rgba(47, 46, 43, 0.58);
 }
 
 .cardCaennaBrand--siteFooter .cardCaennaBrand__social {
   margin-top: clamp(3rem, 2.8vw, 1.5rem);
+  gap: clamp(0.55rem, 1.5vw, 0.95rem);
+  font-size: clamp(0.95rem, 1.85vw, 1.15rem);
 }
 
 .cardCaennaBrand__social {
@@ -438,8 +443,13 @@
 }
 
 .cardCaennaBrand__socialIcon {
-  width: clamp(1.05rem, 1.8vw, 1.38rem);
-  height: clamp(1.05rem, 1.8vw, 1.38rem);
+  width: clamp(1.45rem, 3.1vw, 2.05rem);
+  height: clamp(1.45rem, 3.1vw, 2.05rem);
+}
+
+.cardCaennaBrand--siteFooter .cardCaennaBrand__socialIcon {
+  width: clamp(1.65rem, 3.6vw, 2.35rem);
+  height: clamp(1.65rem, 3.6vw, 2.35rem);
 }
 
 .cardCaennaBrand__copyright {
@@ -525,6 +535,12 @@
 
   .cardCaennaBrand--siteFooter .cardCaennaBrand__copyright {
     margin-top: clamp(1.05rem, 4.6vw, 1.7rem);
+    font-size: clamp(0.88rem, 2.8vw, 1.02rem);
+  }
+
+  .cardCaennaBrand--siteFooter .cardCaennaBrand__socialIcon {
+    width: clamp(1.55rem, 4.5vw, 2.15rem);
+    height: clamp(1.55rem, 4.5vw, 2.15rem);
   }
 }
 

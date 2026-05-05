@@ -66,37 +66,36 @@ const ParallaxReservationSection = () => {
   const k = useMemo(() => {
     if (!narrowMobile) {
       return {
-        /* Línea 1: opaca y nítida desde progreso 0 (antes de scroll en la sección); luego sale como hasta ahora. */
-        l1o: [0, 0.001, 0.16, 0.28],
-        l1y: [0, 0.16, 0.28],
-        l1s: [0.16, 0.28],
-        l1b: [0, 0.001, 0.16, 0.28],
-        l2o: [0.18, 0.28, 0.4, 0.5],
-        l2y: [0.18, 0.4, 0.5],
-        l2s: [0.4, 0.5],
-        l2b: [0.18, 0.28, 0.4, 0.5],
-        /* Split final: más tramo a opacidad 1 antes del fade-out → más scroll hasta el footer. */
-        spo: [0.58, 0.74, 0.97, 0.999],
-        spl: [0.38, 0.56],
-        spy: [0.58, 0.97, 0.999],
-        sps: [0.97, 0.999],
-        spb: [0.58, 0.74, 0.97, 0.999],
+        /* Keyframes algo más espaciados: más fracción de scroll por fase → menos “salto” con scroll rápido. */
+        l1o: [0, 0.001, 0.14, 0.3],
+        l1y: [0, 0.14, 0.3],
+        l1s: [0.14, 0.3],
+        l1b: [0, 0.001, 0.14, 0.3],
+        l2o: [0.17, 0.3, 0.42, 0.53],
+        l2y: [0.17, 0.42, 0.53],
+        l2s: [0.42, 0.53],
+        l2b: [0.17, 0.3, 0.42, 0.53],
+        spo: [0.55, 0.72, 0.965, 0.999],
+        spl: [0.35, 0.55],
+        spy: [0.55, 0.965, 0.999],
+        sps: [0.965, 0.999],
+        spb: [0.55, 0.72, 0.965, 0.999],
       };
     }
     return {
-      l1o: [0, 0.002, 0.18, 0.31],
-      l1y: [0, 0.17, 0.31],
-      l1s: [0.17, 0.31],
-      l1b: [0, 0.002, 0.18, 0.31],
-      l2o: [0.2, 0.31, 0.44, 0.54],
-      l2y: [0.2, 0.44, 0.54],
-      l2s: [0.44, 0.54],
-      l2b: [0.2, 0.31, 0.44, 0.54],
-      spo: [0.56, 0.74, 0.965, 0.999],
-      spl: [0.4, 0.6],
-      spy: [0.56, 0.965, 0.999],
-      sps: [0.965, 0.999],
-      spb: [0.56, 0.74, 0.965, 0.999],
+      l1o: [0, 0.002, 0.16, 0.33],
+      l1y: [0, 0.15, 0.33],
+      l1s: [0.15, 0.33],
+      l1b: [0, 0.002, 0.16, 0.33],
+      l2o: [0.18, 0.33, 0.46, 0.56],
+      l2y: [0.18, 0.46, 0.56],
+      l2s: [0.46, 0.56],
+      l2b: [0.18, 0.33, 0.46, 0.56],
+      spo: [0.54, 0.72, 0.96, 0.999],
+      spl: [0.36, 0.58],
+      spy: [0.54, 0.96, 0.999],
+      sps: [0.96, 0.999],
+      spb: [0.54, 0.72, 0.96, 0.999],
     };
   }, [narrowMobile]);
 
@@ -155,7 +154,7 @@ const ParallaxReservationSection = () => {
   return (
     <section
       ref={parallaxSectionRef}
-      className="relative -mt-28 -mb-[14vh] max-md:h-[min(255vh,3600px)] md:-mt-36 md:-mb-[10vh] md:h-[205vh]"
+      className="relative -mt-28 -mb-[14vh] max-md:h-[min(330vh,4600px)] md:-mt-36 md:-mb-[10vh] md:h-[275vh]"
     >
       <div className="sticky top-0 flex h-[78dvh] min-h-0 items-center justify-center overflow-hidden md:h-[84dvh]">
         <div className="pointer-events-none absolute inset-0 bg-radial-[80%_80%_at_50%_50%]" />

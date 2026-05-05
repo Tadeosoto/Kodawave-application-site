@@ -83,15 +83,25 @@ export default function CaennaBrandPanel({ className = "" }) {
               <span className="relative z-10">{t("parallaxReserve.reserveCta")}</span>
             </GlowPillLink>
             <div className="cardCaennaBrand__social" aria-label={t("parallaxCards.caennaSocialAria")}>
-              <a href="https://www.instagram.com/" target="_blank" rel="noreferrer noopener" aria-label={t("parallaxCards.instagram")}>
+              <a
+                href="https://www.instagram.com/caenna.co/"
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label={t("parallaxCards.instagram")}
+              >
                 <InstagramIcon />
               </a>
               <span aria-hidden>|</span>
-              <a href="https://www.tiktok.com/" target="_blank" rel="noreferrer noopener" aria-label={t("parallaxCards.tiktok")}>
+              <a
+                href="https://www.tiktok.com/@caenna.co"
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label={t("parallaxCards.tiktok")}
+              >
                 <TikTokIcon />
               </a>
               <span aria-hidden>|</span>
-              <a href="mailto:tadeosoto1993@gmail.com" aria-label={t("parallaxCards.email")}>
+              <a href="mailto:michelle.castellanos@caenna.com" aria-label={t("parallaxCards.email")}>
                 <MailIcon />
               </a>
             </div>
