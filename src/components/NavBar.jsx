@@ -242,7 +242,7 @@ const NavBar = () => {
               <NavLink
                 key={`drawer-${link.to}`}
                 to={link.to}
-                className={`rounded-lg px-4 py-3 text-left text-sm font-semibold ${
+                className={`block w-full rounded-lg px-4 py-3 text-left text-sm font-semibold ${
                   location.pathname === link.to
                     ? "bg-principal/40 text-ink text"
                     : "text-neutral-700 hover:bg-principal/25"
@@ -258,14 +258,20 @@ const NavBar = () => {
           <NavLink
             to="/alignna"
             aria-label={t("nav.goToAlignna")}
-            className="mt-6 inline-flex items-center justify-center self-start transition-all duration-300 ease-out hover:opacity-85 active:scale-95"
+            className={`mt-2 block w-full rounded-lg px-4 py-3 transition-colors ${
+              location.pathname === "/alignna"
+                ? "bg-principal/40 text-ink"
+                : "text-neutral-700 hover:bg-principal/25"
+            }`}
           >
-            <img
-              src={alignnaBlancoRotoUrl}
-              alt="Alignna"
-              className="h-6 w-auto invert-78 sepia-21 saturate-482 hue-rotate-96 brightness-92 contrast-88"
-              decoding="async"
-            />
+            <span className="flex min-h-5 items-center">
+              <img
+                src={alignnaBlancoRotoUrl}
+                alt="Alignna"
+                className="h-5 w-auto opacity-85 brightness-0"
+                decoding="async"
+              />
+            </span>
           </NavLink>
         </aside>
       </div>
