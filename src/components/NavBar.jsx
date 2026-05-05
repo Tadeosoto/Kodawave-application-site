@@ -89,6 +89,12 @@ const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   /** Borde inferior del header en px (para anclar el CTA Alignna centrado). */
   const [headerBottomPx, setHeaderBottomPx] = useState(80);
+  /** Sticky CTA: tamaño hero desde lg; más compacto en móvil/tablet (alinea con `lg` de Tailwind). */
+  const [isLgUp, setIsLgUp] = useState(() =>
+    typeof window !== "undefined"
+      ? window.matchMedia("(min-width: 1024px)").matches
+      : false,
+  );
   const isHome = location.pathname === "/";
   const showDockedAlignna = isHome && docked && !isMenuOpen;
 
@@ -102,6 +108,14 @@ const NavBar = () => {
   useEffect(() => {
     if (!isHome) setDocked(false);
   }, [isHome, setDocked]);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const onChange = () => setIsLgUp(mq.matches);
+    onChange();
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
   useLayoutEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
@@ -182,6 +196,7 @@ const NavBar = () => {
               to="/alignna"
               ariaLabel={t("nav.goToAlignna")}
               logoSrc={alignnaBlancoRotoUrl}
+              variant={isLgUp ? "hero" : "nav"}
             />
           </div>
         </MotionDiv>
