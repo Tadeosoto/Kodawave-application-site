@@ -98,7 +98,7 @@ const NavBar = () => {
   const isHome = location.pathname === "/";
   const showDockedAlignna = isHome && docked && !isMenuOpen;
 
-  const links = useMemo(() => [{ to: "/", label: t("nav.home") }], [t]);
+  const links = useMemo(() => [{ to: "/", label: "Caenna" }], []);
   const drawerLinks = useMemo(() => [...links], [links]);
 
   useEffect(() => {
@@ -219,7 +219,9 @@ const NavBar = () => {
           aria-label={t("nav.mobileNav")}
         >
           <div className="mb-8 flex items-center justify-between gap-3">
-            <CaennaHeaderLogo />
+            <div className="origin-left scale-115">
+              <CaennaHeaderLogo />
+            </div>
             <button
               type="button"
               onClick={() => setIsMenuOpen(false)}
@@ -242,13 +244,13 @@ const NavBar = () => {
               <NavLink
                 key={`drawer-${link.to}`}
                 to={link.to}
-                className={`block w-full rounded-lg px-4 py-3 text-left text-sm font-semibold ${
+                className={`block w-full rounded-lg px-4 py-3.5 text-left text-base font-semibold ${
                   location.pathname === link.to
                     ? "bg-principal/40 text-ink text"
                     : "text-neutral-700 hover:bg-principal/25"
                 }`}
               >
-                <span className="flex items-center gap-3">
+                <span className="flex items-center gap-3.5">
                   {linkIcons[link.to]}
                   <span>{link.label}</span>
                 </span>
@@ -258,17 +260,28 @@ const NavBar = () => {
           <NavLink
             to="/alignna"
             aria-label={t("nav.goToAlignna")}
-            className={`mt-2 block w-full rounded-lg px-4 py-3 transition-colors ${
+            className={`mt-1 ml-6 block w-[calc(100%-1.5rem)] rounded-lg px-4 py-3 transition-colors ${
               location.pathname === "/alignna"
-                ? "bg-principal/40 text-ink"
-                : "text-neutral-700 hover:bg-principal/25"
+                ? "bg-principal/38 text-ink"
+                : "text-neutral-700/95 hover:bg-principal/22"
             }`}
           >
-            <span className="flex min-h-5 items-center">
+            <span className="flex min-h-6 items-center gap-3">
+              <svg
+                viewBox="0 0 24 24"
+                className="h-4 w-4 shrink-0 opacity-70"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.7"
+                aria-hidden
+              >
+                <path d="M7 5v8a2 2 0 002 2h8" />
+                <path d="M13 11h4v4" />
+              </svg>
               <img
                 src={alignnaBlancoRotoUrl}
                 alt="Alignna"
-                className="h-5 w-auto opacity-85 brightness-0"
+                className="h-5.5 w-auto opacity-85 brightness-0"
                 decoding="async"
               />
             </span>
