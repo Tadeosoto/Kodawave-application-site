@@ -116,7 +116,11 @@ const Card = ({
                         <img
                           src={col.src}
                           alt=""
-                          className="cardTriptych__img"
+                          className={`cardTriptych__img${
+                            col.labelKey === "triptych3"
+                              ? " cardTriptych__img--mission"
+                              : ""
+                          }`}
                         />
                       </MotionDiv>
                       <div className="cardTriptych__tint" aria-hidden />

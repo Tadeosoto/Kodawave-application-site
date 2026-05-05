@@ -641,7 +641,8 @@
 .cardTriptych__link {
   display: flex;
   flex-direction: column;
-  flex: 1 1 auto;
+  /* Misma altura para las 3 tarjetas en columna (móvil/tablet). */
+  flex: 1 1 0;
   text-decoration: none;
   color: inherit;
   min-height: 0;
@@ -704,6 +705,15 @@
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+@media (max-width: 1023px) {
+  /* Compensa el "aire" interno del asset, manteniendo igualdad de altura en contenedor. */
+  .cardTriptych__img--mission {
+    object-position: center 64%;
+    transform: scale(1.36);
+    transform-origin: center 62%;
+  }
 }
 
 .cardTriptych__tint {
