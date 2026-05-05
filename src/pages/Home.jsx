@@ -241,8 +241,8 @@ const Home = () => {
               transition={{ duration: 0.65, ease, delay: 0.32 }}
               className="mt-auto grid items-end gap-12 pt-16 md:grid-cols-[1fr_auto_1fr] md:gap-14 md:pt-22 lg:pt-24"
             >
-              <div className="text-left md:pb-2">
-                <p className="font-display text-[clamp(2.35rem,5.8vw,4.15rem)] font-medium leading-[1.02] tracking-tight text-ink lg:text-[clamp(2.55rem,4.8vw,4.5rem)]">
+              <div className="text-left max-md:translate-y-14 md:pb-2">
+                <p className="font-display text-[clamp(2.35rem,5.8vw,4.15rem)] font-medium leading-[1.02] tracking-tight text-ink max-md:text-[clamp(1.78rem,8.2vw,2.35rem)] max-md:leading-[1.1] lg:text-[clamp(2.55rem,4.8vw,4.5rem)]">
                   {t("home.heroMaterialising")} <br />
                   <span className="relative inline-flex min-w-[9ch]">
                     <AnimatePresence mode="wait" initial={false}>
@@ -259,7 +259,7 @@ const Home = () => {
                     </AnimatePresence>
                   </span>
                 </p>
-                <p className="mt-4 text-base font-semibold italic text-neutral-600 md:mt-5 md:text-xl lg:text-2xl">
+                <p className="mt-4 text-base font-semibold italic text-neutral-600 max-md:text-[0.88rem] md:mt-5 md:text-xl lg:text-2xl">
                   {t("home.heroTagline")}
                 </p>
               </div>
@@ -375,7 +375,9 @@ const Home = () => {
                 className="font-medium"
               >
                 {t("home.manifestoMorePrefix")}
-                <span className="font-semibold">{t("home.manifestoIntentWord")}</span>
+                <span className="font-semibold">
+                  {t("home.manifestoIntentWord")}
+                </span>
               </MotionP>
             </div>
           </div>
