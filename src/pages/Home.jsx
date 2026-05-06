@@ -22,6 +22,7 @@ import {
 } from "../components/alignnaStickyLayout";
 import { HeroAlignnaButtonGlow } from "../components/HeroAlignnaButtons";
 import { useHeroAlignnaDock } from "../context/HeroAlignnaDockContext";
+import { prefetchRoutePath } from "../utils/routePrefetch";
 
 const ParallaxCards = lazy(() => import("../components/ParallaxCards"));
 
@@ -137,6 +138,10 @@ const Home = () => {
   const engineerLine6Progress = useTransform(engineerScroll, (v) =>
     clamp01((v - 0.68) / 0.18),
   );
+
+  useEffect(() => {
+    prefetchRoutePath("/alignna");
+  }, []);
 
   useEffect(() => {
     if (!words.length) return;

@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { prefetchRoutePath } from "../utils/routePrefetch";
 import "./Alignna.css";
 import FooterNewsletterPanel from "../components/FooterNewsletterPanel";
 import alignnaBlancoRotoUrl from "../assets/michPageAssets/logos-icons/Alignna-BlancoRoto.svg";
@@ -24,6 +26,10 @@ const revealEase = [0.22, 0.61, 0.36, 1];
 
 const Alignna = () => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    prefetchRoutePath("/");
+  }, []);
 
   return (
     <div className="alignnaPage">

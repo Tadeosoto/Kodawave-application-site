@@ -1,11 +1,12 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { lazy } from 'react'
 import SiteLayout from './components/SiteLayout'
+import Home from './pages/Home'
+
 const About = lazy(() => import('./pages/About'))
 const Blog = lazy(() => import('./pages/Blog'))
 const Alignna = lazy(() => import('./pages/Alignna'))
 const Contact = lazy(() => import('./pages/Contact'))
-const Home = lazy(() => import('./pages/Home'))
 const MyWork = lazy(() => import('./pages/MyWork'))
 
 function App() {

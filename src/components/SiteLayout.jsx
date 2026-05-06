@@ -1,5 +1,5 @@
 import { AnimatePresence, LayoutGroup, motion } from 'framer-motion'
-import { Suspense, useEffect } from 'react'
+import { Suspense, useEffect, useLayoutEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { HeroAlignnaDockProvider } from '../context/HeroAlignnaDockContext'
@@ -9,11 +9,17 @@ import SiteFooter from './SiteFooter'
 
 function OutletFallback() {
   const { t } = useTranslation()
+  const { pathname } = useLocation()
+  const isHome = pathname === '/'
   return (
     <div
       role="status"
       aria-label={t('common.loading')}
-      className="min-h-[28vh] w-full rounded-xl bg-terciario/35 motion-safe:animate-pulse"
+      className={
+        isHome
+          ? 'min-h-[min(92vh,960px)] w-full bg-terciario motion-safe:animate-pulse'
+          : 'min-h-[28vh] w-full rounded-xl bg-terciario/35 motion-safe:animate-pulse'
+      }
     />
   )
 }
@@ -25,27 +31,32 @@ const SiteLayout = () => {
   const isAlignnaRoute = location.pathname === '/alignna'
   const isHomeRoute = location.pathname === '/'
 
+  useLayoutEffect(() => {
+    const hash = (location.hash || '').replace(/^#/, '')
+    if (!hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+    }
+  }, [location.pathname, location.hash])
+
   useEffect(() => {
     const hash = (location.hash || '').replace(/^#/, '')
-    if (hash) {
-      let cancelled = false
-      const tryScroll = (attempt = 0) => {
-        if (cancelled) return
-        const el = document.getElementById(hash)
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-          return
-        }
-        if (attempt < 36) {
-          setTimeout(() => tryScroll(attempt + 1), 80)
-        }
+    if (!hash) return
+    let cancelled = false
+    const tryScroll = (attempt = 0) => {
+      if (cancelled) return
+      const el = document.getElementById(hash)
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        return
       }
-      requestAnimationFrame(() => tryScroll())
-      return () => {
-        cancelled = true
+      if (attempt < 36) {
+        setTimeout(() => tryScroll(attempt + 1), 80)
       }
     }
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+    requestAnimationFrame(() => tryScroll())
+    return () => {
+      cancelled = true
+    }
   }, [location.pathname, location.hash])
 
   useEffect(() => {
