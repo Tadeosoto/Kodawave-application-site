@@ -16,6 +16,7 @@ import { CaennaHeaderLogo } from "./CaennaBrand";
 import LanguageSelect from "./LanguageSelect";
 import { HeroAlignnaButtonGlow } from "./HeroAlignnaButtons";
 import { useHeroAlignnaDock } from "../context/HeroAlignnaDockContext";
+import { prefetchRoutePath } from "../utils/routePrefetch";
 import alignnaBlancoRotoUrl from "../assets/michPageAssets/logos-icons/Alignna-BlancoRoto.svg";
 
 const MotionDiv = motionFn.div;
@@ -244,6 +245,8 @@ const NavBar = () => {
               <NavLink
                 key={`drawer-${link.to}`}
                 to={link.to}
+                onMouseEnter={() => prefetchRoutePath(link.to)}
+                onFocus={() => prefetchRoutePath(link.to)}
                 className={`block w-full rounded-lg px-4 py-3.5 text-left text-base font-semibold ${
                   location.pathname === link.to
                     ? "bg-principal/40 text-ink text"
@@ -260,6 +263,8 @@ const NavBar = () => {
           <NavLink
             to="/alignna"
             aria-label={t("nav.goToAlignna")}
+            onMouseEnter={() => prefetchRoutePath("/alignna")}
+            onFocus={() => prefetchRoutePath("/alignna")}
             className={`mt-1 ml-6 block w-[calc(100%-1.5rem)] rounded-lg px-4 py-3 transition-colors ${
               location.pathname === "/alignna"
                 ? "bg-principal/38 text-ink"

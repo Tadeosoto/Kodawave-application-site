@@ -1,10 +1,22 @@
 import { AnimatePresence, LayoutGroup, motion } from 'framer-motion'
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { HeroAlignnaDockProvider } from '../context/HeroAlignnaDockContext'
+import { prefetchOtherRoutesIdle } from '../utils/routePrefetch'
 import NavBar from './NavBar'
 import SiteFooter from './SiteFooter'
+
+function OutletFallback() {
+  const { t } = useTranslation()
+  return (
+    <div
+      role="status"
+      aria-label={t('common.loading')}
+      className="min-h-[28vh] w-full rounded-xl bg-terciario/35 motion-safe:animate-pulse"
+    />
+  )
+}
 
 const SiteLayout = () => {
   const location = useLocation()
@@ -41,6 +53,11 @@ const SiteLayout = () => {
     document.documentElement.lang = lang
   }, [i18n.language, i18n.resolvedLanguage])
 
+  useEffect(() => {
+    prefetchOtherRoutesIdle(location.pathname)
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- one-shot idle warmup on mount
+  }, [])
+
   return (
     <HeroAlignnaDockProvider>
       <LayoutGroup id="alignna-dock-layout">
@@ -53,15 +70,17 @@ const SiteLayout = () => {
                 : 'mx-auto w-full max-w-[1600px] px-6 pb-6 pt-4 md:px-10 md:pt-6'
             }
           >
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
               <MotionDiv
                 key={location.pathname}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.25, ease: 'easeOut' }}
+                transition={{ duration: 0.2, ease: 'easeOut' }}
               >
-                <Outlet />
+                <Suspense fallback={<OutletFallback />}>
+                  <Outlet />
+                </Suspense>
               </MotionDiv>
             </AnimatePresence>
           </main>

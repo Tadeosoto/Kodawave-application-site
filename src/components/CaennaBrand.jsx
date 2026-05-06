@@ -1,4 +1,5 @@
 import { NavLink, useLocation } from 'react-router-dom'
+import { prefetchRoutePath } from '../utils/routePrefetch'
 import logoJadeSuave from '../assets/michPageAssets/logos-icons/Caenna-JadeSuave.png'
 import logoGrisCarbon from '../assets/michPageAssets/logos-icons/Caenna-Griscarbon.png'
 
@@ -13,6 +14,8 @@ export function CaennaHeaderLogo({ className = '' }) {
   return (
     <NavLink
       to="/"
+      onMouseEnter={() => prefetchRoutePath('/')}
+      onFocus={() => prefetchRoutePath('/')}
       className={`flex shrink-0 items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-principal/40 focus-visible:ring-offset-2 focus-visible:ring-offset-terciario ${className}`}
     >
       <img
