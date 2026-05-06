@@ -154,7 +154,7 @@ const ParallaxReservationSection = () => {
   return (
     <section
       ref={parallaxSectionRef}
-      className="relative -mt-28 -mb-[14vh] max-md:h-[min(330vh,4600px)] md:-mt-36 md:-mb-[10vh] md:h-[275vh]"
+      className="pointer-events-none relative -mt-28 -mb-[14vh] max-md:h-[min(330vh,4600px)] md:-mt-36 md:-mb-[10vh] md:h-[275vh] **:pointer-events-none"
     >
       <div className="sticky top-0 flex h-[78dvh] min-h-0 items-center justify-center overflow-hidden md:h-[84dvh]">
         <div className="pointer-events-none absolute inset-0 bg-radial-[80%_80%_at_50%_50%]" />

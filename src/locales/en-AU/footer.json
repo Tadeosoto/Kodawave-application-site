@@ -9,6 +9,7 @@
     "emailLabel": "Email address",
     "placeholder": "you@email.com",
     "submit": "Notify me",
+    "submitSuccessAria": "You are on the list",
     "submitting": "Sending…",
     "errorEmpty": "Please enter a valid email.",
     "successDefault": "Done. We'll let you know as soon as we launch.",

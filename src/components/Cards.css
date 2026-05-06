@@ -165,6 +165,18 @@
   box-sizing: border-box;
 }
 
+/* Waitlist: la tarjeta al 93% deja franjas vertical del sticky sin hijo; en columna
+   móvil el botón suele quedar abajo y el toque acaba en ese hueco (o en la tarjeta
+   intro debajo en z-index). Altura 100% + stacking por encima de la intro. */
+.cardContainer#waitlist {
+  z-index: 2;
+}
+
+.cardContainer#waitlist .card.card--waitlist {
+  height: 100%;
+  max-height: 100%;
+}
+
 .cardCaennaBrand {
   position: relative;
   width: 100%;

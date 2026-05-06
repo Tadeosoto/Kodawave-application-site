@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import alignnaWordmarkUrl from "../assets/michPageAssets/logos-icons/Alignna-BlancoRoto.svg";
@@ -8,8 +8,10 @@ const MotionH2 = motion.h2;
 const MotionDiv = motion.div;
 const MotionP = motion.p;
 const MotionForm = motion.form;
+const MotionButton = motion.button;
 
 const footerEase = [0.22, 0.61, 0.36, 1];
+const submitBtnTransition = { duration: 0.48, ease: footerEase };
 
 const footerContainer = {
   hidden: {},
@@ -26,6 +28,29 @@ const footerItem = {
     transition: { duration: 0.62, ease: footerEase },
   },
 };
+
+function NewsletterSuccessCheck() {
+  return (
+    <svg
+      className="h-[1.35em] w-[1.35em] shrink-0 text-principal sm:h-7 sm:w-7 md:h-8 md:w-8"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden
+    >
+      <motion.path
+        d="M6.4 12.35 10.55 16.85 18.35 7.4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.35"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{ duration: 0.55, ease: footerEase, delay: 0.08 }}
+      />
+    </svg>
+  );
+}
 
 const NOTIFY_EMAIL =
   import.meta.env.VITE_NEWSLETTER_NOTIFY_EMAIL ?? "tadeosoto1993@gmail.com";
@@ -48,6 +73,7 @@ export default function FooterNewsletterPanel({ embedded = false }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (status === "success") return;
     const trimmed = email.trim();
     if (!trimmed) {
       setStatus("error");
@@ -197,16 +223,77 @@ export default function FooterNewsletterPanel({ embedded = false }) {
           placeholder={t("footer.placeholder")}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          disabled={status === "loading"}
+          disabled={status === "loading" || status === "success"}
           className={inputClassName}
         />
-        <button
+        <MotionButton
           type="submit"
-          disabled={status === "loading"}
-          className="min-h-12 shrink-0 rounded-lg bg-[#769382] px-7 py-3.5 text-[1.05rem] font-semibold tracking-wide text-white shadow-sm transition hover:bg-[#6a8774] hover:shadow-md disabled:opacity-60 sm:min-h-13 sm:rounded-l-none sm:px-9 sm:text-lg md:min-h-14 md:px-10 md:text-2xl"
+          data-state={status === "success" ? "success" : undefined}
+          disabled={status === "loading" || status === "success"}
+          aria-label={
+            status === "success" ? t("footer.submitSuccessAria") : undefined
+          }
+          animate={
+            status === "success"
+              ? {
+                  backgroundColor: "#ffffff",
+                  boxShadow: "0 14px 42px -18px rgba(151, 205, 181, 0.52)",
+                }
+              : {
+                  backgroundColor: "#769382",
+                  boxShadow: "0 1px 2px rgba(0, 0, 0, 0.06)",
+                }
+          }
+          transition={submitBtnTransition}
+          whileHover={
+            status === "idle" || status === "error"
+              ? {
+                  backgroundColor: "#6a8774",
+                  boxShadow: "0 6px 20px -8px rgba(0, 0, 0, 0.14)",
+                }
+              : undefined
+          }
+          whileTap={
+            status === "idle" || status === "error"
+              ? { scale: 0.985 }
+              : undefined
+          }
+          className={`relative flex min-h-12 min-w-36 shrink-0 items-center justify-center overflow-hidden rounded-lg border px-7 py-3.5 text-[1.05rem] font-semibold tracking-wide disabled:opacity-60 sm:min-h-13 sm:min-w-42 sm:rounded-l-none sm:px-9 sm:text-lg md:min-h-14 md:min-w-46 md:px-10 md:text-2xl ${
+            status === "success"
+              ? "border-principal/40 opacity-100!"
+              : "border-transparent"
+          }`}
         >
-          {status === "loading" ? t("footer.submitting") : t("footer.submit")}
-        </button>
+          <AnimatePresence mode="wait" initial={false}>
+            {status === "success" ? (
+              <motion.span
+                key="success-icon"
+                className="flex items-center justify-center"
+                initial={{ opacity: 0, scale: 0.82 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.92 }}
+                transition={{
+                  opacity: { duration: 0.3, ease: footerEase },
+                  scale: { duration: 0.45, ease: footerEase },
+                }}
+              >
+                <NewsletterSuccessCheck />
+              </motion.span>
+            ) : (
+              <motion.span
+                key="submit-label"
+                className="text-white"
+                initial={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.26, ease: footerEase }}
+              >
+                {status === "loading"
+                  ? t("footer.submitting")
+                  : t("footer.submit")}
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </MotionButton>
       </MotionForm>
 
       {message ? (

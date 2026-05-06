@@ -9,6 +9,7 @@
     "emailLabel": "Correo electrónico",
     "placeholder": "tu@email.com",
     "submit": "Avisar",
+    "submitSuccessAria": "Listo, te avisaremos",
     "submitting": "Enviando…",
     "errorEmpty": "Escribe un correo válido.",
     "successDefault": "Listo. Te avisamos en cuanto sea el lanzamiento.",

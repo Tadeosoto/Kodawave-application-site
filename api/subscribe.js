@@ -30,7 +30,9 @@ const MESSAGES = {
 };
 
 function normalizeLocale(locale) {
-  const value = String(locale ?? "").trim().toLowerCase();
+  const value = String(locale ?? "")
+    .trim()
+    .toLowerCase();
   if (value === "es-mx" || value.startsWith("es")) return "es-MX";
   return "en-AU";
 }
