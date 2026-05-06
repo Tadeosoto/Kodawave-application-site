@@ -297,6 +297,9 @@
 .cardCaennaBrand__bg {
   width: 100%;
   height: 100%;
+  /* El padre es absolute inset:0 (ya define caja). aspect-ratio sirve como hint al
+     parser para que conozca el ratio nativo del LCP antes del decode (mono jade 1375x768). */
+  aspect-ratio: 1375 / 768;
   object-fit: cover;
   object-position: 86% center;
   display: block;
@@ -711,6 +714,9 @@
   width: 100%;
   flex: 1;
   min-height: 200px;
+  /* aspect-ratio reserva caja antes de que cargue la imagen (CLS≈0). En desktop el
+     padre fija height: 100% y este valor se ignora; en móvil ayuda a la pintura inicial. */
+  aspect-ratio: 3 / 4;
   overflow: hidden;
   background: rgba(42, 38, 32, 0.06);
 }

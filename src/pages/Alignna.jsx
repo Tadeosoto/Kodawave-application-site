@@ -4,7 +4,18 @@ import "./Alignna.css";
 import FooterNewsletterPanel from "../components/FooterNewsletterPanel";
 import alignnaBlancoRotoUrl from "../assets/michPageAssets/logos-icons/Alignna-BlancoRoto.svg";
 import bolaRosaUrl from "../assets/michPageAssets/pageDecoration/bola rosa(1).png";
+import bolaRosa480Avif from "../assets/michPageAssets/pageDecoration/bola rosa(1)-480.avif";
+import bolaRosa960Avif from "../assets/michPageAssets/pageDecoration/bola rosa(1)-960.avif";
+import bolaRosa480Webp from "../assets/michPageAssets/pageDecoration/bola rosa(1)-480.webp";
+import bolaRosa960Webp from "../assets/michPageAssets/pageDecoration/bola rosa(1)-960.webp";
 import manosLatidoSombraUrl from "../assets/michPageAssets/pageDecoration/manos-latido-sombra.png";
+import manosLatidoSombra480Avif from "../assets/michPageAssets/pageDecoration/manos-latido-sombra-480.avif";
+import manosLatidoSombra480Webp from "../assets/michPageAssets/pageDecoration/manos-latido-sombra-480.webp";
+
+const BOLA_ROSA_AVIF = `${bolaRosa480Avif} 480w, ${bolaRosa960Avif} 960w`;
+const BOLA_ROSA_WEBP = `${bolaRosa480Webp} 480w, ${bolaRosa960Webp} 960w`;
+const BOLA_ROSA_SIZES = "(min-width: 1024px) 540px, (min-width: 768px) 50vw, 100vw";
+const MANOS_SIZES = "(min-width: 768px) 600px, 100vw";
 
 const MotionP = motion.p;
 const MotionSection = motion.section;
@@ -84,12 +95,19 @@ const Alignna = () => {
               },
             }}
           >
-            <img
-              src={bolaRosaUrl}
-              alt=""
-              className="alignnaBreakSection__bgImage"
-              decoding="async"
-            />
+            <picture>
+              <source type="image/avif" srcSet={BOLA_ROSA_AVIF} sizes={BOLA_ROSA_SIZES} />
+              <source type="image/webp" srcSet={BOLA_ROSA_WEBP} sizes={BOLA_ROSA_SIZES} />
+              <img
+                src={bolaRosaUrl}
+                alt=""
+                width={1040}
+                height={1024}
+                className="alignnaBreakSection__bgImage"
+                decoding="async"
+                loading="lazy"
+              />
+            </picture>
             <div className="alignnaBreakSection__visualOverlay" aria-hidden />
             <MotionP
               className="alignnaBreakSection__quote"
@@ -174,12 +192,20 @@ const Alignna = () => {
           transition={{ duration: 0.82, ease: revealEase, delay: 0.08 }}
         >
           <div className="alignnaPulseCard__bgWrap" aria-hidden>
-            <img
-              src={manosLatidoSombraUrl}
-              alt=""
-              className="alignnaPulseCard__bgImage"
-              decoding="async"
-            />
+            {/* manos-latido-sombra es 756px nativos → solo variante -480 disponible. */}
+            <picture>
+              <source type="image/avif" srcSet={manosLatidoSombra480Avif} sizes={MANOS_SIZES} />
+              <source type="image/webp" srcSet={manosLatidoSombra480Webp} sizes={MANOS_SIZES} />
+              <img
+                src={manosLatidoSombraUrl}
+                alt=""
+                width={756}
+                height={756}
+                className="alignnaPulseCard__bgImage"
+                decoding="async"
+                loading="lazy"
+              />
+            </picture>
           </div>
           <div className="alignnaPulseCard__overlay" aria-hidden />
 

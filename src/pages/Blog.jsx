@@ -5,6 +5,14 @@ import { useTranslation } from 'react-i18next'
 import { blogPosts } from '../data/content'
 import Reveal from '../components/Reveal'
 import michelleDeskUrl from '../assets/michPageAssets/michPhotos/michelle-desk.png'
+import michelleDesk480Avif from '../assets/michPageAssets/michPhotos/michelle-desk-480.avif'
+import michelleDesk960Avif from '../assets/michPageAssets/michPhotos/michelle-desk-960.avif'
+import michelleDesk480Webp from '../assets/michPageAssets/michPhotos/michelle-desk-480.webp'
+import michelleDesk960Webp from '../assets/michPageAssets/michPhotos/michelle-desk-960.webp'
+
+const MICHELLE_DESK_AVIF = `${michelleDesk480Avif} 480w, ${michelleDesk960Avif} 960w`
+const MICHELLE_DESK_WEBP = `${michelleDesk480Webp} 480w, ${michelleDesk960Webp} 960w`
+const BLOG_DESK_SIZES = '(min-width: 1024px) 360px, (min-width: 768px) 320px, 280px'
 
 const MotionLi = motion.li
 const ease = [0.22, 0.61, 0.36, 1]
@@ -89,13 +97,19 @@ const Blog = () => {
           </div>
           <div className="flex justify-center lg:col-span-4">
             <Reveal delay={0.06}>
-              <img
-                src={michelleDeskUrl}
-                alt={t('blog.deskAlt')}
-                className="h-auto max-h-[min(52vh,520px)] w-full max-w-[280px] object-cover object-center md:max-w-[320px] lg:max-w-[360px]"
-                loading="lazy"
-                decoding="async"
-              />
+              <picture>
+                <source type="image/avif" srcSet={MICHELLE_DESK_AVIF} sizes={BLOG_DESK_SIZES} />
+                <source type="image/webp" srcSet={MICHELLE_DESK_WEBP} sizes={BLOG_DESK_SIZES} />
+                <img
+                  src={michelleDeskUrl}
+                  alt={t('blog.deskAlt')}
+                  width={1024}
+                  height={1536}
+                  className="h-auto max-h-[min(52vh,520px)] w-full max-w-[280px] object-cover object-center md:max-w-[320px] lg:max-w-[360px]"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
             </Reveal>
           </div>
           <div className="lg:col-span-5">

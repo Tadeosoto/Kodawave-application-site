@@ -1,10 +1,19 @@
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import monoJadeUrl from "../assets/michPageAssets/pageDecoration/mono jade.png";
+import monoJade480Avif from "../assets/michPageAssets/pageDecoration/mono jade-480.avif";
+import monoJade960Avif from "../assets/michPageAssets/pageDecoration/mono jade-960.avif";
+import monoJade480Webp from "../assets/michPageAssets/pageDecoration/mono jade-480.webp";
+import monoJade960Webp from "../assets/michPageAssets/pageDecoration/mono jade-960.webp";
 import caennaWordmarkJadeUrl from "../assets/michPageAssets/logos-icons/Caenna-JadeSuave.png";
 import cBlancoRotoUrl from "../assets/michPageAssets/logos-icons/C-BlancoRoto.svg";
 import { GlowPillLink } from "./HeroAlignnaButtons";
 import "./Cards.css";
+
+/** Anchos disponibles del LCP (mono jade es 1375px nativo). */
+const MONO_JADE_AVIF = `${monoJade480Avif} 480w, ${monoJade960Avif} 960w`;
+const MONO_JADE_WEBP = `${monoJade480Webp} 480w, ${monoJade960Webp} 960w`;
+const MONO_JADE_SIZES = "(min-width: 1024px) 1024px, 100vw";
 
 const InstagramIcon = () => (
   <svg viewBox="0 0 24 24" aria-hidden className="cardCaennaBrand__socialIcon">
@@ -43,7 +52,21 @@ export default function CaennaBrandPanel({ className = "" }) {
     <div className={`relative w-full ${className}`}>
       <div className="cardCaennaBrand cardCaennaBrand--siteFooter">
         <div className="cardCaennaBrand__bgMotion">
-          <img src={monoJadeUrl} alt="" className="cardCaennaBrand__bg" decoding="async" />
+          {/* LCP del Home: preload del AVIF/WebP en index.html → fetchpriority="high" + loading="eager" */}
+          <picture>
+            <source type="image/avif" srcSet={MONO_JADE_AVIF} sizes={MONO_JADE_SIZES} />
+            <source type="image/webp" srcSet={MONO_JADE_WEBP} sizes={MONO_JADE_SIZES} />
+            <img
+              src={monoJadeUrl}
+              alt=""
+              width={1375}
+              height={768}
+              className="cardCaennaBrand__bg"
+              decoding="async"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </picture>
         </div>
         <div className="cardCaennaBrand__overlay" aria-hidden />
         <div className="cardCaennaBrand__content">

@@ -35,6 +35,10 @@ export default function ScrollRevealParagraph({
   text,
   imageSrc,
   imageAlt = '',
+  imageWidth,
+  imageHeight,
+  imageSources,
+  imageSizes,
   className = '',
 }) {
   const containerRef = useRef(null)
@@ -76,13 +80,23 @@ export default function ScrollRevealParagraph({
             style={{ opacity: imageOpacity, y: imageY }}
           >
             <div className="mx-auto max-w-md overflow-hidden rounded-sm bg-ink/5 shadow-[0_24px_60px_-28px_rgba(42,38,32,0.35)] lg:mx-0 lg:ml-auto lg:max-w-none">
-              <img
-                src={imageSrc}
-                alt={imageAlt}
-                className="aspect-3/4 w-full object-cover object-center md:aspect-4/5"
-                loading="lazy"
-                decoding="async"
-              />
+              <picture>
+                {imageSources?.avif ? (
+                  <source type="image/avif" srcSet={imageSources.avif} sizes={imageSizes} />
+                ) : null}
+                {imageSources?.webp ? (
+                  <source type="image/webp" srcSet={imageSources.webp} sizes={imageSizes} />
+                ) : null}
+                <img
+                  src={imageSrc}
+                  alt={imageAlt}
+                  width={imageWidth}
+                  height={imageHeight}
+                  className="aspect-3/4 w-full object-cover object-center md:aspect-4/5"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
             </div>
           </MotionDiv>
         </div>

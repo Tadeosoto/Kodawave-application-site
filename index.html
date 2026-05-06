@@ -14,6 +14,22 @@
     <link rel="apple-touch-icon" href="/favicon.svg?v=4" />
     <link rel="manifest" href="/site.webmanifest?v=4" />
 
+    <!-- LCP del Home: silueta del bloque de marca Caenna. Preload temprano (AVIF + WebP fallback)
+         para que la descarga arranque en paralelo con CSS/JS, no después del bundle. -->
+    <link
+      rel="preload"
+      as="image"
+      href="/lcp/mono-jade-960.avif"
+      type="image/avif"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="/lcp/mono-jade-960.webp"
+      type="image/webp"
+    />
+
     <link rel="canonical" href="https://example.com/" />
     <meta property="og:title" content="Caenna Mechanical Engineering" />
     <meta
@@ -30,8 +46,18 @@
       content="Mechanical engineering practice CAD DFM analysis and prototypes."
     />
   </head>
-  <body id="top">
-    <div id="root"></div>
+  <body
+    id="top"
+    style="margin:0;min-height:100vh;background-color:#e2dbd6;color:#2a2620"
+  >
+    <!-- Placeholder neutro: pinta antes del bundle (FCP estable) y no desplaza layout
+         cuando React monta porque ocupa la misma caja vertical y se reemplaza al instante. -->
+    <div id="root">
+      <div
+        aria-hidden="true"
+        style="min-height:100vh;background-color:#e2dbd6"
+      ></div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

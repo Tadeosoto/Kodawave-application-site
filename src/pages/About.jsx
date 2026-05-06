@@ -3,7 +3,24 @@ import ScrollRevealParagraph from '../components/ScrollRevealParagraph'
 import Reveal from '../components/Reveal'
 import { testimonials } from '../data/content'
 import michelleDeskUrl from '../assets/michPageAssets/michPhotos/michelle-desk.png'
+import michelleDesk480Avif from '../assets/michPageAssets/michPhotos/michelle-desk-480.avif'
+import michelleDesk960Avif from '../assets/michPageAssets/michPhotos/michelle-desk-960.avif'
+import michelleDesk480Webp from '../assets/michPageAssets/michPhotos/michelle-desk-480.webp'
+import michelleDesk960Webp from '../assets/michPageAssets/michPhotos/michelle-desk-960.webp'
 import portraitUrl from '../assets/michPageAssets/michPhotos/hf_20260329_022232_608e361f-7fac-4089-bcf8-923d3e56c916.png'
+import portrait480Avif from '../assets/michPageAssets/michPhotos/hf_20260329_022232_608e361f-7fac-4089-bcf8-923d3e56c916-480.avif'
+import portrait960Avif from '../assets/michPageAssets/michPhotos/hf_20260329_022232_608e361f-7fac-4089-bcf8-923d3e56c916-960.avif'
+import portrait1600Avif from '../assets/michPageAssets/michPhotos/hf_20260329_022232_608e361f-7fac-4089-bcf8-923d3e56c916-1600.avif'
+import portrait480Webp from '../assets/michPageAssets/michPhotos/hf_20260329_022232_608e361f-7fac-4089-bcf8-923d3e56c916-480.webp'
+import portrait960Webp from '../assets/michPageAssets/michPhotos/hf_20260329_022232_608e361f-7fac-4089-bcf8-923d3e56c916-960.webp'
+import portrait1600Webp from '../assets/michPageAssets/michPhotos/hf_20260329_022232_608e361f-7fac-4089-bcf8-923d3e56c916-1600.webp'
+
+const MICHELLE_DESK_AVIF = `${michelleDesk480Avif} 480w, ${michelleDesk960Avif} 960w`
+const MICHELLE_DESK_WEBP = `${michelleDesk480Webp} 480w, ${michelleDesk960Webp} 960w`
+const PORTRAIT_AVIF = `${portrait480Avif} 480w, ${portrait960Avif} 960w, ${portrait1600Avif} 1600w`
+const PORTRAIT_WEBP = `${portrait480Webp} 480w, ${portrait960Webp} 960w, ${portrait1600Webp} 1600w`
+const ABOUT_FIGURE_SIZES = '(min-width: 1024px) 720px, (min-width: 768px) 50vw, 100vw'
+const SCROLL_PARAGRAPH_SIZES = '(min-width: 1024px) 30vw, (min-width: 768px) 40vw, 80vw'
 
 const About = () => {
   const { t } = useTranslation()
@@ -32,6 +49,10 @@ const About = () => {
           text={t('about.scrollText')}
           imageSrc={michelleDeskUrl}
           imageAlt={t('about.imageAlt')}
+          imageWidth={1024}
+          imageHeight={1536}
+          imageSources={{ avif: MICHELLE_DESK_AVIF, webp: MICHELLE_DESK_WEBP }}
+          imageSizes={SCROLL_PARAGRAPH_SIZES}
         />
       </section>
 
@@ -82,13 +103,19 @@ const About = () => {
             <Reveal>
               <figure className="m-0">
                 <div className="overflow-hidden bg-ink/5 shadow-[0_20px_50px_-24px_rgba(42,38,32,0.3)]">
-                  <img
-                    src={portraitUrl}
-                    alt="Michelle Castellanos"
-                    className="aspect-[4/5] w-full object-cover object-[center_18%]"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  <picture>
+                    <source type="image/avif" srcSet={PORTRAIT_AVIF} sizes={ABOUT_FIGURE_SIZES} />
+                    <source type="image/webp" srcSet={PORTRAIT_WEBP} sizes={ABOUT_FIGURE_SIZES} />
+                    <img
+                      src={portraitUrl}
+                      alt="Michelle Castellanos"
+                      width={1728}
+                      height={2140}
+                      className="aspect-[4/5] w-full object-cover object-[center_18%]"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
                 </div>
                 <figcaption className="mt-4 font-display text-sm italic text-neutral-500">
                   {t('about.photoCaption1')}
@@ -98,13 +125,19 @@ const About = () => {
             <Reveal delay={0.08}>
               <figure className="m-0">
                 <div className="overflow-hidden bg-ink/5 shadow-[0_20px_50px_-24px_rgba(42,38,32,0.3)]">
-                  <img
-                    src={michelleDeskUrl}
-                    alt=""
-                    className="aspect-[4/5] w-full object-cover object-center"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  <picture>
+                    <source type="image/avif" srcSet={MICHELLE_DESK_AVIF} sizes={ABOUT_FIGURE_SIZES} />
+                    <source type="image/webp" srcSet={MICHELLE_DESK_WEBP} sizes={ABOUT_FIGURE_SIZES} />
+                    <img
+                      src={michelleDeskUrl}
+                      alt=""
+                      width={1024}
+                      height={1536}
+                      className="aspect-[4/5] w-full object-cover object-center"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </picture>
                 </div>
                 <figcaption className="mt-4 font-display text-sm italic text-neutral-500">
                   {t('about.photoCaption2')}
