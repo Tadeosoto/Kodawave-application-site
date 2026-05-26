@@ -196,7 +196,7 @@ export default async function handler(req, res) {
   const localeLabel = normalizeLocale(payload.locale);
   const isNewSubscriber = !existingRow;
   if (isNewSubscriber) {
-    void sendOwnerSignupNotification({
+    await sendOwnerSignupNotification({
       subscriberEmail: email,
       locale: localeLabel,
     });
