@@ -1,0 +1,10 @@
+.lpFinal {
+  padding: clamp(4rem, 10vw, 7rem) clamp(1.25rem, 5vw, 4.5rem);
+  background: #4a4e44;
+  color: #f5f2ec;
+}
+
+.lpFinal__form {
+  max-width: 520px;
+  margin: 2rem auto 0;
+}

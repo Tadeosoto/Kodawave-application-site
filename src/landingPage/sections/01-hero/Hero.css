@@ -1,0 +1,380 @@
+.lpHeroShell {
+  position: relative;
+}
+
+/* TEMP — quitar después de la demo con el cliente */
+.lpHeroDemoToggle {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  z-index: 30;
+  border: 1px solid rgba(58, 56, 52, 0.22);
+  border-radius: 999px;
+  background: rgba(248, 246, 243, 0.92);
+  color: #3a3834;
+  padding: 0.45rem 0.85rem;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(8px);
+}
+
+.lpHeroShell--v2 .lpHeroDemoToggle {
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(20, 20, 20, 0.55);
+  color: #f5f2ec;
+}
+
+.lpHeroDemoToggle:hover {
+  transform: translateY(-1px);
+}
+
+.lpHero {
+  padding: clamp(3.5rem, 8vw, 6.5rem) clamp(1.25rem, 5vw, 4.5rem)
+    clamp(3rem, 6vw, 5rem);
+}
+
+.lpHero__grid {
+  display: grid;
+  gap: 2.5rem;
+  max-width: 1120px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.lpHero__title {
+  margin: 0.85rem 0 1.1rem;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2.35rem, 5.5vw, 3.85rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: #3a3834;
+}
+
+.lpHero__copy .lpBody {
+  max-width: 34rem;
+  margin-bottom: 1.65rem;
+}
+
+.lpHero__media {
+  width: 100%;
+  max-width: 420px;
+  margin-inline: auto;
+}
+
+@media (max-width: 699px) {
+  .lpHero--classic .lpHero__copy {
+    text-align: left;
+  }
+
+  .lpHero--classic .lpForm {
+    margin-inline: auto;
+    max-width: 20.5rem;
+  }
+
+  .lpHero--classic .lpForm__input,
+  .lpHero--classic .lpForm__input::placeholder,
+  .lpHero--classic .lpForm__btn {
+    text-align: center;
+  }
+
+  .lpHero--classic .lpForm__note,
+  .lpHero--classic .lpForm__msg {
+    text-align: center;
+  }
+}
+
+@media (min-width: 900px) {
+  .lpHero__grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 3.5rem;
+  }
+
+  .lpHero__media {
+    max-width: none;
+    margin: 0;
+  }
+}
+
+/* ——— Cinematic / GIF full-bleed (Hero v2) ——— */
+.lpHero--cinematic {
+  position: relative;
+  isolation: isolate;
+  min-height: min(100svh, 920px);
+  padding: 0;
+  overflow: hidden;
+  color: #f5f2ec;
+}
+
+.lpHeroCinematic__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.lpHeroCinematic__gif {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 72% center;
+  display: block;
+}
+
+.lpHeroCinematic__veil {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(18, 17, 15, 0.82) 0%,
+      rgba(18, 17, 15, 0.62) 42%,
+      rgba(18, 17, 15, 0.22) 62%,
+      rgba(18, 17, 15, 0.2) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(18, 17, 15, 0.4) 0%,
+      transparent 30%,
+      transparent 58%,
+      rgba(18, 17, 15, 0.55) 100%
+    );
+}
+
+.lpHeroCinematic__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: inherit;
+  width: 100%;
+  padding: clamp(5.25rem, 11vh, 7.5rem) clamp(1.15rem, 4.5vw, 3.5rem)
+    clamp(1.5rem, 3.5vh, 2.5rem);
+}
+
+.lpHeroCinematic__stack {
+  width: min(100%, 36rem);
+  max-width: 100%;
+}
+
+.lpHeroCinematic__topline {
+  width: 100%;
+}
+
+.lpHeroCinematic__copy {
+  width: 100%;
+}
+
+.lpHeroCinematic__eyebrow {
+  margin: 0;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(245, 242, 236, 0.72);
+}
+
+.lpHeroCinematic__title {
+  margin: 0.85rem 0 0.95rem;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: clamp(2rem, 7.2vw, 2.85rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.lpHeroCinematic__title em {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.lpHeroCinematic__body {
+  margin: 0 0 1.45rem;
+  max-width: 100%;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: clamp(0.92rem, 3.4vw, 1.05rem);
+  line-height: 1.62;
+  color: rgba(245, 242, 236, 0.86);
+}
+
+.lpHeroCinematic__form {
+  width: 100%;
+  max-width: 26rem;
+}
+
+.lpHeroCinematic__scroll {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.45rem;
+  margin: 2.1rem 0 0;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(245, 242, 236, 0.7);
+}
+
+.lpHeroCinematic__chevron {
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+/* Tablet */
+@media (min-width: 700px) {
+  .lpHeroCinematic__gif {
+    object-position: 68% center;
+  }
+
+  .lpHeroCinematic__stack {
+    width: min(52%, 30rem);
+  }
+
+  .lpHeroCinematic__title {
+    font-size: clamp(2.35rem, 4.6vw, 3.2rem);
+  }
+
+  .lpHeroCinematic__form {
+    max-width: none;
+  }
+}
+
+/* Desktop — copy ~ mitad del ancho */
+@media (min-width: 960px) {
+  .lpHero--cinematic {
+    min-height: min(100svh, 960px);
+  }
+
+  .lpHeroCinematic__inner {
+    justify-content: center;
+    padding: clamp(6rem, 12vh, 8.5rem) clamp(2.5rem, 6vw, 5.5rem)
+      clamp(2rem, 4vh, 3rem);
+  }
+
+  .lpHeroCinematic__stack {
+    width: 48%;
+    max-width: 40rem;
+  }
+
+  .lpHeroCinematic__title {
+    font-size: clamp(2.7rem, 3.8vw, 3.7rem);
+  }
+
+  .lpHeroCinematic__body {
+    max-width: 36rem;
+    font-size: clamp(1rem, 1.25vw, 1.12rem);
+  }
+
+  .lpHeroCinematic__form {
+    max-width: 32rem;
+  }
+
+  .lpHeroCinematic__scroll {
+    position: absolute;
+    right: clamp(2.5rem, 6vw, 5.5rem);
+    bottom: clamp(2rem, 4vh, 3rem);
+    margin: 0;
+    justify-content: flex-end;
+  }
+
+  .lpHeroCinematic__gif {
+    object-position: center right;
+  }
+
+  .lpHeroCinematic__veil {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(18, 17, 15, 0.8) 0%,
+        rgba(18, 17, 15, 0.58) 46%,
+        rgba(18, 17, 15, 0.16) 70%,
+        rgba(18, 17, 15, 0.18) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(18, 17, 15, 0.32) 0%,
+        transparent 28%,
+        transparent 64%,
+        rgba(18, 17, 15, 0.45) 100%
+      );
+  }
+}
+
+/* Mobile: eyebrow + título arriba; descripción + form abajo centrados */
+@media (max-width: 699px) {
+  .lpHeroCinematic__gif {
+    object-position: 78% 42%;
+  }
+
+  .lpHeroCinematic__veil {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(18, 17, 15, 0.42) 0%,
+        rgba(18, 17, 15, 0.28) 28%,
+        rgba(18, 17, 15, 0.58) 55%,
+        rgba(18, 17, 15, 0.86) 100%
+      );
+  }
+
+  .lpHeroCinematic__inner {
+    justify-content: flex-start;
+    padding-top: 4.35rem;
+    padding-bottom: 1.35rem;
+  }
+
+  .lpHeroCinematic__stack {
+    display: contents;
+  }
+
+  .lpHeroCinematic__topline {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .lpHeroCinematic__eyebrow {
+    margin-top: 0.15rem;
+  }
+
+  .lpHeroCinematic__title {
+    margin: 0.55rem 0 0;
+  }
+
+  .lpHeroCinematic__copy {
+    margin-top: auto;
+    width: 100%;
+  }
+
+  .lpHeroCinematic__body {
+    margin-top: 0;
+  }
+
+  .lpHeroCinematic__form {
+    margin-inline: auto;
+    max-width: 20.5rem;
+  }
+
+  .lpHeroCinematic__form .lpForm--overlay .lpForm__input,
+  .lpHeroCinematic__form .lpForm--overlay .lpForm__input::placeholder,
+  .lpHeroCinematic__form .lpForm--overlay .lpForm__btn {
+    text-align: center;
+  }
+
+  .lpHeroCinematic__form .lpForm--overlay .lpForm__note,
+  .lpHeroCinematic__form .lpForm--overlay .lpForm__msg {
+    text-align: center;
+  }
+
+  .lpHeroCinematic__scroll {
+    justify-content: center;
+    margin-top: 1.35rem;
+  }
+}

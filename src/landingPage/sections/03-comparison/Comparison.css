@@ -1,0 +1,46 @@
+.lpComparison {
+  padding: clamp(3rem, 7vw, 5.5rem) clamp(1.25rem, 5vw, 4.5rem)
+    clamp(3.5rem, 8vw, 6rem);
+  background: #f1efe9;
+}
+
+.lpComparison__cards {
+  display: grid;
+  gap: 1.15rem;
+  max-width: 920px;
+  margin: 2.25rem auto 0;
+}
+
+.lpComparison__card {
+  background: #fff;
+  border: 1px solid #ddd9d1;
+  border-radius: 4px;
+  padding: 1.6rem 1.4rem 1.75rem;
+  box-shadow: 0 6px 24px rgba(60, 55, 45, 0.04);
+}
+
+.lpComparison__cardTitle {
+  margin: 0 0 0.75rem;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8fb8a1;
+}
+
+.lpComparison__card .lpBody {
+  margin: 0;
+  text-align: left;
+}
+
+@media (min-width: 760px) {
+  .lpComparison__cards {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+  }
+
+  .lpComparison__card {
+    padding: 1.85rem 1.7rem 2rem;
+  }
+}

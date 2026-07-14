@@ -1,0 +1,49 @@
+.lpBenefits {
+  padding: clamp(3.5rem, 8vw, 6rem) clamp(1.25rem, 5vw, 4.5rem);
+}
+
+.lpBenefits__grid {
+  display: grid;
+  gap: 2.25rem;
+  max-width: 1000px;
+  margin: 2.5rem auto 0;
+}
+
+.lpBenefits__item {
+  text-align: center;
+}
+
+.lpBenefits__icon {
+  display: grid;
+  place-items: center;
+  width: 3.75rem;
+  height: 3.75rem;
+  margin: 0 auto 1.15rem;
+  color: #8fb8a1;
+}
+
+.lpBenefits__svg {
+  width: 2.85rem;
+  height: 2.85rem;
+  display: block;
+}
+
+.lpBenefits__title {
+  margin: 0 0 0.55rem;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+  font-weight: 500;
+  color: #3a3834;
+}
+
+.lpBenefits__item .lpBody {
+  margin: 0 auto;
+  max-width: 17rem;
+}
+
+@media (min-width: 800px) {
+  .lpBenefits__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}

@@ -1,0 +1,39 @@
+.lpPre {
+  padding: clamp(3.5rem, 8vw, 6rem) clamp(1.25rem, 5vw, 4.5rem)
+    clamp(3rem, 7vw, 5rem);
+}
+
+.lpPre__cards {
+  display: grid;
+  gap: 1rem;
+  max-width: 980px;
+  margin: 2.5rem auto 0;
+}
+
+.lpPre__card {
+  background: #fff;
+  border: 1px solid #ddd9d1;
+  border-radius: 4px;
+  padding: 1.5rem 1.35rem 1.65rem;
+  text-align: center;
+}
+
+.lpPre__cardTitle {
+  margin: 0 0 0.55rem;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.3rem, 2.2vw, 1.55rem);
+  font-weight: 500;
+  color: #3a3834;
+}
+
+.lpPre__card .lpBody {
+  margin: 0 auto;
+  max-width: 16rem;
+}
+
+@media (min-width: 800px) {
+  .lpPre__cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.15rem;
+  }
+}

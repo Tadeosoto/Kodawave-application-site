@@ -7,6 +7,8 @@ const routeLoaders = {
   "/blog": () => import("../pages/Blog"),
   "/contact": () => import("../pages/Contact"),
   "/alignna": () => import("../pages/Alignna"),
+  "/landing-page-esp": () => import("../pages/LandingPageEsp"),
+  "/landing-page-eng": () => import("../pages/LandingPageEng"),
 };
 
 const inFlight = new Set();
