@@ -107,7 +107,7 @@ export default function CaennaBrandPanel({ className = "" }) {
             </GlowPillLink>
             <div className="cardCaennaBrand__social" aria-label={t("parallaxCards.caennaSocialAria")}>
               <a
-                href="https://www.instagram.com/caenna.co/"
+                href="https://www.instagram.com/caenna_co/"
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label={t("parallaxCards.instagram")}
@@ -116,7 +116,7 @@ export default function CaennaBrandPanel({ className = "" }) {
               </a>
               <span aria-hidden>|</span>
               <a
-                href="https://www.tiktok.com/@caenna.co"
+                href="https://www.tiktok.com/@caenna_co"
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label={t("parallaxCards.tiktok")}
