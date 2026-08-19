@@ -1,8 +1,23 @@
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import WaitlistForm from "../landingPage/components/WaitlistForm";
-import heroGif from "../landingPage/assets/hero-cinematic.gif";
-import founderImage from "../assets/michPageAssets/michPhotos/michelle-desk.png";
 import "./AlignnaV2.css";
+
+const sectionImage = (filename) => `/images-inside-sections/${encodeURIComponent(filename)}`;
+
+const sectionImages = {
+  hero: sectionImage("Section 1 Image 1 V05.png"),
+  problemAfter: sectionImage("Section 2 Image 1 V03.png"),
+  problemInMoment: sectionImage("Section 2 Image 2 V01.png"),
+  stepWear: sectionImage("Section 3 Image 1 V02.png"),
+  stepFeel: sectionImage("Section 3 Image 2 V01.jpeg"),
+  stepOwn: sectionImage("Section 3 Image 3 V01.png"),
+  launchBelt: sectionImage("Section 5 Image 1 V01.png"),
+  lifeWork: sectionImage("Section 6 Image 1 V01.png"),
+  lifeMove: sectionImage("Section 6 Image 2 V03.png"),
+  lifeMoment: sectionImage("Section 6 Image 3 V01.png"),
+  founder: sectionImage("Section 9 Image 1 V06.png"),
+};
 
 const ease = [0.22, 0.61, 0.36, 1];
 const viewport = { once: true, amount: 0.18 };
@@ -15,6 +30,44 @@ const reveal = {
     transition: { duration: 0.72, ease },
   },
 };
+const problemViewport = { once: true, amount: 0.35 };
+const problemPanelLeft = {
+  hidden: { opacity: 0, clipPath: "inset(0 100% 0 0)" },
+  visible: { opacity: 1, clipPath: "inset(0 0 0 0)", transition: { duration: 0.85, ease, delay: 0 } },
+};
+const problemPanelRight = {
+  hidden: { opacity: 0, clipPath: "inset(0 100% 0 0)" },
+  visible: { opacity: 1, clipPath: "inset(0 0 0 0)", transition: { duration: 0.85, ease, delay: 1.45 } },
+};
+const problemPanelMobile = (delay) => ({
+  hidden: { opacity: 0, clipPath: "inset(0 0 100% 0)" },
+  visible: { opacity: 1, clipPath: "inset(0 0 0 0)", transition: { duration: 0.85, ease, delay } },
+});
+const problemArrowReveal = {
+  hidden: { opacity: 0, scaleX: 0, transformOrigin: "left center" },
+  visible: { opacity: 1, scaleX: 1, transformOrigin: "left center" },
+};
+const problemArrowLeft = {
+  ...problemArrowReveal,
+  visible: { ...problemArrowReveal.visible, transition: { duration: 0.55, ease, delay: 0.45 } },
+};
+const problemNowReveal = {
+  hidden: { opacity: 0, scale: 0.72 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.45, ease, delay: 0.85 } },
+};
+const problemArrowRight = {
+  ...problemArrowReveal,
+  visible: { ...problemArrowReveal.visible, transition: { duration: 0.55, ease, delay: 1.15 } },
+};
+const problemArrowDown = {
+  hidden: { opacity: 0, scaleY: 0, transformOrigin: "top center" },
+  visible: { opacity: 1, scaleY: 1, transformOrigin: "top center", transition: { duration: 0.55, ease, delay: 0.45 } },
+};
+const problemArrowDown2 = {
+  hidden: { opacity: 0, scaleY: 0, transformOrigin: "top center" },
+  visible: { opacity: 1, scaleY: 1, transformOrigin: "top center", transition: { duration: 0.55, ease, delay: 1.15 } },
+};
+
 const stagger = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.11, delayChildren: 0.06 } },
@@ -30,59 +83,167 @@ const formCopy = {
   submitting: "Securing…",
 };
 
-const heroFormCopy = {
+const launchFormCopy = {
   ...formCopy,
-  note: "No payment. No obligation. We’ll send you the Kickstarter link before the public launch.",
+  emailPlaceholder: "Your email",
+  note: "No payment. No obligation.",
 };
 
-const image = (id, alt) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1400&q=82`;
+const heroFormCopy = {
+  ...formCopy,
+  note: "No payment. No obligation. We'll send you the Kickstarter link before the public launch.",
+};
+
+const image = (id, extra = "") =>
+  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1800&q=82${extra.startsWith("&") ? extra : ""}`;
+
+const stepsViewport = { once: true, amount: 0.25 };
+const stepColumnDesktop = (index) => ({
+  hidden: { opacity: 0, clipPath: "inset(0 100% 0 0)" },
+  visible: {
+    opacity: 1,
+    clipPath: "inset(0 0 0 0)",
+    transition: {
+      duration: 0.65,
+      ease,
+      delay: index * 0.45,
+      staggerChildren: 0.12,
+      delayChildren: 0.14,
+    },
+  },
+});
+const stepColumnMobile = (index) => ({
+  hidden: { opacity: 0, clipPath: "inset(0 0 100% 0)" },
+  visible: {
+    opacity: 1,
+    clipPath: "inset(0 0 0 0)",
+    transition: {
+      duration: 0.65,
+      ease,
+      delay: index * 0.35,
+      staggerChildren: 0.1,
+      delayChildren: 0.12,
+    },
+  },
+});
+const stepFieldReveal = {
+  hidden: { opacity: 0, clipPath: "inset(0 0 100% 0)" },
+  visible: {
+    opacity: 1,
+    clipPath: "inset(0 0 0 0)",
+    transition: { duration: 0.5, ease },
+  },
+};
 
 const steps = [
   {
-    number: "01",
-    title: "Wear it.",
-    body: "A soft, adjustable belt made to disappear under your everyday clothes.",
-    image: image("photo-1506629905607-d405b7a2a33d", "Woman wearing casual clothing"),
+    number: 1,
+    title: "Wear it",
+    body: "Use Alignna at your desk, on the move, before an event, or whenever you want to feel more aware and present.",
+    image: sectionImages.stepWear,
   },
   {
-    number: "02",
-    title: "Feel it.",
-    body: "A discreet sensor notices when your body drifts before the habit settles in.",
-    image: image("photo-1518611012118-696072aa579a", "Mindful movement"),
+    number: 2,
+    title: "Feel it",
+    body: "When your core lets go, Alignna sends a subtle vibration cue—before a mirror or photograph points it out.",
+    image: sectionImages.stepFeel,
   },
   {
-    number: "03",
-    title: "Own it.",
-    body: "A quiet vibration brings awareness back to you — no shame, no pulling.",
-    image: image("photo-1544161515-4ab6ce6db874", "Gentle body care"),
+    number: 3,
+    title: "Own it",
+    body: "You make the adjustment. With repetition, you practise an awareness that belongs to you—not the belt.",
+    image: sectionImages.stepOwn,
+  },
+];
+
+const lifeSlides = [
+  {
+    id: "work",
+    label: "At work",
+    image: sectionImages.lifeWork,
+    alt: "Woman working at a desk with Alignna",
+    body: "At your desk. A quiet cue while you sit, type, and stay in the work.",
+  },
+  {
+    id: "move",
+    label: "On the move",
+    image: sectionImages.lifeMove,
+    alt: "Man walking through the city wearing Alignna",
+    body: "On the move. Present through the commute, the walk, the in-between.",
+  },
+  {
+    id: "moment",
+    label: "Before the moment",
+    image: sectionImages.lifeMoment,
+    alt: "Woman preparing in the mirror before an event",
+    body: "Before the moments that matter. Already aware, already ready.",
   },
 ];
 
 const quotes = [
-  ["KK", "“I stopped thinking about posture all day. Alignna catches the moment before I do.”"],
-  ["SY", "“It doesn’t correct me. It gives me a second to choose.”"],
-  ["EA", "“The vibration is tiny, but the change feels enormous.”"],
+  {
+    initials: "KK",
+    name: "Karen Kelly, 32",
+    quote: "I don’t ask people to delete photos of me anymore.",
+    featured: true,
+  },
+  {
+    initials: "SY",
+    name: "Sofia Yañez, 34",
+    quote: "I tried it to look better. It changed how I talk about myself.",
+  },
+  {
+    initials: "EA",
+    name: "Emilia Armstrong, 26",
+    quote: "I feel so different, but it’s still me, my body, a 1 sec fix that changed my whole stance.",
+  },
 ];
 
 const compare = [
   {
     name: "Shapewear",
-    symbol: "×",
-    points: ["Squeezes from the outside", "Stops working when removed", "Makes you depend on pressure"],
+    points: [
+      "Compresses and reshapes while worn",
+      "The garment creates the effect",
+      "Can feel tight or restrictive",
+      "The effect ends when it comes off",
+    ],
   },
   {
     name: "Alignna",
-    symbol: "✓",
     featured: true,
-    points: ["Builds awareness from within", "Works with or without the belt", "A gentle cue, never a correction"],
+    points: [
+      "Cues awareness in real time",
+      "You make the adjustment",
+      "No compression or rigid holding",
+      "Less reliance is the goal",
+    ],
   },
   {
     name: "Posture braces",
-    symbol: "×",
-    points: ["Pulls shoulders back", "Restricts natural movement", "Treats posture as a position"],
+    points: [
+      "Uses physical support to hold position",
+      "The brace provides the support",
+      "Can feel bulky under clothing",
+      "Support is tied to wearing it",
+    ],
   },
 ];
+
+function useIsMobile(maxWidth = 760) {
+  const query = `(max-width: ${maxWidth}px)`;
+  const [isMobile, setIsMobile] = useState(
+    () => typeof window !== "undefined" && window.matchMedia(query).matches,
+  );
+  useEffect(() => {
+    const mq = window.matchMedia(query);
+    const onChange = () => setIsMobile(mq.matches);
+    onChange();
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, [query]);
+  return isMobile;
+}
 
 function Check({ children }) {
   return <li><span>✓</span>{children}</li>;
@@ -108,6 +269,98 @@ function PriceBadge() {
   );
 }
 
+function LifeCarousel() {
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const total = lifeSlides.length;
+  const slide = lifeSlides[index];
+  const go = (delta) => setIndex((current) => (current + delta + total) % total);
+
+  useEffect(() => {
+    if (paused) return undefined;
+    const timer = window.setInterval(() => {
+      setIndex((current) => (current + 1) % total);
+    }, 5200);
+    return () => window.clearInterval(timer);
+  }, [index, paused, total]);
+
+  return (
+    <section
+      className="alignnaV2Life"
+      aria-roledescription="carousel"
+      aria-label="Made for real life"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <div className="alignnaV2Life__shell">
+        <div className="alignnaV2Life__media">
+          <div className="alignnaV2Life__stage">
+            <AnimatePresence mode="sync">
+              <motion.img
+                key={slide.id}
+                src={slide.image}
+                alt={slide.alt}
+                initial={{ opacity: 0, scale: 1.035 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.02 }}
+                transition={{ duration: 0.85, ease }}
+              />
+            </AnimatePresence>
+          </div>
+          <div className="alignnaV2Life__nav">
+            <button type="button" className="alignnaV2Life__arrow" onClick={() => go(-1)} aria-label="Previous lifestyle">
+              ‹
+            </button>
+            <div className="alignnaV2Life__thumbs" role="tablist" aria-label="Lifestyle scenes">
+              {lifeSlides.map((item, itemIndex) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={itemIndex === index}
+                  className={`alignnaV2Life__thumb${itemIndex === index ? " is-active" : ""}`}
+                  onClick={() => setIndex(itemIndex)}
+                >
+                  <span className="alignnaV2Life__thumbFrame">
+                    <img src={item.image} alt="" />
+                  </span>
+                  <b>{item.label}</b>
+                </button>
+              ))}
+            </div>
+            <button type="button" className="alignnaV2Life__arrow" onClick={() => go(1)} aria-label="Next lifestyle">
+              ›
+            </button>
+          </div>
+        </div>
+        <div className="alignnaV2Life__copy">
+          <div className="alignnaV2Life__progress">
+            <span className="alignnaV2Life__counter">{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}</span>
+            <div className="alignnaV2Life__bars" aria-hidden>
+              {lifeSlides.map((item, itemIndex) => (
+                <i key={item.id} className={itemIndex === index ? "is-active" : ""} />
+              ))}
+            </div>
+          </div>
+          <p className="alignnaV2__eyebrow">For more confident posture sitting, standing, and moving</p>
+          <h2>Made for real life.</h2>
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={slide.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.4, ease }}
+            >
+              {slide.body}
+            </motion.p>
+          </AnimatePresence>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function SectionIntro({ eyebrow, title, body, className = "" }) {
   return (
     <motion.div
@@ -125,15 +378,19 @@ function SectionIntro({ eyebrow, title, body, className = "" }) {
 }
 
 export default function AlignnaV2() {
+  const isMobile = useIsMobile();
+  const panelLeftVariants = isMobile ? problemPanelMobile(0) : problemPanelLeft;
+  const panelRightVariants = isMobile ? problemPanelMobile(1.45) : problemPanelRight;
+
   return (
     <div className="alignnaV2">
       <section className="alignnaV2Hero">
         <div className="alignnaV2Hero__media">
-          <img src={heroGif} alt="" aria-hidden />
+          <img src={sectionImages.hero} alt="" aria-hidden />
           <KickstarterBadge />
           <PriceBadge />
         </div>
-        <div className="alignnaV2Hero__veil" />
+        <div className="alignnaV2Hero__veil" aria-hidden />
         <div className="alignnaV2Hero__inner">
           <motion.div initial="hidden" animate="visible" variants={stagger} className="alignnaV2Hero__copy">
             <motion.div variants={reveal} className="alignnaV2Hero__heading">
@@ -150,30 +407,132 @@ export default function AlignnaV2() {
                 <Check>No squeezing</Check><Check>No pulling</Check><Check>No dependency</Check>
               </ul>
               <div className="alignnaV2Hero__form">
-                <WaitlistForm copy={heroFormCopy} locale="en-AU" source="alignna-v2-hero" ctaLabel="Secure my spot" variant="overlay" idSuffix="alignna-v2-hero" />
+                <WaitlistForm copy={heroFormCopy} locale="en-AU" source="alignna-v2-hero" ctaLabel="Secure my spot" variant="overlay" idSuffix="alignna-v2-hero" redirectTo="/alignna/thank-you" />
               </div>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      <section className="alignnaV2Problem alignnaV2__light">
-        <SectionIntro eyebrow="The real problem" title="The photo isn’t the problem. The delay is." body="Your body knows when it has drifted. The problem is that you usually notice it after the moment has already passed." />
-        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={stagger} className="alignnaV2Problem__timeline">
-          <motion.article variants={reveal}><img src={image("photo-1518611012118-696072aa579a", "Movement after the moment")} alt="After the moment" /><p>After the moment</p></motion.article>
-          <motion.div variants={reveal} className="alignnaV2Problem__now">Now <i>→</i></motion.div>
-          <motion.article variants={reveal}><img src={image("photo-1529693662653-9d480530a697", "Awareness in the moment")} alt="In the moment" /><p>In the moment</p></motion.article>
+      <section className="alignnaV2Problem">
+        <motion.div
+          className="alignnaV2Problem__intro"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          variants={stagger}
+        >
+          <motion.p variants={reveal} className="alignnaV2__eyebrow">The real problem</motion.p>
+          <motion.h2 variants={reveal}>The photo isn’t the problem. The delay is.</motion.h2>
+          <motion.p variants={reveal} className="alignnaV2Problem__lead">
+            You straighten the second you see yourself. The posture was available all along—awareness simply arrived late. Alignna moves that moment forward.
+          </motion.p>
+        </motion.div>
+        <motion.div
+          className="alignnaV2Problem__split"
+          initial="hidden"
+          whileInView="visible"
+          viewport={problemViewport}
+          variants={{ hidden: {}, visible: {} }}
+        >
+          <motion.article
+            className="alignnaV2Problem__panel alignnaV2Problem__panel--left"
+            variants={panelLeftVariants}
+          >
+            <img src={sectionImages.problemAfter} alt="Woman looking away after noticing herself too late" />
+            <span className="alignnaV2Problem__tag">After the moment</span>
+            <p className="alignnaV2Problem__caption">Why didn’t I notice?</p>
+          </motion.article>
+
+          <motion.div
+            className="alignnaV2Problem__timeline alignnaV2Problem__timeline--mobile"
+            aria-hidden="true"
+            variants={{ hidden: {}, visible: {} }}
+          >
+            <motion.span
+              className="alignnaV2Problem__arrow alignnaV2Problem__arrow--down"
+              variants={problemArrowDown}
+            />
+            <motion.span
+              className="alignnaV2Problem__now"
+              variants={problemNowReveal}
+            >
+              Now
+            </motion.span>
+            <motion.span
+              className="alignnaV2Problem__arrow alignnaV2Problem__arrow--down"
+              variants={problemArrowDown2}
+            />
+          </motion.div>
+
+          <motion.article
+            className="alignnaV2Problem__panel alignnaV2Problem__panel--right"
+            variants={panelRightVariants}
+          >
+            <img src={sectionImages.problemInMoment} alt="Woman standing with upright posture in the moment" />
+            <span className="alignnaV2Problem__tag">In the moment</span>
+            <p className="alignnaV2Problem__caption alignnaV2Problem__caption--end">Notice sooner. Choose for yourself.</p>
+          </motion.article>
+
+          <motion.div
+            className="alignnaV2Problem__timeline alignnaV2Problem__timeline--desktop"
+            aria-hidden="true"
+            variants={{ hidden: {}, visible: {} }}
+          >
+            <motion.span
+              className="alignnaV2Problem__arrow alignnaV2Problem__arrow--left"
+              variants={problemArrowLeft}
+            />
+            <motion.span
+              className="alignnaV2Problem__now"
+              variants={problemNowReveal}
+            >
+              Now
+            </motion.span>
+            <motion.span
+              className="alignnaV2Problem__arrow alignnaV2Problem__arrow--right"
+              variants={problemArrowRight}
+            />
+          </motion.div>
         </motion.div>
       </section>
 
       <section className="alignnaV2Steps alignnaV2__light">
-        <SectionIntro eyebrow="How Alignna works" title="Wear it. Feel it. Own it." />
-        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={stagger} className="alignnaV2Steps__grid">
-          {steps.map((step) => <motion.article key={step.number} variants={reveal}>
-            <img src={step.image} alt="" />
-            <p className="alignnaV2Steps__number">Step {step.number}</p>
-            <h3>{step.title}</h3><p>{step.body}</p>
-          </motion.article>)}
+        <motion.div
+          className="alignnaV2Steps__intro"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          variants={stagger}
+        >
+          <motion.p variants={reveal} className="alignnaV2__eyebrow">How Alignna works</motion.p>
+          <motion.h2 variants={reveal}>Wear it. Feel it. Own it.</motion.h2>
+        </motion.div>
+        <motion.div
+          className="alignnaV2Steps__grid"
+          initial="hidden"
+          whileInView="visible"
+          viewport={stepsViewport}
+          variants={{ hidden: {}, visible: {} }}
+        >
+          {steps.map((step, index) => (
+            <motion.article
+              key={step.number}
+              className="alignnaV2Steps__step"
+              variants={isMobile ? stepColumnMobile(index) : stepColumnDesktop(index)}
+            >
+              <motion.p className="alignnaV2Steps__number" variants={stepFieldReveal}>
+                Step {step.number}
+              </motion.p>
+              <motion.h3 variants={stepFieldReveal}>{step.title}</motion.h3>
+              <motion.div className="alignnaV2Steps__media" variants={stepFieldReveal}>
+                <img src={step.image} alt="" />
+              </motion.div>
+              <motion.p className="alignnaV2Steps__body" variants={stepFieldReveal}>
+                {step.body}
+              </motion.p>
+            </motion.article>
+          ))}
         </motion.div>
       </section>
 
@@ -195,52 +554,217 @@ export default function AlignnaV2() {
       </section>
 
       <section className="alignnaV2Launch">
-        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={stagger} className="alignnaV2Launch__card">
-          <motion.div variants={reveal}><p className="alignnaV2__eyebrow">We’re launching on</p><strong>Kickstarter</strong><h2>Before Alignna goes public.</h2><p>Join the early list for first access and the launch price.</p></motion.div>
-          <motion.div variants={reveal}><WaitlistForm copy={formCopy} locale="en-AU" source="alignna-v2-mid" ctaLabel="Notify me" variant="light" idSuffix="alignna-v2-mid" /></motion.div>
-        </motion.div>
-      </section>
-
-      <section className="alignnaV2Life alignnaV2__light">
-        <div className="alignnaV2Life__image"><img src={image("photo-1496747611176-843222e1e57c", "Woman at work")} alt="Made for real life" /></div>
-        <div className="alignnaV2Life__copy">
-          <p className="alignnaV2__eyebrow">At work · On the move · Before the moment</p>
-          <span className="alignnaV2Life__counter">01 / 03</span>
-          <h2>Made for real life.</h2>
-          <p>Designed to move with the day you already have — sitting, walking, commuting, and everything in between.</p>
-          <div className="alignnaV2Life__thumbs"><span /><span /><span /></div>
+        <div className="alignnaV2Launch__shell">
+          <div className="alignnaV2Launch__blob" aria-hidden />
+          <motion.div
+            className="alignnaV2Launch__card"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+            variants={stagger}
+          >
+            <motion.div className="alignnaV2Launch__content" variants={reveal}>
+              <p className="alignnaV2Launch__eyebrow">We&apos;re launching on</p>
+              <p className="alignnaV2Launch__kickstarter" aria-label="Kickstarter">Kickstarter</p>
+              <h2>Before Alignna goes public.</h2>
+              <p className="alignnaV2Launch__lead">
+                Leave your email and we&apos;ll send you the campaign link before the public launch.
+              </p>
+              <WaitlistForm
+                copy={launchFormCopy}
+                locale="en-AU"
+                source="alignna-v2-mid"
+                ctaLabel="Notify me"
+                variant="light"
+                idSuffix="alignna-v2-mid"
+                redirectTo="/alignna/thank-you"
+              />
+            </motion.div>
+          </motion.div>
+          <div className="alignnaV2Launch__beltWrap" aria-hidden>
+            <motion.img
+              className="alignnaV2Launch__belt"
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewport}
+              variants={reveal}
+              src={sectionImages.launchBelt}
+              alt=""
+            />
+          </div>
         </div>
       </section>
 
-      <section className="alignnaV2Testimonials alignnaV2__light">
-        <SectionIntro eyebrow="Early experiences" title="What users are saying." />
-        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={stagger} className="alignnaV2Testimonials__grid">
-          {quotes.map(([initials, quote], index) => <motion.article key={initials} variants={reveal} className={index === 0 ? "is-featured" : ""}><b>{initials}</b><p>{quote}</p></motion.article>)}
+      <LifeCarousel />
+
+      <section className="alignnaV2Testimonials">
+        <SectionIntro className="alignnaV2Testimonials__intro" eyebrow="Early experiences" title="What users are saying." />
+        <motion.div
+          className="alignnaV2Testimonials__board"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          variants={stagger}
+        >
+          {quotes.map((item) => (
+            <motion.article key={item.initials} variants={reveal} className={item.featured ? "is-featured" : ""}>
+              <svg className="alignnaV2Testimonials__mark" viewBox="0 0 48 32" aria-hidden="true">
+                <path fill="currentColor" d="M18.2 32H0V17.6C0 7.5 6.2 1.2 16.2 0l2.1 6.8c-5.3 1.2-8 4.4-8 9.6V14h8V32zm29.8 0H29.8V17.6c0-10.1 6.2-16.4 16.2-17.6L48 6.8c-5.3 1.2-8 4.4-8 9.6V14h8V32z" />
+              </svg>
+              <p>{item.quote}</p>
+              <footer>
+                <b>{item.initials}</b>
+                <span>{item.name}</span>
+              </footer>
+            </motion.article>
+          ))}
         </motion.div>
       </section>
 
-      <section className="alignnaV2Compare alignnaV2__light">
-        <SectionIntro eyebrow="Alignna vs. the old way" title="Awareness changes everything." />
-        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={stagger} className="alignnaV2Compare__grid">
-          {compare.map((item) => <motion.article key={item.name} variants={reveal} className={item.featured ? "is-featured" : ""}>
-            <div className="alignnaV2Compare__symbol">{item.symbol}</div><h3>{item.name}</h3>
-            <ul>{item.points.map((point) => <li key={point}>{point}</li>)}</ul>
-          </motion.article>)}
+      <section className="alignnaV2Compare">
+        <SectionIntro
+          className="alignnaV2Compare__intro"
+          eyebrow="Alignna vs. the old way"
+          title="Support that works with you—not instead of you."
+        />
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          variants={stagger}
+          className="alignnaV2Compare__grid"
+        >
+          {compare.map((item) => (
+            <motion.article key={item.name} variants={reveal} className={item.featured ? "is-featured" : ""}>
+              {item.featured ? <header>Alignna</header> : <h3>{item.name}</h3>}
+              <ul>
+                {item.points.map((point) => (
+                  <li key={point}>
+                    <span className="alignnaV2Compare__mark" aria-hidden>
+                      {item.featured ? (
+                        <svg viewBox="0 0 16 16">
+                          <path d="M3.2 8.3 6.4 11.6 12.8 4.4" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      ) : (
+                        <svg viewBox="0 0 16 16">
+                          <path d="M4.2 4.2 11.8 11.8M11.8 4.2 4.2 11.8" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
+                        </svg>
+                      )}
+                    </span>
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </motion.article>
+          ))}
         </motion.div>
       </section>
 
-      <section className="alignnaV2Founder alignnaV2__light">
-        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={stagger} className="alignnaV2Founder__grid">
-          <motion.img variants={reveal} src={founderImage} alt="Michelle, Alignna founder" />
-          <motion.div variants={reveal}><p className="alignnaV2__eyebrow">The story behind Alignna</p><h2>Freedom, not correction.</h2><blockquote>“I wanted a reminder that belonged to my body — not another thing that forced it into place.”</blockquote><p>Michelle is a mechanical engineer who tested every cue, material, and vibration until Alignna felt natural enough to forget you are wearing it.</p><p className="alignnaV2Founder__pill">25 prototypes later</p></motion.div>
-        </motion.div>
+      <section className="alignnaV2Founder">
+        <div className="alignnaV2Founder__shell">
+          <motion.figure
+            className="alignnaV2Founder__media"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+            variants={reveal}
+          >
+            <img src={sectionImages.founder} alt="Michelle Castellanos, Alignna founder, holding the Alignna belt" />
+          </motion.figure>
+          <div className="alignnaV2Founder__rule" aria-hidden />
+          <motion.div
+            className="alignnaV2Founder__copy"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+            variants={stagger}
+          >
+            <span className="alignnaV2Founder__quotes" aria-hidden>“</span>
+            <motion.p variants={reveal} className="alignnaV2__eyebrow">Hear from the founder</motion.p>
+            <motion.h2 variants={reveal}>I believe caring for your body should feel like freedom—not correction.</motion.h2>
+            <motion.div variants={reveal} className="alignnaV2Founder__body">
+              <p>I watched person after person catch their reflection and instantly straighten. The posture was already there. What was missing was awareness.</p>
+              <p>As a mechanical engineer who cares deeply about movement and wellbeing, I built the discreet reminder I wanted for myself. Twenty-five prototypes later, that idea became Alignna.</p>
+            </motion.div>
+            <motion.p variants={reveal} className="alignnaV2Founder__byline">
+              <strong>Michelle Castellanos</strong>
+              <span> • Mechanical engineer and founder of Alignna</span>
+            </motion.p>
+            <motion.p variants={reveal} className="alignnaV2Founder__pill">
+              <span className="alignnaV2Founder__check" aria-hidden>
+                <svg viewBox="0 0 16 16">
+                  <path d="M3.2 8.3 6.4 11.6 12.8 4.4" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+              25 prototypes
+            </motion.p>
+          </motion.div>
+        </div>
       </section>
 
       <section className="alignnaV2Final">
-        <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={stagger} className="alignnaV2Final__grid">
-          <motion.div variants={reveal}><p className="alignnaV2__eyebrow">Launch offer</p><h2>Secure the USD 89 launch offer.</h2><p>Be first in line when Alignna launches on Kickstarter.</p><WaitlistForm copy={formCopy} locale="en-AU" source="alignna-v2-final" ctaLabel="Get the USD 89 offer" variant="dark" idSuffix="alignna-v2-final" /></motion.div>
-          <motion.div variants={reveal} className="alignnaV2Final__price"><span>Retail USD 149</span><strong>USD 89</strong><b>−40%</b><img src={image("photo-1523275335684-37898b6baf30", "Alignna product placeholder")} alt="Alignna product placeholder" /></motion.div>
-        </motion.div>
+        <div className="alignnaV2Final__panel">
+          <motion.div
+            className="alignnaV2Final__copy"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+            variants={stagger}
+          >
+            <motion.p variants={reveal} className="alignnaV2Final__soon">Coming soon on</motion.p>
+            <motion.p variants={reveal} className="alignnaV2Final__kickstarter" aria-label="Kickstarter">Kickstarter</motion.p>
+            <motion.h2 variants={reveal}>Secure the USD 89 launch offer.</motion.h2>
+            <motion.p variants={reveal} className="alignnaV2Final__lead">
+              Join the list now. We&apos;ll send you the Kickstarter link before Alignna goes public.
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            className="alignnaV2Final__visual"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+            variants={reveal}
+          >
+            <article className="alignnaV2Final__offer">
+              <div className="alignnaV2Final__offerRow">
+                <div className="alignnaV2Final__retail">
+                  <small>Retail</small>
+                  <s>USD 149</s>
+                </div>
+                <span className="alignnaV2Final__arrow" aria-hidden>→</span>
+                <div className="alignnaV2Final__pay">
+                  <small>You pay</small>
+                  <p>
+                    <em>USD</em>
+                    <strong>89</strong>
+                  </p>
+                </div>
+                <b className="alignnaV2Final__badge">−40%</b>
+              </div>
+              <p className="alignnaV2Final__offerNote">First 24 hours only · then USD 129 for the rest of the campaign</p>
+            </article>
+            <img className="alignnaV2Final__belt" src={sectionImages.launchBelt} alt="Alignna belt" />
+          </motion.div>
+
+          <motion.div
+            className="alignnaV2Final__form"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+            variants={reveal}
+          >
+            <WaitlistForm
+              copy={launchFormCopy}
+              locale="en-AU"
+              source="alignna-v2-final"
+              ctaLabel="Get the USD 89 offer"
+              variant="light"
+              idSuffix="alignna-v2-final"
+              redirectTo="/alignna/thank-you"
+            />
+          </motion.div>
+        </div>
       </section>
     </div>
   );

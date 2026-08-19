@@ -1,4 +1,5 @@
 import { useId, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./WaitlistForm.css";
 
 const NOTIFY_EMAIL =
@@ -17,9 +18,11 @@ export default function WaitlistForm({
   ctaLabel,
   variant = "light",
   idSuffix = "default",
+  redirectTo,
 }) {
   const reactId = useId();
   const inputId = `lp-email-${idSuffix}-${reactId}`;
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("idle");
   const [message, setMessage] = useState("");
@@ -62,6 +65,9 @@ export default function WaitlistForm({
       setStatus("success");
       setMessage(copy.success);
       setEmail("");
+      if (redirectTo) {
+        navigate(redirectTo, { replace: true });
+      }
     } catch (error) {
       if (!import.meta.env.VITE_NEWSLETTER_ENDPOINT) {
         const subject = encodeURIComponent("Alignna — early access");
@@ -71,6 +77,9 @@ export default function WaitlistForm({
         window.location.href = `mailto:${NOTIFY_EMAIL}?subject=${subject}&body=${body}`;
         setStatus("success");
         setMessage(copy.successMailto);
+        if (redirectTo) {
+          navigate(redirectTo, { replace: true });
+        }
         return;
       }
       setStatus("error");

@@ -8,6 +8,7 @@ const About = lazy(() => import('./pages/About'))
 const Blog = lazy(() => import('./pages/Blog'))
 const Alignna = lazy(() => import('./pages/Alignna'))
 const AlignnaV2 = lazy(() => import('./pages/AlignnaV2'))
+const AlignnaThankYou = lazy(() => import('./pages/AlignnaThankYou'))
 const Contact = lazy(() => import('./pages/Contact'))
 const MyWork = lazy(() => import('./pages/MyWork'))
 const LandingPageEsp = lazy(() => import('./pages/LandingPageEsp'))
@@ -50,6 +51,14 @@ function App() {
         element={
           <Suspense fallback={<LandingFallback />}>
             <AlignnaV2 />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/alignna/thank-you"
+        element={
+          <Suspense fallback={<LandingFallback />}>
+            <AlignnaThankYou />
           </Suspense>
         }
       />
