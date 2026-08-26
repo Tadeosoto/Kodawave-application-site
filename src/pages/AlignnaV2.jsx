@@ -15,9 +15,9 @@ const sectionImages = {
   stepFeel: sectionImage("Section 3 Image 2 V01.jpeg"),
   stepOwn: sectionImage("Section 3 Image 3 V01.png"),
   launchBelt: sectionImage("Section 5 Image 1 V01.png"),
-  lifeWork: sectionImage("Section 6 Image 1 V01.png"),
-  lifeMove: sectionImage("Section 6 Image 2 V03.png"),
-  lifeMoment: sectionImage("Section 6 Image 3 V01.png"),
+  lifeWork: sectionImage("Marron.png"),
+  lifeMove: sectionImage("Rosa.png"),
+  lifeMoment: sectionImage("Verde olivo.png"),
   founder: sectionImage("imagen-about-founder.png"),
   kickstarterLogo: sectionImage("KS-logo-hero.png"),
   kickstarterWordmark: sectionImage("Kickstarter-Logo.svg"),
@@ -195,23 +195,23 @@ const steps = [
 const lifeSlides = [
   {
     id: "work",
-    label: "At work",
+    label: "Brown",
     image: sectionImages.lifeWork,
-    alt: "Woman working at a desk with Alignna",
+    alt: "Alignna belt in brown",
     body: "At your desk. A quiet cue while you sit, type, and stay in the work.",
   },
   {
     id: "move",
-    label: "On the move",
+    label: "Pink",
     image: sectionImages.lifeMove,
-    alt: "Man walking through the city wearing Alignna",
+    alt: "Alignna belt in pink",
     body: "On the move. Present through the commute, the walk, the in-between.",
   },
   {
     id: "moment",
-    label: "Before the moment",
+    label: "Olive",
     image: sectionImages.lifeMoment,
-    alt: "Woman preparing in the mirror before an event",
+    alt: "Alignna belt in olive green",
     body: "Before the moments that matter. Already aware, already ready.",
   },
 ];
@@ -403,9 +403,9 @@ function LifeCarousel() {
                 key={slide.id}
                 src={slide.image}
                 alt={slide.alt}
-                initial={{ opacity: 0, scale: 1.035 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.02 }}
+                initial={{ opacity: 0, scale: 1.22 }}
+                animate={{ opacity: 1, scale: 1.18 }}
+                exit={{ opacity: 0, scale: 1.2 }}
                 transition={{ duration: 0.85, ease }}
               />
             </AnimatePresence>
