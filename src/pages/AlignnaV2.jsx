@@ -927,7 +927,7 @@ export default function AlignnaV2() {
               alt="Kickstarter"
             />
             <motion.h2 variants={reveal}>
-              Secure the USD 89 launch offer.
+              Secure the USD $99 launch offer.
             </motion.h2>
             <motion.p variants={reveal} className="alignnaV2Final__lead">
               Join the list now. We&apos;ll send you the Kickstarter link before
@@ -955,7 +955,7 @@ export default function AlignnaV2() {
                   <small>You pay</small>
                   <p>
                     <em>USD</em>
-                    <strong>89</strong>
+                    <strong>99</strong>
                   </p>
                 </div>
                 <b className="alignnaV2Final__badge">−40%</b>
