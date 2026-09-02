@@ -114,7 +114,10 @@
 .alignnaV2Hero__priceBadge small { color: rgba(255,255,255,.85); }
 
 .alignnaV2Testimonials { padding: clamp(5rem, 11vw, 10rem) clamp(1.25rem, 6vw, 7rem); }
-.alignnaV2Problem { --problem-bg: var(--av-cream); background: var(--av-cream); min-height: 100svh; min-height: 100dvh; }
+.alignnaV2Problem { background: var(--av-cream); min-height: 100svh; min-height: 100dvh; }
+@media (min-width: 761px) {
+  .alignnaV2Problem { display: flex; flex-direction: column; }
+}
 .alignnaV2Problem__intro { max-width: 52rem; padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 7vw, 7rem) clamp(1.2rem, 2.4vw, 1.8rem); text-align: left; }
 .alignnaV2Problem__intro h2 { max-width: 16ch; }
 .alignnaV2Problem__lead {
@@ -126,99 +129,28 @@
   font-size: clamp(18px, 1.2vw, 1.125rem);
   line-height: 1.7;
 }
-.alignnaV2Problem__media {
-  position: relative;
-  flex: 0 0 auto;
-  width: 100%;
-  max-width: min(56rem, calc(100% - clamp(3rem, 14vw, 14rem)));
-  margin: 0 auto;
-  padding: 0 clamp(1.5rem, 7vw, 7rem);
-  overflow: hidden;
-  border-radius: 1rem;
-  background: var(--problem-bg);
-  line-height: 0;
-}
+.alignnaV2Problem__split { position: relative; display: grid; grid-template-columns: 1fr 1fr; }
 @media (min-width: 761px) {
-  .alignnaV2Problem {
-    display: grid;
-    grid-template-columns: minmax(16rem, .48fr) minmax(0, 1.12fr);
-    grid-template-rows: auto minmax(0, 1fr);
-    align-items: center;
-    column-gap: clamp(1.5rem, 3vw, 3rem);
-    row-gap: clamp(1rem, 2vw, 1.6rem);
-  }
-  .alignnaV2Problem__intro {
-    grid-column: 1 / -1;
-    grid-row: 1;
-  }
-  .alignnaV2Problem__lead {
-    grid-column: 1;
-    grid-row: 2;
-    align-self: center;
-    max-width: 22rem;
-    margin: 0;
-    justify-self: end;
-    padding: clamp(2rem, 4vw, 3rem) clamp(1.75rem, 3vw, 2.75rem) clamp(2rem, 4vw, 3.2rem) clamp(1.5rem, 7vw, 7rem);
-    border-left: 0;
-    border-right: 1px solid #d5cfc4;
-  }
-  .alignnaV2Problem__media {
-    grid-column: 2;
-    grid-row: 2;
-    align-self: center;
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    padding: 0 clamp(1.5rem, 7vw, 7rem) 0 0;
-  }
-  .alignnaV2Problem__media img {
-    width: 100%;
-    max-height: min(62vh, 42rem);
-    margin-inline: 0;
-  }
-  .alignnaV2Problem__media::after {
-    background:
-      radial-gradient(
-        ellipse 95% 90% at 50% 50%,
-        transparent 62%,
-        rgba(247, 245, 240, .28) 80%,
-        var(--problem-bg) 94%,
-        var(--problem-bg) 100%
-      ),
-      linear-gradient(to bottom, var(--problem-bg) 0%, rgba(247, 245, 240, .5) 4%, transparent 12%),
-      linear-gradient(to top, var(--problem-bg) 0%, rgba(247, 245, 240, .5) 3.5%, transparent 10%),
-      linear-gradient(to right, var(--problem-bg) 0%, rgba(247, 245, 240, .45) 2.5%, transparent 6.5%),
-      linear-gradient(to left, var(--problem-bg) 0%, rgba(247, 245, 240, .45) 2.5%, transparent 6.5%);
-  }
+  .alignnaV2Problem__split { flex: 1; min-height: 0; }
 }
-.alignnaV2Problem__media::after {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  z-index: 1;
-  pointer-events: none;
-  border-radius: inherit;
-  background:
-    radial-gradient(
-      ellipse 95% 90% at 50% 50%,
-      transparent 62%,
-      rgba(247, 245, 240, .28) 80%,
-      var(--problem-bg) 94%,
-      var(--problem-bg) 100%
-    ),
-    linear-gradient(to bottom, var(--problem-bg) 0%, rgba(247, 245, 240, .5) 4%, transparent 12%),
-    linear-gradient(to top, var(--problem-bg) 0%, rgba(247, 245, 240, .5) 3.5%, transparent 10%),
-    linear-gradient(to right, var(--problem-bg) 0%, rgba(247, 245, 240, .45) 2.5%, transparent 6.5%),
-    linear-gradient(to left, var(--problem-bg) 0%, rgba(247, 245, 240, .45) 2.5%, transparent 6.5%);
+.alignnaV2Problem__split::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; z-index: 2; width: 1px; background: rgba(255,255,255,.45); }
+.alignnaV2Problem__panel { position: relative; overflow: hidden; background: #d8d4cc; }
+@media (min-width: 761px) {
+  .alignnaV2Problem__panel { height: 100%; min-height: 0; }
 }
-.alignnaV2Problem__media img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  object-position: center;
-  border-radius: inherit;
-}
+.alignnaV2Problem__panel img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.alignnaV2Problem__timeline { z-index: 4; display: flex; align-items: center; pointer-events: none; }
+.alignnaV2Problem__timeline--desktop { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.alignnaV2Problem__timeline--mobile { display: none; }
+.alignnaV2Problem__now { display: grid; place-items: center; width: 4.35rem; height: 4.35rem; border-radius: 50%; background: var(--av-sage); color: #fff; font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; box-shadow: 0 8px 22px rgba(32,40,31,.18); flex: 0 0 auto; }
+.alignnaV2Problem__arrow { position: relative; display: block; height: 1.5px; background: var(--av-sage); flex: 0 0 auto; }
+.alignnaV2Problem__arrow--left,
+.alignnaV2Problem__arrow--right { width: clamp(3.5rem, 9vw, 7rem); transform-origin: left center; }
+.alignnaV2Problem__arrow--left::after, .alignnaV2Problem__arrow--right::after { content: ""; position: absolute; top: 50%; transform: translateY(-50%); border: 4px solid transparent; border-left-color: var(--av-sage); }
+.alignnaV2Problem__arrow--left::after { right: -1px; }
+.alignnaV2Problem__arrow--right::after { right: 0; }
+.alignnaV2Problem__arrow--down { width: 1.5px; height: 2.1rem; transform-origin: top center; }
+.alignnaV2Problem__arrow--down::after { right: auto; left: 50%; top: 100%; transform: translate(-50%, -1px); border-left-color: transparent; border-top-color: var(--av-sage); }
 
 .alignnaV2Steps {
   --steps-bg: var(--av-cream);
@@ -1319,30 +1251,38 @@
     padding: clamp(.85rem, 2dvh, 1.2rem) 1.5rem max(1rem, env(safe-area-inset-bottom, 0px));
     font-size: 18px;
     line-height: 1.5;
-    border-left: 0;
-    border-right: 0;
   }
-  .alignnaV2Problem__media {
-    flex: 0 0 auto;
-    max-width: none;
-    margin: 0;
+  .alignnaV2Problem__split {
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 1fr) auto minmax(0, 1fr);
     padding: 0 1.5rem;
-    border-radius: .85rem;
+    gap: 0;
   }
-  .alignnaV2Problem__media::after {
-    background:
-      radial-gradient(
-        ellipse 96% 92% at 50% 50%,
-        transparent 60%,
-        rgba(247, 245, 240, .26) 78%,
-        var(--problem-bg) 93%,
-        var(--problem-bg) 100%
-      ),
-      linear-gradient(to bottom, var(--problem-bg) 0%, rgba(247, 245, 240, .48) 4.5%, transparent 13%),
-      linear-gradient(to top, var(--problem-bg) 0%, rgba(247, 245, 240, .48) 4%, transparent 11%),
-      linear-gradient(to right, var(--problem-bg) 0%, rgba(247, 245, 240, .42) 3%, transparent 7%),
-      linear-gradient(to left, var(--problem-bg) 0%, rgba(247, 245, 240, .42) 3%, transparent 7%);
+  .alignnaV2Problem__split::before { display: none; }
+  .alignnaV2Problem__panel {
+    position: relative;
+    height: 100%;
+    min-height: 0;
+    border-radius: .95rem;
   }
+  .alignnaV2Problem__panel img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .alignnaV2Problem__panel--left { grid-row: 1; grid-column: 1; }
+  .alignnaV2Problem__panel--right { grid-row: 3; grid-column: 1; }
+  .alignnaV2Problem__timeline--desktop { display: none; }
+  .alignnaV2Problem__timeline--mobile { display: flex; flex-direction: column; grid-row: 2; grid-column: 1; position: relative; left: auto; top: auto; margin: 0 auto; transform: none; }
+  .alignnaV2Problem__now { width: 3.2rem; height: 3.2rem; font-size: .64rem; }
+  .alignnaV2Problem__arrow--down { height: clamp(1rem, 2.2dvh, 1.5rem); }
   .alignnaV2Inside__media { max-width: 100%; margin: 3rem auto 2rem; }
   .alignnaV2Inside__render {
     aspect-ratio: auto;
@@ -1931,7 +1871,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .alignnaV2 * { scroll-behavior: auto !important; }
-  .alignnaV2Problem__media { transition: none !important; animation: none !important; }
+  .alignnaV2Problem__panel,
+  .alignnaV2Problem__arrow,
+  .alignnaV2Problem__now,
   .alignnaV2Steps__step,
   .alignnaV2Steps__number,
   .alignnaV2Steps__step h3,

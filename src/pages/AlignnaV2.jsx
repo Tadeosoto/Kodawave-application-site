@@ -12,7 +12,6 @@ const situationImage = (filename) =>
 
 const sectionImages = {
   hero: sectionImage("Gif-hero.gif"),
-  problemBeforeAfter: sectionImage("Beforeafter.gif"),
   stepWear: sectionImage("Wear it.gif"),
   stepFeel: sectionImage("Feel it.gif"),
   stepOwn: sectionImage("OwnitV2.gif"),
@@ -26,6 +25,22 @@ const sectionImages = {
   insideRender: sectionImage("Render.gif"),
 };
 
+const problemBeforeImage = "/beforeAndAfter-section/BeforeOnly.webp";
+const problemAfterImage = "/beforeAndAfter-section/AfterOnly.webp";
+
+function ProblemPanelImage({ src, alt }) {
+  return (
+    <img
+      src={src}
+      alt={alt}
+      width={720}
+      height={406}
+      decoding="async"
+      loading="lazy"
+    />
+  );
+}
+
 const ease = [0.22, 0.61, 0.36, 1];
 const viewport = { once: true, amount: 0.18 };
 const reveal = {
@@ -35,6 +50,75 @@ const reveal = {
     y: 0,
     filter: "blur(0px)",
     transition: { duration: 0.72, ease },
+  },
+};
+const problemViewport = { once: true, amount: 0.35 };
+const problemPanelLeft = {
+  hidden: { opacity: 0, clipPath: "inset(0 100% 0 0)" },
+  visible: {
+    opacity: 1,
+    clipPath: "inset(0 0 0 0)",
+    transition: { duration: 0.85, ease, delay: 0 },
+  },
+};
+const problemPanelRight = {
+  hidden: { opacity: 0, clipPath: "inset(0 100% 0 0)" },
+  visible: {
+    opacity: 1,
+    clipPath: "inset(0 0 0 0)",
+    transition: { duration: 0.85, ease, delay: 1.45 },
+  },
+};
+const problemPanelMobile = (delay) => ({
+  hidden: { opacity: 0, clipPath: "inset(0 0 100% 0)" },
+  visible: {
+    opacity: 1,
+    clipPath: "inset(0 0 0 0)",
+    transition: { duration: 0.85, ease, delay },
+  },
+});
+const problemArrowReveal = {
+  hidden: { opacity: 0, scaleX: 0, transformOrigin: "left center" },
+  visible: { opacity: 1, scaleX: 1, transformOrigin: "left center" },
+};
+const problemArrowLeft = {
+  ...problemArrowReveal,
+  visible: {
+    ...problemArrowReveal.visible,
+    transition: { duration: 0.55, ease, delay: 0.45 },
+  },
+};
+const problemNowReveal = {
+  hidden: { opacity: 0, scale: 0.72 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.45, ease, delay: 0.85 },
+  },
+};
+const problemArrowRight = {
+  ...problemArrowReveal,
+  visible: {
+    ...problemArrowReveal.visible,
+    transition: { duration: 0.55, ease, delay: 1.15 },
+  },
+};
+const problemArrowDown = {
+  hidden: { opacity: 0, scaleY: 0, transformOrigin: "top center" },
+  visible: {
+    opacity: 1,
+    scaleY: 1,
+    transformOrigin: "top center",
+    transition: { duration: 0.55, ease, delay: 0.45 },
+  },
+};
+const problemArrowDown2 = {
+  hidden: { opacity: 0, scaleY: 0, transformOrigin: "top center" },
+  visible: {
+    opacity: 1,
+    scaleY: 1,
+    transformOrigin: "top center",
+    transition: { duration: 0.55, ease, delay: 1.15 },
   },
 };
 const stagger = {
@@ -567,6 +651,10 @@ function SectionIntro({ eyebrow, title, body, className = "" }) {
 
 export default function AlignnaV2() {
   const isMobile = useIsMobile();
+  const panelLeftVariants = isMobile ? problemPanelMobile(0) : problemPanelLeft;
+  const panelRightVariants = isMobile
+    ? problemPanelMobile(1.45)
+    : problemPanelRight;
 
   return (
     <div className="alignnaV2">
@@ -649,16 +737,73 @@ export default function AlignnaV2() {
           </motion.h2>
         </motion.div>
         <motion.div
-          className="alignnaV2Problem__media"
+          className="alignnaV2Problem__split"
           initial="hidden"
           whileInView="visible"
-          viewport={viewport}
-          variants={reveal}
+          viewport={problemViewport}
+          variants={{ hidden: {}, visible: {} }}
         >
-          <img
-            src={sectionImages.problemBeforeAfter}
-            alt="Before and after posture awareness comparison"
-          />
+          <motion.article
+            className="alignnaV2Problem__panel alignnaV2Problem__panel--left"
+            variants={panelLeftVariants}
+          >
+            <ProblemPanelImage
+              src={problemBeforeImage}
+              alt="Posture before posture awareness"
+            />
+          </motion.article>
+
+          <motion.div
+            className="alignnaV2Problem__timeline alignnaV2Problem__timeline--mobile"
+            aria-hidden="true"
+            variants={{ hidden: {}, visible: {} }}
+          >
+            <motion.span
+              className="alignnaV2Problem__arrow alignnaV2Problem__arrow--down"
+              variants={problemArrowDown}
+            />
+            <motion.span
+              className="alignnaV2Problem__now"
+              variants={problemNowReveal}
+            >
+              Now
+            </motion.span>
+            <motion.span
+              className="alignnaV2Problem__arrow alignnaV2Problem__arrow--down"
+              variants={problemArrowDown2}
+            />
+          </motion.div>
+
+          <motion.article
+            className="alignnaV2Problem__panel alignnaV2Problem__panel--right"
+            variants={panelRightVariants}
+          >
+            <ProblemPanelImage
+              src={problemAfterImage}
+              alt="Posture after posture awareness"
+            />
+          </motion.article>
+
+          <motion.div
+            className="alignnaV2Problem__timeline alignnaV2Problem__timeline--desktop"
+            aria-hidden="true"
+            variants={{ hidden: {}, visible: {} }}
+          >
+            <motion.span
+              className="alignnaV2Problem__arrow alignnaV2Problem__arrow--left"
+              variants={problemArrowLeft}
+            />
+            <motion.span
+              className="alignnaV2Problem__now"
+              variants={problemNowReveal}
+            >
+              Now
+            </motion.span>
+            <motion.span
+              className="alignnaV2Problem__arrow alignnaV2Problem__arrow--right"
+              variants={problemArrowRight}
+            />
+          </motion.div>
         </motion.div>
         <motion.p
           className="alignnaV2Problem__lead"
