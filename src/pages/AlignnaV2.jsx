@@ -7,20 +7,23 @@ import "./AlignnaV2.css";
 const sectionImage = (filename) =>
   `/images-inside-sections/${encodeURIComponent(filename)}`;
 
+const situationImage = (filename) =>
+  `/images-inside-sections/wear-it-every-situation/${encodeURIComponent(filename)}`;
+
 const sectionImages = {
   hero: sectionImage("Gif-hero.gif"),
-  problemAfter: sectionImage("Section 2 Image 1 V03.png"),
-  problemInMoment: sectionImage("Section 2 Image 2 V01.png"),
-  stepWear: sectionImage("Section 3 Image 1 V02.png"),
-  stepFeel: sectionImage("Section 3 Image 2 V01.jpeg"),
-  stepOwn: sectionImage("Section 3 Image 3 V01.png"),
+  problemBeforeAfter: sectionImage("Beforeafter.gif"),
+  stepWear: sectionImage("Wear it.gif"),
+  stepFeel: sectionImage("Feel it.gif"),
+  stepOwn: sectionImage("OwnitV2.gif"),
   launchBelt: sectionImage("Section 5 Image 1 V01.png"),
-  lifeWork: sectionImage("Marron.png"),
-  lifeMove: sectionImage("Rosa.png"),
-  lifeMoment: sectionImage("Verde olivo.png"),
+  colorBrown: sectionImage("Marron.png"),
+  colorPink: sectionImage("Rosa.png"),
+  colorOlive: sectionImage("Verde olivo.png"),
   founder: sectionImage("imagen-about-founder.png"),
   kickstarterLogo: sectionImage("KS-logo-hero.png"),
   kickstarterWordmark: sectionImage("Kickstarter-Logo.svg"),
+  insideRender: sectionImage("Render.gif"),
 };
 
 const ease = [0.22, 0.61, 0.36, 1];
@@ -34,76 +37,6 @@ const reveal = {
     transition: { duration: 0.72, ease },
   },
 };
-const problemViewport = { once: true, amount: 0.35 };
-const problemPanelLeft = {
-  hidden: { opacity: 0, clipPath: "inset(0 100% 0 0)" },
-  visible: {
-    opacity: 1,
-    clipPath: "inset(0 0 0 0)",
-    transition: { duration: 0.85, ease, delay: 0 },
-  },
-};
-const problemPanelRight = {
-  hidden: { opacity: 0, clipPath: "inset(0 100% 0 0)" },
-  visible: {
-    opacity: 1,
-    clipPath: "inset(0 0 0 0)",
-    transition: { duration: 0.85, ease, delay: 1.45 },
-  },
-};
-const problemPanelMobile = (delay) => ({
-  hidden: { opacity: 0, clipPath: "inset(0 0 100% 0)" },
-  visible: {
-    opacity: 1,
-    clipPath: "inset(0 0 0 0)",
-    transition: { duration: 0.85, ease, delay },
-  },
-});
-const problemArrowReveal = {
-  hidden: { opacity: 0, scaleX: 0, transformOrigin: "left center" },
-  visible: { opacity: 1, scaleX: 1, transformOrigin: "left center" },
-};
-const problemArrowLeft = {
-  ...problemArrowReveal,
-  visible: {
-    ...problemArrowReveal.visible,
-    transition: { duration: 0.55, ease, delay: 0.45 },
-  },
-};
-const problemNowReveal = {
-  hidden: { opacity: 0, scale: 0.72 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.45, ease, delay: 0.85 },
-  },
-};
-const problemArrowRight = {
-  ...problemArrowReveal,
-  visible: {
-    ...problemArrowReveal.visible,
-    transition: { duration: 0.55, ease, delay: 1.15 },
-  },
-};
-const problemArrowDown = {
-  hidden: { opacity: 0, scaleY: 0, transformOrigin: "top center" },
-  visible: {
-    opacity: 1,
-    scaleY: 1,
-    transformOrigin: "top center",
-    transition: { duration: 0.55, ease, delay: 0.45 },
-  },
-};
-const problemArrowDown2 = {
-  hidden: { opacity: 0, scaleY: 0, transformOrigin: "top center" },
-  visible: {
-    opacity: 1,
-    scaleY: 1,
-    transformOrigin: "top center",
-    transition: { duration: 0.55, ease, delay: 1.15 },
-  },
-};
-
 const stagger = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.11, delayChildren: 0.06 } },
@@ -129,9 +62,6 @@ const heroFormCopy = {
   ...formCopy,
   note: "No payment. No obligation. We'll send you the Kickstarter link before the public launch.",
 };
-
-const image = (id, extra = "") =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1800&q=82${extra.startsWith("&") ? extra : ""}`;
 
 const stepsViewport = { once: true, amount: 0.25 };
 const stepColumnDesktop = (index) => ({
@@ -176,43 +106,105 @@ const steps = [
     number: 1,
     title: "Wear it",
     body: "Use Alignna at your desk, on the move, before an event, or whenever you want to feel more aware and present.",
-    image: sectionImages.stepWear,
+    media: sectionImages.stepWear,
+    alt: "Person wearing the Alignna belt",
   },
   {
     number: 2,
     title: "Feel it",
-    body: "When your core lets go, Alignna sends a subtle vibration cue—before a mirror or photograph points it out.",
-    image: sectionImages.stepFeel,
+    body: "When your core lets go, Alignna sends a subtle vibration cue, before a mirror or photograph points it out.",
+    media: sectionImages.stepFeel,
+    alt: "Alignna belt sending a vibration cue",
   },
   {
     number: 3,
     title: "Own it",
-    body: "You make the adjustment. With repetition, you practise an awareness that belongs to you—not the belt.",
-    image: sectionImages.stepOwn,
+    body: "You make the adjustment. With repetition, you practise an awareness that belongs to you, not the belt.",
+    media: sectionImages.stepOwn,
+    alt: "Person confidently wearing Alignna in daily life",
   },
 ];
 
 const lifeSlides = [
   {
-    id: "work",
+    id: "light",
+    label: "Light",
+    image: situationImage("For the everyday1.jpg"),
+    alt: "Woman walking along the beach wearing Alignna",
+    body: "Joy that does not ask you to perform. Awareness that stays soft, so the moment can stay yours.",
+  },
+  {
+    id: "together",
+    label: "Together",
+    image: situationImage("For the everyday.jpg"),
+    alt: "Friends gathered outdoors wearing Alignna",
+    body: "Belonging without second-guessing yourself. Present with the people who matter.",
+  },
+  {
+    id: "ease",
+    label: "Ease",
+    image: situationImage("For the everyday 5.jpg"),
+    alt: "Woman leaning on a park bench wearing Alignna",
+    body: "The unhurried feeling of a day with nowhere to be. A quiet cue before you drift.",
+  },
+  {
+    id: "still",
+    label: "Still",
+    image: situationImage("For the every day 4.jpg"),
+    alt: "Woman meditating by the ocean wearing Alignna",
+    body: "Breath, horizon, and room to settle. Support that respects the calm you are building.",
+  },
+  {
+    id: "flow",
+    label: "Flow",
+    image: situationImage("For the every day 3.jpg"),
+    alt: "Women stretching on the beach wearing Alignna",
+    body: "Movement that feels natural, not forced. Your body in rhythm, your posture following.",
+  },
+  {
+    id: "open",
+    label: "Open",
+    image: situationImage("For the everyday (2).jpg"),
+    alt: "Woman wearing Alignna in everyday life",
+    body: "Confidence that does not need announcing. Wear it like it was always part of you.",
+  },
+  {
+    id: "alive",
+    label: "Alive",
+    image: situationImage("For the eeryday 2.jpg"),
+    alt: "Men running on the beach wearing Alignna",
+    body: "Energy in your stride, ease in your core. Stay aware while life moves fast.",
+  },
+  {
+    id: "whole",
+    label: "Whole",
+    image: situationImage("For t hee veryday 4.jpg"),
+    alt: "Person wearing Alignna during an everyday moment",
+    body: "Not a fix for how you look—a habit for how you feel. More you, more often.",
+  },
+];
+
+const colorSlides = [
+  {
+    id: "brown",
     label: "Brown",
-    image: sectionImages.lifeWork,
+    image: sectionImages.colorBrown,
     alt: "Alignna belt in brown",
-    body: "At your desk. A quiet cue while you sit, type, and stay in the work.",
+    body: "A warm neutral strap that pairs with everyday outfits.",
   },
   {
-    id: "move",
+    id: "pink",
     label: "Pink",
-    image: sectionImages.lifeMove,
+    image: sectionImages.colorPink,
     alt: "Alignna belt in pink",
-    body: "On the move. Present through the commute, the walk, the in-between.",
+    body: "A soft rose tone with the same discreet profile.",
   },
   {
-    id: "moment",
+    id: "olive",
     label: "Olive",
-    image: sectionImages.lifeMoment,
+    image: sectionImages.colorOlive,
     alt: "Alignna belt in olive green",
-    body: "Before the moments that matter. Already aware, already ready.",
+    body: "An earthy green option for understated wear.",
   },
 ];
 
@@ -233,37 +225,6 @@ const quotes = [
     name: "Emilia Armstrong, 26",
     quote:
       "I feel so different, but it’s still me, my body, a 1 sec fix that changed my whole stance.",
-  },
-];
-
-const compare = [
-  {
-    name: "Shapewear",
-    points: [
-      "Compresses and reshapes while worn",
-      "The garment creates the effect",
-      "Can feel tight or restrictive",
-      "The effect ends when it comes off",
-    ],
-  },
-  {
-    name: "Alignna",
-    featured: true,
-    points: [
-      "Cues awareness in real time",
-      "You make the adjustment",
-      "No compression or rigid holding",
-      "Less reliance is the goal",
-    ],
-  },
-  {
-    name: "Posture braces",
-    points: [
-      "Uses physical support to hold position",
-      "The brace provides the support",
-      "Can feel bulky under clothing",
-      "Support is tied to wearing it",
-    ],
   },
 ];
 
@@ -362,22 +323,44 @@ function PriceBadge() {
   return (
     <div
       className="alignnaV2Hero__priceBadge"
-      aria-label="First 24 hours, 89 US dollars on Kickstarter"
+      aria-label="First 24 hours, 99 US dollars on Kickstarter"
     >
       <span>First 24 hours</span>
-      <strong>USD 89</strong>
+      <strong>USD $99</strong>
       <small>On Kickstarter</small>
     </div>
   );
 }
 
-function LifeCarousel() {
+function MediaCarouselSection({
+  className,
+  ariaLabel,
+  slides,
+  introTitle,
+  eyebrow,
+  heading,
+  variant = "lifestyle",
+  thumbAriaLabel = "Scenes",
+  prevLabel = "Previous slide",
+  nextLabel = "Next slide",
+  thumbVisibleCount,
+}) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  const total = lifeSlides.length;
-  const slide = lifeSlides[index];
+  const total = slides.length;
+  const slide = slides[index];
+  const isProduct = variant === "product";
   const go = (delta) =>
     setIndex((current) => (current + delta + total) % total);
+  const useThumbCarousel =
+    typeof thumbVisibleCount === "number" && thumbVisibleCount > 0;
+  const thumbStart =
+    useThumbCarousel && total > thumbVisibleCount
+      ? Math.max(
+          0,
+          Math.min(index - (thumbVisibleCount - 1), total - thumbVisibleCount),
+        )
+      : 0;
 
   useEffect(() => {
     if (paused) return undefined;
@@ -389,75 +372,118 @@ function LifeCarousel() {
 
   return (
     <section
-      className="alignnaV2Life"
+      className={className}
       aria-roledescription="carousel"
-      aria-label="Made for real life"
+      aria-label={ariaLabel}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="alignnaV2Life__shell">
-        <div className="alignnaV2Life__media">
-          <div className="alignnaV2Life__stage">
+      {introTitle ? (
+        <motion.div
+          className={`${className}__intro`}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          variants={reveal}
+        >
+          <h2>{introTitle}</h2>
+        </motion.div>
+      ) : null}
+      <div className={`${className}__shell`}>
+        <div className={`${className}__media`}>
+          <div className={`${className}__stage`}>
             <AnimatePresence mode="sync">
               <motion.img
                 key={slide.id}
                 src={slide.image}
                 alt={slide.alt}
-                initial={{ opacity: 0, scale: 1.22 }}
-                animate={{ opacity: 1, scale: 1.18 }}
-                exit={{ opacity: 0, scale: 1.2 }}
+                initial={{ opacity: 0, scale: isProduct ? 1.22 : 1.035 }}
+                animate={{ opacity: 1, scale: isProduct ? 1.18 : 1 }}
+                exit={{ opacity: 0, scale: isProduct ? 1.2 : 1.02 }}
                 transition={{ duration: 0.85, ease }}
               />
             </AnimatePresence>
           </div>
-          <div className="alignnaV2Life__nav">
+          <div className={`${className}__nav`}>
             <button
               type="button"
-              className="alignnaV2Life__arrow"
+              className={`${className}__arrow`}
               onClick={() => go(-1)}
-              aria-label="Previous lifestyle"
+              aria-label={prevLabel}
             >
               ‹
             </button>
-            <div
-              className="alignnaV2Life__thumbs"
-              role="tablist"
-              aria-label="Lifestyle scenes"
-            >
-              {lifeSlides.map((item, itemIndex) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={itemIndex === index}
-                  className={`alignnaV2Life__thumb${itemIndex === index ? " is-active" : ""}`}
-                  onClick={() => setIndex(itemIndex)}
+            {useThumbCarousel ? (
+              <div
+                className={`${className}__thumbsViewport`}
+                style={{
+                  "--thumb-offset": thumbStart,
+                  "--thumb-visible": thumbVisibleCount,
+                }}
+              >
+                <div
+                  className={`${className}__thumbs ${className}__thumbs--carousel`}
+                  role="tablist"
+                  aria-label={thumbAriaLabel}
                 >
-                  <span className="alignnaV2Life__thumbFrame">
-                    <img src={item.image} alt="" />
-                  </span>
-                  <b>{item.label}</b>
-                </button>
-              ))}
-            </div>
+                  {slides.map((item, itemIndex) => (
+                    <button
+                      key={item.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={itemIndex === index}
+                      className={`${className}__thumb${itemIndex === index ? " is-active" : ""}`}
+                      onClick={() => setIndex(itemIndex)}
+                    >
+                      <span className={`${className}__thumbFrame`}>
+                        <img src={item.image} alt="" />
+                      </span>
+                      <b>{item.label}</b>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div
+                className={`${className}__thumbs`}
+                role="tablist"
+                aria-label={thumbAriaLabel}
+              >
+                {slides.map((item, itemIndex) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={itemIndex === index}
+                    className={`${className}__thumb${itemIndex === index ? " is-active" : ""}`}
+                    onClick={() => setIndex(itemIndex)}
+                  >
+                    <span className={`${className}__thumbFrame`}>
+                      <img src={item.image} alt="" />
+                    </span>
+                    <b>{item.label}</b>
+                  </button>
+                ))}
+              </div>
+            )}
             <button
               type="button"
-              className="alignnaV2Life__arrow"
+              className={`${className}__arrow`}
               onClick={() => go(1)}
-              aria-label="Next lifestyle"
+              aria-label={nextLabel}
             >
               ›
             </button>
           </div>
         </div>
-        <div className="alignnaV2Life__copy">
-          <div className="alignnaV2Life__progress">
-            <span className="alignnaV2Life__counter">
+        <div className={`${className}__copy`}>
+          <div className={`${className}__progress`}>
+            <span className={`${className}__counter`}>
               {String(index + 1).padStart(2, "0")} /{" "}
               {String(total).padStart(2, "0")}
             </span>
-            <div className="alignnaV2Life__bars" aria-hidden>
-              {lifeSlides.map((item, itemIndex) => (
+            <div className={`${className}__bars`} aria-hidden>
+              {slides.map((item, itemIndex) => (
                 <i
                   key={item.id}
                   className={itemIndex === index ? "is-active" : ""}
@@ -465,10 +491,8 @@ function LifeCarousel() {
               ))}
             </div>
           </div>
-          <p className="alignnaV2__eyebrow">
-            For more confident posture sitting, standing, and moving
-          </p>
-          <h2>Made for real life.</h2>
+          {eyebrow ? <p className="alignnaV2__eyebrow">{eyebrow}</p> : null}
+          {heading ? <h2>{heading}</h2> : null}
           <AnimatePresence mode="wait">
             <motion.p
               key={slide.id}
@@ -483,6 +507,39 @@ function LifeCarousel() {
         </div>
       </div>
     </section>
+  );
+}
+
+function ColorsCarousel() {
+  return (
+    <MediaCarouselSection
+      className="alignnaV2Colors"
+      ariaLabel="Alignna color options"
+      slides={colorSlides}
+      introTitle="Match your lifestyle, available in the following colors"
+      variant="product"
+      thumbAriaLabel="Color options"
+      prevLabel="Previous color"
+      nextLabel="Next color"
+    />
+  );
+}
+
+function LifeCarousel() {
+  return (
+    <MediaCarouselSection
+      className="alignnaV2Life"
+      ariaLabel="Made for real life"
+      slides={lifeSlides}
+      introTitle="Wear it in every situation"
+      eyebrow="On the move, while walking, or working, even for the in-betweens."
+      heading="Made for real life."
+      variant="lifestyle"
+      thumbVisibleCount={2}
+      thumbAriaLabel="Lifestyle scenes"
+      prevLabel="Previous lifestyle"
+      nextLabel="Next lifestyle"
+    />
   );
 }
 
@@ -510,10 +567,6 @@ function SectionIntro({ eyebrow, title, body, className = "" }) {
 
 export default function AlignnaV2() {
   const isMobile = useIsMobile();
-  const panelLeftVariants = isMobile ? problemPanelMobile(0) : problemPanelLeft;
-  const panelRightVariants = isMobile
-    ? problemPanelMobile(1.45)
-    : problemPanelRight;
 
   return (
     <div className="alignnaV2">
@@ -592,83 +645,20 @@ export default function AlignnaV2() {
             The real problem
           </motion.p>
           <motion.h2 variants={reveal}>
-            Look the posture before and after
+            See the effects of posture awareness, before and after
           </motion.h2>
         </motion.div>
         <motion.div
-          className="alignnaV2Problem__split"
+          className="alignnaV2Problem__media"
           initial="hidden"
           whileInView="visible"
-          viewport={problemViewport}
-          variants={{ hidden: {}, visible: {} }}
+          viewport={viewport}
+          variants={reveal}
         >
-          <motion.article
-            className="alignnaV2Problem__panel alignnaV2Problem__panel--left"
-            variants={panelLeftVariants}
-          >
-            <img
-              src={sectionImages.problemAfter}
-              alt="Woman looking away after noticing herself too late"
-            />
-            <span className="alignnaV2Problem__tag">After the moment</span>
-            <p className="alignnaV2Problem__caption">Why didn’t I notice?</p>
-          </motion.article>
-
-          <motion.div
-            className="alignnaV2Problem__timeline alignnaV2Problem__timeline--mobile"
-            aria-hidden="true"
-            variants={{ hidden: {}, visible: {} }}
-          >
-            <motion.span
-              className="alignnaV2Problem__arrow alignnaV2Problem__arrow--down"
-              variants={problemArrowDown}
-            />
-            <motion.span
-              className="alignnaV2Problem__now"
-              variants={problemNowReveal}
-            >
-              Now
-            </motion.span>
-            <motion.span
-              className="alignnaV2Problem__arrow alignnaV2Problem__arrow--down"
-              variants={problemArrowDown2}
-            />
-          </motion.div>
-
-          <motion.article
-            className="alignnaV2Problem__panel alignnaV2Problem__panel--right"
-            variants={panelRightVariants}
-          >
-            <img
-              src={sectionImages.problemInMoment}
-              alt="Woman standing with upright posture in the moment"
-            />
-            <span className="alignnaV2Problem__tag">In the moment</span>
-            <p className="alignnaV2Problem__caption alignnaV2Problem__caption--end">
-              Notice sooner. Choose for yourself.
-            </p>
-          </motion.article>
-
-          <motion.div
-            className="alignnaV2Problem__timeline alignnaV2Problem__timeline--desktop"
-            aria-hidden="true"
-            variants={{ hidden: {}, visible: {} }}
-          >
-            <motion.span
-              className="alignnaV2Problem__arrow alignnaV2Problem__arrow--left"
-              variants={problemArrowLeft}
-            />
-            <motion.span
-              className="alignnaV2Problem__now"
-              variants={problemNowReveal}
-            >
-              Now
-            </motion.span>
-            <motion.span
-              className="alignnaV2Problem__arrow alignnaV2Problem__arrow--right"
-              variants={problemArrowRight}
-            />
-          </motion.div>
+          <img
+            src={sectionImages.problemBeforeAfter}
+            alt="Before and after posture awareness comparison"
+          />
         </motion.div>
         <motion.p
           className="alignnaV2Problem__lead"
@@ -678,8 +668,8 @@ export default function AlignnaV2() {
           variants={reveal}
         >
           You straighten the second you see yourself. The posture was available
-          all along—awareness simply arrived late. Alignna moves that moment
-          forward.
+          all along, awareness simply arrived late. Alignna brings that habit to
+          you.
         </motion.p>
       </section>
 
@@ -721,10 +711,10 @@ export default function AlignnaV2() {
               </motion.p>
               <motion.h3 variants={stepFieldReveal}>{step.title}</motion.h3>
               <motion.div
-                className="alignnaV2Steps__media"
+                className={`alignnaV2Steps__media${step.number === 1 ? " alignnaV2Steps__media--wear" : ""}${step.number === 3 ? " alignnaV2Steps__media--own" : ""}`}
                 variants={stepFieldReveal}
               >
-                <img src={step.image} alt="" />
+                <img src={step.media} alt={step.alt} />
               </motion.div>
               <motion.p
                 className="alignnaV2Steps__body"
@@ -747,49 +737,10 @@ export default function AlignnaV2() {
           whileInView="visible"
           viewport={viewport}
           variants={stagger}
-          className="alignnaV2Inside__device"
+          className="alignnaV2Inside__media"
         >
-          <motion.div
-            variants={reveal}
-            className="alignnaV2Inside__annotations alignnaV2Inside__annotations--left"
-          >
-            <span>
-              <b>01</b> Precision motion sensor
-            </span>
-            <span>
-              <b>02</b> Breathable, invisible fabric
-            </span>
-            <span>
-              <b>03</b> Universal soft adjustment
-            </span>
-          </motion.div>
           <motion.div variants={reveal} className="alignnaV2Inside__render">
-            <img
-              src={image(
-                "photo-1523275335684-37898b6baf30",
-                "Alignna product placeholder",
-              )}
-              alt="Alignna product render placeholder"
-            />
-            <i>
-              Alignna
-              <br />
-              smart belt
-            </i>
-          </motion.div>
-          <motion.div
-            variants={reveal}
-            className="alignnaV2Inside__annotations"
-          >
-            <span>
-              <b>04</b> Silent vibration motor
-            </span>
-            <span>
-              <b>05</b> Up to 5 days of battery
-            </span>
-            <span>
-              <b>06</b> Designed for everyday movement
-            </span>
+            <img src={sectionImages.insideRender} alt="Alignna belt render" />
           </motion.div>
         </motion.div>
         <p className="alignnaV2Inside__quote">
@@ -846,6 +797,8 @@ export default function AlignnaV2() {
         </div>
       </section>
 
+      <ColorsCarousel />
+
       <LifeCarousel />
 
       <section className="alignnaV2Testimonials">
@@ -887,63 +840,16 @@ export default function AlignnaV2() {
         </motion.div>
       </section>
 
-      <section className="alignnaV2Compare">
-        <SectionIntro
-          className="alignnaV2Compare__intro"
-          eyebrow="Alignna vs. the old way"
-          title="Support that works with you—not instead of you."
-        />
+      <section className="alignnaV2Founder">
         <motion.div
+          className="alignnaV2Founder__intro"
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
-          variants={stagger}
-          className="alignnaV2Compare__grid"
+          variants={reveal}
         >
-          {compare.map((item) => (
-            <motion.article
-              key={item.name}
-              variants={reveal}
-              className={item.featured ? "is-featured" : ""}
-            >
-              {item.featured ? <header>Alignna</header> : <h3>{item.name}</h3>}
-              <ul>
-                {item.points.map((point) => (
-                  <li key={point}>
-                    <span className="alignnaV2Compare__mark" aria-hidden>
-                      {item.featured ? (
-                        <svg viewBox="0 0 16 16">
-                          <path
-                            d="M3.2 8.3 6.4 11.6 12.8 4.4"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2.4"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      ) : (
-                        <svg viewBox="0 0 16 16">
-                          <path
-                            d="M4.2 4.2 11.8 11.8M11.8 4.2 4.2 11.8"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2.4"
-                            strokeLinecap="round"
-                          />
-                        </svg>
-                      )}
-                    </span>
-                    {point}
-                  </li>
-                ))}
-              </ul>
-            </motion.article>
-          ))}
+          <h2>About the founder</h2>
         </motion.div>
-      </section>
-
-      <section className="alignnaV2Founder">
         <div className="alignnaV2Founder__shell">
           <motion.figure
             className="alignnaV2Founder__media"
@@ -968,19 +874,11 @@ export default function AlignnaV2() {
             <span className="alignnaV2Founder__quotes" aria-hidden>
               “
             </span>
-            <motion.p variants={reveal} className="alignnaV2__eyebrow">
-              About the founder
-            </motion.p>
-            <motion.h2 variants={reveal}>
+            <motion.p variants={reveal} className="alignnaV2Founder__statement">
               I believe caring for your body should feel like freedom, not
               correction.
-            </motion.h2>
+            </motion.p>
             <motion.div variants={reveal} className="alignnaV2Founder__body">
-              <p>
-                I watched person after person catch their reflection and
-                instantly straighten. The posture was already there. What was
-                missing was awareness.
-              </p>
               <p>
                 As a mechanical engineer who cares deeply about movement and
                 wellbeing, I built the discreet reminder I wanted for myself.

@@ -56,14 +56,18 @@ export default function AlignnaThankYou() {
             onClick={(e) => e.preventDefault()}
           >
             <span className="alignnaThanks__cardIcon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M14.5 8.5h2.2V5.2h-2.2c-2.6 0-4.3 1.6-4.3 4.4v1.9H8.2v3.3h2V22h3.5v-7.2h2.4l.5-3.3h-2.9V9.9c0-1 .5-1.4 1.3-1.4Z" />
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
               </svg>
             </span>
             <span className="alignnaThanks__cardText">
-              <span className="alignnaThanks__cardTitle">Join the community</span>
+              <span className="alignnaThanks__cardTitle">Join the community launching group</span>
               <span className="alignnaThanks__cardDesc">
-                Prototypes, testing and how Alignna gets built.
+                You&apos;ll be able to see the behind the scenes, prototypes, and how
+                Alignna gets built. Don&apos;t miss on our giveaways
               </span>
             </span>
             <span className="alignnaThanks__cardArrow" aria-hidden="true">

@@ -13,11 +13,11 @@
   --kickstarter-deep: #04b86a;
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   min-height: 100svh;
   min-height: 100dvh;
-  padding: clamp(2rem, 6vw, 3rem) 1.5rem;
+  padding: clamp(1.35rem, 4vw, 2.25rem) 1.5rem clamp(2rem, 6vw, 3rem);
   color: var(--ink);
   background: var(--bone);
   font-family: "DM Sans", system-ui, sans-serif;
@@ -40,8 +40,9 @@
   );
 }
 
-.alignnaThanks h1,
-.alignnaThanks p { margin: 0; }
+.alignnaThanks h1 { margin: 0; }
+
+.alignnaThanks p:not([class]) { margin: 0; }
 
 .alignnaThanks__page {
   position: relative;
@@ -53,14 +54,14 @@
 
 .alignnaThanks__brand {
   display: inline-flex;
-  margin-bottom: 2.4rem;
+  margin-bottom: 1.5rem;
   text-decoration: none;
 }
 
 .alignnaThanks__wordmark {
   display: block;
-  width: clamp(7.5rem, 22vw, 9.5rem);
-  height: clamp(2.1rem, 5.5vw, 2.65rem);
+  width: clamp(9.25rem, 30vw, 12.5rem);
+  height: clamp(2.55rem, 7.5vw, 3.45rem);
   background-color: #c2915b;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
@@ -74,9 +75,9 @@
   position: relative;
   display: grid;
   place-items: center;
-  width: 8.25rem;
-  height: 8.25rem;
-  margin: 0 auto 1.9rem;
+  width: 7rem;
+  height: 7rem;
+  margin: 0 auto 1.35rem;
 }
 
 .alignnaThanks__ring {
@@ -116,7 +117,7 @@
 }
 
 .alignnaThanks h1 {
-  margin-bottom: 1.125rem;
+  margin-bottom: 1.5rem;
   font-size: clamp(2.35rem, 9vw, 3.375rem);
   font-weight: 700;
   line-height: 1.02;
@@ -125,7 +126,8 @@
 
 .alignnaThanks__sub {
   max-width: 25rem;
-  margin: 0 auto 2.5rem;
+  margin: 0 auto;
+  padding-bottom: clamp(2.75rem, 9vw, 3.5rem);
   color: var(--ink-soft);
   font-size: 1rem;
   line-height: 1.6;
@@ -134,7 +136,9 @@
 .alignnaThanks__actions {
   display: flex;
   flex-direction: column;
-  gap: .75rem;
+  gap: 1rem;
+  margin-top: clamp(1.25rem, 4vw, 2rem);
+  padding-top: clamp(1.5rem, 5vw, 2.5rem);
   text-align: left;
 }
 
@@ -142,6 +146,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  min-height: clamp(8.1rem, 28vw, 9rem);
   padding: 1.25rem 1.375rem;
   border-radius: 1rem;
   color: inherit;
@@ -185,11 +190,14 @@
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: -.01em;
+  line-height: 1.35;
+  min-height: calc(1rem * 1.35 * 2);
 }
 
 .alignnaThanks__cardDesc {
   font-size: .84rem;
   line-height: 1.45;
+  min-height: calc(.84rem * 1.45 * 4);
 }
 
 .alignnaThanks__cardArrow {
@@ -240,11 +248,6 @@
   background: rgba(0, 0, 0, .16);
 }
 
-.alignnaThanks__card--kickstarter .alignnaThanks__cardIcon img {
-  width: 1.55rem;
-  height: 1.55rem;
-}
-
 .alignnaThanks__card--kickstarter .alignnaThanks__cardDesc {
   color: rgba(26, 26, 26, .72);
 }
@@ -254,8 +257,8 @@
   align-items: center;
   justify-content: center;
   gap: .55rem;
-  margin-top: 2.125rem;
-  padding-top: 1.625rem;
+  margin-top: clamp(2.5rem, 7vw, 3.25rem);
+  padding-top: 1.75rem;
   border-top: 1px solid var(--line);
   color: var(--ink-soft);
   font-size: .8125rem;
@@ -269,15 +272,48 @@
   color: var(--sage);
 }
 
+@media (max-width: 760px) {
+  .alignnaThanks {
+    padding-top: max(.85rem, env(safe-area-inset-top, 0px));
+    padding-bottom: 1.5rem;
+  }
+
+  .alignnaThanks__brand { margin-bottom: 1rem; }
+
+  .alignnaThanks__pulse {
+    width: 6.25rem;
+    height: 6.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .alignnaThanks__mark {
+    width: 3.25rem;
+    height: 3.25rem;
+  }
+
+  .alignnaThanks h1 {
+    margin-bottom: 1.25rem;
+    font-size: clamp(2rem, 8.6vw, 2.6rem);
+  }
+
+  .alignnaThanks__sub {
+    padding-bottom: clamp(2rem, 8vw, 2.75rem);
+  }
+
+  .alignnaThanks__actions {
+    margin-top: 1rem;
+    padding-top: clamp(1.75rem, 6vw, 2.25rem);
+  }
+
+  .alignnaThanks__note {
+    margin-top: 2.25rem;
+  }
+}
+
 @media (max-width: 420px) {
   .alignnaThanks__card {
     gap: .8rem;
     padding: 1.05rem 1.125rem;
-  }
-
-  .alignnaThanks__pulse {
-    width: 7rem;
-    height: 7rem;
   }
 }
 
